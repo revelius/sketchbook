@@ -1,0 +1,1661 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>통계/분석 > 매출통계 > 상품별매출통계</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- 총매출은 배송 완료된 주문의 주문금액 [((판매가+옵션가)×수량)-회원할인금-포인트사용+선배송비]으로 배송완료일자 기준의 총합계 금액입니다.</li>
+						<li>- 판매순위는 검색된 내용 중 총매출에 대한 순위입니다.</li>
+						<li>- 판매수/취소수/반품수/환불수취소금액/반품금액/환불금액 은 처리일 기준의 합계 입니다.</li>
+						<li>- 포인트적립은 배송완료일 기준의 합계입니다.</li>
+						<li>- 포인트사용은 주문일 기준의 합계입니다.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- tabWrap -->
+				<div class="tabWrap">
+					<ul class="tabList">
+						<li><a href="#" class="current">WORKSOUT</a></li>
+						<li><a href="#">CARHARTT</a></li>
+						<li><a href="#">OBEY</a></li>
+						<li><a href="#">BRIXTON</a></li>
+					</ul>
+					<div class="tabConWrap">
+						<div class="tabCon">
+							<div class="tableType2">
+								<table>
+									<caption>배송검색</caption>
+									<colgroup>
+										<col width="100px">
+										<col width="*">
+										<col width="100px">
+										<col width="150px">
+										<col width="120px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>기간</th>
+											<td>
+												<a href="#" class="btnType1">당일</a>
+												<a href="#" class="btnType1">전일</a>
+												<a href="#" class="btnType1">당월</a>
+												<a href="#" class="btnType1">1주</a>
+												<a href="#" class="btnType1">15일</a>
+												<a href="#" class="btnType1">한달</a>
+												<a href="#" class="btnType1">두달</a>
+												<br /><br />
+												<div class="wrap">
+													<a href="#" class="btnType1">직접검색</a>
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+												</div>
+											</td>
+											<th>브랜드</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+											<td rowspan="4" class="bd_left">
+												<a href="#" class="btnType2">검색</a> <br /><br />
+												<a href="#" class="btnType1">초기화</a>
+											</td>
+										</tr>
+										<tr>
+											<th>분류</th>
+											<td colspan="3">
+												<select>
+													<option value="0">1차분류</option>
+												</select>
+												<select>
+													<option value="0">2차분류</option>
+												</select>
+												<select>
+													<option value="0">3차분류</option>
+												</select>
+												<select>
+													<option value="0">4차분류</option>
+												</select>
+												<input type="checkbox" id="ch_group">
+												<label for="ch_group">하위포함</label>
+											</td>
+										</tr>
+										<tr>
+											<th>색상</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+											<th>사이즈</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>상품</th>
+											<td colspan="3"><a href="#" class="btnType1">찾기</a> <span>Rival Snap Backnders</span> <a href="#">X</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="section a2">
+								<div class="tableTitle">
+									<div class="left"><span class="icon2"></span><span>2015년 05월 05일</span>부터 <span>2015년 05월 05일</span>까지의 검색 결과입니다.</div>
+									<div class="right">
+										<a href="#" class="btnType1">List</a>
+										<select class="ml_5">
+											<option>15개</option>
+										</select>
+									</div>
+								</div>
+								<!-- list -->
+								<div class="listWrap">
+									<div class="tableType1 tblStats overflowXY">
+										<table class="w1200">
+											<caption>상품 통계</caption>
+											<colgroup>
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: *" />
+												<col style="width: 12%" />
+												<col style="width: 12%" />
+												<col style="width: 12%" />
+											</colgroup>
+											<thead>
+												<tr>
+													<th scope="row" colspan="4">상품분류</th>
+													<th scope="row" rowspan="2">상품명 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">색상 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">사이즈 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">상품코드 <a href="#" class="down">▼</a></th>
+												</tr>
+												<tr>
+													<th scope="row">1차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">2차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">3차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">4차분류 <a href="#" class="down">▼</a></th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+												</tr>
+											</tfoot>
+											<tbody>	
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>판매</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>증지</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>판매</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<!--[s] 페이징 -->
+									<div class="paging">
+										<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+										<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+										<span class="num">
+											<a href="#" class="on">1</a>
+											<a href="#">2</a>
+											<a href="#">3</a>
+											<a href="#">4</a>
+											<a href="#">5</a>
+											<a href="#">6</a>
+											<a href="#">7</a>
+											<a href="#">8</a>
+											<a href="#">9</a>
+											<a href="#">10</a>
+										</span>
+										<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+										<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+										<div class="right">
+											<a href="#" class="btnType2">엑셀다운로드</a>
+										</div>
+									</div>
+									<!--[e] 페이징 -->
+									<div class="section a2">
+										<div class="tableType1 tblStats overflowXY">
+											<table class="w1200">
+												<caption>총매출통계</caption>
+												<thead>
+													<tr>
+														<th scope="row">총매출 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매순위 <a href="#" class="down">▼</a></th>
+														<th scope="row">공급가 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매가 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매수 <a href="#" class="down">▼</a></th>
+														<th scope="row">최소수 <a href="#" class="down">▼</a></th>
+														<th scope="row">반품수 <a href="#" class="down">▼</a></th>
+														<th scope="row">환불수 <a href="#" class="down">▼</a></th>
+														<th scope="row">취소금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">반품금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">환불금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">포인트적립 <a href="#" class="down">▼</a></th>
+														<th scope="row">포인트사용 <a href="#" class="down">▼</a></th>
+														<th scope="row">그래프 <a href="#" class="down">▼</a></th>
+													</tr>
+												</thead>
+												<tbody>	
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<!-- //list -->
+								<!-- graph none 시켜놓았음 style은 영역을 확인하기 위해 임시로 넣어 놓왔음 -->
+								<div class="graphWrap" style="display: none; width: 1000px; padding: 100px 0; border: 1px solid #e5e5e5; text-align: center;">
+									그래프 영역~~~~~ :)
+								</div>
+								<!-- //grap -->
+							</div>
+						</div>
+						<div class="tabCon">
+							<div class="tableType2">
+								<table>
+									<caption>배송검색</caption>
+									<colgroup>
+										<col width="100px">
+										<col width="*">
+										<col width="100px">
+										<col width="150px">
+										<col width="120px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>기간</th>
+											<td>
+												<a href="#" class="btnType1">당일</a>
+												<a href="#" class="btnType1">전일</a>
+												<a href="#" class="btnType1">당월</a>
+												<a href="#" class="btnType1">1주</a>
+												<a href="#" class="btnType1">15일</a>
+												<a href="#" class="btnType1">한달</a>
+												<a href="#" class="btnType1">두달</a>
+												<br /><br />
+												<div class="wrap">
+													<a href="#" class="btnType1">직접검색</a>
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+												</div>
+											</td>
+											<th>브랜드</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+											<td rowspan="4" class="bd_left">
+												<a href="#" class="btnType2">검색</a> <br /><br />
+												<a href="#" class="btnType1">초기화</a>
+											</td>
+										</tr>
+										<tr>
+											<th>분류</th>
+											<td colspan="3">
+												<select>
+													<option value="0">1차분류</option>
+												</select>
+												<select>
+													<option value="0">2차분류</option>
+												</select>
+												<select>
+													<option value="0">3차분류</option>
+												</select>
+												<select>
+													<option value="0">4차분류</option>
+												</select>
+												<input type="checkbox" id="ch_group">
+												<label for="ch_group">하위포함</label>
+											</td>
+										</tr>
+										<tr>
+											<th>색상</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+											<th>사이즈</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>상품</th>
+											<td colspan="3"><a href="#" class="btnType1">찾기</a> <span>Rival Snap Backnders</span> <a href="#">X</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="section a2">
+								<div class="tableTitle">
+									<div class="left"><span class="icon2"></span><span>2015년 05월 05일</span>부터 <span>2015년 05월 05일</span>까지의 검색 결과입니다.</div>
+									<div class="right">
+										<a href="#" class="btnType1">List</a>
+										<select class="ml_5">
+											<option>15개</option>
+										</select>
+									</div>
+								</div>
+								<!-- list -->
+								<div class="listWrap">
+									<div class="tableType1 tblStats overflowXY">
+										<table class="w1200">
+											<caption>상품 통계</caption>
+											<colgroup>
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: *" />
+												<col style="width: 12%" />
+												<col style="width: 12%" />
+												<col style="width: 12%" />
+											</colgroup>
+											<thead>
+												<tr>
+													<th scope="row" colspan="4">상품분류</th>
+													<th scope="row" rowspan="2">상품명 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">색상 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">사이즈 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">상품코드 <a href="#" class="down">▼</a></th>
+												</tr>
+												<tr>
+													<th scope="row">1차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">2차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">3차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">4차분류 <a href="#" class="down">▼</a></th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+												</tr>
+											</tfoot>
+											<tbody>	
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>판매</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>증지</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>판매</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<!--[s] 페이징 -->
+									<div class="paging">
+										<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+										<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+										<span class="num">
+											<a href="#" class="on">1</a>
+											<a href="#">2</a>
+											<a href="#">3</a>
+											<a href="#">4</a>
+											<a href="#">5</a>
+											<a href="#">6</a>
+											<a href="#">7</a>
+											<a href="#">8</a>
+											<a href="#">9</a>
+											<a href="#">10</a>
+										</span>
+										<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+										<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+										<div class="right">
+											<a href="#" class="btnType2">엑셀다운로드</a>
+										</div>
+									</div>
+									<!--[e] 페이징 -->
+									<div class="section a2">
+										<div class="tableType1 tblStats overflowXY">
+											<table class="w1200">
+												<caption>총매출통계</caption>
+												<thead>
+													<tr>
+														<th scope="row">총매출 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매순위 <a href="#" class="down">▼</a></th>
+														<th scope="row">공급가 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매가 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매수 <a href="#" class="down">▼</a></th>
+														<th scope="row">최소수 <a href="#" class="down">▼</a></th>
+														<th scope="row">반품수 <a href="#" class="down">▼</a></th>
+														<th scope="row">환불수 <a href="#" class="down">▼</a></th>
+														<th scope="row">취소금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">반품금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">환불금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">포인트적립 <a href="#" class="down">▼</a></th>
+														<th scope="row">포인트사용 <a href="#" class="down">▼</a></th>
+														<th scope="row">그래프 <a href="#" class="down">▼</a></th>
+													</tr>
+												</thead>
+												<tbody>	
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<!-- //list -->
+								<!-- grap none 시켜놓았음 style은 영역을 확인하기 위해 임시로 넣어 놓왔음 -->
+								<div class="graphWrap" style="display: none; width: 1000px; padding: 100px 0; border: 1px solid #e5e5e5; text-align: center;">
+									그래프 영역~~~~~ :)
+								</div>
+								<!-- //grap -->
+							</div>
+						</div>
+						<div class="tabCon">
+							<div class="tableType2">
+								<table>
+									<caption>배송검색</caption>
+									<colgroup>
+										<col width="100px">
+										<col width="*">
+										<col width="100px">
+										<col width="150px">
+										<col width="120px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>기간</th>
+											<td>
+												<a href="#" class="btnType1">당일</a>
+												<a href="#" class="btnType1">전일</a>
+												<a href="#" class="btnType1">당월</a>
+												<a href="#" class="btnType1">1주</a>
+												<a href="#" class="btnType1">15일</a>
+												<a href="#" class="btnType1">한달</a>
+												<a href="#" class="btnType1">두달</a>
+												<br /><br />
+												<div class="wrap">
+													<a href="#" class="btnType1">직접검색</a>
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+												</div>
+											</td>
+											<th>브랜드</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+											<td rowspan="4" class="bd_left">
+												<a href="#" class="btnType2">검색</a> <br /><br />
+												<a href="#" class="btnType1">초기화</a>
+											</td>
+										</tr>
+										<tr>
+											<th>분류</th>
+											<td colspan="3">
+												<select>
+													<option value="0">1차분류</option>
+												</select>
+												<select>
+													<option value="0">2차분류</option>
+												</select>
+												<select>
+													<option value="0">3차분류</option>
+												</select>
+												<select>
+													<option value="0">4차분류</option>
+												</select>
+												<input type="checkbox" id="ch_group">
+												<label for="ch_group">하위포함</label>
+											</td>
+										</tr>
+										<tr>
+											<th>색상</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+											<th>사이즈</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>상품</th>
+											<td colspan="3"><a href="#" class="btnType1">찾기</a> <span>Rival Snap Backnders</span> <a href="#">X</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="section a2">
+								<div class="tableTitle">
+									<div class="left"><span class="icon2"></span><span>2015년 05월 05일</span>부터 <span>2015년 05월 05일</span>까지의 검색 결과입니다.</div>
+									<div class="right">
+										<a href="#" class="btnType1">List</a>
+										<select class="ml_5">
+											<option>15개</option>
+										</select>
+									</div>
+								</div>
+								<!-- list -->
+								<div class="listWrap">
+									<div class="tableType1 tblStats overflowXY">
+										<table class="w1200">
+											<caption>상품 통계</caption>
+											<colgroup>
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: *" />
+												<col style="width: 12%" />
+												<col style="width: 12%" />
+												<col style="width: 12%" />
+											</colgroup>
+											<thead>
+												<tr>
+													<th scope="row" colspan="4">상품분류</th>
+													<th scope="row" rowspan="2">상품명 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">색상 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">사이즈 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">상품코드 <a href="#" class="down">▼</a></th>
+												</tr>
+												<tr>
+													<th scope="row">1차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">2차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">3차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">4차분류 <a href="#" class="down">▼</a></th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+												</tr>
+											</tfoot>
+											<tbody>	
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>판매</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>증지</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>판매</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<!--[s] 페이징 -->
+									<div class="paging">
+										<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+										<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+										<span class="num">
+											<a href="#" class="on">1</a>
+											<a href="#">2</a>
+											<a href="#">3</a>
+											<a href="#">4</a>
+											<a href="#">5</a>
+											<a href="#">6</a>
+											<a href="#">7</a>
+											<a href="#">8</a>
+											<a href="#">9</a>
+											<a href="#">10</a>
+										</span>
+										<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+										<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+										<div class="right">
+											<a href="#" class="btnType2">엑셀다운로드</a>
+										</div>
+									</div>
+									<!--[e] 페이징 -->
+									<div class="section a2">
+										<div class="tableType1 tblStats overflowXY">
+											<table class="w1200">
+												<caption>총매출통계</caption>
+												<thead>
+													<tr>
+														<th scope="row">총매출 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매순위 <a href="#" class="down">▼</a></th>
+														<th scope="row">공급가 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매가 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매수 <a href="#" class="down">▼</a></th>
+														<th scope="row">최소수 <a href="#" class="down">▼</a></th>
+														<th scope="row">반품수 <a href="#" class="down">▼</a></th>
+														<th scope="row">환불수 <a href="#" class="down">▼</a></th>
+														<th scope="row">취소금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">반품금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">환불금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">포인트적립 <a href="#" class="down">▼</a></th>
+														<th scope="row">포인트사용 <a href="#" class="down">▼</a></th>
+														<th scope="row">그래프 <a href="#" class="down">▼</a></th>
+													</tr>
+												</thead>
+												<tbody>	
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<!-- //list -->
+								<!-- grap none 시켜놓았음 style은 영역을 확인하기 위해 임시로 넣어 놓왔음 -->
+								<div class="graphWrap" style="display: none; width: 1000px; padding: 100px 0; border: 1px solid #e5e5e5; text-align: center;">
+									그래프 영역~~~~~ :)
+								</div>
+								<!-- //grap -->
+							</div>
+						</div>
+						<div class="tabCon">
+							<div class="tableType2">
+								<table>
+									<caption>배송검색</caption>
+									<colgroup>
+										<col width="100px">
+										<col width="*">
+										<col width="100px">
+										<col width="150px">
+										<col width="120px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>기간</th>
+											<td>
+												<a href="#" class="btnType1">당일</a>
+												<a href="#" class="btnType1">전일</a>
+												<a href="#" class="btnType1">당월</a>
+												<a href="#" class="btnType1">1주</a>
+												<a href="#" class="btnType1">15일</a>
+												<a href="#" class="btnType1">한달</a>
+												<a href="#" class="btnType1">두달</a>
+												<br /><br />
+												<div class="wrap">
+													<a href="#" class="btnType1">직접검색</a>
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+												</div>
+											</td>
+											<th>브랜드</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+											<td rowspan="4" class="bd_left">
+												<a href="#" class="btnType2">검색</a> <br /><br />
+												<a href="#" class="btnType1">초기화</a>
+											</td>
+										</tr>
+										<tr>
+											<th>분류</th>
+											<td colspan="3">
+												<select>
+													<option value="0">1차분류</option>
+												</select>
+												<select>
+													<option value="0">2차분류</option>
+												</select>
+												<select>
+													<option value="0">3차분류</option>
+												</select>
+												<select>
+													<option value="0">4차분류</option>
+												</select>
+												<input type="checkbox" id="ch_group">
+												<label for="ch_group">하위포함</label>
+											</td>
+										</tr>
+										<tr>
+											<th>색상</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+											<th>사이즈</th>
+											<td>
+												<select>
+													<option value="0">전체</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>상품</th>
+											<td colspan="3"><a href="#" class="btnType1">찾기</a> <span>Rival Snap Backnders</span> <a href="#">X</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="section a2">
+								<div class="tableTitle">
+									<div class="left"><span class="icon2"></span><span>2015년 05월 05일</span>부터 <span>2015년 05월 05일</span>까지의 검색 결과입니다.</div>
+									<div class="right">
+										<a href="#" class="btnType1">List</a>
+										<select class="ml_5">
+											<option>15개</option>
+										</select>
+									</div>
+								</div>
+								<!-- list -->
+								<div class="listWrap">
+									<div class="tableType1 tblStats overflowXY">
+										<table class="w1200">
+											<caption>상품 통계</caption>
+											<colgroup>
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: 8%" />
+												<col style="width: *" />
+												<col style="width: 12%" />
+												<col style="width: 12%" />
+												<col style="width: 12%" />
+											</colgroup>
+											<thead>
+												<tr>
+													<th scope="row" colspan="4">상품분류</th>
+													<th scope="row" rowspan="2">상품명 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">색상 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">사이즈 <a href="#" class="down">▼</a></th>
+													<th scope="row" rowspan="2">상품코드 <a href="#" class="down">▼</a></th>
+												</tr>
+												<tr>
+													<th scope="row">1차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">2차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">3차분류 <a href="#" class="down">▼</a></th>
+													<th scope="row">4차분류 <a href="#" class="down">▼</a></th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+													<td>합계</td>
+												</tr>
+											</tfoot>
+											<tbody>	
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>판매</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>증지</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>판매</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+												<tr>	
+													<td>Brixton</td>
+													<td>Headwear</td>
+													<td></td>
+													<td></td>
+													<td>Rival Snap Backnders</td>
+													<td>PT151</td>
+													<td>휴지통</td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<!--[s] 페이징 -->
+									<div class="paging">
+										<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+										<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+										<span class="num">
+											<a href="#" class="on">1</a>
+											<a href="#">2</a>
+											<a href="#">3</a>
+											<a href="#">4</a>
+											<a href="#">5</a>
+											<a href="#">6</a>
+											<a href="#">7</a>
+											<a href="#">8</a>
+											<a href="#">9</a>
+											<a href="#">10</a>
+										</span>
+										<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+										<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+										<div class="right">
+											<a href="#" class="btnType2">엑셀다운로드</a>
+										</div>
+									</div>
+									<!--[e] 페이징 -->
+									<div class="section a2">
+										<div class="tableType1 tblStats overflowXY">
+											<table class="w1200">
+												<caption>총매출통계</caption>
+												<thead>
+													<tr>
+														<th scope="row">총매출 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매순위 <a href="#" class="down">▼</a></th>
+														<th scope="row">공급가 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매가 <a href="#" class="down">▼</a></th>
+														<th scope="row">판매수 <a href="#" class="down">▼</a></th>
+														<th scope="row">최소수 <a href="#" class="down">▼</a></th>
+														<th scope="row">반품수 <a href="#" class="down">▼</a></th>
+														<th scope="row">환불수 <a href="#" class="down">▼</a></th>
+														<th scope="row">취소금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">반품금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">환불금액 <a href="#" class="down">▼</a></th>
+														<th scope="row">포인트적립 <a href="#" class="down">▼</a></th>
+														<th scope="row">포인트사용 <a href="#" class="down">▼</a></th>
+														<th scope="row">그래프 <a href="#" class="down">▼</a></th>
+													</tr>
+												</thead>
+												<tbody>	
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+													<tr>	
+														<td>43,000</td>
+														<td>7</td>
+														<td>43.000</td>
+														<td>1</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>0</td>
+														<td>200</td>
+														<td>0</td>
+														<td><a href="#" class="btnType1">보기</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<!-- //list -->
+								<!-- grap none 시켜놓았음 style은 영역을 확인하기 위해 임시로 넣어 놓왔음 -->
+								<div class="graphWrap" style="display: none; width: 1000px; padding: 100px 0; border: 1px solid #e5e5e5; text-align: center;">
+									그래프 영역~~~~~ :)
+								</div>
+								<!-- //grap -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- //tabWrap -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

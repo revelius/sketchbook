@@ -1,0 +1,217 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	
+</head> 
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">			
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">					
+					<h3>회원관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">회원관리</a>
+							<ul>
+								<li class="on">- <a href="#">회원목록</a></li>
+								<li class="last">- <a href="#">포인트관리</a></li>
+							</ul>
+						</li>						
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents memberList">				
+					<h3><span class="icon1"></span>회원정보</h3>	
+					<p class="pt_14">ididididid 님의 정보<span>최종로그인 yyyy-mm-dd HH:MM:SS </span></p>
+
+					<div class="tabType1">
+						<ul>
+							<li><a href="/admin/member/membershipInfo.html">회원정보</a></li>
+							<li><a href="/admin/member/orderList.html">주문내역</a></li>
+							<li><a href="/admin/member/inquire.html">1:1 문의</a></li>
+							<li class="on"><a href="/admin/member/cart.html">Cart</a></li>
+						</ul>
+					</div>
+					<div class="section a2">
+						<div class="tableType1">
+							<table>
+								<caption>상품 리스트</caption>
+								<colgroup>
+									<col width="5%" />
+									<col width="*" />
+									<col width="15%" />
+									<col width="12%" />
+									<col width="12%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th><input type="checkbox" /></th>
+										<th>상품</th>
+										<th>가격</th>
+										<th>적립포인트</th>
+										<th>삭제</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td class="imgBox">
+											<img src="../static/images/temp/temp1.jpg" alt="" />
+											<div class="productText">
+												<a href="#">W LITE WALK 4 PW0WW13F (red/240)</a>
+												<div>
+													<span>Size</span>
+													<select>
+														<option value="0">S</option>
+													</select>
+													<a href="#" class="btnType1">변경</a>
+												</div>
+											</div>
+										</td>
+										<td>30,000원</td>
+										<td>900</td>
+										<td><a href="#"><img src="../static/images/popup/closeBtn2.gif" alt="주문삭제" /></a></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td class="imgBox">
+											<img src="../static/images/temp/temp1.jpg" alt="" />
+											<div class="productText">
+												<a href="#">W LITE WALK 4 PW0WW13F (red/240)</a>
+												<div>
+													<span>Size</span>
+													<select>
+														<option value="0">S</option>
+													</select>
+													<a href="#" class="btnType1">변경</a>
+												</div>
+											</div>
+										</td>
+										<td>30,000원</td>
+										<td>900</td>
+										<td><a href="#"><img src="../static/images/popup/closeBtn2.gif" alt="주문삭제" /></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="btn">
+							<a href="#" class="btnType2 left">회원목록</a>
+							<a href="#" class="btnType2 right">주문추가</a>
+						</div>
+						<!--[s] 페이징 -->
+						<div class="paging">
+							<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+							<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+							<span class="num">
+								<a href="#" class="on">1</a>
+								<a href="#">2</a>
+								<a href="#">3</a>
+								<a href="#">4</a>
+								<a href="#">5</a>
+								<a href="#">6</a>
+								<a href="#">7</a>
+								<a href="#">8</a>
+								<a href="#">9</a>
+								<a href="#">10</a>
+							</span>
+							<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+							<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+						</div>
+						<!--[e] 페이징 -->				
+					</div>
+					<div class="section a2">
+						<div class="tableType1">
+							<table>
+								<caption>주문추가</caption>
+								<colgroup>
+									<col width="*" />
+									<col width="12%" />
+									<col width="15%" />
+									<col width="12%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th colspan="4">주문추가</th>
+									</tr>
+									<tr>
+										<th>상품검색</th>
+										<th>Size</th>
+										<th>추가 주문일</th>
+										<th>작성자</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="text" /> <a href="#" class="btnType1">검색</a></td>
+										<td>
+											<select>
+												<option value="0">M</option>
+											</select>
+										</td>
+										<td>yyyy.mm.dd</td>
+										<td>관리자</td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<div class="btn">
+												<p class="left">※ 상품검색은 상품품번으로 검색하시기 바랍니다.</p>
+												<span class="right"><a href="#" class="btnType1">등록</a></span>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!--[e] contents -->
+			</div>
+			<!--[e] subWrap -->
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

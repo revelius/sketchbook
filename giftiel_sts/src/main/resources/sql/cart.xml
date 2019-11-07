@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="cart">
+	<resultMap id="listCartAddSize" type="com.giftiel.shop.dto.Cart">
+		<id property="id" column="UBI_GDS_NO" />
+		
+	    <result property="memNo" 	column="MEM_NO"/> 
+	    <result property="memGrdNo" column="MEM_GRD_NO"/> 
+	    <result property="regrNo" 	column="REGR_NO"/> 
+	    <result property="regDts" 	column="REG_DTS"/> 
+	    <result property="updrNo" 	column="UPDR_NO"/> 
+	    <result property="updDts" 	column="UPD_DTS"/> 
+        
+        <result property="loginDts" column="LOGIN_DTS"/>
+        <result property="cmntNo" 	column="CMNT_NO"/>
+        <result property="cmntTxt" 	column="CMNT_TXT"/>     
+        <result property="cmtCnt" 	column="CMT_CNT"/>  
+        
+        <result property="size1"    column="SIZE_1"/>
+	    <result property="size2"    column="SIZE_2"/>
+	    <result property="size3"    column="SIZE_3"/>
+	    <result property="size4"    column="SIZE_4"/>
+	    <result property="size5"    column="SIZE_5"/>
+	    <result property="size6"    column="SIZE_6"/>
+	    <result property="size7"    column="SIZE_7"/>
+	    <result property="size8"    column="SIZE_8"/>
+	    <result property="size9"    column="SIZE_9"/>
+	    <result property="size10"   column="SIZE_10"/>
+	    
+	    <result property="ubiGdsNo" column="UBI_GDS_NO"/>
+	    <result property="gdsNo"    column="GDS_NO"/>
+	    <result property="ubiSlPrc" column="UBI_SL_PRC"/>
+	    
+	    <result property="ubiGdsNm" column="UBI_GDS_NM"/>
+	    <result property="color"    column="COLOR"/>
+	    <result property="brand"    column="BARND"/>
+	    <result property="sizeNm"   column="SIZE_NM"/>
+	    
+	    <result property="ubiGdsSize"   column="UBI_GDS_SIZE"/>
+		
+	</resultMap>
+	
+	
+	<!-- 	admin 카트리스트 selectFrontCartList 참조 변경 -->
+	<select id="selectCartList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCartFront">
+			SELECT
+		    MAIN.RNUM
+		    ,MAIN.MEM_NO 
+		    ,MAIN.UBI_GDS_NO 
+		    ,MAIN.QTY 
+		    ,MAIN.REGR_NO 
+		    ,MAIN.REG_DTS 
+		    ,MAIN.UPDR_NO 
+		    ,MAIN.UPD_DTS 
+		    ,MAIN.GDS_SIZE 
+		    ,MAIN.EMAIL 
+		    ,MAIN.IP_ADDR 
+		    ,MAIN.MEM_YN 
+			,MAIN.UBI_GDS_NM
+			,MAIN.UBI_GDS_COLOR_CD
+			,MAIN.UBI_GDS_COLOR_NM
+			,MAIN.UBI_GDS_SIZE
+			,MAIN.BRAND	   
+			,MAIN.STOCK
+			,MAIN.UBI_SL_PRC
+			,MAIN.CART_NO
+			,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = MAIN.UBI_GDS_NO) AS MAIN_IMG
+		FROM(
+		    SELECT 
+		        ROWNUM RNUM
+		        ,CART.MEM_NO 
+		        ,CART.UBI_GDS_NO 
+		        ,CART.QTY 
+		        ,CART.REGR_NO 
+		        ,CART.REG_DTS 
+		        ,CART.UPDR_NO 
+		        ,CART.UPD_DTS 
+		        ,CART.GDS_SIZE 
+		        ,CART.EMAIL 
+		        ,CART.IP_ADDR 
+		        ,CART.MEM_YN 
+		        ,CART.CART_NO
+				,UBIGDS.품명 as UBI_GDS_NM
+				,UBIGDS.색상 as UBI_GDS_COLOR_CD
+				,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+				,UBIGDS.사이즈 as UBI_GDS_SIZE
+				,UBIGDS.BARND as BRAND
+				,UBIGDS.재고수량	AS STOCK
+				,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC			
+		    FROM
+		        TBL_ME_CART CART, UBI09S_WORKS.V_상품정보트리거 UBIGDS
+		    WHERE UBIGDS.품번 = CART.UBI_GDS_NO
+		    AND UBIGDS.사이즈 = CART.GDS_SIZE
+		    <if test="memNo != null and memNo != ''"> 
+		        AND CART.MEM_NO = #{memNo}
+		    </if>
+		    <if test="ubiGdsNo != null and ubiGdsNo != ''"> 
+		        AND CART.UBI_GDS_NO = #{ubiGdsNo}
+		    </if>
+		    <if test="ubiGdsSize != null and ubiGdsSize != ''"> 
+		        AND CART.GDS_SIZE = #{ubiGdsSize}
+		    </if>
+		    <if test="email != null and email != ''"> 
+		        AND CART.EMAIL = #{email}
+		    </if>
+		    <if test="ipAddr != null and ipAddr != ''"> 
+		        AND CART.IP_ADDR = #{ipAddr}
+		    </if>
+		    <if test="memYn != null and memYn != ''"> 
+		        AND CART.MEM_YN = #{memYn}
+		    </if>
+		)MAIN
+		WHERE RNUM BETWEEN  #{startListNum} AND #{endListNum}
+	</select>
+	
+	
+	
+	
+	
+	<!-- 	// 기존 박필종 과장님 작성 카트리스트 listCartFront listCartAddSize -->
+	<!-- 
+	<select id="selectCartList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCartFront">
+		SELECT DTL.* 
+			   FROM (SELECT ROWNUM AS RNUM
+			       ,IMG.IMG_URL      /*이미지*/
+			       ,UBIGDS.품번 AS UBI_GDS_NO   /*상품번호*/
+			       ,CART.GDS_SIZE AS SIZE_NM   /*사이즈*/
+			       ,UBIGDS.품명 AS UBI_GDS_NM
+		           ,UBIGDS.COLOR
+		           ,UBIGDS.BARND
+			       ,GDSIZE.SIZE_1
+			       ,GDSIZE.SIZE_2
+			       ,GDSIZE.SIZE_3
+			       ,GDSIZE.SIZE_4
+			       ,GDSIZE.SIZE_5
+			       ,GDSIZE.SIZE_6
+			       ,GDSIZE.SIZE_7
+			       ,GDSIZE.SIZE_8
+			       ,GDSIZE.SIZE_9
+			       ,GDSIZE.SIZE_10
+			       ,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC
+			  FROM (SELECT UBI_GDS_NO
+			              ,IMG_CLS
+			              ,IMG_URL
+			              ,PRIR
+			          FROM TBL_GD_GDS_IMG  
+			         WHERE IMG_CLS = 'CM00601'  /* 리스트 이미지 */
+			           AND ROWNUM = 1 )  IMG , TBL_GD_GDS GDS, TBL_GD_SIZE GDSIZE, TBL_ME_CART CART 
+			           ,UBI09S_WORKS.V_상품정보트리거 UBIGDS
+			  WHERE IMG.UBI_GDS_NO = GDS.UBI_GDS_NO
+			    AND GDS.UBI_GDS_NO = GDSIZE.UBI_GDS_NO(+)
+			    AND UBIGDS.품번 = CART.UBI_GDS_NO(+)
+			    AND CART.MEM_NO =  #{memNo} 
+			    AND CART.GDS_SIZE = UBIGDS.사이즈
+			 ) DTL
+			WHERE RNUM BETWEEN  #{startListNum} AND #{endListNum}
+	</select>
+	 -->
+	
+	
+	
+	
+	
+	
+	<select id="sizeList" parameterType="String" resultMap="listCartAddSize">
+	       SELECT UBIGDS.사이즈 AS UBI_GDS_SIZE
+	         FROM UBI09S_WORKS.V_상품정보트리거 UBIGDS
+	        WHERE UBIGDS.품번 = #{ubiGdsNo}
+	</select>
+	
+	
+	<!-- 	기존 cartlist total -->
+	<!-- 
+	<select id="totalListCart" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT COUNT(*) 
+		  FROM (SELECT UBI_GDS_NO
+		              ,IMG_CLS
+		              ,IMG_URL
+		              ,PRIR
+		          FROM TBL_GD_GDS_IMG  
+		         WHERE IMG_CLS = 'CM00602'  /* 리스트 이미지 */
+		           AND ROWNUM = 1 )  IMG , TBL_GD_GDS GDS, TBL_GD_SIZE GDSIZE, TBL_ME_CART CART
+		           ,UBI09S_WORKS.V_상품정보트리거 UBIGDS 
+		  WHERE IMG.UBI_GDS_NO = GDS.UBI_GDS_NO
+		    AND GDS.UBI_GDS_NO = GDSIZE.UBI_GDS_NO(+)
+		    AND UBIGDS.품번 = CART.UBI_GDS_NO(+)
+		    AND CART.MEM_NO = #{memNo} 
+		    AND CART.GDS_SIZE = UBIGDS.사이즈
+	</select>  
+	 -->
+	 
+	 
+	 
+	 <select id="totalListCart" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		  SELECT
+		    COUNT(*)
+		FROM(
+		    SELECT 
+		        ROWNUM RNUM
+		        ,CART.MEM_NO 
+		        ,CART.UBI_GDS_NO 
+		        ,CART.QTY 
+		        ,CART.REGR_NO 
+		        ,CART.REG_DTS 
+		        ,CART.UPDR_NO 
+		        ,CART.UPD_DTS 
+		        ,CART.GDS_SIZE 
+		        ,CART.EMAIL 
+		        ,CART.IP_ADDR 
+		        ,CART.MEM_YN 
+				,UBIGDS.품명 as UBI_GDS_NM
+				,UBIGDS.색상 as UBI_GDS_COLOR_CD
+				,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+				,UBIGDS.사이즈 as UBI_GDS_SIZE
+				,UBIGDS.BARND as BRAND
+				,UBIGDS.재고수량	AS STOCK
+				,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC			
+		    FROM
+		        TBL_ME_CART CART, UBI09S_WORKS.V_상품정보트리거 UBIGDS
+		    WHERE UBIGDS.품번 = CART.UBI_GDS_NO
+		    AND UBIGDS.사이즈 = CART.GDS_SIZE
+		    <if test="memNo != null and memNo != ''"> 
+		        AND CART.MEM_NO = #{memNo}
+		    </if>
+		    <if test="ubiGdsNo != null and ubiGdsNo != ''"> 
+		        AND CART.UBI_GDS_NO = #{ubiGdsNo}
+		    </if>
+		    <if test="ubiGdsSize != null and ubiGdsSize != ''"> 
+		        AND CART.GDS_SIZE = #{ubiGdsSize}
+		    </if>
+		    <if test="email != null and email != ''"> 
+		        AND CART.EMAIL = #{email}
+		    </if>
+		    <if test="ipAddr != null and ipAddr != ''"> 
+		        AND CART.IP_ADDR = #{ipAddr}
+		    </if>
+		    <if test="memYn != null and memYn != ''"> 
+		        AND CART.MEM_YN = #{memYn}
+		    </if>
+		)MAIN
+	</select>  
+	
+	
+	<resultMap id="listCart" type="com.giftiel.shop.dto.Cart">
+	    <result property="memNo" 	column="MEM_NO"/> 
+	    <result property="memGrdNo" column="MEM_GRD_NO"/> 
+	    <result property="regrNo" 	column="REGR_NO"/> 
+	    <result property="regDts" 	column="REG_DTS"/> 
+	    <result property="updrNo" 	column="UPDR_NO"/> 
+	    <result property="updDts" 	column="UPD_DTS"/> 
+        
+        <result property="loginDts" column="LOGIN_DTS"/>
+        <result property="cmntNo" 	column="CMNT_NO"/>
+        <result property="cmntTxt" 	column="CMNT_TXT"/>     
+        <result property="cmtCnt" 	column="CMT_CNT"/>  
+        
+        <result property="size1"    column="SIZE_1"/>
+	    <result property="size2"    column="SIZE_2"/>
+	    <result property="size3"    column="SIZE_3"/>
+	    <result property="size4"    column="SIZE_4"/>
+	    <result property="size5"    column="SIZE_5"/>
+	    <result property="size6"    column="SIZE_6"/>
+	    <result property="size7"    column="SIZE_7"/>
+	    <result property="size8"    column="SIZE_8"/>
+	    <result property="size9"    column="SIZE_9"/>
+	    <result property="size10"   column="SIZE_10"/>
+	    
+	    <result property="ubiGdsNo" column="UBI_GDS_NO"/>
+	    <result property="gdsNo"    column="GDS_NO"/>
+	    <result property="ubiSlPrc" column="UBI_SL_PRC"/>
+	    
+	    <result property="ubiGdsNm" column="UBI_GDS_NM"/>
+	    <result property="color"    column="COLOR"/>
+	    <result property="brand"    column="BARND"/>
+	    <result property="sizeNm"   column="SIZE_NM"/>
+	    
+	</resultMap>
+	
+	<select id="selectGdsNo" parameterType="com.giftiel.shop.dto.Cart" resultMap="listCart">
+	
+		 SELECT UBIGDS.품번 AS UBI_GDS_NO 
+		   FROM UBI09S_WORKS.V_상품정보트리거 UBIGDS
+		  WHERE UBIGDS.품번 = #{gdsNo}
+		  	AND UBIGDS.재고수량 > 0
+		  	AND EXISTS(SELECT UBI_GDS_NO FROM TBL_GD_GDS WHERE UBI_GDS_NO = #{gdsNo} AND DISP_YN = 'Y' AND GDS_STAT = 'GD00402')
+		  	
+	</select>
+	
+	
+	<insert id="insertGdsCart" parameterType="com.giftiel.shop.dto.Cart">
+		INSERT INTO TBL_ME_CART 
+					(
+						CART_NO
+						,MEM_NO
+					   ,UBI_GDS_NO
+					   ,QTY
+					   ,GDS_SIZE
+					   ,REGR_NO
+					   ,REG_DTS
+					   ,EMAIL
+					   ,IP_ADDR
+					   ,MEM_YN
+					   ,SITE_NO
+					)	
+		    VALUES ( 	SEQ_ME_CART.nextval
+		           	   ,#{memNo}
+		           	   ,#{ubiGdsNo}
+		           	   ,1
+		           	   ,#{gdsSize}
+		           	   ,#{regrNo}
+		           	   ,SYSDATE
+		           	   ,#{email, jdbcType=VARCHAR}
+		           	   ,#{ipAddr, jdbcType=VARCHAR}
+		           	   ,#{memYn, jdbcType=VARCHAR}	
+		           	   ,#{siteNo, jdbcType=VARCHAR}
+		           )
+	</insert>
+	
+	<delete id="deleteGdsCart" parameterType="com.giftiel.shop.dto.Cart">
+		DELETE FROM TBL_ME_CART
+		 WHERE CART_NO     = #{cartNo}
+	</delete>
+	
+	<select id="selectGdsCart" parameterType="com.giftiel.shop.dto.Cart" resultMap="listCart">
+		SELECT MEM_NO
+		  FROM TBL_ME_CART
+		 WHERE MEM_NO =  #{memNo}
+		   <if test="gdsNo != '' and gdsNo != null">
+		   AND UBI_GDS_NO =  #{gdsNo}
+		   </if>
+		   <if test="ubiGdsNo != '' and ubiGdsNo != null">
+		   AND UBI_GDS_NO =  #{ubiGdsNo}
+		   </if>
+		   <if test="gdsSize != '' and gdsSize != null">
+		   AND GDS_SIZE = #{gdsSize}
+		   </if>
+		   <if test="gdsSize == null or gdsSize == ''">
+		   AND GDS_SIZE  IS NULL
+		   </if>
+		   <if test="ipAddr != '' and ipAddr != null">
+		   AND IP_ADDR = #{ipAddr}
+		   </if>
+	</select>
+	
+	<update id="updateGdsCart" parameterType="com.giftiel.shop.dto.Cart">
+		UPDATE TBL_ME_CART
+		   SET QTY = QTY + 1
+		   <if test="updrNo != '' and updrNo != null">
+		   ,UPDR_NO = #{updrNo}
+		   ,UPD_DTS = sysdate
+		   </if>
+		 WHERE MEM_NO = #{memNo}
+		   <if test="gdsNo != '' and gdsNo != null">
+		   AND UBI_GDS_NO =  #{gdsNo}
+		   </if>
+		   <if test="ubiGdsNo != '' and ubiGdsNo != null">
+		   AND UBI_GDS_NO =  #{ubiGdsNo}
+		   </if>
+		   <if test="gdsSize != '' and gdsSize != null">
+		   AND GDS_SIZE = #{gdsSize}
+		   </if>
+		   <if test="gdsSize == null or gdsSize == ''">
+		   AND GDS_SIZE  IS NULL
+		   </if>
+		   <if test="ipAddr != '' and ipAddr != null">
+		   AND IP_ADDR = #{ipAddr}
+		   </if>		   
+	</update>
+	
+	<update id="updateGdsSize" parameterType="com.giftiel.shop.dto.Cart">
+		UPDATE TBL_ME_CART
+		   SET GDS_SIZE = #{gdsSize}
+		      ,UPDR_NO = #{regrNo}
+		      ,UPD_DTS = SYSDATE
+		 WHERE CART_NO = #{cartNo}
+	</update>
+	
+	<resultMap id="listCartFront" type="com.giftiel.shop.dto.Cart">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="ubiGdsNo" column="UBI_GDS_NO"/> 
+	    <result property="qty" column="QTY"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="gdsSize" column="GDS_SIZE"/> 
+	    <result property="email" column="EMAIL"/> 
+	    <result property="ipAddr" column="IP_ADDR"/> 
+	    <result property="memYn" column="MEM_YN"/>
+	    
+	    <result property="ubiGdsNm" column="UBI_GDS_NM"/> 
+	    <result property="ubiGdsColorCd" column="UBI_GDS_COLOR_CD"/>
+	    <result property="ubiGdsColorNm" column="UBI_GDS_COLOR_NM"/> 
+	    <result property="ubiGdsSize" column="UBI_GDS_SIZE"/> 
+	    <result property="brand" column="BRAND"/>
+	    <result property="stock" column="STOCK"/>
+	    <result property="ubiSlPrc" column="UBI_SL_PRC"/>
+	    <result property="mainImg" column="MAIN_IMG"/>      
+	    <result property="mainImg2" column="MAIN_IMG2"/>
+	    
+	    <result property="cartNo" column="CART_NO"/>
+	    
+	    <collection property="currentGoodsSizes" javaType="ArrayList" column="UBI_GDS_NO" ofType="com.giftiel.shop.dto.CurrentGoodsSize" select="goods.listCurGdsSize"/>
+	</resultMap>	
+	<select id="selectFrontCartList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCartFront">
+		SELECT
+		    MAIN.RNUM
+		    ,MAIN.MEM_NO 
+		    ,MAIN.UBI_GDS_NO 
+		    ,MAIN.QTY 
+		    ,MAIN.REGR_NO 
+		    ,MAIN.REG_DTS 
+		    ,MAIN.UPDR_NO 
+		    ,MAIN.UPD_DTS 
+		    ,MAIN.GDS_SIZE 
+		    ,MAIN.EMAIL 
+		    ,MAIN.IP_ADDR 
+		    ,MAIN.MEM_YN 
+			,MAIN.UBI_GDS_NM
+			,MAIN.UBI_GDS_COLOR_CD
+			,MAIN.UBI_GDS_COLOR_NM
+			,MAIN.UBI_GDS_SIZE
+			,MAIN.BRAND	   
+			,MAIN.STOCK
+			,MAIN.UBI_SL_PRC
+			,MAIN.CART_NO
+			,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = MAIN.UBI_GDS_NO) AS MAIN_IMG
+			,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=1 AND UBI_GDS_NO = MAIN.UBI_GDS_NO) AS MAIN_IMG2
+		FROM(
+		    SELECT 
+		        ROWNUM RNUM
+		        ,CART.MEM_NO 
+		        ,CART.UBI_GDS_NO 
+		        ,CART.QTY 
+		        ,CART.REGR_NO 
+		        ,CART.REG_DTS 
+		        ,CART.UPDR_NO 
+		        ,CART.UPD_DTS 
+		        ,CART.GDS_SIZE 
+		        ,CART.EMAIL 
+		        ,CART.IP_ADDR 
+		        ,CART.MEM_YN 
+		        ,CART.CART_NO
+				,UBIGDS.품명 as UBI_GDS_NM
+				,UBIGDS.색상 as UBI_GDS_COLOR_CD
+				,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+				,UBIGDS.사이즈 as UBI_GDS_SIZE
+				,UBIGDS.BARND as BRAND
+				,UBIGDS.재고수량	AS STOCK
+				,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC			
+		    FROM
+		        TBL_ME_CART CART, UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+		    WHERE UBIGDS.품번 = CART.UBI_GDS_NO
+		    AND CART.UBI_GDS_NO = GDS.UBI_GDS_NO
+		    AND UBIGDS.사이즈 = CART.GDS_SIZE
+		    AND GDS.GDS_STAT = 'GD00402'
+		    AND UBIGDS.재고수량 > 0
+		    <if test="memNo != null and memNo != ''"> 
+		        AND CART.MEM_NO = #{memNo}
+		    </if>
+		    <if test="ubiGdsNo != null and ubiGdsNo != ''"> 
+		        AND CART.UBI_GDS_NO = #{ubiGdsNo}
+		    </if>
+		    <if test="ubiGdsSize != null and ubiGdsSize != ''"> 
+		        AND CART.GDS_SIZE = #{ubiGdsSize}
+		    </if>
+		    <if test="email != null and email != ''"> 
+		        AND CART.EMAIL = #{email}
+		    </if>
+		    <if test="ipAddr != null and ipAddr != ''"> 
+		        AND CART.IP_ADDR = #{ipAddr}
+		    </if>
+		    <if test="memYn != null and memYn != ''"> 
+		        AND CART.MEM_YN = #{memYn}
+		    </if>
+		    <if test="siteNo != null and siteNo != ''"> 
+		        AND CART.SITE_NO = #{siteNo}
+		    </if>		    
+		    ORDER BY REG_DTS DESC
+		)MAIN
+	</select>	
+</mapper>

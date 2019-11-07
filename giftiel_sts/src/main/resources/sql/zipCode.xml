@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="zipCode">
+	<resultMap id="listZipCd" type="com.giftiel.shop.dto.ZipCode">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="lawDongCd" column="LAW_DONG_CD"/> 
+	    <result property="sidoNm" column="SIDO_NM"/> 
+	    <result property="sigunguNm" column="SIGUNGU_NM"/> 
+	    <result property="lawEmdNm" column="LAW_EMD_NM"/> 
+	    <result property="lawLiNm" column="LAW_LI_NM"/> 
+	    <result property="sanYn" column="SAN_YN"/> 
+	    <result property="jibunBon" column="JIBUN_BON"/> 
+	    <result property="jibunBu" column="JIBUN_BU"/> 
+	    <result property="loadCd" column="LOAD_CD"/> 
+	    <result property="loadNm" column="LOAD_NM"/> 
+	    <result property="underYn" column="UNDER_YN"/> 
+	    <result property="buildBon" column="BUILD_BON"/> 
+	    <result property="buildBu" column="BUILD_BU"/> 
+	    <result property="buildNm" column="BUILD_NM"/> 
+	    <result property="buildNmDetail" column="BUILD_NM_DETAIL"/> 
+	    <result property="buildNo" column="BUILD_NO"/> 
+	    <result property="emdNo" column="EMD_NO"/> 
+	    <result property="admDongCd" column="ADM_DONG_CD"/> 
+	    <result property="admDongNm" column="ADM_DONG_NM"/> 
+	    <result property="zipCd" column="ZIP_CD"/> 
+	    <result property="zipNo" column="ZIP_NO"/> 
+	    <result property="muchDeliveNm" column="MUCH_DELIVE_NM"/> 
+	    <result property="reasonMoveCd" column="REASON_MOVE_CD"/> 
+	    <result property="changeDate" column="CHANGE_DATE"/> 
+	    <result property="preChangeLoad" column="PRE_CHANGE_LOAD"/> 
+	    <result property="sigunguBuildNm" column="SIGUNGU_BUILD_NM"/> 
+	    <result property="apartYn" column="APART_YN"/> 
+	</resultMap>
+    
+	<select id="selectSido" resultMap="listZipCd" >
+		SELECT DISTINCT SIDO_NM     
+  		  FROM TBL_AD_ZIP_CD
+	</select>
+	
+	<select id="selectSiGungu" parameterType="String" resultMap="listZipCd" >
+		SELECT SIDO_NM 
+		      ,SIGUNGU_NM
+		  FROM TBL_AD_ZIP_CD
+		 WHERE SIDO_NM = #{id}	
+		 GROUP BY SIDO_NM ,SIGUNGU_NM
+	</select>
+	
+	<select id="selectAddressList" parameterType="com.giftiel.shop.dto.ZipCode" resultMap="listZipCd" >
+		SELECT     
+			LAW_DONG_CD 
+		    ,SIDO_NM 
+		    ,SIGUNGU_NM 
+		    ,LAW_EMD_NM 
+		    ,LAW_LI_NM 
+		    ,SAN_YN 
+		    ,JIBUN_BON 
+		    ,JIBUN_BU 
+		    ,LOAD_CD 
+		    ,LOAD_NM 
+		    ,UNDER_YN 
+		    ,BUILD_BON 
+		    ,BUILD_BU 
+		    ,BUILD_NM 
+		    ,BUILD_NM_DETAIL 
+		    ,BUILD_NO 
+		    ,EMD_NO 
+		    ,ADM_DONG_CD 
+		    ,ADM_DONG_NM 
+		    ,ZIP_CD 
+		    ,ZIP_NO 
+		    ,MUCH_DELIVE_NM 
+		    ,REASON_MOVE_CD 
+		    ,CHANGE_DATE 
+		    ,PRE_CHANGE_LOAD 
+		    ,SIGUNGU_BUILD_NM 
+		    ,APART_YN 
+		 FROM TBL_AD_ZIP_CD
+		 WHERE 1=1 
+		 <if test="sidoNm != null and sidoNm !=''">
+		 AND SIDO_NM  = #{sidoNm}
+		 </if>
+		 <if test="sigunguNm != null and sigunguNm !=''">
+		 AND SIGUNGU_NM  = #{sigunguNm}
+		 </if>
+		 <if test="searchText != null and searchText !=''">
+		 AND LOAD_NM||' '||LAW_EMD_NM||' '||JIBUN_BON ||'-'||JIBUN_BU||' '||BUILD_NM  like #{searchText}||'%'
+		 </if>		 
+	</select>
+	
+</mapper>

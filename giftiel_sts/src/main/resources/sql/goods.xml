@@ -1,0 +1,3052 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="goods">
+	<resultMap id="listGds" type="com.giftiel.shop.dto.Goods">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="dispGdsNm" column="DISP_GDS_NM"/> 
+	    <result property="gdsStat" column="GDS_STAT"/> 
+	    <result property="bsDesc" column="BS_DESC" jdbcType="CLOB" javaType="java.lang.String" />
+	    <result property="dtlDesc" column="DTL_DESC" jdbcType="CLOB" javaType="java.lang.String" /> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="expPnt" column="EXP_PNT"/> 
+	    <result property="pntRsvCls" column="PNT_RSV_CLS"/> 
+	    <result property="gdsRsvPntaplYn" column="GDS_RSV_PNTAPL_YN"/> 
+	    <result property="dlvCst" column="DLV_CST"/> 
+	    <result property="slTermCls" column="SL_TERM_CLS"/> 
+	    <result property="slStrDtm" column="SL_STR_DTM"/> 
+	    <result property="slEndDtm" column="SL_END_DTM"/> 
+	    <result property="gdsDlvCstPayway" column="GDS_DLV_CST_PAYWAY"/> 
+	    <result property="minPaypntPntRt" column="MIN_PAYPNT_PNT_RT"/> 
+	    <result property="mktprcDispYn" column="MKTPRC_DISP_YN"/> 
+	    <result property="gdsSlFeeaplYn" column="GDS_SL_FEEAPL_YN"/> 
+	    <result property="gdsMinPaypntaplYn" column="GDS_MIN_PAYPNTAPL_YN"/> 
+	    <result property="sndPosbTm" column="SND_POSB_TM"/> 
+	    <result property="perMaxPurqty" column="PER_MAX_PURQTY"/> 
+	    <result property="feeRt" column="FEE_RT"/> 
+	    <result property="oosDts" column="OOS_DTS"/> 
+	    <result property="sortNo" column="SORT_NO"/>
+	    <result property="sortNo2" column="SORT_NO2"/>  
+	    <result property="gdsInfoNo" column="GDS_INFO_NO"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="totalStock" column="TOTAL_STOCK"/>
+	    <result property="cllbSortNo" column="CLLB_SORT_NO"/>
+	    
+	    <result property="newArvl" column="NEW_ARVL"/>
+	    <result property="sortNo2" column="SORT_NO2"/>
+	    <result property="offGdsChk" column="OFF_GDS_CHK"/>  
+
+		<result property="ubiGoods.ubiGdsNo" column="UBI_GDS_NO"/>
+	    <result property="ubiGoods.ubiGdsNm" column="UBI_GDS_NM"/>
+	    <result property="ubiGoods.ubiGdsColorCd" column="UBI_GDS_COLOR_CD"/>
+	    <result property="ubiGoods.ubiGdsColorNm" column="UBI_GDS_COLOR_NM"/>
+	    <result property="ubiGoods.ubiGdsSize" column="UBI_GDS_SIZE"/>
+	    <result property="ubiGoods.brandCode" column="BRAND_CODE"/>
+	    <result property="ubiGoods.yearCode" column="YEAR_CODE"/>
+	    <result property="ubiGoods.seasongroupCode" column="SEASONGROUP_CODE"/>
+	    <result property="ubiGoods.category2Code" column="CATEGORY2_CODE"/>
+	    <result property="ubiGoods.colorCode" column="COLOR_CODE"/>
+	    <result property="ubiGoods.brand" column="BRAND"/>
+	    <result property="ubiGoods.year" column="YEAR"/>
+	    <result property="ubiGoods.seasongroup" column="SEASONGROUP"/>
+	    <result property="ubiGoods.category2" column="CATEGORY2"/>
+	    <result property="ubiGoods.color" column="COLOR"/>
+	    <result property="ubiGoods.collectionCode" column="COLLECTION_CODE"/>
+	    <result property="ubiGoods.seasonCode" column="SEASON_CODE"/>
+	    <result property="ubiGoods.category1Code" column="CATEGORY1_CODE"/>
+	    <result property="ubiGoods.buyingcodeCode" column="BUYINGCODE_CODE"/>
+	    <result property="ubiGoods.deliverdateCode" column="DELIVERDATE_CODE"/>
+	    <result property="ubiGoods.collection" column="COLLECTION"/>
+	    <result property="ubiGoods.season" column="SEASON"/>
+	    <result property="ubiGoods.category1" column="CATEGORY1"/>
+	    <result property="ubiGoods.buyingcode" column="BUYINGCODE"/>
+	    <result property="ubiGoods.deliverdate" column="DELIVERDATE"/>
+	    <result property="ubiGoods.production" column="PRODUCTION"/>
+	    <result property="ubiGoods.material" column="MATERIAL"/>
+	    <result property="ubiGoods.ubiCostPrc" column="UBI_COST_PRC"/>
+	    <result property="ubiGoods.stock" column="STOCK"/>
+	    <result property="ubiGoods.ubiDctCost" column="UBI_DCT_COST"/>
+	    <result property="ubiGoods.ubiCost" column="UBI_COST"/>
+	    <result property="ubiGoods.ubiSlPrc" column="UBI_SL_PRC"/>
+	    <result property="ubiGoods.ubiRegDtm" column="UBI_REG_DTM"/>	    
+	    
+		<result property="mainImg" column="MAIN_IMG"/> 
+		<result property="viewCnt" column="VIEW_CNT"/>
+	</resultMap>	
+
+	<resultMap id="intgBoardMap" type="com.giftiel.shop.dto.IntgBoard">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="txtNo" column="TXT_NO"/> 
+	    <result property="boardClcd" column="BOARD_CLCD"/> 
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="title" column="TITLE"/> 
+	    <result property="lnkUrl" column="LNK_URL"/> 
+	    <result property="regUserNm" column="REG_USER_NM"/> 
+	    <result property="imgUrl" column="IMG_URL"/> 
+	    <result property="seasonCd" column="SEASON_CD"/> 
+	    <result property="clbltnNm" column="CLBLTN_NM"/> 
+	</resultMap>
+	
+	
+	
+	
+	<resultMap id="couponMap" type="com.giftiel.shop.dto.Coupon">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="cpnNo" column="CPN_NO"/> 
+	    <result property="cpnNm" column="CPN_NM"/> 
+	    <result property="cpnKnd" column="CPN_KND"/> 
+	    <result property="issWay" column="ISS_WAY"/> 
+	    <result property="cpnDesc" column="CPN_DESC"/> 
+	    <result property="dcWay" column="DC_WAY"/> 
+	    <result property="dcAmt" column="DC_AMT"/> 
+	    <result property="vldTermCls" column="VLD_TERM_CLS"/> 
+	    <result property="vldStrDts" column="VLD_STR_DTS"/> 
+	    <result property="vldEndDts" column="VLD_END_DTS"/> 
+	    <result property="vldDayCnt" column="VLD_DAY_CNT"/> 
+	    <result property="vldWkdy" column="VLD_WKDY"/> 
+	    <result property="vldStrTm" column="VLD_STR_TM"/> 
+	    <result property="vldEndTm" column="VLD_END_TM"/> 
+	    <result property="issStrDts" column="ISS_STR_DTS"/> 
+	    <result property="issEndDts" column="ISS_END_DTS"/> 
+	    <result property="cpnStat" column="CPN_STAT"/> 
+	    <result property="cpnImgUrl" column="CPN_IMG_URL"/> 
+	    <result property="maxDcAmt" column="MAX_DC_AMT"/> 
+	    <result property="minOrdAmt" column="MIN_ORD_AMT"/> 
+	    <result property="allIssLmtCnt" column="ALL_ISS_LMT_CNT"/> 
+	    <result property="dupIssYn" column="DUP_ISS_YN"/> 
+	    <result property="issTms" column="ISS_TMS"/> 
+	    <result property="issWkdy" column="ISS_WKDY"/> 
+	    <result property="issStrTm" column="ISS_STR_TM"/> 
+	    <result property="issEndTm" column="ISS_END_TM"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+
+	<sql id = "gds">
+	    ,GDS.GDS_INFO_NO 
+	    ,GDS.GDS_STAT 
+	    ,GDS.BS_DESC 
+	    ,GDS.DTL_DESC 
+	    ,GDS.DISP_YN 
+	    ,GDS.SL_TERM_CLS 
+	    ,TO_CHAR(GDS.SL_STR_DTM,'YYYY-MM-DD') SL_STR_DTM
+	    ,TO_CHAR(GDS.SL_END_DTM,'YYYY-MM-DD') SL_END_DTM
+	    ,TO_CHAR(GDS.OOS_DTS,'YYYY-MM-DD') OOS_DTS
+	    ,GDS.SORT_NO
+	    ,GDS.SORT_NO2 
+	    ,GDS.REGR_NO
+	    ,TO_CHAR(GDS.REG_DTS,'YYYY-MM-DD') REG_DTS
+	    ,GDS.UPDR_NO
+	    ,TO_CHAR(GDS.UPD_DTS,'YYYY-MM-DD') UPD_DTS
+	    ,GDS.CLLB_SORT_NO
+	    ,GDS.NEW_ARVL
+	    ,GDS.NEW_ARVL_10002
+	    ,GDS.NEW_ARVL_10003
+	    ,GDS.NEW_ARVL_10004
+	    ,GDS.NEW_ARVL_10006
+	    ,GDS.OFF_GDS_CHK
+	    ,GDS.SORT_NO_10002
+	    ,GDS.SORT_NO_10003
+	    ,GDS.SORT_NO_10004
+	    ,GDS.SORT_NO_10006
+	    ,GDS.SORT_NO2_10002
+	    ,GDS.SORT_NO2_10003
+	    ,GDS.SORT_NO2_10004
+	    ,GDS.SORT_NO2_10006	    
+	    ,GDS.VIEW_CNT
+	</sql>	
+	<sql id = "ubiGds">
+		UBIGDS.품번 as UBI_GDS_NO
+		,UBIGDS.품명 as UBI_GDS_NM
+		,UBIGDS.색상 as UBI_GDS_COLOR_CD
+		,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+		,UBIGDS.사이즈 as UBI_GDS_SIZE
+		,UBIGDS.BRAND코드 as BRAND_CODE
+		,UBIGDS.YEAR코드 as YEAR_CODE
+		,UBIGDS.SEASONGROUP코드 AS SEASONGROUP_CODE
+		,UBIGDS.CATEGORY2코드 AS CATEGORY2_CODE
+		,UBIGDS.COLOR코드 AS COLOR_CODE
+		,UBIGDS.BARND AS BRAND
+		,UBIGDS.YEAR
+		,UBIGDS.SEASONGROUP
+		,UBIGDS.CATEGORY2
+		,UBIGDS.COLOR
+		,UBIGDS.COLLECTION코드 AS COLLECTION_CODE
+		,UBIGDS.SEASON코드 AS SEASON_CODE
+		,UBIGDS.CATEGORY1코드 AS CATEGORY1_CODE 
+		,UBIGDS.BUYINGCODE코드 AS BUYINGCODE_CODE
+		,UBIGDS.DELIVERDATE코드 AS DELIVERDATE_CODE
+		,UBIGDS.COLLECTION
+		,UBIGDS.SEASON
+		,UBIGDS.CATEGORY1
+		,UBIGDS.BUYINGCODE
+		,UBIGDS.DELIVERDATE
+		,UBIGDS.PRODUCTION
+		,UBIGDS.MATERIAL
+		,UBIGDS.최초판매가 AS UBI_COST_PRC
+		,UBIGDS.재고수량	AS STOCK
+<!-- 		,UBIGDS.사전원가	AS UBI_DCT_COST -->
+		,UBIGDS.사후원가	AS UBI_COST
+		,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC
+		,UBIGDS.성별구분 AS SEX
+	</sql>
+	
+	
+	
+	
+	<sql id = "categoryFilter">
+<!-- 		<if test="searchText !='' and searchText != null"> -->
+<!-- 		<if test="siteNo != '' and siteNo != null"> -->
+		<choose>
+			<when test="searchText !='' and searchText != null">
+				AND UBIGDS.CATEGORY1코드  IN(
+						SELECT * FROM
+						(WITH TT AS
+						      (SELECT
+						        (SELECT WM_CONCAT(CATE_DEPTH_2) CATE_DEPTH_2
+						        FROM TBL_AD_CATE_CONFIG
+						        <choose>
+									<when test="siteNo != '' and siteNo != null">
+										WHERE SEASON_SEQ IN (SELECT SEASON_SEQ FROM TBL_AD_CATE_SEASON WHERE SITE_NO = #{siteNo} AND USE_YN='Y' AND DISP_YN='Y')
+									</when>
+									<otherwise>
+										WHERE SEASON_SEQ IN (SELECT SEASON_SEQ FROM TBL_AD_CATE_SEASON WHERE SITE_NO = '10001' AND USE_YN='Y' AND DISP_YN='Y')
+									</otherwise>
+								</choose>
+						        AND CATE_DEPTH_1 = 'CM01501'
+						        AND USE_YN       ='Y'
+						        ) TXT
+						      FROM DUAL
+						  
+						      )
+						    SELECT DISTINCT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT
+						    FROM TT
+						      CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0)
+						      
+						UNION
+						
+						
+						SELECT * FROM
+						(WITH TT AS
+						      (SELECT
+						        (SELECT WM_CONCAT(CATE_DEPTH_2) CATE_DEPTH_2
+						        FROM TBL_AD_CATE_CONFIG
+						        <choose>
+									<when test="siteNo != '' and siteNo != null">
+										WHERE SEASON_SEQ IN (SELECT SEASON_SEQ FROM TBL_AD_CATE_SEASON WHERE SITE_NO = #{siteNo} AND USE_YN='Y' AND DISP_YN='Y')
+									</when>
+									<otherwise>
+										WHERE SEASON_SEQ IN (SELECT SEASON_SEQ FROM TBL_AD_CATE_SEASON WHERE SITE_NO = '10001' AND USE_YN='Y' AND DISP_YN='Y')
+									</otherwise>
+								</choose>
+						        AND CATE_DEPTH_1 = 'CM01502'
+						        AND USE_YN       ='Y'
+						        ) TXT
+						      FROM DUAL
+						  
+						      )
+						    SELECT DISTINCT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT
+						    FROM TT
+						      CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0)
+					)
+					
+					
+				AND UBIGDS.CATEGORY2코드  IN(
+						SELECT * FROM
+						(WITH TT AS
+						      (SELECT
+						        (SELECT WM_CONCAT(CATE_DEPTH_3) CATE_DEPTH_3
+						        FROM TBL_AD_CATE_CONFIG
+						        <choose>
+									<when test="siteNo != '' and siteNo != null">
+										WHERE SEASON_SEQ IN (SELECT SEASON_SEQ FROM TBL_AD_CATE_SEASON WHERE SITE_NO = #{siteNo} AND USE_YN='Y' AND DISP_YN='Y')
+									</when>
+									<otherwise>
+										WHERE SEASON_SEQ IN (SELECT SEASON_SEQ FROM TBL_AD_CATE_SEASON WHERE SITE_NO = '10001' AND USE_YN='Y' AND DISP_YN='Y')
+									</otherwise>
+								</choose>
+						        AND CATE_DEPTH_1 = 'CM01501'
+						        AND USE_YN       ='Y'
+						        ) TXT
+						      FROM DUAL
+						  
+						      )
+						    SELECT DISTINCT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT
+						    FROM TT
+						      CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0)
+						      
+						UNION
+						
+						
+						SELECT * FROM
+						(WITH TT AS
+						      (SELECT
+						        (SELECT WM_CONCAT(CATE_DEPTH_3) CATE_DEPTH_3
+						        FROM TBL_AD_CATE_CONFIG
+						        <choose>
+									<when test="siteNo != '' and siteNo != null">
+										WHERE SEASON_SEQ IN (SELECT SEASON_SEQ FROM TBL_AD_CATE_SEASON WHERE SITE_NO = #{siteNo} AND USE_YN='Y' AND DISP_YN='Y')
+									</when>
+									<otherwise>
+										WHERE SEASON_SEQ IN (SELECT SEASON_SEQ FROM TBL_AD_CATE_SEASON WHERE SITE_NO = '10001' AND USE_YN='Y' AND DISP_YN='Y')
+									</otherwise>
+								</choose>
+						        AND CATE_DEPTH_1 = 'CM01502'
+						        AND USE_YN       ='Y'
+						        ) TXT
+						      FROM DUAL
+						  
+						      )
+						    SELECT DISTINCT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT
+						    FROM TT
+						      CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0)
+					)
+			</when>
+			<otherwise>
+				<choose>
+					<when test="sex != '' and sex != null">
+						AND UBIGDS.CATEGORY1코드  IN(
+				          WITH TT AS
+				      (
+				      	SELECT (SELECT CATE_DEPTH_2 FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ = #{nowSeq} AND CATE_DEPTH_1= DECODE(#{sex}, 'M', 'CM01501', 'CM01502') AND USE_YN='Y') TXT FROM DUAL
+				      )
+				      SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+				          FROM TT
+				          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+				    	)
+				    	
+				    	
+				    	AND UBIGDS.CATEGORY2코드  IN(
+				          WITH TT AS
+				      (
+				      	SELECT (SELECT CATE_DEPTH_3 FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ = #{nowSeq} AND CATE_DEPTH_1=DECODE(#{sex}, 'M', 'CM01501', 'CM01502') AND USE_YN='Y') TXT FROM DUAL
+				      )
+				      SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+				          FROM TT
+				          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+				    	)
+					</when>
+					<otherwise>
+					AND UBIGDS.CATEGORY1코드  IN(
+						SELECT * FROM
+						(WITH TT AS
+						      (SELECT
+						        (SELECT CATE_DEPTH_2
+						        FROM TBL_AD_CATE_CONFIG
+						        WHERE SEASON_SEQ = #{nowSeq}
+						        AND CATE_DEPTH_1 = 'CM01501'
+						        AND USE_YN       ='Y'
+						        ) TXT
+						      FROM DUAL
+						  
+						      )
+						    SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT
+						    FROM TT
+						      CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0)
+						      
+						UNION
+						
+						
+						SELECT * FROM
+						(WITH TT AS
+						      (SELECT
+						        (SELECT CATE_DEPTH_2
+						        FROM TBL_AD_CATE_CONFIG
+						        WHERE SEASON_SEQ = #{nowSeq}
+						        AND CATE_DEPTH_1 = 'CM01502'
+						        AND USE_YN       ='Y'
+						        ) TXT
+						      FROM DUAL
+						  
+						      )
+						    SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT
+						    FROM TT
+						      CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0)
+					)
+					
+					
+					
+					AND UBIGDS.CATEGORY2코드  IN(
+						SELECT * FROM
+						(WITH TT AS
+						      (SELECT
+						        (SELECT CATE_DEPTH_3
+						        FROM TBL_AD_CATE_CONFIG
+						        WHERE SEASON_SEQ = #{nowSeq}
+						        AND CATE_DEPTH_1 = 'CM01501'
+						        AND USE_YN       ='Y'
+						        ) TXT
+						      FROM DUAL
+						  
+						      )
+						    SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT
+						    FROM TT
+						      CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0)
+						      
+						UNION
+						
+						
+						SELECT * FROM
+						(WITH TT AS
+						      (SELECT
+						        (SELECT CATE_DEPTH_3
+						        FROM TBL_AD_CATE_CONFIG
+						        WHERE SEASON_SEQ = #{nowSeq}
+						        AND CATE_DEPTH_1 = 'CM01502'
+						        AND USE_YN       ='Y'
+						        ) TXT
+						      FROM DUAL
+						  
+						      )
+						    SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT
+						    FROM TT
+						      CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0)
+					)
+					
+					
+					</otherwise>
+				</choose> 
+			</otherwise>
+		</choose>
+		
+    	
+    	
+    	
+    	 <if test='siteNo == null'>
+    	 	<choose>
+				<when test="searchText !='' and searchText != null">
+					AND UBIGDS.BRAND코드 IN(
+			          WITH TT AS
+			      (
+			          SELECT (
+			          	SELECT WM_CONCAT(CATE_DEPTH_2) CATE_DEPTH_2
+			          	FROM TBL_AD_CATE_CONFIG 
+			          	WHERE SEASON_SEQ IN (SELECT SEASON_SEQ FROM TBL_AD_CATE_SEASON WHERE SITE_NO = '10001' AND USE_YN='Y' AND DISP_YN='Y')
+			          	AND CATE_DEPTH_1='CM01503'
+			          	 AND USE_YN='Y'
+			          ) TXT FROM DUAL
+			      )
+			      SELECT DISTINCT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+			          FROM TT
+			          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+			    	)
+			    </when>
+			    <otherwise>
+			    	AND UBIGDS.BRAND코드 IN(
+			          WITH TT AS
+			      (
+			          SELECT (
+			          	SELECT CATE_DEPTH_2 
+			          	FROM TBL_AD_CATE_CONFIG 
+			          	WHERE SEASON_SEQ = #{nowSeq}
+			          	<if test='sex == "M"'>
+			          		AND CATE_DEPTH_1='CM01503'
+			          	</if>
+			          	<if test='sex == "W"'>
+			          		AND CATE_DEPTH_1='CM01504'
+			          	</if>
+			          	
+			          	<if test='sex == null or sex == ""'>
+			          		<if test='ubiGdsNo != null'>
+			          			AND CATE_DEPTH_1= (select DISTINCT DECODE(UBIGDS.성별구분, 'M', 'CM01503', 'CM01504') from UBI09S_WORKS.V_상품정보트리거 UBIGDS where UBIGDS.품번 = #{ubiGdsNo})
+			          		</if>
+			          		<if test='ubiGdsNo == null || ubiGdsNo == ""'>
+			          			AND CATE_DEPTH_1='CM01503'
+			          		</if>
+			          	</if>			          	
+			          	AND USE_YN='Y'
+			          ) TXT FROM DUAL
+			      )
+			      SELECT DISTINCT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+			          FROM TT
+			          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+			    	)
+			    </otherwise>
+		    </choose>
+		</if>
+	</sql>
+	
+	
+	
+	
+	<select id="listGoods" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listGds">
+		SELECT  /* goods.listGoods */
+				RNUM 
+			    ,GDS_INFO_NO 
+			    ,GDS_STAT 
+			    ,BS_DESC 
+			    ,DTL_DESC 
+			    ,DISP_YN 
+			    ,SL_TERM_CLS 
+			    ,SL_STR_DTM 
+			    ,SL_END_DTM 
+			    ,OOS_DTS 
+			    ,SORT_NO 
+			    ,REGR_NO 
+			    ,REG_DTS 
+			    ,UPDR_NO 
+			    ,UPD_DTS 
+		        ,UBI_GDS_NO
+				,UBI_GDS_NM
+				,UBI_GDS_COLOR_CD
+				,UBI_GDS_COLOR_NM
+				,UBI_GDS_SIZE
+				,BRAND_CODE
+				,YEAR_CODE
+				,SEASONGROUP_CODE
+				,CATEGORY2_CODE
+				,COLOR_CODE
+				,BRAND
+				,YEAR
+				,SEASONGROUP
+				,CATEGORY2
+				,COLOR
+				,COLLECTION_CODE
+				,SEASON_CODE
+				,CATEGORY1_CODE 
+				,BUYINGCODE_CODE
+				,DELIVERDATE_CODE
+				,COLLECTION
+				,SEASON
+				,CATEGORY1
+				,BUYINGCODE
+				,DELIVERDATE
+				,PRODUCTION
+				,MATERIAL
+				,UBI_COST_PRC
+				,STOCK -
+				(select count(*) from tbl_or_ord ord, tbl_or_ord_gds ordgds
+			      where ord.ord_no = ordgds.ord_no
+			      AND ordgds.per_ord_stat     IN ('OR00501','OR00502')
+			      and ord.ord_stat != 'OR00201'
+			      and ordgds.ubi_gds_no = MAIN_GDS_NO
+			      and ord.reg_dts > sysdate-2) AS STOCK
+<!-- 				,UBI_DCT_COST -->
+				,UBI_COST
+				,UBI_SL_PRC		
+<!-- 				,UBI_REG_DTM -->
+				
+				,MAIN_IMG
+				,VIEW_CNT
+		FROM(
+		    SELECT
+				<choose>
+					<when test="orderBy != '' and orderBy != null">
+					ROW_NUMBER () OVER (ORDER BY ${orderBy} ${orderFlag}) AS  RNUM
+					</when>
+					<otherwise>
+					ROW_NUMBER () OVER (ORDER BY REG_DTS DESC) AS  RNUM
+ 					</otherwise>
+				</choose>
+			    ,GDS_INFO_NO 
+			    ,GDS_STAT 
+			    ,BS_DESC 
+			    ,DTL_DESC 
+			    ,DISP_YN 
+			    ,SL_TERM_CLS 
+			    ,SL_STR_DTM 
+			    ,SL_END_DTM 
+			    ,OOS_DTS 
+			    ,SORT_NO 
+			    ,REGR_NO 
+			    ,REG_DTS 
+			    ,UPDR_NO 
+			    ,UPD_DTS
+		        ,UBI_GDS_NO
+		        ,UBI_GDS_NO AS MAIN_GDS_NO
+				,UBI_GDS_NM
+				,UBI_GDS_COLOR_CD
+				,UBI_GDS_COLOR_NM
+				,UBI_GDS_SIZE
+				,BRAND_CODE
+				,YEAR_CODE
+				,SEASONGROUP_CODE
+				,CATEGORY2_CODE
+				,COLOR_CODE
+				,BRAND
+				,YEAR
+				,SEASONGROUP
+				,CATEGORY2
+				,COLOR
+				,COLLECTION_CODE
+				,SEASON_CODE
+				,CATEGORY1_CODE 
+				,BUYINGCODE_CODE
+				,DELIVERDATE_CODE
+				,COLLECTION
+				,SEASON
+				,CATEGORY1
+				,BUYINGCODE
+				,DELIVERDATE
+				,PRODUCTION
+				,MATERIAL
+				,UBI_COST_PRC
+				,STOCK
+<!-- 				,UBI_DCT_COST -->
+				,UBI_COST
+				,UBI_SL_PRC
+<!-- 				,UBI_REG_DTM -->
+				
+				,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = MAIN.UBI_GDS_NO AND ROWNUM = 1) AS MAIN_IMG
+				,VIEW_CNT
+		    FROM(
+			    SELECT 
+			    	<include refid="ubiGds" />
+			    	<include refid="gds" />	
+<!-- 			    	,UBIGDS.작성일	AS UBI_REG_DTM -->
+			    FROM
+			        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+			    WHERE UBIGDS.품번 = GDS.UBI_GDS_NO(+)
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	AND UBIGDS.SEASON코드 = #{oneDepth}
+			    </if>
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND UBIGDS.CATEGORY1코드 = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND UBIGDS.CATEGORY2코드 = #{threeDepth}
+			    </if> 
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+                <if test="regStrDtm != '' and regStrDtm != null">
+                	AND 작성일 >= TO_DATE(#{regStrDtm},'YYYY-MM-DD')
+                </if>
+                <if test="regEndDtm != '' and regEndDtm != null">
+					AND 작성일 <![CDATA[<]]> TO_DATE(#{regEndDtm},'YYYY-MM-DD')
+				</if>			    
+	            <if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+					AND 현판매가 >= #{ubiSlStrPrc}
+				</if>
+	            <if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+					AND 현판매가 <![CDATA[<=]]> #{ubiSlEndPrc}
+				</if>
+				<if test="stockZeroGubun != '' and stockZeroGubun != null">
+		    		<choose>
+		    			<when test="stockZeroGubun eq 'Y'.toString()">
+		    				AND UBIGDS.재고수량 > 0
+		    			</when>
+		    			<otherwise>
+		    				AND (UBIGDS.재고수량 <![CDATA[<]]> 1 OR UBIGDS.재고수량 IS NULL)
+		    			</otherwise>
+		    		</choose>
+		    	</if>
+				<if test="imageUploadGubun != '' and imageUploadGubun != null">
+		    		<choose>
+		    			<when test="imageUploadGubun eq 'Y'.toString()">
+		    				AND (SELECT COUNT(*) FROM TBL_GD_GDS_IMG WHERE UBI_GDS_NO = UBIGDS.품번) <![CDATA[>]]> 0
+		    			</when>
+		    			<otherwise>
+		    				AND (SELECT COUNT(*) FROM TBL_GD_GDS_IMG WHERE UBI_GDS_NO = UBIGDS.품번) <![CDATA[<]]> 1
+		    			</otherwise>
+		    		</choose>
+		    	</if>
+<!--                 <if test="stockZeroChk"> -->
+<!-- 					AND UBIGDS.재고수량 > 0  -->
+<!-- 				</if> -->
+<!--                 <if test="imageUploadChk"> -->
+<!-- 					AND (SELECT COUNT(*) FROM TBL_GD_GDS_IMG WHERE UBI_GDS_NO = UBIGDS.품번) <![CDATA[<=]]> 1 -->
+<!-- 				</if> -->
+				<if test="brand != '' and brand != null">
+					AND UBIGDS.BARND = #{brand}
+				</if>
+			)MAIN
+				where 1=1
+			    <if test="gdsStat != '' and gdsStat != null">
+			    	AND GDS_STAT = #{gdsStat}
+			    </if>
+			    <if test="dispYn != null and dispYn != ''"> 
+		        	AND DISP_YN = #{dispYn}
+		    	</if>
+		)
+		WHERE RNUM BETWEEN #{startListNum} AND #{endListNum} 		    
+	</select>
+	<select id="totalListGoods" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		    SELECT
+		        COUNT(*) TOTAL_CNT 
+		    FROM
+				UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+			WHERE UBIGDS.품번 = GDS.UBI_GDS_NO(+)
+		    <if test="oneDepth != '' and oneDepth != null">
+		    	AND UBIGDS.SEASON코드 = #{oneDepth}
+		    </if>
+		    <if test="twoDepth != '' and twoDepth != null">
+		    	AND UBIGDS.CATEGORY1코드 = #{twoDepth}
+		    </if> 
+		    <if test="threeDepth != '' and threeDepth != null">
+		    	AND UBIGDS.CATEGORY2코드 = #{threeDepth}
+		    </if>		
+		    <if test="searchGb != '' and searchGb != null and searchText != ''">
+				AND ${searchGb} like '%'||#{searchText}||'%'
+		    </if>
+			<if test="regStrDtm != '' and regStrDtm != null">
+				AND 작성일 >= TO_DATE(#{regStrDtm},'YYYY-MM-DD')
+			</if>
+			<if test="regEndDtm != '' and regEndDtm != null">
+				AND 작성일 <![CDATA[<]]> TO_DATE(#{regEndDtm},'YYYY-MM-DD')
+			</if>
+            <if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+				AND 현판매가 >= #{ubiSlStrPrc}
+			</if>
+            <if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+				AND 현판매가 <![CDATA[<=]]> #{ubiSlEndPrc}
+			</if>
+			<if test="rownum != '' and rownum != null">
+				AND rownum <![CDATA[<=]]> #{rownum}
+			</if>
+			<if test="stockZeroGubun != '' and stockZeroGubun != null">
+	    		<choose>
+	    			<when test="stockZeroGubun eq 'Y'.toString()">
+	    				AND UBIGDS.재고수량 > 0
+	    			</when>
+	    			<otherwise>
+	    				AND (UBIGDS.재고수량 <![CDATA[<]]> 1 OR UBIGDS.재고수량 IS NULL)
+	    			</otherwise>
+	    		</choose>
+	    	</if>
+			<if test="imageUploadGubun != '' and imageUploadGubun != null">
+	    		<choose>
+	    			<when test="imageUploadGubun eq 'Y'.toString()">
+	    				AND (SELECT COUNT(*) FROM TBL_GD_GDS_IMG WHERE UBI_GDS_NO = UBIGDS.품번) <![CDATA[>]]> 0
+	    			</when>
+	    			<otherwise>
+	    				AND (SELECT COUNT(*) FROM TBL_GD_GDS_IMG WHERE UBI_GDS_NO = UBIGDS.품번) <![CDATA[<]]> 1
+	    			</otherwise>
+	    		</choose>
+	    	</if>
+<!--             <if test="stockZeroChk"> -->
+<!-- 				AND UBIGDS.재고수량 > 0  -->
+<!-- 			</if> -->
+<!--             <if test="imageUploadChk"> -->
+<!-- 				AND (SELECT COUNT(*) FROM TBL_GD_GDS_IMG WHERE UBI_GDS_NO = UBIGDS.품번) > 0 -->
+<!-- 			</if>			 -->
+			<if test="brand != '' and brand != null">
+				AND UBIGDS.BARND = #{brand}
+			</if>
+			<if test="gdsStat != '' and gdsStat != null">
+		    	AND GDS.GDS_STAT = #{gdsStat}
+		    </if>
+		    <if test="dispYn != null and dispYn != ''"> 
+	        	AND GDS.DISP_YN = #{dispYn}
+	    	</if>
+	</select>	
+	<resultMap id="selectGds" type="com.giftiel.shop.dto.Goods">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="dispGdsNm" column="DISP_GDS_NM"/> 
+	    <result property="gdsStat" column="GDS_STAT"/> 
+	    <result property="bsDesc" column="BS_DESC" jdbcType="CLOB" javaType="java.lang.String" />
+	    <result property="dtlDesc" column="DTL_DESC" jdbcType="CLOB" javaType="java.lang.String" />
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="expPnt" column="EXP_PNT"/> 
+	    <result property="pntRsvCls" column="PNT_RSV_CLS"/> 
+	    <result property="gdsRsvPntaplYn" column="GDS_RSV_PNTAPL_YN"/> 
+	    <result property="dlvCst" column="DLV_CST"/> 
+	    <result property="slTermCls" column="SL_TERM_CLS"/> 
+	    <result property="slStrDtm" column="SL_STR_DTM"/> 
+	    <result property="slEndDtm" column="SL_END_DTM"/> 
+	    <result property="gdsDlvCstPayway" column="GDS_DLV_CST_PAYWAY"/> 
+	    <result property="minPaypntPntRt" column="MIN_PAYPNT_PNT_RT"/> 
+	    <result property="mktprcDispYn" column="MKTPRC_DISP_YN"/> 
+	    <result property="gdsSlFeeaplYn" column="GDS_SL_FEEAPL_YN"/> 
+	    <result property="gdsMinPaypntaplYn" column="GDS_MIN_PAYPNTAPL_YN"/> 
+	    <result property="sndPosbTm" column="SND_POSB_TM"/> 
+	    <result property="perMaxPurqty" column="PER_MAX_PURQTY"/> 
+	    <result property="feeRt" column="FEE_RT"/> 
+	    <result property="oosDts" column="OOS_DTS"/> 
+	    <result property="sortNo" column="SORT_NO"/> 
+	    <result property="gdsInfoNo" column="GDS_INFO_NO"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="offGdsChk" column="OFF_GDS_CHK"/>
+
+		<result property="ubiGoods.ubiGdsNo" column="UBI_GDS_NO"/>
+	    <result property="ubiGoods.ubiGdsNm" column="UBI_GDS_NM"/>
+	    <result property="ubiGoods.ubiGdsColorCd" column="UBI_GDS_COLOR_CD"/>
+	    <result property="ubiGoods.ubiGdsColorNm" column="UBI_GDS_COLOR_NM"/>
+	    <result property="ubiGoods.ubiGdsSize" column="UBI_GDS_SIZE"/>
+	    <result property="ubiGoods.brandCode" column="BRAND_CODE"/>
+	    <result property="ubiGoods.yearCode" column="YEAR_CODE"/>
+	    <result property="ubiGoods.seasongroupCode" column="SEASONGROUP_CODE"/>
+	    <result property="ubiGoods.category2Code" column="CATEGORY2_CODE"/>
+	    <result property="ubiGoods.colorCode" column="COLOR_CODE"/>
+	    <result property="ubiGoods.brand" column="BRAND"/>
+	    <result property="ubiGoods.year" column="YEAR"/>
+	    <result property="ubiGoods.seasongroup" column="SEASONGROUP"/>
+	    <result property="ubiGoods.category2" column="CATEGORY2"/>
+	    <result property="ubiGoods.color" column="COLOR"/>
+	    <result property="ubiGoods.collectionCode" column="COLLECTION_CODE"/>
+	    <result property="ubiGoods.seasonCode" column="SEASON_CODE"/>
+	    <result property="ubiGoods.category1Code" column="CATEGORY1_CODE"/>
+	    <result property="ubiGoods.buyingcodeCode" column="BUYINGCODE_CODE"/>
+	    <result property="ubiGoods.deliverdateCode" column="DELIVERDATE_CODE"/>
+	    <result property="ubiGoods.collection" column="COLLECTION"/>
+	    <result property="ubiGoods.season" column="SEASON"/>
+	    <result property="ubiGoods.category1" column="CATEGORY1"/>
+	    <result property="ubiGoods.buyingcode" column="BUYINGCODE"/>
+	    <result property="ubiGoods.deliverdate" column="DELIVERDATE"/>
+	    <result property="ubiGoods.production" column="PRODUCTION"/>
+	    <result property="ubiGoods.material" column="MATERIAL"/>
+	    <result property="ubiGoods.ubiCostPrc" column="UBI_COST_PRC"/>
+	    <result property="ubiGoods.stock" column="STOCK"/>
+	    <result property="ubiGoods.ubiDctCost" column="UBI_DCT_COST"/>
+	    <result property="ubiGoods.ubiCost" column="UBI_COST"/>
+	    <result property="ubiGoods.ubiSlPrc" column="UBI_SL_PRC"/>
+	    <result property="ubiGoods.ubiRegDtm" column="UBI_REG_DTM"/>
+	    <result property="ubiGoods.etcGdsNo" column="ETC_GDS_NO"/>
+	    <result property="ubiGoods.sex" column="SEX"/>		    	    
+	    
+		<collection property="goodsTags" javaType="ArrayList" column="UBI_GDS_NO" ofType="com.giftiel.shop.dto.GoodsAddInfo" select="listTag"/>
+		<collection property="goodsImages" javaType="ArrayList" column="UBI_GDS_NO" ofType="com.giftiel.shop.dto.GoodsAddInfo" select="listGdsImg"/>
+		<collection property="goodsSizes" javaType="ArrayList" column="UBI_GDS_NO" ofType="com.giftiel.shop.dto.GoodsSize" select="listSize"/>
+		<collection property="currentGoodsSizes" javaType="ArrayList" column="UBI_GDS_NO" ofType="com.giftiel.shop.dto.CurrentGoodsSize" select="listCurGdsSize"/>
+	</resultMap>		
+	
+	<select id="selectGoods" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="selectGds">
+		SELECT /* goods.selectGoods */
+	    	<include refid="ubiGds" />
+	    	<include refid="gds" />	
+	    FROM
+	        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+	    WHERE UBIGDS.품번 = GDS.UBI_GDS_NO(+)
+    	AND UBIGDS.품번 = #{ubiGdsNo}
+    	<if test="ubiGdsSize != '' and ubiGdsSize != null">
+    	AND UBIGDS.사이즈 = #{ubiGdsSize} 
+    	</if>
+	</select>
+	
+	<select id="selectGoodsFront" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="selectGds">
+	SELECT MAIN.*
+		,(SELECT BS_DESC FROM TBL_GD_GDS WHERE UBI_GDS_NO = MAIN.UBI_GDS_NO) BS_DESC
+		,(SELECT DTL_DESC FROM TBL_GD_GDS WHERE UBI_GDS_NO = MAIN.UBI_GDS_NO) DTL_DESC
+	FROM (
+		SELECT
+			DISTINCT
+			UBIGDS.품번 as UBI_GDS_NO
+			,UBIGDS.품명 as UBI_GDS_NM
+			,UBIGDS.색상 as UBI_GDS_COLOR_CD
+			,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+			,UBIGDS.BRAND코드 as BRAND_CODE
+			,UBIGDS.YEAR코드 as YEAR_CODE
+			,UBIGDS.SEASONGROUP코드 AS SEASONGROUP_CODE
+			,UBIGDS.CATEGORY2코드 AS CATEGORY2_CODE
+			,UBIGDS.COLOR코드 AS COLOR_CODE
+			,UBIGDS.BARND AS BRAND
+			,UBIGDS.YEAR
+			,UBIGDS.SEASONGROUP
+			,UBIGDS.CATEGORY2
+			,UBIGDS.COLOR
+			,UBIGDS.COLLECTION코드 AS COLLECTION_CODE
+			,UBIGDS.SEASON코드 AS SEASON_CODE
+			,UBIGDS.CATEGORY1코드 AS CATEGORY1_CODE 
+			,UBIGDS.BUYINGCODE코드 AS BUYINGCODE_CODE
+			,UBIGDS.DELIVERDATE코드 AS DELIVERDATE_CODE
+			,UBIGDS.COLLECTION
+			,UBIGDS.SEASON
+			,UBIGDS.CATEGORY1
+			,UBIGDS.BUYINGCODE
+			,UBIGDS.DELIVERDATE
+			,UBIGDS.PRODUCTION
+			,UBIGDS.MATERIAL
+			,UBIGDS.최초판매가 AS UBI_COST_PRC
+<!-- 			,UBIGDS.사전원가	AS UBI_DCT_COST -->
+			,UBIGDS.사후원가	AS UBI_COST
+			,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC
+			,UBIGDS.성별구분	AS SEX
+		    ,GDS.GDS_INFO_NO 
+		    ,GDS.GDS_STAT 
+		    ,GDS.DISP_YN 
+		    ,GDS.SL_TERM_CLS 
+		    ,TO_CHAR(GDS.SL_STR_DTM,'YYYY-MM-DD') SL_STR_DTM
+		    ,TO_CHAR(GDS.SL_END_DTM,'YYYY-MM-DD') SL_END_DTM
+		    ,TO_CHAR(GDS.OOS_DTS,'YYYY-MM-DD') OOS_DTS
+		    ,GDS.SORT_NO 
+		    ,GDS.REGR_NO
+		    ,TO_CHAR(GDS.REG_DTS,'YYYY-MM-DD') REG_DTS
+		    ,GDS.UPDR_NO
+		    ,TO_CHAR(GDS.UPD_DTS,'YYYY-MM-DD') UPD_DTS		
+		    ,UBIGDS.기타품번 AS ETC_GDS_NO
+		    ,GDS.OFF_GDS_CHK
+	    FROM
+	        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+	    WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+    	AND UBIGDS.품번 = #{ubiGdsNo}
+    	AND GDS.GDS_STAT IN ('GD00402','GD00404')
+       	AND GDS.DISP_YN = 'Y'
+       	
+       	
+       	
+       	<include refid="categoryFilter"/>
+       	
+       	
+       	
+       	
+    	)MAIN
+	</select>	
+	
+	<resultMap id="listAddInfoGrp" type="com.giftiel.shop.dto.GoodsAddInfoGrp">
+	    <result property="gdsInfoNo" column="GDS_INFO_NO"/> 
+	    <result property="gdsInfoNm" column="GDS_INFO_NM"/> 
+	    <result property="useYn" column="USE_YN"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+	
+	<select id="listAddInfoGrp" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listAddInfoGrp">
+	    SELECT 
+	        ROWNUM RNUM
+	        ,GDS_INFO_NO 
+	        ,GDS_INFO_NM 
+	        ,USE_YN 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	    FROM
+	        TBL_GD_INFO_GRP 
+	    WHERE 1 = 1
+	    <if test="gdsInfoNo != null"> 
+	        AND GDS_INFO_NO = #{gdsInfoNo}
+	    </if>
+	    <if test="gdsInfoNm != null"> 
+	        AND GDS_INFO_NM = #{gdsInfoNm}
+	    </if>
+	    <if test="useYn != null"> 
+	        AND USE_YN = #{useYn}
+	    </if>
+	</select>
+	
+	<resultMap id="selectAddInfoGrp" type="com.giftiel.shop.dto.GoodsAddInfoGrp">
+	    <result property="gdsInfoNo" column="GDS_INFO_NO"/> 
+	    <result property="gdsInfoNm" column="GDS_INFO_NM"/> 
+	    <result property="useYn" column="USE_YN"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/>
+		
+		<collection property="goodsAddInfos" javaType="ArrayList" column="GDS_INFO_NO" ofType="com.giftiel.shop.dto.GoodsAddInfo" select="listAddInfo"/>
+	</resultMap>
+	
+	<select id="selectAddInfoGrp" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="selectAddInfoGrp">
+	    SELECT 
+	        ROWNUM RNUM
+	        ,GDS_INFO_NO 
+	        ,GDS_INFO_NM 
+	        ,USE_YN 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	    FROM
+	        TBL_GD_INFO_GRP 
+	    WHERE 1 = 1
+	    <if test="gdsInfoNo != null"> 
+	        AND GDS_INFO_NO = #{gdsInfoNo}
+	    </if>
+	    <if test="ubiGdsNo != null"> 
+	        AND GDS_INFO_NM = #{ubiGdsNo}
+	    </if>
+	    <if test="useYn != null"> 
+	        AND USE_YN = #{useYn}
+	    </if>
+	</select>
+	
+	<resultMap id="listAddInfo" type="com.giftiel.shop.dto.GoodsAddInfo">
+		<result property="title" column="TITLE"/>
+		<result property="txt" column="TXT"/>
+	</resultMap>	
+	
+	<select id="listAddInfo" resultType="com.giftiel.shop.dto.GoodsAddInfo">
+	    SELECT 
+	        GDS_INFO_NO 
+	        ,TITLE 
+	        ,TXT
+	    FROM
+	        TBL_GD_INFO
+	    WHERE 1 = 1
+	        AND GDS_INFO_NO = #{gdsInfoNo}
+	</select>
+	
+	<insert id="insertInfoGrp" parameterType="com.giftiel.shop.dto.GoodsAddInfoGrp">
+	    INSERT INTO TBL_GD_INFO_GRP
+	        ( GDS_INFO_NO , GDS_INFO_NM , USE_YN , REGR_NO , REG_DTS, UPDR_NO, UPD_DTS)
+	    VALUES 
+	        ( #{gdsInfoNo}, #{gdsInfoNm} , 'Y' , #{regrNo} , SYSDATE, #{updrNo}, SYSDATE)
+	</insert>
+
+	<update id="updateInfoGrp" parameterType="com.giftiel.shop.dto.GoodsAddInfoGrp">
+	    UPDATE TBL_GD_INFO_GRP
+	    	SET UPD_DTS = SYSDATE
+	    	, UPDR_NO = #{updrNo}
+		    <if test="gdsInfoNm != null"> 
+		        , GDS_INFO_NM = #{gdsInfoNm}
+		    </if>
+		where GDS_INFO_NO = #{gdsInfoNo}
+	</update>	
+	
+	<insert id="insertInfo" parameterType="com.giftiel.shop.dto.GoodsAddInfo">
+	    INSERT INTO TBL_GD_INFO
+	        ( GDS_INFO_NO , TITLE , TXT , REGR_NO , REG_DTS, UPDR_NO, UPD_DTS)
+	    VALUES 
+	        ( #{gdsInfoNo} , #{title} , #{txt} , #{regrNo} , SYSDATE, #{updrNo}, SYSDATE)
+	</insert>
+	
+	<delete id="deleteInfo" parameterType="Integer">
+	    DELETE FROM TBL_GD_INFO
+	    WHERE GDS_INFO_NO = #{id}
+	</delete>
+	
+	<select id="checkInsertGoods" parameterType="String" resultType="INTEGER">
+		SELECT COUNT(*) AS TOTAL_CNT FROM TBL_GD_GDS
+		WHERE UBI_GDS_NO = #{id}
+	</select>
+	
+	<insert id="insertGoods" parameterType="com.giftiel.shop.dto.Goods">
+		INSERT INTO TBL_GD_GDS
+		 (
+			UBI_GDS_NO
+			, GDS_INFO_NO
+			, GDS_STAT
+			, BS_DESC
+			, DTL_DESC
+			, DISP_YN
+			, SL_TERM_CLS
+			, SL_STR_DTM
+			, SL_END_DTM
+			, OOS_DTS
+			, SORT_NO
+			, REGR_NO
+			, REG_DTS
+			, OFF_GDS_CHK
+			, SEASON_CODE
+			, CATEGORY1
+			, CATEGORY2
+			, SEX
+			, BRAND_CODE
+		  )
+		VALUES ( 
+			#{ubiGoods.ubiGdsNo}
+			, #{gdsInfoNo, jdbcType=VARCHAR}
+			, #{gdsStat, jdbcType=VARCHAR}
+			, #{bsDesc,jdbcType=CLOB}
+			, #{dtlDesc,jdbcType=CLOB}
+			, #{dispYn, jdbcType=VARCHAR}
+			, #{slTermCls, jdbcType=VARCHAR}
+			, TO_DATE(#{slStrDtm, jdbcType=VARCHAR}||' 00:00:00','YYYY-MM-DD HH24:MI:SS')
+			, TO_DATE(#{slEndDtm, jdbcType=VARCHAR}||' 23:59:59','YYYY-MM-DD HH24:MI:SS')
+			, null
+			, 0
+			, #{regrNo, jdbcType=VARCHAR}
+			, SYSDATE
+			, #{offGdsChk}
+			, #{ubiGoods.seasonCode}
+			, #{ubiGoods.category1Code}
+			, #{ubiGoods.category2Code}
+			, #{ubiGoods.sex}
+			, #{ubiGoods.brandCode}
+		)
+	</insert>
+
+	<update id="updateGoods" parameterType="com.giftiel.shop.dto.Goods">
+		UPDATE TBL_GD_GDS
+		SET UPD_DTS = SYSDATE
+		    <if test="gdsInfoNo != null and gdsInfoNo != ''"> 
+		        ,GDS_INFO_NO = #{gdsInfoNo}
+		    </if>
+		    <if test="gdsStat != null and gdsStat != ''"> 
+		        ,GDS_STAT = #{gdsStat}
+		    </if>
+		    <if test="bsDesc != null and bsDesc != ''"> 
+		        ,BS_DESC = #{bsDesc,jdbcType=CLOB}
+		    </if>
+		    <if test="dtlDesc != null and dtlDesc != ''"> 
+		        ,DTL_DESC = #{dtlDesc,jdbcType=CLOB}
+		    </if>
+		    <if test="dispYn != null and dispYn != ''"> 
+		        ,DISP_YN = #{dispYn}
+		    </if>
+		    <if test="slTermCls != null and slTermCls != ''"> 
+		        ,SL_TERM_CLS = #{slTermCls}
+		    </if>
+		    <if test="slStrDtm != null and slStrDtm != ''"> 
+		        ,SL_STR_DTM = TO_DATE(#{slStrDtm}||' 00:00:00','YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="slEndDtm != null and slEndDtm != ''"> 
+		        ,SL_END_DTM = TO_DATE(#{slEndDtm}||' 23:59:59','YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="oosDts != null and oosDts != ''"> 
+		        ,OOS_DTS = TO_DATE(#{oosDts},'YYYY-MM-DD HH24:MI:SS')
+		    </if>
+		    <if test="sortNo != null and sortNo != ''">
+				<choose>
+				  <when test="newArrivalChk">
+					<choose>
+					  <when test="siteNo != '' and siteNo != '10001'">
+					    ,SORT_NO2_${siteNo} = #{sortNo}
+					  </when>
+					  <otherwise>
+			  			,SORT_NO2 = #{sortNo}
+					  </otherwise>
+					</choose>
+				  </when>
+				  <otherwise>
+					<choose>
+					  <when test="siteNo != '' and siteNo != '10001'">
+					    ,SORT_NO_${siteNo} = #{sortNo}
+					  </when>
+					  <otherwise>
+			  			,SORT_NO = #{sortNo}
+					  </otherwise>
+					</choose>		  			
+				  </otherwise>
+				</choose>
+		    </if>
+		    <if test="cllbSortNo != null and cllbSortNo != ''"> 
+		        ,CLLB_SORT_NO = #{cllbSortNo}
+		    </if>		    
+		    <if test="updrNo != null and updrNo != ''"> 
+		        ,UPDR_NO = #{updrNo}
+		    </if>
+		    <if test="newArvl != null and newArvl != ''"> 
+				<choose>
+				  <when test="siteNo != '' and siteNo != '10001'">
+				    ,NEW_ARVL_${siteNo} = #{newArvl}
+				  </when>
+				  <otherwise>
+		  			,NEW_ARVL = #{newArvl}
+				  </otherwise>
+				</choose>		    
+		    </if>
+		    <if test="offGdsChk != null and offGdsChk != ''"> 
+		        ,OFF_GDS_CHK = #{offGdsChk}
+		    </if>
+			<if test="ubiGoods != null">
+			    <if test="ubiGoods.seasonCode != null and ubiGoods.seasonCode != ''"> 
+			        ,SEASON_CODE = #{ubiGoods.seasonCode}
+			    </if>
+			    <if test="ubiGoods.category1Code != null and ubiGoods.category1Code != ''"> 
+			        ,CATEGORY1 = #{ubiGoods.category1Code}
+			    </if>
+			    <if test="ubiGoods.category2Code != null and ubiGoods.category2Code != ''"> 
+			        ,CATEGORY2 = #{ubiGoods.category2Code}
+			    </if>
+			    <if test="ubiGoods.brandCode != null and ubiGoods.brandCode != ''"> 
+			        ,BRAND_CODE = #{ubiGoods.brandCode}
+			    </if>
+			    <if test="ubiGoods.sex != null and ubiGoods.sex != ''"> 
+			        ,SEX = #{ubiGoods.sex}
+			    </if>			
+			</if>
+
+		where 1=1 
+			<choose>
+			  <when test="ubiGdsNo != null and ubiGdsNo != ''">
+			    and UBI_GDS_NO = #{ubiGdsNo}
+			  </when>
+			  <otherwise>
+			  	and UBI_GDS_NO = #{ubiGoods.ubiGdsNo}
+			  </otherwise>
+			</choose>
+	</update>
+	
+	<update id="updateGoodsSort" parameterType="com.giftiel.shop.dto.Goods">
+		UPDATE TBL_GD_GDS
+		SET 
+		<choose>
+		  <when test="newArrivalChk">
+			<choose>
+			  <when test="siteNo != '' and siteNo != '10001'">
+			    SORT_NO2_${siteNo} = #{sortNo}
+			  </when>
+			  <otherwise>
+	  			SORT_NO2 = #{sortNo}
+			  </otherwise>
+			</choose>
+		  </when>
+		  <otherwise>
+			<choose>
+			  <when test="siteNo != '' and siteNo != '10001'">
+			    SORT_NO_${siteNo} = #{sortNo}
+			  </when>
+			  <otherwise>
+	  			SORT_NO = #{sortNo}
+			  </otherwise>
+			</choose>		  			
+		  </otherwise>
+		</choose>
+		where 1=1 
+			<choose>
+			  <when test="ubiGdsNo != null and ubiGdsNo != ''">
+			    and UBI_GDS_NO = #{ubiGdsNo}
+			  </when>
+			  <otherwise>
+			  	and UBI_GDS_NO = #{ubiGoods.ubiGdsNo}
+			  </otherwise>
+			</choose>
+	</update>
+	
+	<update id="updateGoodsSortCollabo" parameterType="com.giftiel.shop.dto.Goods">
+		UPDATE TBL_GD_GDS
+		SET   CLLB_SORT_NO = #{cllbSortNo}
+		where UBI_GDS_NO = #{ubiGdsNo}
+	</update>	
+	
+	<select id="listTag" resultType="com.giftiel.shop.dto.GoodsTag">
+	    SELECT 
+	       	TAG_NM tagNm
+	    FROM
+	        TBL_GD_TAG
+	    WHERE UBI_GDS_NO = #{ubiGdsNo}
+	    ORDER BY REG_DTS ASC
+	</select>	
+	
+	<insert id="insertTag" parameterType="com.giftiel.shop.dto.GoodsTag">
+	    INSERT INTO TBL_GD_TAG
+	        (  UBI_GDS_NO , TAG_NM , REGR_NO , REG_DTS)
+	    VALUES 
+	        ( #{ubiGdsNo} , #{tagNm} , #{regrNo} , SYSDATE)
+	</insert>
+	
+	<delete id="deleteTag" parameterType="String">
+	    DELETE FROM TBL_GD_TAG
+	    WHERE UBI_GDS_NO = #{id}
+	</delete>
+	
+	<select id="listGdsImg" resultType="com.giftiel.shop.dto.GoodsImage">
+	    SELECT 
+		CASE 
+		   WHEN REG_DTS <![CDATA[<]]> (SELECT SYNC_DTS FROM TBL_AD_IMG_SYNC WHERE ROWNUM = 1) THEN 'http://googledrive.com/host/0B6HfeD747YiJZFNiZTNKdGphN2M/'||REPLACE(IMG_URL, '/', '_')
+		   ELSE 'http://worksout60.cafe24.com/upload/image'||IMG_URL
+		END AS frontImgUrl	      
+		,IMG_URL AS imgUrl
+	    ,PRIR
+	    FROM
+	        TBL_GD_GDS_IMG 
+	    WHERE UBI_GDS_NO = #{ubiGdsNo}
+	    ORDER BY PRIR ASC
+	</select>		
+	
+	<insert id="insertGdsImg" parameterType="com.giftiel.shop.dto.GoodsImage">
+	    INSERT INTO TBL_GD_GDS_IMG
+	        ( UBI_GDS_NO , IMG_URL , PRIR , REGR_NO , REG_DTS)
+	    VALUES 
+	        (  #{ubiGdsNo} , #{imgUrl} , #{prir} , #{regrNo}, SYSDATE)
+	</insert>
+	
+	<delete id="deleteGdsImg" parameterType="String">
+	    DELETE FROM TBL_GD_GDS_IMG
+	    WHERE UBI_GDS_NO = #{id}
+	</delete>
+	
+	<select id="listGoodsCategoryDisplay" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listGds">
+		    SELECT
+		    	DISTINCT
+			    GDS_INFO_NO 
+			    ,GDS_STAT 
+			    ,DISP_YN 
+			    ,SL_TERM_CLS 
+			    ,SL_STR_DTM 
+			    ,SL_END_DTM 
+			    ,OOS_DTS 
+				<choose>
+				  <when test="brand != '' and brand != '10001'">
+				    ,SORT_NO_${brand} AS SORT_NO
+				  </when>
+				  <otherwise>
+				  	,SORT_NO
+				  </otherwise>
+				</choose>
+				<choose>
+				  <when test="brand != '' and brand != '10001'">
+				    ,SORT_NO2_${brand} AS SORT_NO2
+				  </when>
+				  <otherwise>
+				  	,SORT_NO2
+				  </otherwise>
+				</choose>
+			    ,REGR_NO 
+			    ,REG_DTS 
+			    ,UPDR_NO 
+			    ,UPD_DTS
+		        ,UBI_GDS_NO 
+				,UBI_GDS_NM
+				,UBI_GDS_COLOR_CD
+				,UBI_GDS_COLOR_NM
+				,BRAND_CODE
+				,YEAR_CODE
+				,SEASONGROUP_CODE
+				,CATEGORY2_CODE
+				,COLOR_CODE
+				,BRAND
+				,YEAR
+				,SEASONGROUP
+				,CATEGORY2
+				,COLOR
+				,COLLECTION_CODE
+				,SEASON_CODE
+				,CATEGORY1_CODE 
+				,BUYINGCODE_CODE
+				,DELIVERDATE_CODE
+				,COLLECTION
+				,SEASON
+				,CATEGORY1
+				,BUYINGCODE
+				,DELIVERDATE
+				,PRODUCTION
+				,MATERIAL
+				,UBI_COST_PRC
+<!-- 				,UBI_DCT_COST -->
+				,UBI_COST
+				,UBI_SL_PRC
+<!-- 				,UBI_REG_DTM -->
+				,CLLB_SORT_NO
+				,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = MAIN.UBI_GDS_NO) AS MAIN_IMG
+				<choose>
+				  <when test="brand != '' and brand != '10001'">
+				   ,NEW_ARVL_${brand} AS NEW_ARVL
+				  </when>
+				  <otherwise>
+				  	,NEW_ARVL
+				  </otherwise>
+				</choose>				
+		    FROM(
+			    SELECT 
+			    	<include refid="ubiGds" />
+			    	<include refid="gds" />	
+<!-- 			    	,UBIGDS.작성일	AS UBI_REG_DTM -->
+			    FROM
+			        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+			    WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	<if test="oneDepth == 'OUTLET'">
+		    			<if test="brand != '' and brand != null">
+		    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{brand})
+		    			</if>
+		    			<if test="brand == null">
+		    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = 10001)
+		    			</if>
+			    		AND UBIGDS.재고수량 > 0
+			    	</if>
+			    	<if test="oneDepth != 'OUTLET'">
+			    		AND UBIGDS.SEASON코드 = #{oneDepth}
+			    	</if>			    	
+			    </if>
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND UBIGDS.CATEGORY1코드 = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND UBIGDS.CATEGORY2코드 = #{threeDepth}
+			    </if> 
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+                <if test="regStrDtm != '' and regStrDtm != null">
+                	AND 작성일 >= TO_DATE(#{regStrDtm},'YYYY-MM-DD')
+                </if>
+                <if test="regEndDtm != '' and regEndDtm != null">
+					AND 작성일 <![CDATA[<]]> TO_DATE(#{regEndDtm},'YYYY-MM-DD')
+				</if>			    
+	            <if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+					AND 현판매가 >= #{ubiSlStrPrc}
+				</if>
+	            <if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+					AND 현판매가 <![CDATA[<=]]> #{ubiSlEndPrc}
+				</if>
+                <if test="brand != '' and brand != '10001'">
+					AND UBIGDS.BRAND코드 = (SELECT 코드 FROM UBI09S_WORKS.V_코드정보 WHERE 구분 = 'BRAND' 
+											AND 코드명 = (select site_desc from tbl_ad_site where site_no = #{brand}))
+				</if>
+                <if test="clbltnNm != '' and clbltnNm != null">
+					AND UBIGDS.COLLABORATION = #{clbltnNm}
+				</if>
+                <if test="seasonCode != '' and seasonCode != null">
+					AND UBIGDS.SEASON코드 = #{seasonCode}
+				</if>	
+				<if test="newArrival == true">
+					<choose>
+					  <when test="brand != '' and brand != '10001'">
+					    AND GDS.NEW_ARVL_${brand} = 'Y'
+					  </when>
+					  <otherwise>
+					  	AND GDS.NEW_ARVL = 'Y'
+					  </otherwise>
+					</choose>				
+				</if>
+			    <if test="dispYn != null and dispYn != ''"> 
+		        	AND DISP_YN = #{dispYn}
+		    	</if>
+				<if test="sex != '' and sex != null">
+					AND 성별구분 in (#{sex},'U')
+				</if>
+			)MAIN
+                <if test="clbltnNm != '' and clbltnNm != null">
+					ORDER BY CLLB_SORT_NO ASC
+				</if>
+                <if test="clbltnNm == '' or clbltnNm == null">
+					<choose>
+					  <when test="newArrival">
+					    
+						<choose>
+						  <when test="brand != '' and brand != '10001'">
+						    ORDER BY to_number(SORT_NO2_${brand}) ASC
+						  </when>
+						  <otherwise>
+						  	ORDER BY to_number(SORT_NO2) ASC
+						  </otherwise>
+						</choose>							    
+					  </when>
+					  <otherwise>
+					  	ORDER BY SORT_NO ASC, UPD_DTS DESC
+					  </otherwise>
+					</choose>
+				</if>									
+	</select>
+	
+	<select id="listGoodsCategoryDisplayBrand" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listGds">
+		    SELECT /*goods.listGoodsCategoryDisplayBrand*/
+		    	DISTINCT
+				BRAND_CODE
+				,BRAND
+		    FROM(
+			    SELECT 
+					UBIGDS.BRAND코드 as BRAND_CODE
+					,UBIGDS.BARND AS BRAND
+			    	,GDS.SORT_NO
+			    FROM
+			        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+			    WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	<if test="oneDepth == 'OUTLET'">
+		    			<if test="brand != '' and brand != null">
+		    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{brand})
+		    			</if>
+		    			<if test="brand == null">
+		    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = 10001)
+		    			</if>
+			    		AND UBIGDS.재고수량 > 0
+			    	</if>
+			    	<if test="oneDepth != 'OUTLET'">
+			    		AND UBIGDS.SEASON코드 = #{oneDepth}
+			    	</if>			    	
+			    </if>
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND UBIGDS.CATEGORY1코드 = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND UBIGDS.CATEGORY2코드 = #{threeDepth}
+			    </if> 
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+                <if test="regStrDtm != '' and regStrDtm != null">
+                	AND 작성일 >= TO_DATE(#{regStrDtm},'YYYY-MM-DD')
+                </if>
+                <if test="regEndDtm != '' and regEndDtm != null">
+					AND 작성일 <![CDATA[<]]> TO_DATE(#{regEndDtm},'YYYY-MM-DD')
+				</if>
+	            <if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+					AND 현판매가 >= #{ubiSlStrPrc}
+				</if>
+	            <if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+					AND 현판매가 <![CDATA[<=]]> #{ubiSlEndPrc}
+				</if>
+                <if test="brand != '' and brand != null">
+					AND UBIGDS.BRAND코드 = (SELECT 코드 FROM UBI09S_WORKS.V_코드정보 WHERE 구분 = 'BRAND' 
+											AND 코드명 = (select site_desc from tbl_ad_site where site_no = #{brand}))
+				</if>
+                <if test="clbltnNm != '' and clbltnNm != null">
+					AND UBIGDS.COLLABORATION = #{clbltnNm}
+				</if>
+                <if test="seasonCode != '' and seasonCode != null">
+					AND UBIGDS.SEASON코드 = #{seasonCode}
+				</if>	
+				<if test="newArrival == true">
+					AND GDS.NEW_ARVL = 'Y' 			
+				</if>
+				<if test="sex != '' and sex != null">
+					AND 성별구분 in (#{sex},'U')
+				</if>
+				ORDER BY SORT_NO ASC
+			)MAIN
+	</select>	
+	
+	<select id="listGoodsCategoryDisplayThreeDepth" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listGds">
+		    SELECT /*goods.listGoodsCategoryDisplayThreeDepth*/
+		    	DISTINCT
+				CATEGORY2_CODE
+				,CATEGORY2
+		    FROM(
+			    SELECT 
+					UBIGDS.CATEGORY2코드 as CATEGORY2_CODE
+					,UBIGDS.CATEGORY2 AS CATEGORY2
+			    	,GDS.SORT_NO 
+			    FROM
+			        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+			    WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	<if test="oneDepth == 'OUTLET'">
+		    			<if test="brand != '' and brand != null">
+		    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{brand})
+		    			</if>
+		    			<if test="brand == null">
+		    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = 10001)
+		    			</if>
+			    		AND UBIGDS.재고수량 > 0
+			    	</if>
+			    	<if test="oneDepth != 'OUTLET'">
+			    		AND UBIGDS.SEASON코드 = #{oneDepth}
+			    	</if>			    	
+			    </if>
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND UBIGDS.CATEGORY1코드 = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND UBIGDS.CATEGORY2코드 = #{threeDepth}
+			    </if> 
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+                <if test="regStrDtm != '' and regStrDtm != null">
+                	AND 작성일 >= TO_DATE(#{regStrDtm},'YYYY-MM-DD')
+                </if>
+                <if test="regEndDtm != '' and regEndDtm != null">
+					AND 작성일 <![CDATA[<]]> TO_DATE(#{regEndDtm},'YYYY-MM-DD')
+				</if>
+	            <if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+					AND 현판매가 >= #{ubiSlStrPrc}
+				</if>
+	            <if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+					AND 현판매가 <![CDATA[<=]]> #{ubiSlEndPrc}
+				</if>
+                <if test="brand != '' and brand != null">
+					AND UBIGDS.BRAND코드 = (SELECT 코드 FROM UBI09S_WORKS.V_코드정보 WHERE 구분 = 'BRAND' 
+											AND 코드명 = (select site_desc from tbl_ad_site where site_no = #{brand}))
+				</if>
+                <if test="clbltnNm != '' and clbltnNm != null">
+					AND UBIGDS.COLLABORATION = #{clbltnNm}
+				</if>
+                <if test="seasonCode != '' and seasonCode != null">
+					AND UBIGDS.SEASON코드 = #{seasonCode}
+				</if>	
+				<if test="newArrival == true">
+					AND GDS.NEW_ARVL = 'Y' 			
+				</if>
+				<if test="sex != '' and sex != null">
+					AND 성별구분 in (#{sex},'U')
+				</if>
+				ORDER BY SORT_NO ASC
+			)MAIN
+	</select>
+	
+	<insert id="insertSize" parameterType="com.giftiel.shop.dto.GoodsSize">
+	    INSERT INTO TBL_GD_SIZE
+	        ( UBI_GDS_NO , SIZE_NM , SIZE_1 , SIZE_2 , SIZE_3 , SIZE_4 , SIZE_5 , SIZE_6 , SIZE_7 , SIZE_8 , SIZE_9 , SIZE_10, PRIR )
+	    VALUES 
+	        ( #{ubiGdsNo, jdbcType=VARCHAR} , #{sizeNm, jdbcType=VARCHAR} , #{size1, jdbcType=VARCHAR} , #{size2, jdbcType=VARCHAR} , #{size3, jdbcType=VARCHAR} , #{size4, jdbcType=VARCHAR} , #{size5, jdbcType=VARCHAR} , #{size6, jdbcType=VARCHAR} , #{size7, jdbcType=VARCHAR} , #{size8, jdbcType=VARCHAR} , #{size9, jdbcType=VARCHAR} , #{size10, jdbcType=VARCHAR} , #{prir} )
+	</insert>
+	
+	<delete id="deleteSize" parameterType="String">
+	    DELETE FROM TBL_GD_SIZE
+	    WHERE UBI_GDS_NO = #{id}
+	</delete>
+	
+	<select id="listSize" resultType="com.giftiel.shop.dto.GoodsSize">
+	    SELECT 
+        UBI_GDS_NO AS UbiGdsNo
+        ,SIZE_NM AS sizeNm
+        ,SIZE_1 AS size1
+        ,SIZE_2 AS size2
+        ,SIZE_3 AS size3 
+        ,SIZE_4 AS size4
+        ,SIZE_5 AS size5
+        ,SIZE_6 AS size6
+        ,SIZE_7 AS size7
+        ,SIZE_8 AS size8
+        ,SIZE_9 AS size9
+        ,SIZE_10 AS size10
+    FROM
+        TBL_GD_SIZE 
+    WHERE UBI_GDS_NO = #{ubiGdsNo}
+    ORDER BY PRIR ASC
+	</select>
+	
+	<select id="listGoodsFront" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listGds">
+		SELECT  /*goods.listGoodsFront*/
+				RNUM 
+			    ,GDS_INFO_NO 
+			    ,GDS_STAT 
+			    ,DISP_YN 
+			    ,SL_TERM_CLS 
+			    ,SL_STR_DTM 
+			    ,SL_END_DTM 
+			    ,OOS_DTS 
+			    ,SORT_NO
+			    ,SORT_NO2 
+			    ,REGR_NO 
+			    ,REG_DTS 
+			    ,UPDR_NO 
+			    ,UPD_DTS 
+		        ,UBI_GDS_NO
+				,UBI_GDS_NM
+				,UBI_GDS_COLOR_CD
+				,UBI_GDS_COLOR_NM
+				,BRAND_CODE
+				,YEAR_CODE
+				,SEASONGROUP_CODE
+				,CATEGORY2_CODE
+				,COLOR_CODE
+				,BRAND
+				,YEAR
+				,SEASONGROUP
+				,CATEGORY2
+				,COLOR
+				,COLLECTION_CODE
+				,SEASON_CODE
+				,CATEGORY1_CODE 
+				,BUYINGCODE_CODE
+				,DELIVERDATE_CODE
+				,COLLECTION
+				,SEASON
+				,CATEGORY1
+				,BUYINGCODE
+				,DELIVERDATE
+				,PRODUCTION
+				,MATERIAL
+				,UBI_COST_PRC
+<!-- 				,UBI_DCT_COST -->
+				,UBI_COST
+				,UBI_SL_PRC		
+				,CASE 
+				   WHEN (SELECT REG_DTS FROM TBL_GD_GDS_IMG GDSIMG WHERE PRIR=0 AND GDSIMG.UBI_GDS_NO = TOP.UBI_GDS_NO AND ROWNUM = 1 ) <![CDATA[<]]> (SELECT SYNC_DTS FROM TBL_AD_IMG_SYNC WHERE ROWNUM = 1) THEN 'http://googledrive.com/host/0B6HfeD747YiJZFNiZTNKdGphN2M/'||REPLACE(MAIN_IMG, '/', '_')
+				   ELSE 'http://worksout60.cafe24.com/upload/image'||MAIN_IMG
+				END AS MAIN_IMG
+				,(NVL(TOTAL_STOCK, 0) - NVL(DELAY_STOCK, 0)) AS TOTAL_STOCK
+		FROM( 
+		    SELECT
+				<if test="orderBy != '' and orderBy != null">
+					ROW_NUMBER () OVER (ORDER BY ${orderBy} ${orderFlag}) AS  RNUM
+				</if>
+				<if test="orderBy == '' or orderBy == null">
+	                <if test="clbltnNm != '' and clbltnNm != null">
+						ROW_NUMBER () OVER (ORDER BY CLLB_SORT_NO DESC) AS  RNUM
+					</if>
+	                <if test="clbltnNm == '' or clbltnNm == null">
+						<choose>
+						  <when test="newArrival">
+						  	ROW_NUMBER () OVER (ORDER BY to_number(SORT_NO2) ASC) AS  RNUM
+						  </when>
+						  <otherwise>
+							<choose>
+							  <when test="twoDepth == '' and brand != ''">
+							  	ROW_NUMBER () OVER (ORDER BY UPD_DTS DESC) AS  RNUM
+							  </when>
+							  <otherwise>
+							  	ROW_NUMBER () OVER (ORDER BY SORT_NO ASC, UPD_DTS DESC) AS  RNUM
+							  </otherwise>
+							</choose>	
+						  </otherwise>
+						</choose>					
+					</if>								
+				</if>					
+			    ,GDS_INFO_NO 
+			    ,GDS_STAT 
+			    ,DISP_YN 
+			    ,SL_TERM_CLS 
+			    ,SL_STR_DTM 
+			    ,SL_END_DTM 
+			    ,OOS_DTS 
+			    ,SORT_NO
+			    ,SORT_NO2 
+			    ,REGR_NO 
+			    ,REG_DTS 
+			    ,UPDR_NO 
+			    ,UPD_DTS
+		        ,UBI_GDS_NO 
+				,UBI_GDS_NM
+				,UBI_GDS_COLOR_CD
+				,UBI_GDS_COLOR_NM
+				,BRAND_CODE
+				,YEAR_CODE
+				,SEASONGROUP_CODE
+				,CATEGORY2_CODE
+				,COLOR_CODE
+				,BRAND
+				,YEAR
+				,SEASONGROUP
+				,CATEGORY2
+				,COLOR
+				,COLLECTION_CODE
+				,SEASON_CODE
+				,CATEGORY1_CODE 
+				,BUYINGCODE_CODE
+				,DELIVERDATE_CODE
+				,COLLECTION
+				,SEASON
+				,CATEGORY1
+				,BUYINGCODE
+				,DELIVERDATE
+				,PRODUCTION
+				,MATERIAL
+				,UBI_COST_PRC
+<!-- 				,UBI_DCT_COST -->
+				,UBI_COST
+				,UBI_SL_PRC
+				,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = MAIN.UBI_GDS_NO AND ROWNUM = 1) AS MAIN_IMG
+				,(SELECT SUM(NVL(재고수량,0)) FROM UBI09S_WORKS.V_상품정보트리거 WHERE 품번 = MAIN.UBI_GDS_NO) AS TOTAL_STOCK
+				,(select count(*) from tbl_or_ord ord, tbl_or_ord_gds ordgds
+			      where ord.ord_no = ordgds.ord_no
+			      AND ordgds.per_ord_stat     IN ('OR00501','OR00502')
+			      and ordgds.ubi_gds_no = MAIN.UBI_GDS_NO
+			      and ord.ord_stat != 'OR00201'
+			      and ord.reg_dts > sysdate-2) AS DELAY_STOCK
+		    FROM (
+			    SELECT 
+			    	DISTINCT
+					UBIGDS.품번 as UBI_GDS_NO
+					,UBIGDS.품명 as UBI_GDS_NM
+					,UBIGDS.색상 as UBI_GDS_COLOR_CD
+					,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+					,UBIGDS.BRAND코드 as BRAND_CODE
+					,UBIGDS.YEAR코드 as YEAR_CODE
+					,UBIGDS.SEASONGROUP코드 AS SEASONGROUP_CODE
+					,UBIGDS.CATEGORY2코드 AS CATEGORY2_CODE
+					,UBIGDS.COLOR코드 AS COLOR_CODE
+					,UBIGDS.BARND AS BRAND
+					,UBIGDS.YEAR
+					,UBIGDS.SEASONGROUP
+					,UBIGDS.CATEGORY2
+					,UBIGDS.COLOR
+					,UBIGDS.COLLECTION코드 AS COLLECTION_CODE
+					,UBIGDS.SEASON코드 AS SEASON_CODE
+					,UBIGDS.CATEGORY1코드 AS CATEGORY1_CODE 
+					,UBIGDS.BUYINGCODE코드 AS BUYINGCODE_CODE
+					,UBIGDS.DELIVERDATE코드 AS DELIVERDATE_CODE
+					,UBIGDS.COLLECTION
+					,UBIGDS.SEASON
+					,UBIGDS.CATEGORY1
+					,UBIGDS.BUYINGCODE
+					,UBIGDS.DELIVERDATE
+					,UBIGDS.PRODUCTION
+					,UBIGDS.MATERIAL
+					,UBIGDS.최초판매가 AS UBI_COST_PRC
+<!-- 					,UBIGDS.사전원가	AS UBI_DCT_COST -->
+					,UBIGDS.사후원가	AS UBI_COST
+					,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC			    
+				    ,GDS.GDS_INFO_NO 
+				    ,GDS.GDS_STAT 
+				    ,GDS.DISP_YN 
+				    ,GDS.SL_TERM_CLS 
+				    ,TO_CHAR(GDS.SL_STR_DTM,'YYYY-MM-DD') SL_STR_DTM
+				    ,TO_CHAR(GDS.SL_END_DTM,'YYYY-MM-DD') SL_END_DTM
+				    ,TO_CHAR(GDS.OOS_DTS,'YYYY-MM-DD') OOS_DTS
+					<choose>
+					  <when test="siteNo != '' and siteNo != '10001' and siteNo != null ">
+					    ,GDS.SORT_NO_${siteNo} AS SORT_NO
+					    ,GDS.SORT_NO2_${siteNo} AS SORT_NO2
+					  </when>
+					  <otherwise>
+					  	,GDS.SORT_NO
+					  	,GDS.SORT_NO2  
+					  </otherwise>
+					</choose>				    
+				    ,GDS.REGR_NO
+				    ,TO_CHAR(GDS.REG_DTS,'YYYY-MM-DD') REG_DTS
+				    ,GDS.UPDR_NO
+				    ,TO_TIMESTAMP(TO_CHAR(GDS.UPD_DTS,'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS') AS UPD_DTS
+			    	,GDS.CLLB_SORT_NO
+			    FROM
+			        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+			    WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+			    	AND GDS.DISP_YN = 'Y'
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	<if test="oneDepth == 'OUTLET'">
+			    		<if test="curSeason != '' and curSeason != null">
+			    			<if test="siteNo != '' and siteNo != null">
+			    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{siteNo})
+			    			</if>
+			    			<if test="siteNo == null">
+			    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = 10001)
+			    			</if>			    			
+			    		</if>
+			    		
+			    		<if test="preSeason != '' and preSeason != null">
+			    			AND UBIGDS.SEASON코드 != #{preSeason}
+			    		</if>
+			    		AND UBIGDS.재고수량 > 0
+			    	</if>
+			    	<if test="oneDepth != 'OUTLET'">
+			    		AND UBIGDS.SEASON코드 = #{oneDepth}
+			    	</if>			    	
+			    </if>
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND UBIGDS.CATEGORY1코드 = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND UBIGDS.CATEGORY2코드 = #{threeDepth}
+			    </if> 
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+                <if test="regStrDtm != '' and regStrDtm != null">
+                	AND 작성일 >= TO_DATE(#{regStrDtm},'YYYY-MM-DD')
+                </if>
+                <if test="regEndDtm != '' and regEndDtm != null">
+					AND 작성일 <![CDATA[<]]> TO_DATE(#{regEndDtm},'YYYY-MM-DD')
+				</if>			    
+	            <if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+					AND 현판매가 >= #{ubiSlStrPrc}
+				</if>
+	            <if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+					AND 현판매가 <![CDATA[<=]]> #{ubiSlEndPrc}
+				</if>
+                <if test="siteNo != '' and siteNo != null">
+					AND UBIGDS.BRAND코드 = (SELECT 코드 FROM UBI09S_WORKS.V_코드정보 WHERE 구분 = 'BRAND' AND 코드명 = (select site_desc from tbl_ad_site where site_no = #{siteNo}))
+				</if>
+				<if test="brands != '' and brands!= null">
+	                <if test="brand != '' and brand != null">
+						AND UBIGDS.BRAND코드 in 
+						<foreach collection="brands" item="brand"   open="(" close=")" separator=",">
+      						#{brand}
+ 						</foreach>
+					</if>
+				</if>
+				<if test="brands == '' or brands== null">
+	                <if test="brand != '' and brand != null">
+						AND UBIGDS.BRAND코드 = #{brand}
+					</if>				
+				</if>
+                <if test="sex != '' and sex != null">
+					AND 성별구분 in (#{sex},'U')
+				</if>
+                <if test="ubiGdsSize != '' and ubiGdsSize != null">
+					AND UBIGDS.사이즈 = #{ubiGdsSize}
+				</if>
+                <if test="clbltnNm != '' and clbltnNm != null">
+					AND UBIGDS.COLLABORATION = #{clbltnNm}
+				</if>
+                <if test="clbltnNm == '' or clbltnNm == null">
+	                <if test="siteNo == '10002'">
+						AND UBIGDS.COLLABORATION is null
+					</if>
+				</if>
+				<if test="searchText !='' and searchText != null">
+					AND 
+					( 
+				      (UBIGDS.품명 LIKE '%'||LOWER(#{searchText})||'%' OR UBIGDS.품명 LIKE '%'||UPPER(#{searchText})||'%') OR 
+				      UBI_GDS_NO IN(SELECT UBI_GDS_NO FROM TBL_GD_TAG WHERE (TAG_NM LIKE '%'||UPPER(#{searchText})||'%' OR TAG_NM LIKE '%'||LOWER(#{searchText})||'%')) OR
+				      (UBIGDS.BARND LIKE '%'||LOWER(#{searchText})||'%' OR UBIGDS.BARND LIKE '%'||UPPER(#{searchText})||'%') 
+				    )
+				</if>
+				<if test="newArrival">
+					<choose>
+					  <when test="siteNo != '' and siteNo != null and siteNo != '10001'">
+					    AND GDS.NEW_ARVL_${siteNo} = 'Y'
+					  </when>
+					  <otherwise>
+					  	AND GDS.NEW_ARVL = 'Y'
+					  </otherwise>
+					</choose>
+				</if>
+				
+			    <if test="gdsStat != '' and gdsStat != null">
+			    	AND GDS.GDS_STAT IN (#{gdsStat},'GD00404')
+			    </if>				
+				
+				<include refid="categoryFilter"/>	
+				
+				
+<!-- 				AND UBIGDS.CATEGORY2코드 = #{threeDepth} -->
+				
+			)MAIN
+				where 1=1
+		)TOP
+		WHERE RNUM BETWEEN #{startListNum} AND #{endListNum} 	
+	</select>
+	<select id="totalListGoodsFront" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		    SELECT /* goods.totalListGoodsFront*/
+		        COUNT(*) TOTAL_CNT 
+		    FROM(
+		    	
+		    	SELECT 
+					DISTINCT UBIGDS.품번 as UBI_GDS_NO
+			    FROM
+					UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+				WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	<if test="oneDepth == 'OUTLET'">
+			    		<if test="curSeason != '' and curSeason != null">
+			    			<if test="siteNo != '' and siteNo != null">
+			    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{siteNo})
+			    			</if>
+			    			<if test="siteNo == null">
+			    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = 10001)
+			    			</if>
+			    		</if>
+			    		
+			    		<if test="preSeason != '' and preSeason != null">
+			    			AND UBIGDS.SEASON코드 != #{preSeason}
+			    		</if>
+			    		AND UBIGDS.재고수량 > 0
+			    	</if>
+			    	<if test="oneDepth != 'OUTLET'">
+			    		AND UBIGDS.SEASON코드 = #{oneDepth}
+			    	</if>			    	
+			    </if>
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND UBIGDS.CATEGORY1코드 = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND UBIGDS.CATEGORY2코드 = #{threeDepth}
+			    </if> 
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+                <if test="regStrDtm != '' and regStrDtm != null">
+                	AND 작성일 >= TO_DATE(#{regStrDtm},'YYYY-MM-DD')
+                </if>
+                <if test="regEndDtm != '' and regEndDtm != null">
+					AND 작성일 <![CDATA[<]]> TO_DATE(#{regEndDtm},'YYYY-MM-DD')
+				</if>			    
+	            <if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+					AND 현판매가 >= #{ubiSlStrPrc}
+				</if>
+	            <if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+					AND 현판매가 <![CDATA[<=]]> #{ubiSlEndPrc}
+				</if>
+                <if test="siteNo != '' and siteNo != null">
+					AND UBIGDS.BRAND코드 = (SELECT 코드 FROM UBI09S_WORKS.V_코드정보 WHERE 구분 = 'BRAND' AND 코드명 = (select site_desc from tbl_ad_site where site_no = #{siteNo}))
+				</if>
+				<if test="brands != '' and brands!= null">
+	                <if test="brand != '' and brand != null">
+						AND UBIGDS.BRAND코드 in 
+						<foreach collection="brands" item="brand"   open="(" close=")" separator=",">
+      						#{brand}
+ 						</foreach>
+					</if>
+				</if>
+				<if test="brands == '' or brands== null">
+	                <if test="brand != '' and brand != null">
+						AND UBIGDS.BRAND코드 = #{brand}
+					</if>				
+				</if>
+                <if test="sex != '' and sex != null">
+					AND 성별구분 in (#{sex},'U')
+				</if>
+                <if test="ubiGdsSize != '' and ubiGdsSize != null">
+					AND UBIGDS.사이즈 = #{ubiGdsSize}
+				</if>
+                <if test="clbltnNm != '' and clbltnNm != null">
+					AND UBIGDS.COLLABORATION = #{clbltnNm}
+				</if>
+                <if test="clbltnNm == '' or clbltnNm == null">
+	                <if test="siteNo == '10002'">
+						AND UBIGDS.COLLABORATION is null
+					</if>
+				</if>
+				<if test="searchText !='' and searchText != null">
+					AND 
+					( 
+				      (UBIGDS.품명 LIKE '%'||LOWER(#{searchText})||'%' OR UBIGDS.품명 LIKE '%'||UPPER(#{searchText})||'%') OR 
+				      UBI_GDS_NO IN(SELECT UBI_GDS_NO FROM TBL_GD_TAG WHERE (TAG_NM LIKE '%'||UPPER(#{searchText})||'%' OR TAG_NM LIKE '%'||LOWER(#{searchText})||'%')) OR
+				      (UBIGDS.BARND LIKE '%'||LOWER(#{searchText})||'%' OR UBIGDS.BARND LIKE '%'||UPPER(#{searchText})||'%') 
+				    )
+				</if>
+				<if test="newArrival">
+					<choose>
+					  <when test="siteNo != '' and siteNo != null and siteNo != '10001'">
+					    AND GDS.NEW_ARVL_${siteNo} = 'Y'
+					  </when>
+					  <otherwise>
+					  	AND GDS.NEW_ARVL = 'Y'
+					  </otherwise>
+					</choose>
+				</if>
+
+			    <if test="gdsStat != '' and gdsStat != null">
+			    	AND GDS.GDS_STAT IN (#{gdsStat},'GD00404')
+			    </if>
+				
+				<include refid="categoryFilter"/>	
+		    	
+			) DUAL
+			where 1=1
+			
+	</select>
+	<select id="listGoodsSizeFront" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listGds">
+				SELECT UBI_GDS_SIZE FROM (
+					SELECT DISTINCT UBI_GDS_SIZE, SIZE_PRIR FROM (  
+					    SELECT 
+					    	ROW_NUMBER () OVER (ORDER BY UBIGDS.품번 ASC) AS  RNUM ,
+					    	UBIGDS.사이즈	AS UBI_GDS_SIZE
+					    	,CASE UBIGDS.사이즈 
+				                WHEN 'OS' THEN 0
+				                WHEN 'XS' THEN 1
+				                WHEN 'S' THEN 2
+				                WHEN 'M' THEN 3
+				                WHEN 'L' THEN 4
+				                WHEN 'XL' THEN 5
+				                WHEN 'XXL' THEN 6
+				                WHEN 'XXXL' THEN 7
+				                ELSE 10
+				              END AS SIZE_PRIR
+					    FROM
+					        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+					    WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+					    <if test="oneDepth != '' and oneDepth != null">
+					    	AND UBIGDS.SEASON코드 = #{oneDepth}
+					    </if>
+					    <if test="twoDepth != '' and twoDepth != null">
+					    	AND UBIGDS.CATEGORY1코드 = #{twoDepth}
+					    </if> 
+					    <if test="threeDepth != '' and threeDepth != null">
+					    	AND UBIGDS.CATEGORY2코드 = #{threeDepth}
+					    </if> 
+					    <if test="searchGb != '' and searchGb != null and searchText != ''">
+							AND ${searchGb} like '%'||#{searchText}||'%'
+					    </if>
+		                <if test="regStrDtm != '' and regStrDtm != null">
+		                	AND 작성일 >= TO_DATE(#{regStrDtm},'YYYY-MM-DD')
+		                </if>
+		                <if test="regEndDtm != '' and regEndDtm != null">
+							AND 작성일 <![CDATA[<]]> TO_DATE(#{regEndDtm},'YYYY-MM-DD')
+						</if>			    
+			            <if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+							AND 현판매가 >= #{ubiSlStrPrc}
+						</if>
+			            <if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+							AND 현판매가 <![CDATA[<=]]> #{ubiSlEndPrc}
+						</if>
+						<if test="brands != '' and brands!= null">
+			                <if test="brand != '' and brand != null">
+								AND UBIGDS.BRAND코드 in 
+								<foreach collection="brands" item="brand"   open="(" close=")" separator=",">
+		      						#{brand}
+		 						</foreach>
+							</if>
+						</if>
+						<if test="brands == '' or brands== null">
+			                <if test="brand != '' and brand != null">
+								AND UBIGDS.BRAND코드 = #{brand}
+							</if>				
+						</if>
+		                <if test="sex != '' and sex != null">
+							AND 성별구분 in (#{sex},'U')
+						</if>
+					)MAIN
+				)
+					ORDER BY SIZE_PRIR ASC, UBI_GDS_SIZE ASC
+	</select>
+	
+	<select id="listGoodsSize" resultMap="listGds">
+				SELECT MAIN.UBI_GDS_SIZE FROM (
+				    SELECT 
+				    	DISTINCT
+				    	UBIGDS.사이즈	AS UBI_GDS_SIZE
+				    	,CASE UBIGDS.사이즈 
+			                WHEN 'OS' THEN 0
+			                WHEN 'XS' THEN 1
+			                WHEN 'S' THEN 2
+			                WHEN 'M' THEN 3
+			                WHEN 'L' THEN 4
+			                WHEN 'XL' THEN 5
+			                WHEN 'XXL' THEN 6
+			                WHEN 'XXXL' THEN 7
+			                WHEN 'S-M' THEN 8
+			                WHEN 'M-L' THEN 9
+			                ELSE 10
+			              END AS SIZE_PRIR
+				    FROM
+				        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+				    WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+		)MAIN
+		ORDER BY MAIN.SIZE_PRIR ASC,MAIN.UBI_GDS_SIZE ASC
+	</select>	
+	
+	<select id="listCurGdsSize" parameterType="String" resultType="com.giftiel.shop.dto.CurrentGoodsSize">
+		SELECT ubiGdsSize
+			,stock  - (select count(*) from tbl_or_ord ord, tbl_or_ord_gds ordgds
+			      where ord.ord_no = ordgds.ord_no
+			      and ordgds.per_ord_stat IN ('OR00501', 'OR00502')
+			      and ordgds.ubi_gds_no = #{ubiGdsNo}
+			      and ordgds.ubi_gds_size = main.ubiGdsSize
+			      and ord.ord_stat != 'OR00201'
+			      and ord.reg_dts > sysdate-2) AS STOCK
+			,SIZE_PRIR
+		FROM (
+	       SELECT UBIGDS.사이즈 AS ubiGdsSize
+	       		 ,NVL(UBIGDS.재고수량, 0) AS stock
+	       		 ,CASE UBIGDS.사이즈 
+	                WHEN 'OS' THEN 0
+	                WHEN 'XS' THEN 1
+	                WHEN 'S' THEN 2
+	                WHEN 'M' THEN 3
+	                WHEN 'L' THEN 4
+	                WHEN 'XL' THEN 5
+	                WHEN 'XXL' THEN 6
+	                WHEN 'XXXL' THEN 7
+	                ELSE 10
+	              END AS SIZE_PRIR
+	         FROM UBI09S_WORKS.V_상품정보트리거 UBIGDS
+	        WHERE UBIGDS.품번 = #{ubiGdsNo}
+	        ORDER BY SIZE_PRIR ASC, UBIGDS.사이즈 ASC
+	        ) MAIN
+	</select>
+	
+	<resultMap id="listCurColorsMap" type="com.giftiel.shop.dto.CurrentGoodsColors">
+	    <result property="ubiGdsNo" column="UBI_GDS_NO"/>
+	    <result property="color" column="COLOR"/> 
+	    <result property="mainImg" column="MAIN_IMG"/> 
+	</resultMap>	
+	
+	<select id="listCurColors" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCurColorsMap">
+			select /*goods.listCurColors*/ DISTINCT UBIGDS.품번 AS UBI_GDS_NO
+				,UBIGDS.색상명 AS COLOR
+				,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = UBIGDS.품번 AND ROWNUM = 1) AS MAIN_IMG
+			FROM UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+			WHERE GDS.UBI_GDS_NO = UBIGDS.품번
+		        AND GDS.GDS_STAT = 'GD00402'
+		        /*AND SL_STR_DTM <![CDATA[<]]> SYSDATE AND SL_END_DTM <![CDATA[>]]> SYSDATE*/
+		        <if test="etcGdsNo != '' and etcGdsNo != null">
+		        AND UBIGDS.기타품번 = #{etcGdsNo}
+		        </if>
+		        <if test="seasonCode != '' and seasonCode != null">
+			    AND UBIGDS.SEASON코드 = #{seasonCode}
+		        </if>
+	</select>	
+	
+	
+	<!-- 	COLLABORATION 리스트 -->
+	<select id="collaboList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="intgBoardMap">
+		SELECT C_TABLE.* FROM(	/* collaboList */
+			SELECT ROWNUM PRNUM
+			      ,B_TABLE.*
+			 FROM(
+				SELECT
+					<choose>
+						<when test="orderBy != '' and orderBy != null">
+							ROW_NUMBER() OVER(ORDER BY ${orderBy} ${orderFlag}) RNUM
+						</when>
+						<otherwise>
+							ROW_NUMBER() OVER(ORDER BY UPD_DTS DESC) RNUM
+						</otherwise>
+				    </choose>
+				    ,A_TABLE.*
+				FROM(
+				    SELECT 
+				         INTG_BOARD.TXT_NO 
+				        ,INTG_BOARD.BOARD_CLCD 
+				        ,INTG_BOARD.SITE_NO 
+				        ,DECODE(INTG_BOARD.DISP_YN,'Y','공개','N','비공개') DISP_YN
+				        ,INTG_BOARD.REGR_NO 
+				        ,INTG_BOARD.REG_DTS 
+				        ,INTG_BOARD.UPDR_NO 
+				        ,INTG_BOARD.UPD_DTS
+				        ,INTG_BOARD.TITLE 
+				        ,INTG_BOARD.LNK_URL 
+						,INTG_BOARD.SEASON_CD
+				        ,INTG_BOARD.CLBLTN_NM
+				        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = INTG_BOARD.UPDR_NO) REG_USER_NM
+						,(SELECT IMG_URL FROM TBL_CM_INTG_BOARD_CNTS WHERE TXT_NO = INTG_BOARD.TXT_NO) IMG_URL
+				    FROM
+				        TBL_CM_INTG_BOARD INTG_BOARD
+				    WHERE BOARD_CLCD = 'CM00802' AND DISP_YN = 'Y'
+				    <if test="searchText != null and  searchText !=''"> 
+				    	AND INTG_BOARD.TITLE LIKE '%' || #{searchText} || '%'
+				    </if>
+				    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+				    	AND INTG_BOARD.UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </if>
+			        <if test="siteNo != null and  siteNo !=''"> 
+				  		AND INTG_BOARD.SITE_NO = #{siteNo}
+				    </if>
+				    <choose>
+						<when test="orderBy != '' and orderBy != null">
+							ORDER BY ${orderBy} ${orderFlag}
+						</when>
+						<otherwise>
+							ORDER BY UPD_DTS DESC
+						</otherwise>
+				    </choose>
+				) A_TABLE
+			) B_TABLE 
+		)C_TABLE
+			WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+
+	<insert id="insertGdsView" parameterType="com.giftiel.shop.dto.GoodsView">
+    INSERT INTO TBL_GD_GDS_VIEW
+        ( UBI_GDS_NO , MEM_NO , SITE_NO , REG_IP , REGR_NO , REG_DTS)
+    VALUES 
+        ( #{ubiGdsNo} , #{memNo} , #{siteNo} , #{regIp} , #{regrNo} , SYSDATE)
+	</insert>
+	
+	<select id="checkGdsView" parameterType="com.giftiel.shop.dto.GoodsView" resultType="INTEGER">
+		    SELECT
+		        COUNT(*) TOTAL_CNT 
+		    FROM
+				TBL_GD_GDS_VIEW
+			WHERE UBI_GDS_NO = #{ubiGdsNo}
+			AND MEM_NO = #{memNo}
+			AND SITE_NO = #{siteNo}
+			AND REG_IP = #{regIp}
+	</select>
+	
+	<select id="checkGdsStock" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		select 재고수량  - (select count(*) from tbl_or_ord ord, tbl_or_ord_gds ordgds
+					      where ord.ord_no = ordgds.ord_no
+					      and ord.ord_stat = 'OR00202'
+					      and ordgds.ubi_gds_no = #{ubiGdsNo}
+					      and ordgds.ubi_gds_size = #{ubiGdsSize}
+					      and ord.reg_dts + 2 > sysdate) AS STOCK 
+		from UBI09S_WORKS.V_상품정보트리거
+		where 품번 = #{ubiGdsNo}
+		and 사이즈 = #{ubiGdsSize}
+	</select>
+	
+	
+	
+	
+	<!-- 	쿠폰 리스트가져오기 -->
+	<select id="getCouponList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="couponMap">
+		    SELECT 
+		        ROWNUM RNUM
+		        ,CPN_NO 
+		        ,CPN_NM 
+		        ,F_CD_NM(CPN_KND)CPN_KND 
+		        ,F_CD_NM(ISS_WAY)ISS_WAY 
+		        ,CPN_DESC 
+		        ,F_CD_NM(DC_WAY)DC_WAY 
+		        ,DC_AMT 
+		        ,VLD_TERM_CLS 
+		        ,VLD_STR_DTS 
+		        ,VLD_END_DTS 
+		        ,VLD_DAY_CNT 
+		        ,VLD_WKDY 
+		        ,VLD_STR_TM 
+		        ,VLD_END_TM 
+		        ,ISS_STR_DTS 
+		        ,ISS_END_DTS 
+		        ,F_CD_NM(CPN_STAT)CPN_STAT 
+		        ,CPN_IMG_URL 
+		        ,MAX_DC_AMT 
+		        ,MIN_ORD_AMT 
+		        ,ALL_ISS_LMT_CNT 
+		        ,DUP_ISS_YN 
+		        ,ISS_TMS 
+		        ,ISS_WKDY 
+		        ,ISS_STR_TM 
+		        ,ISS_END_TM 
+		        ,REGR_NO 
+		        ,REG_DTS 
+		        ,UPDR_NO 
+		        ,UPD_DTS 
+		    FROM  TBL_MT_CPN 
+			ORDER BY CPN_NO DESC
+	</select>
+	
+	
+	<!-- 	쿠폰 생성 -->
+	<insert id="couponReg" parameterType="com.giftiel.shop.dto.Coupon">
+    INSERT INTO TBL_MT_CPN
+        ( CPN_NO 
+        , CPN_NM 
+        , CPN_KND 
+        , ISS_WAY 
+        <if test="cpnDesc != null and  cpnDesc !=''"> 
+	    	, CPN_DESC 
+	    </if>
+        , DC_WAY 
+        , DC_AMT 
+        <if test="vldTermCls == 'MT00401'"> 
+	    	, VLD_STR_DTS 
+	        , VLD_END_DTS 
+	        , VLD_STR_TM 
+	        , VLD_END_TM 
+	    </if>
+        , VLD_TERM_CLS 
+	    <if test="vldTermCls == 'MT00402'"> 
+	    	, VLD_DAY_CNT   
+	    </if>
+        , VLD_WKDY 
+        , ISS_STR_DTS 
+        , ISS_END_DTS 
+        , CPN_STAT 
+        <if test="cpnImgUrl != null and  cpnImgUrl !=''"> 
+	    	, CPN_IMG_URL 
+	    </if>
+        , MAX_DC_AMT 
+        , MIN_ORD_AMT 
+        , ALL_ISS_LMT_CNT 
+        , DUP_ISS_YN 
+        , ISS_TMS 
+        , ISS_WKDY 
+        , ISS_STR_TM 
+        , ISS_END_TM 
+        , REGR_NO 
+        , REG_DTS 
+        , UPDR_NO 
+        , UPD_DTS )
+    VALUES 
+        ( SEQ_TBL_MT_CPN.NEXTVAL 
+        , #{cpnNm} 
+        , #{cpnKnd} 
+        , #{issWay} 
+        <if test="cpnDesc != null and  cpnDesc !=''"> 
+	    	, #{cpnDesc} 
+	    </if>
+        , #{dcWay} 
+        , #{dcAmt} 
+        <if test="vldTermCls == 'MT00401'"> 
+	    	, #{vldStrDts} 
+	        , #{vldEndDts} 
+	        , #{vldStrTm} 
+	        , #{vldEndTm}  
+	    </if>
+        , #{vldTermCls} 
+	    <if test="vldTermCls == 'MT00402'"> 
+	    	, #{vldDayCnt}   
+	    </if>
+        , #{vldWkdy} 
+        , #{issStrDts} 
+        , #{issEndDts} 
+        , #{cpnStat} 
+        <if test="cpnImgUrl != null and  cpnImgUrl !=''"> 
+	    	, #{cpnImgUrl} 
+	    </if>
+        , #{maxDcAmt} 
+        , #{minOrdAmt} 
+        , #{allIssLmtCnt} 
+        , #{dupIssYn} 
+        , #{issTms} 
+        , #{issWkdy} 
+        , #{issStrTm} 
+        , #{issEndTm} 
+        , #{regrNo} 
+        , SYSDATE 
+        , #{updrNo} 
+        , SYSDATE )
+	</insert>
+	
+	
+	
+	<!-- 	쿠폰 수정 -->
+	<update id="couponModify" parameterType="com.giftiel.shop.dto.Coupon">
+    UPDATE TBL_MT_CPN SET
+         CPN_NM = #{cpnNm}
+        , CPN_KND = #{cpnKnd} 
+        , ISS_WAY = #{issWay} 
+        , DC_WAY = #{dcWay} 
+        , DC_AMT = #{dcAmt}
+        <if test="vldTermCls == 'MT00401'"> 
+	    	, VLD_STR_DTS = #{vldStrDts}
+	        , VLD_END_DTS = #{vldEndDts} 
+	        , VLD_STR_TM = #{vldStrTm} 
+	        , VLD_END_TM = #{vldEndTm}
+	    </if>
+        , VLD_TERM_CLS = #{vldTermCls} 
+	    <if test="vldTermCls == 'MT00402'"> 
+	    	, VLD_DAY_CNT = #{vldDayCnt} 
+	    </if>
+        , VLD_WKDY = #{vldWkdy}
+        , ISS_STR_DTS = #{issStrDts} 
+        , ISS_END_DTS = #{issEndDts} 
+        , CPN_STAT = #{cpnStat}
+        
+        <if test="cpnImgUrl != null and  cpnImgUrl !=''"> 
+	    	, CPN_IMG_URL = #{cpnImgUrl}
+	    </if>
+        , MAX_DC_AMT = #{maxDcAmt} 
+        , MIN_ORD_AMT = #{minOrdAmt} 
+        , ALL_ISS_LMT_CNT = #{allIssLmtCnt} 
+        , DUP_ISS_YN = #{dupIssYn} 
+        , ISS_TMS = #{issTms}
+        , ISS_WKDY = #{issWkdy} 
+        , ISS_STR_TM = #{issStrTm} 
+        , ISS_END_TM = #{issEndTm} 
+        , UPDR_NO = #{updrNo} 
+        , UPD_DTS =  SYSDATE 
+        WHERE CPN_NO = #{cpnNo}
+         
+	</update>
+	
+	
+	
+	<!-- 	쿠폰 상세가져오기 -->
+	<select id="getCoupon" parameterType="INTEGER" resultMap="couponMap">
+		    SELECT 
+		        CPN_NO 
+		        ,CPN_NM 
+		        ,CPN_KND 
+		        ,ISS_WAY 
+		        ,CPN_DESC 
+		        ,DC_WAY 
+		        ,DC_AMT 
+		        ,VLD_TERM_CLS 
+		        ,VLD_STR_DTS 
+		        ,VLD_END_DTS 
+		        ,VLD_DAY_CNT 
+		        ,VLD_WKDY 
+		        ,VLD_STR_TM 
+		        ,VLD_END_TM 
+		        ,ISS_STR_DTS 
+		        ,ISS_END_DTS 
+		        ,CPN_STAT 
+		        ,CPN_IMG_URL 
+		        ,MAX_DC_AMT 
+		        ,MIN_ORD_AMT 
+		        ,ALL_ISS_LMT_CNT 
+		        ,DUP_ISS_YN 
+		        ,ISS_TMS 
+		        ,ISS_WKDY 
+		        ,ISS_STR_TM 
+		        ,ISS_END_TM 
+		        ,REGR_NO 
+		        ,REG_DTS 
+		        ,UPDR_NO 
+		        ,UPD_DTS 
+		    FROM  TBL_MT_CPN 
+		    WHERE CPN_NO = #{cpnNo} 
+				
+	</select>
+	
+	<update id="updateGoodsArrvSort" parameterType="com.giftiel.shop.dto.Goods">
+	/* goods.updateGoodsArrvSort */
+		UPDATE TBL_GD_GDS
+		SET
+		UPD_DTS = sysdate
+		,UPDR_NO = ${updrNo}
+		
+	    <if test="newArvl != null and newArvl != ''"> 
+			<choose>
+			  <when test="siteNo != '' and siteNo != '10001'">
+			    ,NEW_ARVL_${siteNo} = #{newArvl}
+			  </when>
+			  <otherwise>
+	  			,NEW_ARVL = #{newArvl}
+			  </otherwise>
+			</choose>		    
+	    </if>
+		
+        <if test="sortNo2 != null and  sortNo2 !=''">
+			<choose>
+			  <when test="siteNo != '' and siteNo != '10001'">
+			    ,SORT_NO2_${siteNo} = #{sortNo2}
+			  </when>
+			  <otherwise>
+	  			,SORT_NO2 = #{sortNo2}
+			  </otherwise>
+			</choose>
+	    </if>
+		where UBI_GDS_NO = #{ubiGdsNo} 
+	</update>		
+	
+	
+	<select id="listGoodsFrontNew" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listGds">
+		SELECT  /*goods.listGoodsFrontNew*/
+				RNUM 
+			    ,GDS_INFO_NO 
+			    ,GDS_STAT 
+			    ,DISP_YN 
+			    ,SL_TERM_CLS 
+			    ,SL_STR_DTM 
+			    ,SL_END_DTM 
+			    ,OOS_DTS 
+			    ,REGR_NO 
+			    ,REG_DTS 
+			    ,UPDR_NO 
+			    ,UPD_DTS 
+		        ,UBI_GDS_NO
+				,UBI_GDS_NM
+				,UBI_GDS_COLOR_CD
+				,UBI_GDS_COLOR_NM
+				,BRAND_CODE
+				,YEAR_CODE
+				,SEASONGROUP_CODE
+				,CATEGORY2_CODE
+				,COLOR_CODE
+				,BRAND
+				,YEAR
+				,SEASONGROUP
+				,CATEGORY2
+				,COLOR
+				,COLLECTION_CODE
+				,SEASON_CODE
+				,CATEGORY1_CODE 
+				,BUYINGCODE_CODE
+				,DELIVERDATE_CODE
+				,COLLECTION
+				,SEASON
+				,CATEGORY1
+				,BUYINGCODE
+				,DELIVERDATE
+				,PRODUCTION
+				,MATERIAL
+				,UBI_COST_PRC
+<!-- 				,UBI_DCT_COST -->
+				,UBI_COST
+				,UBI_SL_PRC		
+				,CASE 
+				   WHEN (SELECT REG_DTS FROM TBL_GD_GDS_IMG GDSIMG WHERE PRIR=0 AND GDSIMG.UBI_GDS_NO = TOP.UBI_GDS_NO AND ROWNUM = 1 ) <![CDATA[<]]> (SELECT SYNC_DTS FROM TBL_AD_IMG_SYNC WHERE ROWNUM = 1) THEN 'http://googledrive.com/host/0B6HfeD747YiJZFNiZTNKdGphN2M/'||REPLACE(MAIN_IMG, '/', '_')
+				   ELSE 'http://worksout60.cafe24.com/upload/image'||MAIN_IMG
+				END AS MAIN_IMG
+				,(NVL(TOTAL_STOCK, 0) - NVL(DELAY_STOCK, 0)) AS TOTAL_STOCK
+				,SORT_NO
+		FROM( 
+		    SELECT
+				<if test="orderBy != '' and orderBy != null">
+					ROW_NUMBER () OVER (ORDER BY ${orderBy} ${orderFlag}) AS  RNUM
+				</if>
+				<if test="orderBy == '' or orderBy == null">
+					ROW_NUMBER () OVER (ORDER BY SORT_NO ASC, UPD_DTS DESC) AS  RNUM
+				</if>					
+			    ,GDS_INFO_NO 
+			    ,GDS_STAT 
+			    ,DISP_YN 
+			    ,SL_TERM_CLS 
+			    ,SL_STR_DTM 
+			    ,SL_END_DTM 
+			    ,OOS_DTS 
+			    ,REGR_NO 
+			    ,REG_DTS 
+			    ,UPDR_NO 
+			    ,UPD_DTS
+		        ,UBI_GDS_NO 
+				,UBI_GDS_NM
+				,UBI_GDS_COLOR_CD
+				,UBI_GDS_COLOR_NM
+				,BRAND_CODE
+				,YEAR_CODE
+				,SEASONGROUP_CODE
+				,CATEGORY2_CODE
+				,COLOR_CODE
+				,BRAND
+				,YEAR
+				,SEASONGROUP
+				,CATEGORY2
+				,COLOR
+				,COLLECTION_CODE
+				,SEASON_CODE
+				,CATEGORY1_CODE 
+				,BUYINGCODE_CODE
+				,DELIVERDATE_CODE
+				,COLLECTION
+				,SEASON
+				,CATEGORY1
+				,BUYINGCODE
+				,DELIVERDATE
+				,PRODUCTION
+				,MATERIAL
+				,UBI_COST_PRC
+<!-- 				,UBI_DCT_COST -->
+				,UBI_COST
+				,UBI_SL_PRC
+				,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = MAIN.UBI_GDS_NO AND ROWNUM = 1) AS MAIN_IMG
+				,(SELECT SUM(NVL(재고수량,0)) FROM UBI09S_WORKS.V_상품정보트리거 WHERE 품번 = MAIN.UBI_GDS_NO) AS TOTAL_STOCK
+				,(select count(*) from tbl_or_ord ord, tbl_or_ord_gds ordgds
+			      where ord.ord_no = ordgds.ord_no
+			      AND ordgds.per_ord_stat     IN ('OR00501','OR00502')
+			      and ord.ord_stat != 'OR00201'
+			      and ordgds.ubi_gds_no = MAIN.UBI_GDS_NO
+			      and ord.reg_dts > sysdate-2) AS DELAY_STOCK
+			    ,SORT_NO
+		    FROM (
+			    SELECT 
+			    	DISTINCT
+					UBIGDS.품번 as UBI_GDS_NO
+					,UBIGDS.품명 as UBI_GDS_NM
+					,UBIGDS.색상 as UBI_GDS_COLOR_CD
+					,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+					,UBIGDS.BRAND코드 as BRAND_CODE
+					,UBIGDS.YEAR코드 as YEAR_CODE
+					,UBIGDS.SEASONGROUP코드 AS SEASONGROUP_CODE
+					,UBIGDS.CATEGORY2코드 AS CATEGORY2_CODE
+					,UBIGDS.COLOR코드 AS COLOR_CODE
+					,UBIGDS.BARND AS BRAND
+					,UBIGDS.YEAR
+					,UBIGDS.SEASONGROUP
+					,UBIGDS.CATEGORY2
+					,UBIGDS.COLOR
+					,UBIGDS.COLLECTION코드 AS COLLECTION_CODE
+					,UBIGDS.SEASON코드 AS SEASON_CODE
+					,UBIGDS.CATEGORY1코드 AS CATEGORY1_CODE 
+					,UBIGDS.BUYINGCODE코드 AS BUYINGCODE_CODE
+					,UBIGDS.DELIVERDATE코드 AS DELIVERDATE_CODE
+					,UBIGDS.COLLECTION
+					,UBIGDS.SEASON
+					,UBIGDS.CATEGORY1
+					,UBIGDS.BUYINGCODE
+					,UBIGDS.DELIVERDATE
+					,UBIGDS.PRODUCTION
+					,UBIGDS.MATERIAL
+					,UBIGDS.최초판매가 AS UBI_COST_PRC
+<!-- 					,UBIGDS.사전원가	AS UBI_DCT_COST -->
+					,UBIGDS.사후원가	AS UBI_COST
+					,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC			    
+				    ,GDS.GDS_INFO_NO 
+				    ,GDS.GDS_STAT 
+				    ,GDS.DISP_YN 
+				    ,GDS.SL_TERM_CLS 
+				    ,TO_CHAR(GDS.SL_STR_DTM,'YYYY-MM-DD') SL_STR_DTM
+				    ,TO_CHAR(GDS.SL_END_DTM,'YYYY-MM-DD') SL_END_DTM
+				    ,TO_CHAR(GDS.OOS_DTS,'YYYY-MM-DD') OOS_DTS
+				    ,GDS.REGR_NO
+				    ,TO_CHAR(GDS.REG_DTS,'YYYY-MM-DD') REG_DTS
+				    ,GDS.UPDR_NO
+				    ,TO_TIMESTAMP(TO_CHAR(GDS.UPD_DTS,'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS') AS UPD_DTS
+			    	,GDS.CLLB_SORT_NO
+			    	
+			    	,CATEGDS.PRIR AS SORT_NO
+			    FROM
+					UBI09S_WORKS.V_상품정보트리거 UBIGDS,
+				    TBL_GD_GDS GDS,
+				    TBL_GD_CATEGORY_NEW CATE,
+				    TBL_GD_CATEGORY_NEW_GDS CATEGDS
+			    WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+			    	AND GDS.DISP_YN = 'Y'
+					AND CATEGDS.GDS_NO = GDS.UBI_GDS_NO
+  					AND CATE.CATE_NO = CATEGDS.CATE_NO
+			    <if test="gdsStat != '' and gdsStat != null">
+			    	AND GDS.GDS_STAT = #{gdsStat}
+			    </if>
+				<if test="siteNo != '' and siteNo != null">
+					AND CATE.SITE_NO = #{siteNo}
+				</if>
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	<if test="oneDepth == 'OUTLET'">
+			    		<if test="curSeason != '' and curSeason != null">
+			    			<if test="siteNo != '' and siteNo != null">
+			    				AND CATE.ONE_DEPTH NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{siteNo})
+			    			</if>
+			    		</if>
+			    		
+			    		<if test="preSeason != '' and preSeason != null">
+			    			AND CATE.ONE_DEPTH != #{preSeason}
+			    		</if>
+			    	</if>
+			    	
+			    	AND UBIGDS.재고수량 > 0
+			    </if>					
+				
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND CATE.TWO_DEPTH = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND CATE.THREE_DEPTH = #{threeDepth}
+			    </if> 					
+			    <if test="threeDepth == '' or threeDepth == null">
+			    	AND CATE.THREE_DEPTH is null
+			    </if>
+				<if test="sex != '' and sex != null">
+					AND CATE.SEX = #{sex}
+				</if>
+				<if test="sex == '' or sex == null">
+					AND CATE.SEX is null
+				</if>
+				<if test="newArrival">
+			  		AND CATE.NEW_ARVL = 'true'
+				</if>
+				<if test="!newArrival">
+			  		AND CATE.NEW_ARVL is null
+				</if>
+			)MAIN
+				where 1=1
+		)TOP
+		WHERE RNUM BETWEEN #{startListNum} AND #{endListNum} 	
+	</select>	
+	
+	<select id="totalListGoodsFrontNew" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		    SELECT /* goods.totalListGoodsFrontNew*/
+		        COUNT(*) TOTAL_CNT 
+		    FROM(
+		    	
+		    	SELECT 
+					DISTINCT UBIGDS.품번 as UBI_GDS_NO
+			    FROM
+					UBI09S_WORKS.V_상품정보트리거 UBIGDS,
+				    TBL_GD_GDS GDS,
+				    TBL_GD_CATEGORY_NEW CATE,
+				    TBL_GD_CATEGORY_NEW_GDS CATEGDS
+				WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+					AND CATEGDS.GDS_NO = GDS.UBI_GDS_NO
+  					AND CATE.CATE_NO = CATEGDS.CATE_NO
+				
+			    <if test="gdsStat != '' and gdsStat != null">
+			    	AND GDS.GDS_STAT = #{gdsStat}
+			    </if>
+				<if test="siteNo != '' and siteNo != null">
+					AND CATE.SITE_NO = #{siteNo}
+				</if>
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	<if test="oneDepth == 'OUTLET'">
+			    		<if test="curSeason != '' and curSeason != null">
+			    			<if test="siteNo != '' and siteNo != null">
+			    				AND CATE.ONE_DEPTH NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{siteNo})
+			    			</if>
+			    		</if>
+			    		
+			    		<if test="preSeason != '' and preSeason != null">
+			    			AND CATE.ONE_DEPTH != #{preSeason}
+			    		</if>
+			    		
+			    		AND UBIGDS.재고수량 > 0
+			    	</if>
+			    </if>					
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND CATE.TWO_DEPTH = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND CATE.THREE_DEPTH = #{threeDepth}
+			    </if> 					
+			    <if test="threeDepth == '' or threeDepth == null">
+			    	AND CATE.THREE_DEPTH is null
+			    </if>
+				<if test="sex != '' and sex != null">
+					AND CATE.SEX = #{sex}
+				</if>
+				<if test="sex == '' or sex == null">
+					AND CATE.SEX is null
+				</if>
+				<if test="newArrival">
+			  		AND CATE.NEW_ARVL = 'true'
+				</if>
+				<if test="!newArrival">
+			  		AND CATE.NEW_ARVL is null
+				</if>
+			) DUAL
+			where 1=1
+	</select>
+	
+	<select id="listGoodsCategoryDisplayNew" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listGds">
+		    SELECT
+		    	DISTINCT
+			    GDS_INFO_NO 
+			    ,GDS_STAT 
+			    ,DISP_YN 
+			    ,SL_TERM_CLS 
+			    ,SL_STR_DTM 
+			    ,SL_END_DTM 
+			    ,OOS_DTS 
+			    ,REGR_NO 
+			    ,REG_DTS 
+			    ,UPDR_NO 
+			    ,UPD_DTS
+		        ,UBI_GDS_NO 
+				,UBI_GDS_NM
+				,UBI_GDS_COLOR_CD
+				,UBI_GDS_COLOR_NM
+				,BRAND_CODE
+				,YEAR_CODE
+				,SEASONGROUP_CODE
+				,CATEGORY2_CODE
+				,COLOR_CODE
+				,BRAND
+				,YEAR
+				,SEASONGROUP
+				,CATEGORY2
+				,COLOR
+				,COLLECTION_CODE
+				,SEASON_CODE
+				,CATEGORY1_CODE 
+				,BUYINGCODE_CODE
+				,DELIVERDATE_CODE
+				,COLLECTION
+				,SEASON
+				,CATEGORY1
+				,BUYINGCODE
+				,DELIVERDATE
+				,PRODUCTION
+				,MATERIAL
+				,UBI_COST_PRC
+				,UBI_COST
+				,UBI_SL_PRC
+				,CLLB_SORT_NO
+				,SORT_NO
+				,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = MAIN.UBI_GDS_NO) AS MAIN_IMG
+				<choose>
+				  <when test="siteNo != '' and siteNo != null and siteNo != '10001'">
+				   ,NEW_ARVL_${siteNo} AS NEW_ARVL
+				  </when>
+				  <otherwise>
+				  	,NEW_ARVL
+				  </otherwise>
+				</choose>	
+		    FROM(
+			    SELECT 
+					UBIGDS.품번 as UBI_GDS_NO
+					,UBIGDS.품명 as UBI_GDS_NM
+					,UBIGDS.색상 as UBI_GDS_COLOR_CD
+					,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+					,UBIGDS.BRAND코드 as BRAND_CODE
+					,UBIGDS.YEAR코드 as YEAR_CODE
+					,UBIGDS.SEASONGROUP코드 AS SEASONGROUP_CODE
+					,UBIGDS.CATEGORY2코드 AS CATEGORY2_CODE
+					,UBIGDS.COLOR코드 AS COLOR_CODE
+					,UBIGDS.BARND AS BRAND
+					,UBIGDS.YEAR
+					,UBIGDS.SEASONGROUP
+					,UBIGDS.CATEGORY2
+					,UBIGDS.COLOR
+					,UBIGDS.COLLECTION코드 AS COLLECTION_CODE
+					,UBIGDS.SEASON코드 AS SEASON_CODE
+					,UBIGDS.CATEGORY1코드 AS CATEGORY1_CODE 
+					,UBIGDS.BUYINGCODE코드 AS BUYINGCODE_CODE
+					,UBIGDS.DELIVERDATE코드 AS DELIVERDATE_CODE
+					,UBIGDS.COLLECTION
+					,UBIGDS.SEASON
+					,UBIGDS.CATEGORY1
+					,UBIGDS.BUYINGCODE
+					,UBIGDS.DELIVERDATE
+					,UBIGDS.PRODUCTION
+					,UBIGDS.MATERIAL
+					,UBIGDS.최초판매가 AS UBI_COST_PRC
+					,UBIGDS.사후원가	AS UBI_COST
+					,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC			    
+				    ,GDS.GDS_INFO_NO 
+				    ,GDS.GDS_STAT 
+				    ,GDS.DISP_YN 
+				    ,GDS.SL_TERM_CLS 
+				    ,TO_CHAR(GDS.SL_STR_DTM,'YYYY-MM-DD') SL_STR_DTM
+				    ,TO_CHAR(GDS.SL_END_DTM,'YYYY-MM-DD') SL_END_DTM
+				    ,TO_CHAR(GDS.OOS_DTS,'YYYY-MM-DD') OOS_DTS
+				    ,GDS.REGR_NO
+				    ,TO_CHAR(GDS.REG_DTS,'YYYY-MM-DD') REG_DTS
+				    ,GDS.UPDR_NO
+				    ,TO_TIMESTAMP(TO_CHAR(GDS.UPD_DTS,'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS') AS UPD_DTS
+			    	,GDS.CLLB_SORT_NO
+			    	,CATEGDS.PRIR AS SORT_NO
+				    ,GDS.NEW_ARVL
+				    ,GDS.NEW_ARVL_10002
+				    ,GDS.NEW_ARVL_10003
+				    ,GDS.NEW_ARVL_10004
+				    ,GDS.NEW_ARVL_10006
+			    FROM
+					UBI09S_WORKS.V_상품정보트리거 UBIGDS,
+				    TBL_GD_GDS GDS,
+				    TBL_GD_CATEGORY_NEW CATE,
+				    TBL_GD_CATEGORY_NEW_GDS CATEGDS
+				WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+					AND CATEGDS.GDS_NO = GDS.UBI_GDS_NO
+  					AND CATE.CATE_NO = CATEGDS.CATE_NO
+				<if test="siteNo != '' and siteNo != null">
+					AND CATE.SITE_NO = #{siteNo}
+				</if>
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	<if test="oneDepth == 'OUTLET'">
+			    		<if test="curSeason != '' and curSeason != null">
+			    			<if test="siteNo != '' and siteNo != null">
+			    				AND CATE.ONE_DEPTH NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{siteNo})
+			    			</if>
+			    		</if>
+			    		
+			    		<if test="preSeason != '' and preSeason != null">
+			    			AND CATE.ONE_DEPTH != #{preSeason}
+			    		</if>
+			    	</if>
+			    </if>					
+				
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND CATE.TWO_DEPTH = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND CATE.THREE_DEPTH = #{threeDepth}
+			    </if> 					
+			    <if test="threeDepth == '' or threeDepth == null">
+			    	AND CATE.THREE_DEPTH is null
+			    </if>
+				<if test="sex != '' and sex != null">
+					AND CATE.SEX = #{sex}
+				</if>
+				<if test="sex == '' or sex == null">
+					AND CATE.SEX is null
+				</if>
+				<if test="newArrival">
+			  		AND CATE.NEW_ARVL = 'true'
+				</if>
+				<if test="!newArrival">
+			  		AND CATE.NEW_ARVL is null
+				</if>
+				
+				UNION ALL
+			    
+			    SELECT 
+					UBIGDS.품번 as UBI_GDS_NO
+					,UBIGDS.품명 as UBI_GDS_NM
+					,UBIGDS.색상 as UBI_GDS_COLOR_CD
+					,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+					,UBIGDS.BRAND코드 as BRAND_CODE
+					,UBIGDS.YEAR코드 as YEAR_CODE
+					,UBIGDS.SEASONGROUP코드 AS SEASONGROUP_CODE
+					,UBIGDS.CATEGORY2코드 AS CATEGORY2_CODE
+					,UBIGDS.COLOR코드 AS COLOR_CODE
+					,UBIGDS.BARND AS BRAND
+					,UBIGDS.YEAR
+					,UBIGDS.SEASONGROUP
+					,UBIGDS.CATEGORY2
+					,UBIGDS.COLOR
+					,UBIGDS.COLLECTION코드 AS COLLECTION_CODE
+					,UBIGDS.SEASON코드 AS SEASON_CODE
+					,UBIGDS.CATEGORY1코드 AS CATEGORY1_CODE 
+					,UBIGDS.BUYINGCODE코드 AS BUYINGCODE_CODE
+					,UBIGDS.DELIVERDATE코드 AS DELIVERDATE_CODE
+					,UBIGDS.COLLECTION
+					,UBIGDS.SEASON
+					,UBIGDS.CATEGORY1
+					,UBIGDS.BUYINGCODE
+					,UBIGDS.DELIVERDATE
+					,UBIGDS.PRODUCTION
+					,UBIGDS.MATERIAL
+					,UBIGDS.최초판매가 AS UBI_COST_PRC
+					,UBIGDS.사후원가	AS UBI_COST
+					,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC			    
+				    ,GDS.GDS_INFO_NO 
+				    ,GDS.GDS_STAT 
+				    ,GDS.DISP_YN 
+				    ,GDS.SL_TERM_CLS 
+				    ,TO_CHAR(GDS.SL_STR_DTM,'YYYY-MM-DD') SL_STR_DTM
+				    ,TO_CHAR(GDS.SL_END_DTM,'YYYY-MM-DD') SL_END_DTM
+				    ,TO_CHAR(GDS.OOS_DTS,'YYYY-MM-DD') OOS_DTS
+				    ,GDS.REGR_NO
+				    ,TO_CHAR(GDS.REG_DTS,'YYYY-MM-DD') REG_DTS
+				    ,GDS.UPDR_NO
+				    ,TO_TIMESTAMP(TO_CHAR(GDS.UPD_DTS,'YYYYMMDDHH24MISS'), 'YYYYMMDDHH24MISS') AS UPD_DTS
+			    	,GDS.CLLB_SORT_NO
+			    	,0 AS SORT_NO
+				    ,GDS.NEW_ARVL
+				    ,GDS.NEW_ARVL_10002
+				    ,GDS.NEW_ARVL_10003
+				    ,GDS.NEW_ARVL_10004
+				    ,GDS.NEW_ARVL_10006
+				FROM
+			        UBI09S_WORKS.V_상품정보트리거 UBIGDS, TBL_GD_GDS GDS
+			    WHERE UBIGDS.품번(+) = GDS.UBI_GDS_NO
+			    <if test="oneDepth != '' and oneDepth != null">
+			    	<if test="oneDepth == 'OUTLET'">
+		    			<if test="brand != '' and brand != null">
+		    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{brand})
+		    			</if>
+		    			<if test="brand == null">
+		    				AND UBIGDS.SEASON코드 NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = 10001)
+		    			</if>
+			    		AND UBIGDS.재고수량 > 0
+			    	</if>
+			    	<if test="oneDepth != 'OUTLET'">
+			    		AND UBIGDS.SEASON코드 = #{oneDepth}
+			    	</if>			    	
+			    </if>
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND UBIGDS.CATEGORY1코드 = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND UBIGDS.CATEGORY2코드 = #{threeDepth}
+			    </if> 
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+                <if test="regStrDtm != '' and regStrDtm != null">
+                	AND 작성일 >= TO_DATE(#{regStrDtm},'YYYY-MM-DD')
+                </if>
+                <if test="regEndDtm != '' and regEndDtm != null">
+					AND 작성일 <![CDATA[<]]> TO_DATE(#{regEndDtm},'YYYY-MM-DD')
+				</if>			    
+	            <if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+					AND 현판매가 >= #{ubiSlStrPrc}
+				</if>
+	            <if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+					AND 현판매가 <![CDATA[<=]]> #{ubiSlEndPrc}
+				</if>
+                <if test="brand != '' and brand != '10001'">
+					AND UBIGDS.BRAND코드 = (SELECT 코드 FROM UBI09S_WORKS.V_코드정보 WHERE 구분 = 'BRAND' 
+											AND 코드명 = (select site_desc from tbl_ad_site where site_no = #{brand}))
+				</if>
+                <if test="clbltnNm != '' and clbltnNm != null">
+					AND UBIGDS.COLLABORATION = #{clbltnNm}
+				</if>
+                <if test="seasonCode != '' and seasonCode != null">
+					AND UBIGDS.SEASON코드 = #{seasonCode}
+				</if>	
+				<if test="newArrival == true">
+					<choose>
+					  <when test="brand != '' and brand != '10001'">
+					    AND GDS.NEW_ARVL_${brand} = 'Y'
+					  </when>
+					  <otherwise>
+					  	AND GDS.NEW_ARVL = 'Y'
+					  </otherwise>
+					</choose>				
+				</if>
+				<if test="sex != '' and sex != null">
+					AND 성별구분 in (#{sex},'U')
+				</if>
+					AND GDS.UBI_GDS_NO NOT IN (
+						SELECT CATEGDS.GDS_NO
+						FROM
+						    TBL_GD_CATEGORY_NEW CATE,
+						    TBL_GD_CATEGORY_NEW_GDS CATEGDS
+						WHERE CATEGDS.GDS_NO = GDS.UBI_GDS_NO
+		  					AND CATE.CATE_NO = CATEGDS.CATE_NO
+						<if test="siteNo != '' and siteNo != null">
+							AND CATE.SITE_NO = #{siteNo}
+						</if>
+					    <if test="oneDepth != '' and oneDepth != null">
+					    	<if test="oneDepth == 'OUTLET'">
+					    		<if test="curSeason != '' and curSeason != null">
+					    			<if test="siteNo != '' and siteNo != null">
+					    				AND CATE.ONE_DEPTH NOT IN (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON WHERE SEASON_CD != 'OUTLET' AND DISP_YN = 'Y' AND SITE_NO = #{siteNo})
+					    			</if>
+					    		</if>
+					    		
+					    		<if test="preSeason != '' and preSeason != null">
+					    			AND CATE.ONE_DEPTH != #{preSeason}
+					    		</if>
+					    	</if>
+					    </if>					
+						
+					    <if test="twoDepth != '' and twoDepth != null">
+					    	AND CATE.TWO_DEPTH = #{twoDepth}
+					    </if> 
+					    <if test="threeDepth != '' and threeDepth != null">
+					    	AND CATE.THREE_DEPTH = #{threeDepth}
+					    </if> 					
+					    <if test="threeDepth == '' or threeDepth == null">
+					    	AND CATE.THREE_DEPTH is null
+					    </if>
+						<if test="sex != '' and sex != null">
+							AND CATE.SEX = #{sex}
+						</if>
+						<if test="sex == '' or sex == null">
+							AND CATE.SEX is null
+						</if>
+						<if test="newArrival">
+					  		AND CATE.NEW_ARVL = 'true'
+						</if>
+						<if test="!newArrival">
+					  		AND CATE.NEW_ARVL is null
+						</if>
+					) 
+			)MAIN
+			
+			ORDER BY SORT_NO ASC
+	</select>
+	
+	<update id="updateViewCount" parameterType="String">
+	    UPDATE TBL_GD_GDS
+	    	SET VIEW_CNT = VIEW_CNT +1
+		where UBI_GDS_NO = #{ubiGdsNo}
+	</update>
+</mapper>

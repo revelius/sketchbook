@@ -1,0 +1,254 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>통계/분석 > 접속통계 > 방문자접속통계</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="first">
+					<div class="tableType2">
+						<table>
+							<caption>배송검색</caption>
+							<colgroup>
+								<col width="100px">
+								<col width="*">
+								<col width="100px">
+								<col width="200px">
+								<col width="120px">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">조건</th>
+									<td colspan="3">
+										<div class="wrap">
+											<input type="radio" id="rd_condition1" name="rd_condition" /> <label for="rd_condition1">일별(시간단위)</label>
+											<input type="radio" id="rd_condition2" name="rd_condition" /> <label for="rd_condition2">월별(일단위)</label>
+											<input type="radio" id="rd_condition3" name="rd_condition" /> <label for="rd_condition3">연도별(월단위)</label>
+											<input type="radio" id="rd_condition4" name="rd_condition" /> <label for="rd_condition4">요일별</label>
+											<input type="radio" id="rd_condition5" name="rd_condition" /> <label for="rd_condition5">시간대별</label>
+										</div>
+									</td>
+									<td rowspan="2" class="bd_left">
+										<a href="#" class="btnType2">검색</a> <br /><br />
+										<a href="#" class="btnType1">초기화</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">기간</th>
+									<td>
+										<div class="wrap">
+											<input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>		
+										</div>
+										<!-- 월별 -->
+										<!-- <select>
+											<option value="0">2015</option>
+										</select>
+										년
+										<select>
+											<option value="0">05</option>
+										</select>
+										월 -->
+										<!-- //월별 -->
+										<!-- 연도별 -->
+										<!-- <select>
+											<option value="0">2015</option>
+										</select>
+										년
+										<select>
+											<option value="0">05</option>
+										</select>
+										월
+										~
+										<select>
+											<option value="0">2015</option>
+										</select>
+										년
+										<select>
+											<option value="0">05</option>
+										</select>
+										월 -->
+										<!-- //연도별 -->
+										<!-- 요일별, 시간대별 -->
+										<!-- <input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>			
+										~
+										<input type="text" id="" name="">
+										<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>	 -->	
+										<!-- //요일별, 시간대별 -->
+									</td>
+									<th scope="col">브랜드</th>
+									<td>
+										<select>
+											<option value="0">전체</option>
+										</select>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- section -->
+				<div class="section a2">
+					<div class="tableTitle">
+						<div class="left"><span class="icon2"></span><span>2015년 05월 05일</span>부터 <span>2015년 05월 05일</span>까지의 검색 결과입니다.</div>
+						<div class="right">
+							<a href="#" class="btnType2">전일보기</a>
+							<a href="#" class="btnType2">오늘보기</a>
+							<a href="#" class="btnType2">다음일보기</a>
+						</div>
+					</div>
+					<div class="tableType1">
+						<table>
+							<caption>거주지별통계 그래프</caption>
+							<colgroup>
+								<col width="10%" />
+								<col width="8%" />
+								<col width="8%" />
+								<col width="*" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="row">시간</th>
+									<th scope="row">브랜드</th>
+									<th scope="row">접속수</th>
+									<th scope="row">그래프</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="txtBold">
+									<th scope="col" colspan="2">합계</th>
+									<td class="tdBg">333</td>
+									<td class="tdBg"></td>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr>
+									<td rowspan="5">00시</td>
+									<td>W</td>
+									<td>30</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>C</td>
+									<td>45</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>O</td>
+									<td>7</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>B</td>
+									<td>10</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>합계</td>
+									<td>92</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td rowspan="5">01시</td>
+									<td>W</td>
+									<td>30</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>C</td>
+									<td>45</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>O</td>
+									<td>7</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>B</td>
+									<td>10</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>합계</td>
+									<td>92</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td rowspan="5">02시</td>
+									<td>W</td>
+									<td>30</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>C</td>
+									<td>45</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>O</td>
+									<td>7</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>B</td>
+									<td>10</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>합계</td>
+									<td>92</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td rowspan="5">02시</td>
+									<td>W</td>
+									<td>30</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>C</td>
+									<td>45</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>O</td>
+									<td>7</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>B</td>
+									<td>10</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>합계</td>
+									<td>92</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- //section -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

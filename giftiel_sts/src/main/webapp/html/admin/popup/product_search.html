@@ -1,0 +1,306 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+<!-- 대 카테고리 추가 -->
+<div class="layerWrap">
+	<div class="title">
+		<h1><span class="icon1"></span>상품 검색</h1>
+		<a href="javascript:;" onclick="window.close()">Close</a>
+	</div>
+	<div class="wrap">
+		<div class="section a1">
+			<div class="tableType2">
+				<div class="tableTitle">
+					<div class="left"><span class="icon2"></span>검색</div>
+				</div>
+				<table class="cateinfo">
+					<colgroup>
+						<col width="132px" />
+						<col width="*" />
+						<col width="120px"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th scope="col">브랜드</th>
+							<td>
+								<select>
+									<option value="0">worksout</option>
+								</select>
+							</td>
+							<td rowspan="3" class="bd_left">
+								<a href="#" class="btnType2">검색</a> <br /><br />
+								<a href="#" class="btnType1">초기화</a>
+							</td>
+						</tr>
+						<tr>
+							<th scope="col">분류</th>
+							<td>
+								<select>
+									<option value="0">1차분류</option>
+								</select>
+								<select>
+									<option value="0">2차분류</option>
+								</select>
+								<select>
+									<option value="0">3차분류</option>
+								</select>
+								<select>
+									<option value="0">4차분류</option>
+								</select>
+								<input type="checkbox" id="ch_group">
+								<label for="ch_group">하위포함</label>
+							</td>
+						</tr>
+						<tr>
+							<th scope="col">상품</th>
+							<td>
+								<select>
+									<option value="0">상품코드</option>
+								</select>
+								<input type="text" class="searchBar" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="section a2">
+			<div class="tableType2">
+				<table class="cateinfo pt_14">
+					<colgroup>
+						<col width="132px" />
+						<col width="*" />
+						<col width="120px"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th scope="col">브랜드</th>
+							<td>
+								<select>
+									<option value="0">worksout</option>
+								</select>
+							</td>
+							<td rowspan="3" class="bd_left">
+								<a href="#" class="btnType2">검색</a> <br /><br />
+								<a href="#" class="btnType1">초기화</a>
+							</td>
+						</tr>
+						<tr>
+							<th scope="col">분류</th>
+							<td>
+								<select>
+									<option value="0">1차분류</option>
+								</select>
+								<select>
+									<option value="0">2차분류</option>
+								</select>
+								<select>
+									<option value="0">3차분류</option>
+								</select>
+								<select>
+									<option value="0">4차분류</option>
+								</select>
+								<input type="checkbox" id="ch_group">
+								<label for="ch_group">하위포함</label>
+							</td>
+						</tr>
+						<tr>
+							<th scope="col">상품</th>
+							<td>
+								<select>
+									<option value="0">상품코드</option>
+								</select>
+								<input type="text" class="searchBar" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="section">
+			<div class="tableTitle">
+				<div class="right">
+					<select>
+						<option>15개</option>
+					</select>
+				</div>
+			</div>
+			<div class="tableType1 tblStats overflowXY">
+				<table class="w1200">
+					<caption>상품 통계</caption>
+					<colgroup>
+						<col style="width: 8%" />
+						<col style="width: 8%" />
+						<col style="width: 8%" />
+						<col style="width: 8%" />
+						<col style="width: *" />
+						<col style="width: 12%" />
+						<col style="width: 12%" />
+						<col style="width: 12%" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="row" colspan="4">상품분류</th>
+							<th scope="row" rowspan="2">상품명 <a href="#" class="down">▼</a></th>
+							<th scope="row" rowspan="2">상품코드 <a href="#" class="down">▼</a></th>
+							<th scope="row" rowspan="2">상태 <a href="#" class="down">▼</a></th>
+							<th scope="row" rowspan="2">선택</th>
+						</tr>
+						<tr>
+							<th scope="row">1차분류 <a href="#" class="down">▼</a></th>
+							<th scope="row">2차분류 <a href="#" class="down">▼</a></th>
+							<th scope="row">3차분류 <a href="#" class="down">▼</a></th>
+							<th scope="row">4차분류 <a href="#" class="down">▼</a></th>
+						</tr>
+					</thead>
+					<tbody>	
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>판매</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>증지</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>판매</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>휴지통</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>휴지통</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>휴지통</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>휴지통</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>휴지통</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>휴지통</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>휴지통</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+						<tr>	
+							<td>Brixton</td>
+							<td>Headwear</td>
+							<td></td>
+							<td></td>
+							<td>Rival Snap Backnders</td>
+							<td>PT151</td>
+							<td>휴지통</td>
+							<td><a href="#" class="btnType1">선택</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!--[s] 페이징 -->
+			<div class="paging">
+				<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+				<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+				<span class="num">
+					<a href="#" class="on">1</a>
+					<a href="#">2</a>
+					<a href="#">3</a>
+					<a href="#">4</a>
+					<a href="#">5</a>
+					<a href="#">6</a>
+					<a href="#">7</a>
+					<a href="#">8</a>
+					<a href="#">9</a>
+					<a href="#">10</a>
+				</span>
+				<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+				<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+			</div>
+			<!--[e] 페이징 -->
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+</div>
+<!-- //대 카테고리 추가 -->
+</body>
+</html>

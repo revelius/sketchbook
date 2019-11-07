@@ -1,0 +1,150 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>운영관리 > 권한관리 > 부운영자</h3>
+				<!-- section -->
+				<div class="section a1 tabCon_inner">
+					<div class="tableType2">
+						<table>
+							<caption>부운영자</caption>
+							<colgroup>
+								<col width="132px">
+								<col width="*">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">아이디</th>
+									<td>ID0000000004</td>
+								</tr>
+								<tr>
+									<th scope="col">비밀번호</th>
+									<td><input type="password" class="wd_200" /><span class="addtxt ml_5">*6~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요. / 비밀번호 형식이 잘못되었습니다.</span></td>
+								</tr>
+								<tr>
+									<th scope="col">비밀번호 확인</th>
+									<td><input type="password" class="wd_200" /> <span class="addtxt ml_5">*비밀번호가 일치합니다. / 비밀번호가 일치하지 않습니다.</span></td>
+								</tr>
+								<tr>
+									<th scope="col">이름</th>
+									<td><input type="text" class="wd_200" /></td>
+								</tr>
+								<tr>
+									<th scope="col">연락처</th>
+									<td><input type="text" class="wd_200" /><span class="addtxt ml_5">*숫자만 입력 가능합니다.</span></td>
+								</tr>
+								<tr>
+									<th scope="col">이메일</th>
+									<td><input type="text" class="wd_200" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- //section -->
+				<!-- section -->
+				<div class="section a2">
+					<div class="tableType1">
+						<table>
+							<caption>전체매출통계</caption>
+							<colgroup>
+								<col style="width: 3%" />
+								<col style="width: 20%" />
+								<col style="width: 40%" />
+								<col style="width: *" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="row"><input type="checkbox" /></th>
+									<th scope="row">구분</th>
+									<th scope="row">항목</th>
+									<th scope="row">권한설정</th>
+								</tr>
+							</thead>
+							<tbody>	
+								<tr>	
+									<td rowspan="4"><input type="checkbox" /></td>
+									<td rowspan="4">회원관리</td>
+									<td></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>
+									<td class="bd_left"></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>
+									<td class="bd_left"></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>
+									<td class="bd_left"></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>	
+									<td rowspan="4"><input type="checkbox" /></td>
+									<td rowspan="4" class="bd_right">상품관리</td>
+									<td></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>
+									<td class="bd_left"></td>
+									<td><input type="checkbox" /></td>
+									</td>
+								</tr>
+								<tr>
+									<td class="bd_left"></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>
+									<td class="bd_left"></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>	
+									<td rowspan="4"><input type="checkbox" /></td>
+									<td rowspan="4" class="bd_right">환경설정</td>
+									<td></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>
+									<td class="bd_left"></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>
+									<td class="bd_left"></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+								<tr>
+									<td class="bd_left"></td>
+									<td><input type="checkbox" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- //section -->
+				<div class="section a2 btn">
+					<a href="#" class="btnType2">저장</a>
+					<a href="#" class="btnType1">취소</a>
+					<a href="#" class="btnType1">삭제</a>
+				</div>
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

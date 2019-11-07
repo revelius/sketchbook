@@ -1,0 +1,186 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>	
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>환경설정 > 상점기본정보관리 > 사이트환경설정</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- 사이트 별 필요 정보를 설정합니다.</li>
+						<li>- 브라우저 타이틀, 검색엔진키워드 설정, 파비콘, 구매확정기간 설정이 가능합니다.</li>
+						<li>- 사업자 정보는 홈페이지 하단 카피라이트부분에 노출됩니다</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- [s] 상점환경설정 컨텐츠 -->
+				<div class="tabCon_inner">
+					<!-- [s] 브라우저 타이틀 설정 테이블 -->
+					<div class="tableType2">
+						<table>
+							<caption>상점환결설정</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="2" class="row_tit">브라우저 타이틀 설정</th>
+							    </tr>
+								<tr>
+									<th scope="col">WORKSOUT</th>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col">CARHARTT</th>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col">OBEY</th>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col">BRIXTON</th>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col">LEXDRAY</th>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 브라우저 타이틀 설정 테이블 -->
+					<!-- [s] 파비콘설정 테이블 -->
+					<div class="tableType2 pt20">
+						<table>
+							<caption>파비콘 설정</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="2" class="row_tit">파비콘 설정</th>
+							    </tr>
+								<tr>
+									<th scope="col">WORKSOUT</th>
+									<td><input type="file" /></td>
+								</tr>
+								<tr>
+									<th scope="col">CARHARTT</th>
+									<td><input type="file" /></td>
+								</tr>
+								<tr>
+									<th scope="col">OBEY</th>
+									<td><input type="file" /> Obay_favicon.ico</td>
+								</tr>
+								<tr>
+									<th scope="col">BRIXTON</th>
+									<td><input type="file" /></td>
+								</tr>
+								<tr>
+									<th scope="col">LEXDRAY</th>
+									<td><input type="file" /> Obay_favicon.ico</td>
+								</tr>
+								<tr>
+									<td colspan="2"><span class="highlight">※ 이미지 사이즈 16 x 16 의 아이콘(확장자 : ico)으로 등록해 주시기 바랍니다.</span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 파비콘설정 테이블 -->
+					<!-- [s] 검색엔진키워드설정 테이블 -->
+					<div class="tableType2 pt20">
+						<table>
+							<caption>파비콘 설정</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="132px" />
+								<col width="*" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="3" class="row_tit">검색엔진키워드 설정</th>
+							    </tr>
+								<tr>
+									<th scope="col" rowspan="2">WORKSOUT</th>
+									<td>사이트 설정</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<td>검색엔진 키워드</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col" rowspan="2">CARHARTT</th>
+									<td>사이트 설정</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<td>검색엔진 키워드</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col" rowspan="2">OBEY</th>
+									<td>사이트 설정</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<td>검색엔진 키워드</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col" rowspan="2">BRIXTON</th>
+									<td>사이트 설정</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<td>검색엔진 키워드</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col" rowspan="2">LEXDRAY</th>
+									<td>사이트 설정</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<td>검색엔진 키워드</td>
+									<td><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<p class="highlight">※ 사이트 설명 : 200자 이내의 문자(특수문자 제외)를 입력하시기 바랍니다.</p>
+										<p class="highlight">※ 검색엔진 키워드 : 검색엔진에서 검색시 나타나게 할 검색키워드를 입력하시기 바랍니다.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 검색엔진키워드설정 테이블 -->
+					<div class="section a2 btn">
+						<a href="#" class="btnType2">저장</a> 
+						<a href="#" class="btnType1">취소</a>
+					</div>
+				</div>
+				<!-- [e] 상점환경설정 컨텐츠 -->	
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

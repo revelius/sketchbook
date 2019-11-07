@@ -1,0 +1,138 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">
+					<h3>상품관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">카테고리관리</a>
+							<ul>
+								<li>- <a href="#">상품카테고리관리</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상품관리</a>
+							<ul>
+								<li>- <a href="/admin/product/prdAdd.html">상품등록</a></li>
+								<li>- <a href="/admin/product/prdIcon.html">상품 아이콘 관리</a></li>
+								<li>- <a href="/admin/product/prdList.html">상품목록</a></li>
+								<li>- <a href="/admin/product/prdDisplay.html">상품진열설정</a></li>
+								<li>- <a href="/admin/product/prdDel.html">상품휴지통</a></li>
+								<li class="on">- <a href="/admin/product/prdExcel.html">상품 엑셀 일괄 등록</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상품정보고시 관리</a>
+							<ul>
+								<li>- <a href="#">상품정보고시 관리</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents productList">
+					<!--[s] 카테고리관리 -->
+					<div class="section a1">
+						<h3><span class="icon1"></span>상품 엑셀 일괄 등록</h3>
+						<div class="tableType2">
+							<ul class="boxLi">
+								<li>- 상품을 엑셀 파일로 일괄 등록 및 관리합니다.</li>
+							</ul>
+							<div class="tableTitle">
+								<div class="left"><span class="icon2"></span>상품 등록</div>		
+							</div>
+							<div class="tableType2">							
+								<table>
+								<caption>상품등록 폼</caption>
+								<colgroup>
+									<col width="132px" />
+									<col width="*" />
+								</colgroup>
+								<tbody>
+								
+									<tr>
+										<th>파일 첨부</th>
+										<td>
+											<input type="file" />
+											<p class="addtxt">* 상품은 최대 1000개까지만 등록/수정할 수 있습니다. </p>
+										</td>
+									</tr>
+								</tbody>
+								</table>
+							</div>							
+							<div class="paging">
+								<div class="right">
+									<a href="#" class="btnType2">등록</a>
+								</div>
+							</div>
+							<div class="tableTitle">
+								<div class="left"><span class="icon2"></span>엑셀등록 도움말</div>
+								<ul>
+									<li>- 파일 내에서 행이나 열의 삭제/수정, 서식 이용, 순서 변경을 하지 마십시오.</li>
+									<li>- 양식은 다른 이름으로 저장하더라도, 확장자는 유지해 주세요.</li>
+								</ul>
+							</div>
+							<div class="paging">
+								<div class="right">
+									<a href="#" class="btnType2">엑셀 샘플 다운로드</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--[e] 카테고리관리 -->
+				</div>
+				<!--[e] contents -->
+			</div>
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,3446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="manage">
+
+	<resultMap id="carharttRadioMap" type="com.giftiel.shop.dto.CarharttRadioForm">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="radioNo" column="RADIO_NO"/> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="banImgUrl" column="BAN_IMG_URL"/> 
+	    <result property="cvImgUrl" column="CV_IMG_URL"/> 
+	    <result property="bgImgUrl" column="BG_IMG_URL"/> 
+	    <result property="radioLink" column="RADIO_LINK"/> 
+	    <result property="radioTitle" column="RADIO_TITLE"/> 
+	    <result property="radioArtist" column="RADIO_ARTIST"/> 
+	    <result property="radioInfo" column="RADIO_INFO"/> 
+	    <result property="radioTrackList" column="RADIO_TRACK_LIST"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/>
+	    <result property="radioArtistInfo" column="RADIO_ARTIST_INFO"/>
+	    <result property="regUserNm" column="REG_USER_NM"/>
+	</resultMap>
+
+   <resultMap id="inquiryMap" type="com.giftiel.shop.dto.Inquiry">
+	    <result property="rnum"          column="RNUM"/>
+	    <result property="cnslNo"        column="CNSL_NO"/> 
+	    <result property="memNo"         column="MEM_NO"/> 
+	    <result property="cnslTpLcl"     column="CNSL_TP_LCL"/> 
+	    <result property="cnslTpMcl"     column="CNSL_TP_MCL"/> 
+	    <result property="cnslStat"      column="CNSL_STAT"/> 
+	    <result property="procCmplDts"   column="PROC_CMPL_DTS"/> 
+	    <result property="procCmplUsrno" column="PROC_CMPL_USRNO"/> 
+	    <result property="memId"         column="MEM_ID"/> 
+	    <result property="memNm"         column="MEM_NM"/> 
+	    <result property="title"         column="TITLE"/> 
+	    <result property="cnslTxt"       column="CNSL_TXT"/> 
+	    <result property="procTxt"       column="PROC_TXT"/> 
+	    <result property="ordNo"         column="ORD_NO"/> 
+	    <result property="ordGdsSeq"     column="ORD_GDS_SEQ"/> 
+	    <result property="gdsNo"         column="GDS_NO"/> 
+	    <result property="email"         column="EMAIL"/> 
+	    <result property="emailAnsReqYn" column="EMAIL_ANS_REQ_YN"/> 
+	    <result property="tel"           column="TEL"/> 
+	    <result property="replyTelYn"    column="REPLY_TEL_YN"/> 
+	    <result property="chgr"          column="CHGR"/> 
+	    <result property="regrNo"        column="REGR_NO"/> 
+	    <result property="regDts"        column="REG_DTS"/> 
+	    <result property="updrNo"        column="UPDR_NO"/> 
+	    <result property="updDts"        column="UPD_DTS"/> 
+	    <result property="atchFile"      column="ATCH_FILE"/> 
+	    <result property="siteNo"        column="SITE_NO"/> 
+	    <result property="siteNm"        column="SITE_NM"/> 
+	    
+	</resultMap>
+	
+	<resultMap id="frontInquiryMap" type="com.giftiel.shop.dto.Inquiry">
+		<result property="rnum"          column="RNUM"/>
+	    <result property="cnslNo"        column="CNSL_NO"/> 
+	    <result property="memNo"         column="MEM_NO"/> 
+	    <result property="cnslTpLcl"     column="CNSL_TP_LCL"/> 
+	    <result property="cnslTpMcl"     column="CNSL_TP_MCL"/> 
+	    <result property="cnslStat"      column="CNSL_STAT"/> 
+	    <result property="procCmplDts"   column="PROC_CMPL_DTS"/> 
+	    <result property="procCmplUsrno" column="PROC_CMPL_USRNO"/> 
+	    <result property="memId"         column="MEM_ID"/> 
+	    <result property="memNm"         column="MEM_NM"/> 
+	    <result property="title"         column="TITLE"/> 
+	    <result property="cnslTxt"       column="CNSL_TXT"/> 
+	    <result property="procTxt"       column="PROC_TXT"/> 
+	    <result property="ordNo"         column="ORD_NO"/> 
+	    <result property="ordGdsSeq"     column="ORD_GDS_SEQ"/> 
+	    <result property="gdsNo"         column="GDS_NO"/> 
+	    <result property="email"         column="EMAIL"/> 
+	    <result property="emailAnsReqYn" column="EMAIL_ANS_REQ_YN"/> 
+	    <result property="tel"           column="TEL"/> 
+	    <result property="replyTelYn"    column="REPLY_TEL_YN"/> 
+	    <result property="chgr"          column="CHGR"/> 
+	    <result property="regrNo"        column="REGR_NO"/> 
+	    <result property="regDts"        column="REG_DTS"/> 
+	    <result property="updrNo"        column="UPDR_NO"/> 
+	    <result property="updDts"        column="UPD_DTS"/> 
+	    <result property="atchFile"      column="ATCH_FILE"/> 
+	    <result property="siteNo"        column="SITE_NO"/> 
+	    <result property="maxQ"          column="MAXQ"/> 
+	    <result property="maxA"          column="MAXA"/> 
+	    
+	    	<collection property="inqueryRepl" ofType="com.giftiel.shop.dto.InquiryRepl">
+				<result property="memoNo"        column="MEMO_NO"/>
+				<result property="memoTxt"       column="MEMO_TXT"/>
+				<result property="regrNo"        column="MEMO_REGR_NO"/>
+				<result property="regDts"        column="MEMO_REG_DTS"/>
+				<result property="updrNo"        column="MEMO_UPDR_NO"/>
+				<result property="updDts"        column="MEMO_UPD_DTS"/>
+				<result property="wrtrCls"       column="WRTR_CLS"/>
+			</collection>
+	</resultMap>
+	
+	<resultMap id="inquiryReplMap" type="com.giftiel.shop.dto.InquiryRepl">
+		<result property="cnslNo"        column="CNSL_NO"/>
+		<result property="memoNo"        column="MEMO_NO"/>
+		<result property="memoTxt"       column="MEMO_TXT"/>
+		<result property="regrNo"        column="REGR_NO"/>
+		<result property="regDts"        column="REG_DTS"/>
+		<result property="updrNo"        column="UPDR_NO"/>
+		<result property="updrNm"        column="UPDR_NM"/>
+		<result property="updDts"        column="UPD_DTS"/>
+		<result property="wrtrCls"       column="WRTR_CLS"/>
+	</resultMap>
+
+	<resultMap id="operatorMap" type="com.giftiel.shop.dto.Operator">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="userNo" column="USER_NO"/> 
+	    <result property="id" column="ID"/> 
+	    <result property="pwd" column="PWD"/> 
+	    <result property="userNm" column="USER_NM"/> 
+	    <result property="email" column="EMAIL"/> 
+	    <result property="cpNo" column="CP_NO"/> 
+	    <result property="useYn" column="USE_YN"/> 
+	    <result property="userCls" column="USER_CLS"/> 
+	    <result property="cmpNm" column="CMP_NM"/> 
+	    <result property="reprNm" column="REPR_NM"/> 
+	    <result property="personInfoMngr" column="PERSON_INFO_MNGR"/> 
+	    <result property="personInfoMngrEmail" column="PERSON_INFO_MNGR_EMAIL"/> 
+	    <result property="zipCd" column="ZIP_CD"/> 
+	    <result property="addr" column="ADDR"/> 
+	    <result property="dtlAddr" column="DTL_ADDR"/> 
+	    <result property="tel" column="TEL"/> 
+	    <result property="faxNo" column="FAX_NO"/> 
+	    <result property="bizRegNo" column="BIZ_REG_NO"/> 
+	    <result property="teleSalesBizRegNo" column="TELE_SALES_BIZ_REG_NO"/> 
+	    <result property="bizSt" column="BIZ_ST"/> 
+	    <result property="event" column="EVENT"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="latelyConnect" column="LATELY_CONNECT"/> 
+	    <result property="totConnect" column="TOT_CONNECT"/> 
+	</resultMap>
+	
+	<resultMap id="authGrpMap" type="com.giftiel.shop.dto.AuthGrp">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="authGrpNo" column="AUTH_GRP_NO"/> 
+	    <result property="authGrpNm" column="AUTH_GRP_NM"/> 
+	    <result property="useYn" column="USE_YN"/> 
+	    <result property="authGrpDesc" column="AUTH_GRP_DESC"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    
+	    <collection property="supMenu" ofType="com.giftiel.shop.dto.SupMenu">
+	    	<result property="supMenuNm" column="SUP_MENU_NM"/>
+	    	
+	    	<collection property="menu" ofType="com.giftiel.shop.dto.Menu">
+		    	<result property="rnum" column="RNUM"/>
+			    <result property="menuNo" column="MENU_NO"/> 
+			    <result property="supMenuNo" column="SUP_MENU_NO"/> 
+			    <result property="menuNm" column="MENU_NM"/> 
+			    <result property="menuTp" column="MENU_TP"/> 
+			    <result property="pageUrl" column="PAGE_URL"/> 
+			    <result property="useYn" column="USE_YN"/> 
+			    <result property="prir" column="PRIR"/> 
+			    <result property="regrNo" column="REGR_NO"/> 
+			    <result property="regDts" column="REG_DTS"/> 
+			    <result property="updrNo" column="UPDR_NO"/> 
+			    <result property="updDts" column="UPD_DTS"/>
+			</collection>
+	    </collection>
+	</resultMap>
+	
+	<resultMap id="accessAuthMap" type="com.giftiel.shop.dto.AccessAuth">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="authGrpNo" column="AUTH_GRP_NO"/> 
+	    <result property="menuNo" column="MENU_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	</resultMap>
+	
+	<resultMap id="userMap" type="com.giftiel.shop.dto.User">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="userNo" column="USER_NO"/> 
+	    <result property="id" column="ID"/> 
+	    <result property="pwd" column="PWD"/> 
+	    <result property="userNm" column="USER_NM"/> 
+	    <result property="email" column="EMAIL"/> 
+	    <result property="cpNo" column="CP_NO"/> 
+	    <result property="useYn" column="USE_YN"/> 
+	    <result property="userCls" column="USER_CLS"/> 
+	    <result property="cmpNm" column="CMP_NM"/> 
+	    <result property="reprNm" column="REPR_NM"/> 
+	    <result property="personInfoMngr" column="PERSON_INFO_MNGR"/> 
+	    <result property="personInfoMngrEmail" column="PERSON_INFO_MNGR_EMAIL"/> 
+	    <result property="zipCd" column="ZIP_CD"/> 
+	    <result property="addr" column="ADDR"/> 
+	    <result property="dtlAddr" column="DTL_ADDR"/> 
+	    <result property="tel" column="TEL"/> 
+	    <result property="faxNo" column="FAX_NO"/> 
+	    <result property="bizRegNo" column="BIZ_REG_NO"/> 
+	    <result property="teleSalesBizRegNo" column="TELE_SALES_BIZ_REG_NO"/> 
+	    <result property="bizSt" column="BIZ_ST"/> 
+	    <result property="event" column="EVENT"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="siteAuthNo" column="SITE_AUTH_NO"/> 
+	    
+<!-- 	    <collection property="authGrpNo" ofType="INTEGER" > -->
+<!-- 	    	<result property="authGrpNo" column="AUTH_GRP_NO"/>  -->
+<!-- 	    </collection> -->
+	</resultMap>
+	
+	<resultMap id="smsMngMap" type="com.giftiel.shop.dto.SmsMng">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="mngNo" column="MNG_NO"/> 
+	    <result property="mngTitle" column="MNG_TITLE"/> 
+	    <result property="smsTxt" column="SMS_TXT"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="sndCls" column="SND_CLS"/> 
+	    <result property="autoCls" column="AUTO_CLS"/> 
+	    <result property="msgSeq" column="MSG_SEQ"/> 
+	    <result property="curState" column="CUR_STATE"/> 
+	    <result property="sentDate" column="SENT_DATE"/> 
+	    <result property="rsltDate" column="RSLT_DATE"/> 
+	    <result property="reqDate" column="REQ_DATE"/> 
+	    <result property="rsltCode" column="RSLT_CODE"/> 
+	    <result property="rsltCode2" column="RSLT_CODE2"/> 
+	    <result property="rsltNet" column="RSLT_NET"/> 
+	    <result property="callTo" column="CALL_TO"/>
+	    <result property="callFrom" column="CALL_FROM"/>
+	    <result property="msgTxt" column="MSG_TXT"/>
+	    <result property="msgType" column="MSG_TYPE"/>
+	    <result property="contSeq" column="CONT_SEQ"/>	   
+	    <result property="rsvTgGb" column="RSV_TG_GB"/> 
+    	<result property="rsvTg" column="RSV_TG"/> 
+	    <result property="regUserNm" column="REG_USER_NM"/>  
+	</resultMap>
+	
+	<resultMap id="intgBoardMap" type="com.giftiel.shop.dto.IntgBoard">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="txtNo" column="TXT_NO"/> 
+	    <result property="boardClcd" column="BOARD_CLCD"/> 
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="title" column="TITLE"/> 
+	    <result property="lnkUrl" column="LNK_URL"/> 
+	    <result property="regUserNm" column="REG_USER_NM"/> 
+	    <result property="imgUrl" column="IMG_URL"/>
+	    <result property="imgSeq" column="IMG_SEQ"/>  
+	    <result property="seasonCd" column="SEASON_CD"/> 
+	    <result property="clbltnNm" column="CLBLTN_NM"/> 
+	</resultMap>
+	
+	<resultMap id="newsMap" type="com.giftiel.shop.dto.News">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="txtNo" column="TXT_NO"/> 
+	    <result property="title" column="TITLE"/> 
+	    <result property="txt" column="TXT"/> 
+	    <result property="txtTp" column="TXT_TP"/> 
+	    <result property="txtCls" column="TXT_CLS"/> 
+	    <result property="movUrl" column="MOV_URL"/> 
+	    <result property="imgUrl" column="IMG_URL"/> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="readCnt" column="READ_CNT"/> 
+	    <result property="prir" column="PRIR"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="etc1" column="ETC1"/> 
+    	<result property="etc2" column="ETC2"/>
+    	<result property="sldDispYn" column="SLD_DISP_YN"/> 
+	    <result property="thmbUrl" column="THMB_URL"/> 
+	    <result property="preview" column="PREVIEW"/> 
+    	
+	    <result property="regUserNm" column="REG_USER_NM"/> 
+	    
+	    <result property="topBnnrDispYn" column="TOP_BNNR_DISP_YN"/> 
+	    
+<!-- 	    <collection property="siteNo" column="SITE_NO"  ofType="java.util.ArrayList"/> -->
+	    
+	    
+	    <collection property="newsSite" ofType="com.giftiel.shop.dto.NewsSite">
+		    <result property="siteNo" column="SITE_NO"/> 
+		</collection>
+		
+		<collection property="newsCont" ofType="com.giftiel.shop.dto.NewsCont">
+		    <result property="addContNo" column="ADD_CONT_NO"/> 
+		    <result property="addContType" column="ADD_CONT_TYPE"/> 
+		    <result property="addContAddr" column="ADD_CONT_ADDR"/> 
+		</collection>
+	    
+	</resultMap>
+	
+	<resultMap id="lookbookMap" type="com.giftiel.shop.dto.IntgBoard">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="txtNo" column="TXT_NO"/> 
+	    <result property="boardClcd" column="BOARD_CLCD"/> 
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="title" column="TITLE"/> 
+	    <result property="lnkUrl" column="LNK_URL"/> 
+	    <result property="regUserNm" column="REG_USER_NM"/> 
+	    
+	    
+	    <collection property="intgBoardCnts" ofType="com.giftiel.shop.dto.IntgBoardCnts">
+		    <result property="imgCls" column="INTG_BOARD_CNTS_IMG_CLS"/> 
+		    <result property="imgUrl" column="INTG_BOARD_CNTS_IMG_URL"/> 
+		    <result property="imgSeq" column="INTG_BOARD_CNTS_IMG_SEQ"/> 
+		    <result property="prir" column="INTG_BOARD_CNTS_PRIR"/> 
+			<result property="dtlImgUrl" column="INTG_BOARD_CNTS_DTL_IMG_URL"/>
+	    	
+	    	<collection property="boardGds" ofType="com.giftiel.shop.dto.BoardGds">
+			    <result property="imgSeq" column="BOARD_GDS_IMG_SEQ"/> 
+			    <result property="ubiGdsNo" column="BOARD_GDS_UBI_GDS_NO"/> 
+			    <result property="gdsNm" column="BOARD_GDS_GDS_NM"/> 
+			    <result property="slPrc" column="BOARD_GDS_SL_PRC"/> 
+			    <result property="imgUrl" column="BOARD_GDS_IMG_URL"/> 
+			    <result property="linkUrl" column="BOARD_GDS_LINK_URL"/> 
+			    <result property="prir" column="BOARD_GDS_PRIR"/> 
+			    <result property="gubun" column="BOARD_GDS_GUBUN"/> 
+			</collection>
+	    </collection>
+	    
+	</resultMap>
+	
+	<resultMap id="mainManageMap" type="com.giftiel.shop.dto.MainManage">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="mainNo" column="MAIN_NO"/> 
+	    <result property="imgUrl" column="IMG_URL"/> 
+	    <result property="lnkUrl" column="LNK_URL"/> 
+	    <result property="txt" column="TXT"/> 
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="sortNo" column="SORT_NO"/>
+	    <result property="frontImgUrl" column="FRONT_IMG_URL"/>
+	</resultMap>
+	
+	<resultMap id="featureManageMap" type="com.giftiel.shop.dto.FeatureManage">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="featureNo" column="FEATURE_NO"/> 
+	    <result property="sex" column="SEX"/> 
+	    <result property="imgUrl" column="IMG_URL"/> 
+	    <result property="lnkUrl" column="LNK_URL"/> 
+	    <result property="txt" column="TXT"/> 
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+	
+	<resultMap id="WorksWithusMap" type="com.giftiel.shop.dto.WorkWithUs">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="withusSeq" column="WITHUS_SEQ"/> 
+	    <result property="withusStat" column="WITHUS_STAT"/> 
+	    <result property="withusCls" column="WITHUS_CLS"/> 
+	    <result property="withusArea" column="WITHUS_AREA"/> 
+	    <result property="withusCl" column="WITHUS_CL"/> 
+	    <result property="strDts" column="STR_DTS"/> 
+	    <result property="endDts" column="END_DTS"/> 
+	    <result property="dtlDesc" column="DTL_DESC"/> 
+	    <result property="regrNo" column="REGR_NO"/>
+	    <result property="regUserNm" column="REG_USER_NM"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+
+   	    <collection property="workWithUsSite" ofType="com.giftiel.shop.dto.WorkWithUsSite">
+		    <result property="withusSeq" column="WITHUS_SEQ"/>
+		    <result property="siteNo" column="SITE_NO"/> 
+		</collection>
+
+	</resultMap>
+	
+	<resultMap id="mailSend" type="com.giftiel.shop.dto.MailManage">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="sndHistNo" column="SND_HIST_NO"/> 
+	    <result property="sndrEmail" column="SNDR_EMAIL"/> 
+	    <result property="rcvrEmail" column="RCVR_EMAIL"/> 
+	    <result property="tmplUrl" column="TMPL_URL"/> 
+	    <result property="title" column="TITLE"/> 
+	    <result property="txtHtml" column="TXT_HTML"/> 
+	    <result property="sndDts" column="SND_DTS"/> 
+	    <result property="atchFile" column="ATCH_FILE"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/>
+	    <result property="rsvTgGb" column="RSV_TG_GB"/> 
+    	<result property="rsvTg" column="RSV_TG"/> 
+	    <result property="regUserNm" column="REG_USER_NM"/> 
+	    
+	    <result property="getBrnd" column="GET_BRND"/>
+		<result property="getMem" column="GET_MEM"/>
+	    
+	</resultMap>
+	
+	<resultMap id="awnesMap" type="com.giftiel.shop.dto.Awnes">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="awnesNo" column="AWNES_NO"/> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="dtlTxt" column="DTL_TXT"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="title" column="TITLE"/> 
+	    <result property="userNm" column="USER_NM"/> 
+	    
+	    <collection property="awnesCont" ofType="com.giftiel.shop.dto.AwnesCont">
+		    <result property="rnum" column="RNUM"/>
+		    <result property="awnesNo" column="AWNES_NO"/> 
+		    <result property="contCls" column="CONT_CLS"/> 
+		    <result property="contUrl" column="CONT_URL"/> 
+		    <result property="prir" column="PRIR"/> 
+		    <result property="regrNo" column="REGR_NO"/> 
+		    <result property="regDts" column="REG_DTS"/> 
+		    <result property="updrNo" column="UPDR_NO"/> 
+		    <result property="updDts" column="UPD_DTS"/> 
+		    <result property="imgUrl" column="IMG_URL"/>  
+		</collection>
+	    
+	</resultMap>
+	
+	
+	<!-- 운영자 권한 리스트 -->
+	<select id="authGrpList" resultMap="authGrpMap">
+		SELECT AUTH_GRP.AUTH_GRP_NO
+		      ,AUTH_GRP.AUTH_GRP_NM
+		      ,MENU.MENU_NO
+		      ,MENU.MENU_NM
+		      ,MENU.SUP_MENU_NO
+		      ,(
+		      SELECT MENU_NM FROM TBL_AD_MENU SUB_MENU
+		      WHERE SUB_MENU.MENU_NO = MENU.SUP_MENU_NO
+		      )SUP_MENU_NM
+		FROM TBL_AD_AUTH_GRP AUTH_GRP
+		    ,TBL_AD_MENU MENU
+		    ,TBL_AD_ACCESS_AUTH ACCESS_AUTH
+		WHERE AUTH_GRP.AUTH_GRP_NO = ACCESS_AUTH.AUTH_GRP_NO(+)
+		  AND ACCESS_AUTH.MENU_NO = MENU.MENU_NO(+)
+		  AND AUTH_GRP.USE_YN = 'Y'
+		  AND MENU.SUP_MENU_NO IS NOT NULL
+		  AND ACCESS_AUTH.AUTH_GRP_NO != 9
+		  ORDER BY AUTH_GRP_NO ASC, SUP_MENU_NO ASC, MENU_NO ASC
+	</select>
+	
+	<!-- 운영자 권한 별 총갯수 -->
+	<select id="authGrpTot" resultType="java.util.HashMap">
+		SELECT GRPTOT FROM(
+			SELECT COUNT(GRP_LIST.AUTH_GRP_NO) GRPTOT FROM
+				 (SELECT AUTH_GRP.AUTH_GRP_NO
+				      ,AUTH_GRP.AUTH_GRP_NM
+				      ,MENU.MENU_NO
+				      ,MENU.MENU_NM
+				      ,MENU.SUP_MENU_NO
+				      ,(
+				      SELECT MENU_NM FROM TBL_AD_MENU SUB_MENU
+				      WHERE SUB_MENU.MENU_NO = MENU.SUP_MENU_NO
+				      )SUP_MENU_NM
+				FROM TBL_AD_AUTH_GRP AUTH_GRP
+				    ,TBL_AD_MENU MENU
+				    ,TBL_AD_ACCESS_AUTH ACCESS_AUTH
+				WHERE AUTH_GRP.AUTH_GRP_NO = ACCESS_AUTH.AUTH_GRP_NO(+)
+				  AND ACCESS_AUTH.MENU_NO = MENU.MENU_NO(+)
+				  AND AUTH_GRP.USE_YN = 'Y'
+				  AND MENU.SUP_MENU_NO IS NOT NULL
+				  AND ACCESS_AUTH.AUTH_GRP_NO != 9
+				  ORDER BY AUTH_GRP_NO ASC, SUP_MENU_NO ASC, MENU_NO ASC
+				  )GRP_LIST
+			 GROUP by AUTH_GRP_NO
+			 ORDER BY AUTH_GRP_NO ASC
+	     )
+	</select>
+	
+	<!-- 1:1문의 리스트 -->
+	<select id="inquiryList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="inquiryMap">
+SELECT C_TABLE.* FROM(
+			SELECT ROWNUM PRNUM
+			      ,B_TABLE.*
+			 FROM(
+				SELECT
+					<choose>
+						<when test="orderBy != '' and orderBy != null">
+							ROW_NUMBER() OVER(ORDER BY ${orderBy} ${orderFlag}) RNUM
+						</when>
+						<otherwise>
+							ROW_NUMBER() OVER(ORDER BY SORT ASC) RNUM
+						</otherwise>
+				    </choose>
+				    ,A_TABLE.*
+				FROM(
+		    SELECT 
+		        CNSL.CNSL_NO 
+		        ,CNSL.MEM_NO 
+		        ,CNSL.CNSL_TP_LCL 
+		        ,CNSL.CNSL_TP_MCL 
+		        ,DECODE(CNSL.CNSL_STAT, 'CM00703', '답변' , 'CM00702', '미답변', 'CM00701', '미답변') CNSL_STAT
+		        ,CNSL.PROC_CMPL_DTS 
+		        ,CNSL.PROC_CMPL_USRNO 
+		        ,CNSL.MEM_ID 
+		        ,CNSL.MEM_NM 
+		        ,CNSL.TITLE 
+		        ,CNSL.CNSL_TXT 
+		        ,CNSL.PROC_TXT 
+		        ,CNSL.ORD_NO 
+		        ,CNSL.ORD_GDS_SEQ 
+		        ,CNSL.UBI_GDS_NO GDS_NO 
+		        ,CNSL.EMAIL 
+		        ,CNSL.EMAIL_ANS_REQ_YN 
+		        ,CNSL.TEL 
+		        ,CNSL.REPLY_TEL_YN 
+		        ,CNSL.CHGR 
+		        ,CNSL.REGR_NO 
+		        ,TO_CHAR(CNSL.REG_DTS, 'YYYY.MM.DD') REG_DTS
+		        ,CNSL.UPDR_NO 
+		        ,UPD_DTS SORT
+		        ,TO_CHAR(CNSL.UPD_DTS, 'YYYY.MM.DD') UPD_DTS
+		        ,NVL(CNSL.ATCH_FILE, '')ATCH_FILE
+		        ,CNSL.SITE_NO 
+		        
+		    FROM
+		        TBL_CM_CNSL CNSL
+		    WHERE 1 = 1
+		    <if test="memNo != null and  memNo !=''"> 
+		    	AND CNSL.MEM_NO = #{memNo}
+		    </if>
+		    <if test="memGb != null and  memGb !=''"> 
+			    AND EXISTS (
+						    SELECT 'X' 
+						    FROM DUAL
+						    WHERE ('name' = #{memGb} AND CNSL.MEM_NM LIKE '%' || #{member} || '%') 
+						    OR ('email' = #{memGb} AND CNSL.EMAIL LIKE '%' || #{member} || '%') 
+						 )
+			</if>
+			<if test="replGb != null and  replGb !=''"> 
+			    AND CNSL.CNSL_STAT = DECODE(#{replGb}, 'y', 'CM00703', 'n','CM00701') 
+			</if>
+			<if test="siteNo != null and  siteNo !=''"> 
+			    AND CNSL.SITE_NO = #{siteNo}
+			</if>
+	        <if test="inqStrDtm != null and inqEndDtm != null and inqStrDtm != '' and inqEndDtm != ''">
+	        	AND CNSL.UPD_DTS BETWEEN to_date(#{inqStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{inqEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+	        </if>
+		    <if test="searchGb != null and  searchGb !=''">
+		        AND EXISTS (
+						    SELECT 'X' 
+						    FROM DUAL
+						    WHERE ('title' = #{searchGb} AND CNSL.TITLE LIKE '%' || #{searchText} || '%') 
+						    OR ('content' = #{searchGb} AND CNSL.CNSL_TXT LIKE '%' || #{searchText} || '%') 
+						    OR ('all' = #{searchGb} AND (CNSL.TITLE LIKE '%' || #{searchText} || '%' OR CNSL.CNSL_TXT LIKE '%' || #{searchText} || '%'))
+						)
+		    </if>
+		    <choose>
+		    <when test="orderBy != '' and orderBy != null">
+				ORDER BY ${orderBy} ${orderFlag}
+			</when>
+			<otherwise>
+				ORDER BY REG_DTS DESC, CNSL_STAT DESC
+			</otherwise>
+			</choose>
+) A_TABLE ORDER BY RNUM DESC
+			) B_TABLE 
+		)C_TABLE
+			WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+<!-- 	 ORDER BY RNUM DESC -->
+	</select>
+	
+	<!-- 1:1문의 리스트(front용) -->
+	<select id="frontInquiryList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="frontInquiryMap">
+	SELECT T.RNUM 
+	      ,T.CNSL_NO 
+	      ,T.MEM_NO 
+	      ,T.CNSL_TP_LCL 
+	      ,T.CNSL_TP_MCL 
+	      ,T.CNSL_STAT 
+	      ,T.PROC_CMPL_DTS 
+	      ,T.PROC_CMPL_USRNO 
+	      ,T.MEM_ID 
+	      ,T.MEM_NM 
+	      ,T.TITLE 
+	      ,T.CNSL_TXT 
+	      ,T.PROC_TXT 
+	      ,T.ORD_NO 
+	      ,T.ORD_GDS_SEQ 
+	      ,T.GDS_NO 
+	      ,T.EMAIL 
+	      ,T.EMAIL_ANS_REQ_YN 
+	      ,T.TEL 
+	      ,T.REPLY_TEL_YN 
+	      ,T.CHGR 
+	      ,T.REGR_NO 
+	      ,T.REG_DTS 
+	      ,T.UPDR_NO 
+	      ,T.UPD_DTS 
+	      ,T.ATCH_FILE 
+	      ,T.SITE_NO 
+	      ,(CASE WHEN (TO_CHAR(SYSDATE, 'YYYYMMDD') - TO_CHAR(T.MAXQ, 'YYYYMMDD')) = 0 THEN TO_CHAR(T.MAXQ, 'HH24:MI')
+	      ELSE TO_CHAR(T.MAXQ, 'YYYY.MM.DD')
+	      END) MAXQ
+	      
+	      ,(CASE WHEN (TO_CHAR(SYSDATE, 'YYYYMMDD') - TO_CHAR(T.MAXA, 'YYYYMMDD')) = 0  THEN TO_CHAR(T.MAXA, 'HH24:MI')
+	      ELSE TO_CHAR(T.MAXA, 'YYYY.MM.DD')
+	      END) MAXA
+	      ,T.MEMO_NO
+	      ,T.MEMO_TXT
+	      ,T.WRTR_CLS
+	      ,T.MEMO_REGR_NO
+	      ,TO_CHAR(T.MEMO_REG_DTS, 'YYYY.MM.DD HH24:MI:SS') MEMO_REG_DTS
+	      ,T.MEMO_UPDR_NO
+	      ,TO_CHAR(T.MEMO_UPD_DTS, 'YYYY.MM.DD HH24:MI:SS') MEMO_UPD_DTS
+	from (
+		SELECT
+		     DENSE_RANK() OVER(ORDER BY UPD_DTS DESC) AS RNUM
+		    ,CNSL_NO 
+		    ,MEM_NO 
+		    ,CNSL_TP_LCL 
+		    ,CNSL_TP_MCL 
+		    ,CNSL_STAT 
+		    ,PROC_CMPL_DTS 
+		    ,PROC_CMPL_USRNO 
+		    ,MEM_ID 
+		    ,MEM_NM 
+		    ,TITLE 
+		    ,CNSL_TXT 
+		    ,PROC_TXT 
+		    ,ORD_NO 
+		    ,ORD_GDS_SEQ 
+		    ,GDS_NO 
+		    ,EMAIL 
+		    ,EMAIL_ANS_REQ_YN 
+		    ,TEL 
+		    ,REPLY_TEL_YN 
+		    ,CHGR 
+		    ,REGR_NO 
+		    ,REG_DTS 
+		    ,UPDR_NO 
+		    ,UPD_DTS 
+		    ,ATCH_FILE
+		    ,SITE_NO
+		    ,NVL((SELECT MAX(UPD_DTS) FROM TBL_CM_CNSL_MEMO WHERE CNSL_NO = SUBT.CNSL_NO AND WRTR_CLS = 'CM01002'),(SELECT REG_DTS FROM TBL_CM_CNSL WHERE CNSL_NO = SUBT.CNSL_NO)) MAXQ
+   			,(SELECT MAX(UPD_DTS) FROM TBL_CM_CNSL_MEMO WHERE CNSL_NO = SUBT.CNSL_NO AND WRTR_CLS = 'CM01001') MAXA
+		    
+		    ,MEMO_NO
+	        ,MEMO_TXT
+	        ,WRTR_CLS
+	        ,MEMO_REGR_NO
+	        ,MEMO_REG_DTS
+	        ,MEMO_UPDR_NO
+	        ,MEMO_UPD_DTS
+	        
+		FROM(
+		    SELECT 
+		        
+		        CNSL.CNSL_NO 
+		        ,CNSL.MEM_NO 
+		        ,CNSL.CNSL_TP_LCL 
+		        ,CNSL.CNSL_TP_MCL 
+		        ,(SELECT CD_NM FROM TBL_AD_CD WHERE CD_NO = CNSL.CNSL_STAT)  CNSL_STAT
+		        ,CNSL.PROC_CMPL_DTS 
+		        ,CNSL.PROC_CMPL_USRNO 
+		        ,CNSL.MEM_ID 
+		        ,CNSL.MEM_NM 
+		        ,CNSL.TITLE 
+		        ,CNSL.CNSL_TXT 
+		        ,CNSL.PROC_TXT 
+		        ,CNSL.ORD_NO 
+		        ,CNSL.ORD_GDS_SEQ 
+		        ,CNSL.UBI_GDS_NO GDS_NO 
+		        ,CNSL.EMAIL 
+		        ,CNSL.EMAIL_ANS_REQ_YN 
+		        ,CNSL.TEL 
+		        ,CNSL.REPLY_TEL_YN 
+		        ,CNSL.CHGR 
+		        ,CNSL.REGR_NO 
+		        ,TO_CHAR(CNSL.REG_DTS, 'YYYY.MM.DD HH24:MI:SS') REG_DTS
+		        ,CNSL.UPDR_NO 
+		        ,TO_CHAR(CNSL.UPD_DTS, 'YYYY.MM.DD HH24:MI:SS') UPD_DTS
+		        ,NVL(CNSL.ATCH_FILE, '')ATCH_FILE
+		        ,CNSL.SITE_NO 
+		        
+		        ,CNSL_MEMO.MEMO_NO
+		        ,CNSL_MEMO.MEMO_TXT
+		        ,CNSL_MEMO.WRTR_CLS
+		        ,CNSL_MEMO.REGR_NO MEMO_REGR_NO
+		        ,CNSL_MEMO.REG_DTS MEMO_REG_DTS
+		        ,CNSL_MEMO.UPDR_NO MEMO_UPDR_NO
+		        ,CNSL_MEMO.UPD_DTS MEMO_UPD_DTS
+		    FROM
+		        TBL_CM_CNSL CNSL
+		       ,TBL_CM_CNSL_MEMO CNSL_MEMO
+		    WHERE 1 = 1
+		      AND CNSL.CNSL_NO = CNSL_MEMO.CNSL_NO(+)
+		    <if test="memNo != null and  memNo !=''"> 
+		    	AND CNSL.MEM_NO = #{memNo}
+		    </if>
+		    <if test="memGb != null and  memGb !=''"> 
+			    AND EXISTS (
+						    SELECT 'X' 
+						    FROM DUAL
+						    WHERE ('name' = #{memGb} AND CNSL.MEM_NM LIKE '%' || #{member} || '%') 
+						    OR ('email' = #{memGb} AND CNSL.EMAIL LIKE '%' || #{member} || '%') 
+						 )
+			</if>
+			<if test="replGb != null and  replGb !=''"> 
+			    AND CNSL.CNSL_STAT = DECODE(#{replGb}, 'y', 'CM00703', 'n','CM00701') 
+			</if>
+			<if test="siteNo != null and  siteNo !=''"> 
+			    AND CNSL.SITE_NO = #{siteNo}
+			</if>
+		    <if test="searchGb != null and  searchGb !=''"> 
+		        AND EXISTS (
+						    SELECT 'X' 
+						    FROM DUAL
+						    WHERE ('title' = #{searchGb} AND CNSL.TITLE LIKE '%' || #{searchText} || '%') 
+						    OR ('content' = #{searchGb} AND CNSL.CNSL_TXT LIKE '%' || #{searchText} || '%') 
+						    OR ('all' = #{searchGb} AND (CNSL.TITLE LIKE '%' || #{searchText} || '%' OR CNSL.CNSL_TXT LIKE '%' || #{searchText} || '%'))
+						)
+		    </if>
+		    <choose>
+		    <when test="orderBy != '' and orderBy != null">
+				ORDER BY ${orderBy} ${orderFlag}, MEMO_UPD_DTS ASC
+			</when>
+			<otherwise>
+				ORDER BY UPD_DTS DESC, MEMO_UPD_DTS ASC
+			</otherwise>
+			</choose>
+		)SUBT
+	)T WHERE 1=1
+	       AND RNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+	
+	<!-- 1:1문의 총갯수 -->
+	<select id="totalListInquiry" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_CM_CNSL CNSL
+	    WHERE 1 = 1
+	    <if test="siteNo != null and  siteNo !=''"> 
+		    AND CNSL.SITE_NO = #{siteNo}
+		</if>
+	    <if test="memNo != null and  memNo !=''"> 
+		    	AND CNSL.MEM_NO = #{memNo}
+		</if>
+	    <if test="memGb != null and  memGb !=''"> 
+		    AND EXISTS (
+					    SELECT 'X' 
+					    FROM DUAL
+					    WHERE ('name' = #{memGb} AND CNSL.MEM_NM LIKE '%' || #{member} || '%') 
+					    OR ('email' = #{memGb} AND CNSL.EMAIL LIKE '%' || #{member} || '%') 
+					 )
+		</if>
+		<if test="replGb != null and  replGb !=''"> 
+		    AND CNSL.CNSL_STAT = DECODE(#{replGb}, 'y', 'CM00703', 'n','CM00701') 
+		</if>
+		<if test="inqStrDtm != null and inqEndDtm != null and inqStrDtm != '' and inqEndDtm != ''">
+			AND CNSL.UPD_DTS BETWEEN to_date(#{inqStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{inqEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		</if>
+	    <if test="searchGb != null and  searchGb !=''"> 
+	        AND EXISTS (
+					    SELECT 'X' 
+					    FROM DUAL
+					    WHERE ('title' = #{searchGb} AND CNSL.TITLE LIKE '%' || #{searchText} || '%') 
+					    OR ('content' = #{searchGb} AND CNSL.CNSL_TXT LIKE '%' || #{searchText} || '%') 
+					    OR ('all' = #{searchGb} AND (CNSL.TITLE LIKE '%' || #{searchText} || '%' OR CNSL.CNSL_TXT LIKE '%' || #{searchText} || '%'))
+					)
+	    </if>
+	    
+	</select>
+	
+	<!-- 1:1문의 상세 -->
+	<select id="inquiryDetail" parameterType="STRING" resultMap="inquiryMap">
+		SELECT 
+		        CNSL.CNSL_NO 
+		        ,CNSL.MEM_NO 
+		        ,CNSL.CNSL_TP_LCL 
+		        ,CNSL.CNSL_TP_MCL 
+		        ,DECODE(CNSL.CNSL_STAT, 'CM00703', '답변' ,'CM00702', '미답변', 'CM00701', '미답변') CNSL_STAT
+		        ,CNSL.PROC_CMPL_DTS 
+		        ,CNSL.PROC_CMPL_USRNO 
+		        ,CNSL.MEM_ID 
+		        ,CNSL.MEM_NM 
+		        ,CNSL.TITLE 
+		        ,CNSL.CNSL_TXT 
+		        ,CNSL.PROC_TXT 
+		        ,CNSL.ORD_NO 
+		        ,CNSL.ORD_GDS_SEQ 
+		        ,CNSL.UBI_GDS_NO GDS_NO 
+		        ,CNSL.EMAIL 
+		        ,CNSL.EMAIL_ANS_REQ_YN 
+		        ,CNSL.TEL 
+		        ,CNSL.REPLY_TEL_YN 
+		        ,CNSL.CHGR 
+		        ,CNSL.REGR_NO 
+		        ,TO_CHAR(CNSL.REG_DTS, 'YYYY.MM.DD') REG_DTS
+		        ,CNSL.UPDR_NO 
+		        ,TO_CHAR(CNSL.UPD_DTS, 'YYYY.MM.DD HH:MI:SS') UPD_DTS
+		        ,ATCH_FILE
+		        ,SITE_NO
+		        ,(SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = CNSL.SITE_NO)SITE_NM
+		    FROM
+		        TBL_CM_CNSL CNSL
+		    WHERE 1 = 1
+			  AND CNSL.CNSL_NO = #{cnslNo}
+	
+	</select>
+	
+	<!--  -->
+	<select id="inquiryRepl" parameterType="STRING" resultMap="inquiryReplMap">
+		SELECT 
+				CNSL_MEMO.CNSL_NO
+				,CNSL_MEMO.MEMO_NO
+				,CNSL_MEMO.MEMO_TXT
+		        ,CNSL_MEMO.UPDR_NO 
+		        ,TO_CHAR(CNSL_MEMO.REG_DTS, 'YYYY.MM.DD') REG_DTS
+		        ,CNSL_MEMO.UPDR_NO 
+		        ,(SELECT USER_NM from TBL_AD_USER WHERE USER_NO = CNSL_MEMO.UPDR_NO) UPDR_NM
+		        ,TO_CHAR(CNSL_MEMO.UPD_DTS, 'YYYY.MM.DD HH:MI:SS') UPD_DTS
+		        ,CNSL_MEMO.WRTR_CLS
+		    FROM
+		        TBL_CM_CNSL_MEMO CNSL_MEMO
+		    WHERE 1 = 1
+			  AND CNSL_MEMO.CNSL_NO = #{cnslNo}
+			ORDER BY MEMO_NO ASC
+	
+	</select>
+	
+	<!-- 1:1문의 답변 등록 -->
+	<insert id="regInquiryRepl" parameterType="com.giftiel.shop.dto.InquiryRepl">
+		INSERT INTO TBL_CM_CNSL_MEMO(
+                           CNSL_NO,
+                           MEMO_NO,
+                           MEMO_TXT,
+                           REGR_NO,
+                           REG_DTS,
+                           UPDR_NO,
+                           UPD_DTS,
+                           WRTR_CLS
+                           )
+		             VALUES(
+		             #{cnslNo}
+		             ,(SELECT NVL(MAX(MEMO_NO),1)+1 FROM TBL_CM_CNSL_MEMO WHERE CNSL_NO = #{cnslNo})
+		             ,#{memoTxt}
+		             ,#{regrNo}
+		             ,SYSDATE
+		             ,#{updrNo}
+		             ,SYSDATE
+		             ,#{wrtrCls}
+		             )
+	</insert>
+	
+	<!-- 	1:1 문의 원글 수정 -->
+	<update id="modInquiry" parameterType="com.giftiel.shop.dto.Inquiry">
+		UPDATE TBL_CM_CNSL SET 
+				 CNSL_TXT = #{cnslTxt}
+				,UPD_DTS = SYSDATE
+				,UPDR_NO = #{updrNo}
+		 WHERE CNSL_NO = #{cnslNo}
+	</update>
+	
+	<!-- 	1:1 문의 reply 수정 -->
+	<update id="modInquiryReply" parameterType="com.giftiel.shop.dto.InquiryRepl">
+		UPDATE TBL_CM_CNSL_MEMO SET 
+				 MEMO_TXT = #{memoTxt}
+				,UPD_DTS = SYSDATE
+				,UPDR_NO = #{updrNo}
+		 WHERE CNSL_NO = #{cnslNo}
+		   AND MEMO_NO = #{memoNo}
+	</update>
+
+	<!-- 	1:1답변,추가문의후 답변여부 상태값 변경 -->
+	<update id="updateInquiryStat" parameterType="java.util.HashMap">
+		UPDATE TBL_CM_CNSL SET 
+				<if test="stat != null and  stat !=''"> 
+				    	CNSL_STAT=#{stat},
+				</if>
+				 UPD_DTS = SYSDATE
+				,UPDR_NO = #{updrNo}
+		 WHERE CNSL_NO = #{cnslNo}
+		 <if test="stat =='CM00702'"> 
+		   AND CNSL_STAT = 'CM00701'
+		 </if>
+	</update>
+	
+	<!-- 	1:1문의 등록 -->
+	<insert id="regInquiry" parameterType="com.giftiel.shop.dto.Inquiry">
+		INSERT INTO TBL_CM_CNSL
+				  (
+				    CNSL_NO ,
+				    MEM_NO ,
+				    SITE_NO ,
+				    <if test="cnslTpLcl != null and  cnslTpLcl !=''"> 
+					    	CNSL_TP_LCL,
+					</if>
+					<if test="cnslTpMcl != null and  cnslTpMcl !=''"> 
+					    	CNSL_TP_MCL,
+					</if>
+				    CNSL_STAT ,
+				    <if test="procCmplDts != null and  procCmplDts !=''"> 
+					    	PROC_CMPL_DTS ,
+					</if>
+					<if test="procCmplUsrno != null and  procCmplUsrno !=''"> 
+					    	PROC_CMPL_USRNO ,
+					</if>
+				    MEM_ID ,
+				    MEM_NM ,
+				    TITLE ,
+				    CNSL_TXT ,
+				    <if test="procTxt != null and  procTxt !=''"> 
+					    	PROC_TXT ,
+					</if>
+					<if test="ordNo != null and  ordNo !=''"> 
+					    	ORD_NO ,
+					</if>
+					<if test="ordGdsSeq != null and  ordGdsSeq !=''"> 
+					    	ORD_GDS_SEQ ,
+					</if>
+					<if test="ubiGdsNo != null and  ubiGdsNo !=''"> 
+					    	UBI_GDS_NO ,
+					</if>
+				    
+				    EMAIL ,
+				    <if test="emailAnsReqYn != null and  emailAnsReqYn !=''"> 
+					    	EMAIL_ANS_REQ_YN ,
+					</if>
+					<if test="replyTelYn != null and  replyTelYn !=''"> 
+					    	REPLY_TEL_YN ,
+					</if>
+					<if test="chgr != null and  chgr !=''"> 
+					    	CHGR ,
+					</if>
+					<if test="atchFile != null and  atchFile !=''"> 
+					    	ATCH_FILE ,
+					</if>
+				    TEL ,
+				    REGR_NO ,
+				    REG_DTS ,
+				    UPDR_NO ,
+				    UPD_DTS
+				  )
+				  VALUES
+				  (
+				    SEQ_CM_CNSL.NEXTVAL ,
+				    #{memNo} ,
+				    #{siteNo} ,
+				    <if test="cnslTpLcl != null and  cnslTpLcl !=''"> 
+					    	#{cnslTpLcl} ,
+					</if>
+					<if test="cnslTpMcl != null and  cnslTpMcl !=''"> 
+					    	#{cnslTpMcl} ,
+					</if>
+				    'CM00701' ,
+				    <if test="procCmplDts != null and  procCmplDts !=''"> 
+					    	 #{procCmplDts} ,
+					</if>
+					<if test="procCmplUsrno != null and  procCmplUsrno !=''"> 
+					    	#{procCmplUsrno} ,
+					</if>
+				    #{memId} ,
+				    #{memNm} ,
+				    #{title} ,
+				    #{cnslTxt} ,
+				    <if test="procTxt != null and  procTxt !=''"> 
+					    	#{procTxt} ,
+					</if>
+					<if test="ordNo != null and  ordNo !=''"> 
+					    	#{ordNo} ,
+					</if>
+					<if test="ordGdsSeq != null and  ordGdsSeq !=''"> 
+					    	#{ordGdsSeq} ,
+					</if>
+					<if test="ubiGdsNo != null and  ubiGdsNo !=''"> 
+					    	#{ubiGdsNo} ,
+					</if>
+				    #{email} ,
+				    <if test="emailAnsReqYn != null and  emailAnsReqYn !=''"> 
+					    	#{emailAnsReqYn} ,
+					</if>
+					<if test="replyTelYn != null and  replyTelYn !=''"> 
+					    	#{replyTelYn} ,
+					</if>
+					<if test="chgr != null and  chgr !=''"> 
+					    	#{chgr} ,
+					</if>
+					<if test="atchFile != null and  atchFile !=''"> 
+					    	#{atchFile} ,
+					</if>
+				    #{tel} ,
+				    #{regrNo} ,
+				    SYSDATE ,
+				    #{updrNo} ,
+				    SYSDATE
+				  )
+	
+	</insert>
+	
+	<!-- 	1:1 원글삭제 -->
+	<delete id="delInquiry" parameterType="com.giftiel.shop.dto.Inquiry">
+		DELETE FROM TBL_CM_CNSL
+		WHERE CNSL_NO = #{cnslNo}
+	</delete>
+	
+	<!-- 	1:1 reply 삭제 -->
+	<delete id="delInquiryReply" parameterType="com.giftiel.shop.dto.InquiryRepl">
+		DELETE FROM TBL_CM_CNSL_MEMO
+		WHERE CNSL_NO = #{cnslNo}
+		  AND MEMO_NO = #{memoNo}
+	</delete>
+	
+	<!-- 운영자목록 총갯수 -->
+	<select id="totalListOperator" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_AD_USER 
+	    WHERE 1 = 1
+	</select>
+	
+	<!-- 운영자목록 -->
+	<select id="operatorList" parameterType="com.giftiel.shop.dto.SearchForm" resultType="com.giftiel.shop.dto.Operator">
+		SELECT
+		    ROWNUM RNUM
+		    ,USER_NO 
+		    ,ID 
+		    ,PWD 
+		    ,USER_NM 
+		    ,EMAIL 
+		    ,CP_NO 
+		    ,USE_YN 
+		    ,USER_CLS 
+		    ,CMP_NM 
+		    ,REPR_NM 
+		    ,PERSON_INFO_MNGR 
+		    ,PERSON_INFO_MNGR_EMAIL 
+		    ,ZIP_CD 
+		    ,ADDR 
+		    ,DTL_ADDR 
+		    ,TEL 
+		    ,FAX_NO 
+		    ,BIZ_REG_NO 
+		    ,TELE_SALES_BIZ_REG_NO 
+		    ,BIZ_ST 
+		    ,EVENT 
+		    ,REGR_NO 
+		    ,REG_DTS 
+		    ,UPDR_NO 
+		    ,UPD_DTS 
+		    ,LATELY_CONNECT
+		    ,TOT_CONNECT
+		FROM(
+		    SELECT 
+		        AD_USER.USER_NO 
+		        ,AD_USER.ID 
+		        ,AD_USER.PWD 
+		        ,AD_USER.USER_NM 
+		        ,AD_USER.EMAIL 
+		        ,AD_USER.CP_NO 
+		        ,AD_USER.USE_YN 
+		        ,AD_USER.USER_CLS 
+		        ,AD_USER.CMP_NM 
+		        ,AD_USER.REPR_NM 
+		        ,AD_USER.PERSON_INFO_MNGR 
+		        ,AD_USER.PERSON_INFO_MNGR_EMAIL 
+		        ,AD_USER.ZIP_CD 
+		        ,AD_USER.ADDR 
+		        ,AD_USER.DTL_ADDR 
+		        ,AD_USER.TEL 
+		        ,AD_USER.FAX_NO 
+		        ,AD_USER.BIZ_REG_NO 
+		        ,AD_USER.TELE_SALES_BIZ_REG_NO 
+		        ,AD_USER.BIZ_ST 
+		        ,AD_USER.EVENT 
+		        ,AD_USER.REGR_NO 
+		        ,TO_CHAR(AD_USER.REG_DTS, 'YYYY.MM.DD') REG_DTS
+		        ,AD_USER.UPDR_NO 
+		        ,AD_USER.UPD_DTS 
+		        ,(
+				  SELECT TO_CHAR(MAX(REG_DTS), 'YYYY.MM.DD HH:MI:SS') FROM TBL_AD_LOGIN_HIST LOGIN_HIST_A
+				  WHERE LOGIN_HIST_A.USER_NO = AD_USER.USER_NO
+				 ) LATELY_CONNECT
+				,(
+				  SELECT COUNT(*) FROM TBL_AD_LOGIN_HIST LOGIN_HIST_B
+				  WHERE LOGIN_HIST_B.USER_NO = AD_USER.USER_NO
+				 ) TOT_CONNECT
+		    FROM
+		        TBL_AD_USER AD_USER
+		    WHERE 1 = 1
+		    <choose>
+		    <when test="orderBy != '' and orderBy != null">
+				ORDER BY ${orderBy} ${orderFlag}
+			</when>
+			<otherwise>
+				ORDER BY REG_DTS DESC
+			</otherwise>
+			</choose>
+		) WHERE 1=1
+		    AND ROWNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+	
+	<!-- id중복체크 -->
+	<select id="idDuplChk" parameterType="STRING" resultType="INTEGER">
+	    SELECT COUNT(ID) FROM TBL_AD_USER
+		 WHERE ID = #{id}
+	</select>
+	
+	<!-- 	유저번호 -->
+	<select id="getUserNo" parameterType="STRING" resultType="INTEGER">
+	    SELECT MAX(USER_NO) USERNO FROM TBL_AD_USER
+	</select>
+	
+	<!-- 유저권한 그룹 생성 -->
+	<insert id="setUserAuthGrp" parameterType="com.giftiel.shop.dto.UserAuthGrp">
+			INSERT ALL
+			<foreach item="authGrpNo" collection="authGrpNo" index="index" separator=" ">
+			INTO TBL_AD_USER_AUTH_GRP(
+                     USER_NO
+                    ,AUTH_GRP_NO
+                    ,REGR_NO
+                    ,REG_DTS
+                    ,UPDR_NO
+                    ,UPD_DTS
+                    )
+             VALUES
+             	(
+             	  #{userNo}
+             	 ,#{authGrpNo}
+        	     ,#{regrNo}
+        	     ,SYSDATE
+        	     ,#{updrNo}
+        	     ,SYSDATE
+             	)
+       		</foreach>
+             	SELECT * FROM DUAL
+             
+	</insert>
+	
+	<!-- 유저 생성 -->
+	<insert id="regUser" parameterType="com.giftiel.shop.dto.User">
+		INSERT INTO TBL_AD_USER(
+                 USER_NO
+                ,ID
+                ,PWD
+                ,USER_NM
+                ,EMAIL
+                ,CP_NO
+                ,USE_YN
+                ,USER_CLS
+                ,CMP_NM
+                ,REPR_NM
+                ,PERSON_INFO_MNGR
+                ,PERSON_INFO_MNGR_EMAIL
+                ,ZIP_CD
+                ,ADDR
+                ,DTL_ADDR
+                ,TEL
+                ,FAX_NO
+                ,BIZ_REG_NO
+                ,TELE_SALES_BIZ_REG_NO
+                ,BIZ_ST
+                ,EVENT
+                ,REGR_NO
+                ,REG_DTS
+                ,UPDR_NO
+                ,UPD_DTS
+                ,SITE_AUTH_NO
+                )VALUES(
+                	SEQ_AD_USER.NEXTVAL
+                	,#{id}
+                	,#{pwd}
+                	,#{userNm}
+                	,#{email}
+                	,''
+                	,'Y'
+                	,'AD02002'
+                	,''
+                	,''
+                	,''
+                	,''
+                	,''
+                	,''
+                	,''
+                	,#{tel}
+                	,''
+                	,''
+                	,''
+                	,''
+                	,''
+                	,#{regrNo}
+                	,SYSDATE
+                	,#{updrNo}
+                	,SYSDATE
+                	,#{siteAuthNo}
+                )
+                <selectKey keyProperty="idx" resultType="Integer" order="AFTER">
+					SELECT SEQ_AD_USER.CURRVAL FROM DUAL
+				</selectKey>
+	</insert>
+
+	<!-- 	유저 -->
+	<select id="getUser" parameterType="int" resultMap="userMap">
+	    SELECT 
+	    	AD_USER.USER_NO
+<!-- 	    	,USER_AUTH_GRP.AUTH_GRP_NO  -->
+		    ,AD_USER.ID 
+		    ,AD_USER.PWD 
+		    ,AD_USER.USER_NM 
+		    ,AD_USER.EMAIL 
+		    ,AD_USER.CP_NO 
+		    ,AD_USER.USE_YN 
+		    ,AD_USER.USER_CLS 
+		    ,AD_USER.CMP_NM 
+		    ,AD_USER.REPR_NM 
+		    ,AD_USER.PERSON_INFO_MNGR 
+		    ,AD_USER.PERSON_INFO_MNGR_EMAIL 
+		    ,AD_USER.ZIP_CD 
+		    ,AD_USER.ADDR 
+		    ,AD_USER.DTL_ADDR 
+		    ,AD_USER.TEL 
+		    ,AD_USER.FAX_NO 
+		    ,AD_USER.BIZ_REG_NO 
+		    ,AD_USER.TELE_SALES_BIZ_REG_NO 
+		    ,AD_USER.BIZ_ST 
+		    ,AD_USER.EVENT 
+		    ,AD_USER.REGR_NO 
+		    ,AD_USER.REG_DTS 
+		    ,AD_USER.UPDR_NO 
+		    ,AD_USER.UPD_DTS  
+		    ,AD_USER.SITE_AUTH_NO  
+		    
+		    FROM TBL_AD_USER AD_USER
+<!-- 		        ,TBL_AD_USER_AUTH_GRP USER_AUTH_GRP -->
+		WHERE AD_USER.USER_NO =  #{userNo}
+<!-- 		  and AD_USER.USER_NO = USER_AUTH_GRP.USER_NO(+) -->
+	</select>
+	
+	<!-- 유저권한 가져오기 -->
+	<select id="getUserGrpNo" parameterType="int" resultType="java.lang.Integer">
+	    SELECT AUTH_GRP_NO FROM TBL_AD_USER_AUTH_GRP
+		WHERE USER_NO =  #{userNo}
+	</select>
+	
+	<!-- 운영자 권한 삭제 -->
+	<delete id="deleteUserAuthGrp" parameterType="java.lang.Integer">
+		DELETE FROM TBL_AD_USER_AUTH_GRP
+		WHERE USER_NO = #{userNo}
+	</delete>
+	
+	<!-- 운영자 삭제 -->
+	<delete id="delUser" parameterType="com.giftiel.shop.dto.UserAuthGrp">
+		DELETE FROM TBL_AD_USER
+		WHERE USER_NO = #{userNo}
+	</delete>
+	
+    <!-- 운영자 정보 수정 -->
+	<update id="updateUser" parameterType="com.giftiel.shop.dto.User">
+		UPDATE TBL_AD_USER SET
+			<if test="pwd != null and  pwd !=''"> 
+				 PWD =  #{pwd},
+			</if>
+			
+			SITE_AUTH_NO = #{siteAuthNo}
+			,USER_NM= #{userNm}
+			,TEL= #{tel}
+			,EMAIL= #{email}
+			,UPDR_NO = #{updrNo}
+			,UPD_DTS = SYSDATE
+		WHERE USER_NO = #{userNo}
+	</update>
+	
+	<!--sms 메시지 목록 -->
+	<select id="SmsMngTitleList" resultMap="smsMngMap">
+		SELECT MNG_NO
+		      ,MNG_TITLE
+		      ,SMS_TXT
+		      ,REGR_NO
+		      ,REG_DTS
+		      ,UPDR_NO
+		      ,UPD_DTS
+		      ,SND_CLS
+		      ,AUTO_CLS 
+		FROM TBL_AD_SMS_MNG
+		WHERE SND_CLS = 'CM01002' AND AUTO_CLS = 'Y'
+		ORDER BY MNG_NO ASC
+	</select>
+	
+	<!--sms 메시지 목록 -->
+	<select id="SmsMngList" resultMap="smsMngMap">
+		SELECT MNG_NO
+		      ,MNG_TITLE
+		      ,SMS_TXT
+		      ,REGR_NO
+		      ,REG_DTS
+		      ,UPDR_NO
+		      ,UPD_DTS
+		      ,SND_CLS
+		      ,AUTO_CLS 
+		FROM TBL_AD_SMS_MNG
+		ORDER BY MNG_NO ASC
+	</select>
+	
+	<!--sms 메시지 목록 -->
+	<select id="SmsMngDetail" resultMap="smsMngMap">
+		SELECT MNG_NO
+		      ,MNG_TITLE
+		      ,SMS_TXT
+		      ,REGR_NO
+		      ,REG_DTS
+		      ,UPDR_NO
+		      ,UPD_DTS
+		      ,SND_CLS
+		      ,AUTO_CLS 
+		FROM TBL_AD_SMS_MNG
+		WHERE MNG_NO = #{mngNo}
+	</select>	
+	
+	<!-- 	sms문구 수정 -->
+	<update id="smsManageUpdate" parameterType="com.giftiel.shop.dto.SmsMng">
+		UPDATE TBL_AD_SMS_MNG SET
+			 SMS_TXT = #{smsTxt}
+			,AUTO_CLS = #{autoCls}
+			,UPDR_NO = #{updrNo}
+			,UPD_DTS = SYSDATE
+		WHERE MNG_NO = #{mngNo}
+	</update>
+	
+	<!-- 	sms문구 입력 -->
+	<insert id="smsInsert" parameterType="com.giftiel.shop.dto.SmsMng">
+		INSERT INTO MSG_DATA( /*manage.smsInsert*/
+			  MSG_SEQ
+		      ,CUR_STATE
+		      ,SENT_DATE
+		      ,RSLT_DATE
+		      ,REQ_DATE
+		      ,RSLT_CODE
+		      ,RSLT_CODE2
+		      ,RSLT_NET
+		      ,CALL_TO
+		      ,CALL_FROM
+		      ,SMS_TXT
+		      ,MSG_TYPE
+		      ,CONT_SEQ)
+		           VALUES 
+		           (MSG_DATA_SEQ.NEXTVAL
+		           ,0
+		       ,SYSDATE
+		       ,#{rsltDate, jdbcType=VARCHAR}
+		       ,#{reqDate, jdbcType=VARCHAR}
+		       ,#{rsltCode, jdbcType=VARCHAR}
+		       ,#{rsltCode2, jdbcType=VARCHAR}
+		       ,#{rsltNet, jdbcType=VARCHAR}
+		       ,#{callTo, jdbcType=VARCHAR}
+		       ,#{callFrom, jdbcType=VARCHAR}
+		       ,#{smsTxt, jdbcType=VARCHAR}
+		       ,4
+		       ,#{contSeq, jdbcType=VARCHAR})
+	</insert>
+	
+	<!--sms 발송 목록 -->
+	<select id="smsSendList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="smsMngMap">
+		SELECT C_TABLE.*
+		FROM(
+			SELECT ROWNUM PRNUM
+				,B_TABLE.*
+			FROM(
+				SELECT
+					ROW_NUMBER() OVER(ORDER BY SORT ASC) RNUM
+					,A_TABLE.*
+				FROM(
+  					SELECT 
+					    MSG_SEQ,
+						CUR_STATE,
+						RSLT_DATE,
+						REQ_DATE,
+						RSLT_CODE,
+						RSLT_CODE2,
+						RSLT_NET,
+						CALL_TO,
+						CALL_FROM,
+						SMS_TXT,
+						MSG_TYPE,
+						CONT_SEQ,
+						SENT_DATE,
+					    SENT_DATE SORT
+					FROM MSG_DATA
+					WHERE 1=1
+						<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+						AND SENT_DATE BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+					<if test="sendGb != null and  sendGb !=''"> 
+						AND CUR_STATE = DECODE(#{sendGb}, '3', '3', '4', '4','2', '2','1', '1') 
+					</if>
+					<if test="searchGb != null and  searchGb !=''"> 
+					AND EXISTS (
+								SELECT 'X' 
+								FROM DUAL
+								WHERE ('cpno' = #{searchGb} AND CALL_TO LIKE '%' || #{searchText} || '%') 
+								OR ('msg' = #{searchGb} AND SMS_TXT LIKE '%' || #{searchText} || '%')			    
+							)
+					</if>
+					<if test="searchText != null and searchText != ''" >
+						AND SMS_TXT LIKE '%'|| #{searchText} ||'%' OR CALL_TO LIKE '%'|| #{searchText} ||'%'
+			<choose>
+				<when test="orderBy != '' and orderBy != null">
+					ORDER BY ${orderBy} ${orderFlag}
+				</when>
+				<otherwise>
+					ORDER BY SORT DESC
+				</otherwise>
+			</choose>  			
+					</if>
+  				) A_TABLE
+  				ORDER BY RNUM DESC  				
+  			)B_TABLE
+  		)C_TABLE
+  		WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+	
+	
+		<!-- sms 발송목록 총갯수 -->
+	<select id="totalListSmsSend" parameterType="com.giftiel.shop.dto.SmsMng" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        MSG_DATA
+	    WHERE 1 = 1
+	    <if test="smsStrDtm != null and  smsStrDtm !='' and smsEndDtm != null and  smsEndDtm !=''"> 
+	    	AND SENT_DATE BETWEEN to_date(#{smsStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{smsEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+	    </if>
+	    	<if test="sendGb != null and  sendGb !=''"> 
+			    AND CUR_STATE = DECODE(#{sendGb}, '3', '3', '4', '4','2', '2','1', '1') 
+			</if>
+	      <if test="searchGb != null and  searchGb !=''"> 
+	        AND EXISTS (
+					    SELECT 'X' 
+					    FROM DUAL
+					    WHERE ('cpno' = #{searchGb} AND CALL_TO LIKE '%' || #{searchText} || '%') 
+					    OR ('msg' = #{searchGb} AND SMS_TXT LIKE '%' || #{searchText} || '%')			    
+					)
+	    </if>
+				<if test="searchText != null and searchText != ''" >
+					AND SMS_TXT LIKE '%'|| #{searchText} ||'%' OR CALL_TO LIKE '%'|| #{searchText} ||'%'
+				</if>
+	</select>
+	
+	
+	
+	    
+	<!-- sms 발송 상세 -->
+	<select id="smsDetail" parameterType="com.giftiel.shop.dto.SmsMng" resultMap="smsMngMap">
+		SELECT 
+		         MSG_SEQ
+		      ,CUR_STATE
+		      ,SENT_DATE
+		      ,RSLT_DATE
+		      ,REQ_DATE
+		      ,RSLT_CODE
+		      ,RSLT_CODE2
+		      ,RSLT_NET
+		      ,CALL_TO
+		      ,CALL_FROM
+		      ,SMS_TXT
+		      ,MSG_TYPE
+		      ,CONT_SEQ
+		FROM MSG_DATA
+		WHERE MSG_SEQ =#{msgSeq}
+	</select>
+	
+	<!-- 	COLLABORATION total -->
+	<select id="totalListCollabo" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_CM_INTG_BOARD
+	    WHERE BOARD_CLCD = 'CM00802'
+		    <if test="searchText != null and  searchText !=''"> 
+		    	AND TITLE LIKE '%' || #{searchText} || '%'
+		    </if>
+		    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+		    	AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		    </if>
+	        <if test="siteNo != null and  siteNo !=''"> 
+		  		AND SITE_NO = #{siteNo}
+		    </if>
+	</select>
+	
+	<!-- 	COLLABORATION 리스트 -->
+	<select id="collaboList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="intgBoardMap">
+		SELECT C_TABLE.* FROM(	/* collaboList */
+			SELECT ROWNUM PRNUM
+			      ,B_TABLE.*
+			 FROM(
+				SELECT
+					<choose>
+						<when test="orderBy != '' and orderBy != null">
+							ROW_NUMBER() OVER(ORDER BY ${orderBy} ${orderFlag}) RNUM
+						</when>
+						<otherwise>
+							ROW_NUMBER() OVER(ORDER BY UPD_DTS DESC) RNUM
+						</otherwise>
+				    </choose>
+				    ,A_TABLE.*
+				FROM(
+				    SELECT 
+				         INTG_BOARD.TXT_NO 
+				        ,INTG_BOARD.BOARD_CLCD 
+				        ,INTG_BOARD.SITE_NO 
+				        ,DECODE(INTG_BOARD.DISP_YN,'Y','공개','N','비공개') DISP_YN
+				        ,INTG_BOARD.REGR_NO 
+				        ,INTG_BOARD.REG_DTS 
+				        ,INTG_BOARD.UPDR_NO 
+				        ,INTG_BOARD.UPD_DTS
+				        ,INTG_BOARD.TITLE 
+				        ,INTG_BOARD.LNK_URL 
+				        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = INTG_BOARD.UPDR_NO) REG_USER_NM
+						,(SELECT IMG_URL FROM TBL_CM_INTG_BOARD_CNTS WHERE TXT_NO = INTG_BOARD.TXT_NO) IMG_URL
+						,CLBLTN_NM
+						,SEASON_CD
+				    FROM
+				        TBL_CM_INTG_BOARD INTG_BOARD
+				    WHERE BOARD_CLCD = 'CM00802'
+				    <if test="searchText != null and  searchText !=''"> 
+				    	AND INTG_BOARD.TITLE LIKE '%' || #{searchText} || '%'
+				    </if>
+				    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+				    	AND INTG_BOARD.UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </if>
+			        <if test="siteNo != null and  siteNo !=''"> 
+				  		AND INTG_BOARD.SITE_NO = #{siteNo}
+				    </if>
+				    <choose>
+						<when test="orderBy != '' and orderBy != null">
+							ORDER BY ${orderBy} ${orderFlag}
+						</when>
+						<otherwise>
+							ORDER BY UPD_DTS DESC
+						</otherwise>
+				    </choose>
+				) A_TABLE
+			) B_TABLE 
+		)C_TABLE
+			WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+	
+	<!-- 	COLLABORATION 상세 -->
+	<select id="collaboDetail" parameterType="INTEGER" resultMap="intgBoardMap">
+		SELECT 
+		    ROWNUM RNUM
+		    ,INTG_BOARD.TXT_NO 
+		    ,INTG_BOARD.BOARD_CLCD 
+		    ,INTG_BOARD.SITE_NO 
+		    ,INTG_BOARD.DISP_YN
+		    ,INTG_BOARD.REGR_NO 
+		    ,INTG_BOARD.REG_DTS 
+		    ,INTG_BOARD.UPDR_NO 
+		    ,TO_CHAR(INTG_BOARD.UPD_DTS, 'YYYY.MM.DD HH:MI:SS') UPD_DTS
+		    ,INTG_BOARD.TITLE 
+		    ,INTG_BOARD.LNK_URL 
+		    ,INTG_BOARD.SEASON_CD 
+		    ,INTG_BOARD.CLBLTN_NM 
+		    ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = INTG_BOARD.UPDR_NO) REG_USER_NM
+		    ,(SELECT IMG_URL FROM TBL_CM_INTG_BOARD_CNTS WHERE TXT_NO = #{txtNo}) IMG_URL
+		    ,(SELECT IMG_SEQ FROM TBL_CM_INTG_BOARD_CNTS WHERE TXT_NO = #{txtNo}) IMG_SEQ
+		FROM
+		    TBL_CM_INTG_BOARD INTG_BOARD
+		WHERE TXT_NO = #{txtNo}
+	
+	</select>
+	
+	<!-- 	COLLABORATION 삭제 -->
+	<delete id="collaboDelete" parameterType="java.lang.Integer">
+		DELETE FROM TBL_CM_INTG_BOARD
+		WHERE TXT_NO = #{txtNo}
+	</delete>
+	
+	<!-- 	COLLABORATION 수정 -->
+	<update id="collaboUpdateBoard" parameterType="com.giftiel.shop.dto.IntgBoard">
+		UPDATE TBL_CM_INTG_BOARD SET /* collaboUpdateBoard */
+			SITE_NO = #{siteNo}
+			,DISP_YN = #{dispYn}
+			,TITLE = #{title}
+			<choose>
+				<when test="lnkUrl != '' and lnkUrl != null">
+					,LNK_URL = #{lnkUrl}
+				</when>
+				<otherwise>
+					,LNK_URL = null
+				</otherwise>
+		    </choose>
+			<if test="seasonCd != null and  seasonCd !=''"> 
+		    	,SEASON_CD = #{seasonCd}
+		    </if>
+		    <if test="clbltnNm != null and  clbltnNm !=''"> 
+		    	,CLBLTN_NM = #{clbltnNm}
+		    </if>
+		    ,UPD_DTS = SYSDATE
+		WHERE TXT_NO = #{txtNo}
+	</update>
+	
+	<!-- 	COLLABORATION 수정 -->
+	<update id="collaboUpdateCnts" parameterType="com.giftiel.shop.dto.IntgBoard">
+		MERGE INTO TBL_CM_INTG_BOARD_CNTS /* collaboUpdateCnts */
+		    USING DUAL
+		    ON (TXT_NO = #{txtNo})
+		    
+		WHEN MATCHED THEN
+		
+			UPDATE SET
+				IMG_URL = #{imgUrl}
+				,UPD_DTS = SYSDATE
+		
+		WHEN NOT MATCHED THEN
+		
+			INSERT (
+					 IMG_SEQ
+					,TXT_NO
+					,IMG_CLS
+					,IMG_URL
+					,PRIR
+					,REGR_NO
+					,REG_DTS
+					,UPDR_NO
+					,UPD_DTS
+					)
+			VALUES(
+				 SEQ_CM_INTG_BOARD_CNTS.NEXTVAL
+				,#{txtNo}
+				,'CM00601'
+				,#{imgUrl}
+				,1
+				,#{updrNo}
+				,SYSDATE
+				,#{updrNo}
+				,SYSDATE
+			)
+	</update>
+	
+	<!-- 	COLLABORATION 등록 -->
+	<insert id="collaboRegBoard" parameterType="com.giftiel.shop.dto.IntgBoard">
+		INSERT INTO TBL_CM_INTG_BOARD(
+			 TXT_NO
+			,BOARD_CLCD
+			,SITE_NO
+			,DISP_YN
+			,REGR_NO
+			,REG_DTS
+			,UPDR_NO
+			,UPD_DTS
+			,TITLE
+			<if test="seasonCd != null and  seasonCd !=''"> 
+		    	,SEASON_CD
+		    </if>
+		    <if test="clbltnNm != null and  clbltnNm !=''"> 
+		    	,CLBLTN_NM
+		    </if>
+			<if test="lnkUrl != null and  lnkUrl !=''"> 
+		    	,LNK_URL
+		    </if>
+			
+			)
+			VALUES(
+				 SEQ_CM_INTG_BOARD.NEXTVAL
+				,'CM00802'
+				,#{siteNo}
+				,#{dispYn}
+				,#{updrNo}
+				,SYSDATE
+				,#{updrNo}
+				,SYSDATE
+				,#{title}
+				<if test="seasonCd != null and  seasonCd !=''"> 
+			    	,#{seasonCd}
+			    </if>
+			    <if test="clbltnNm != null and  clbltnNm !=''"> 
+			    	,#{clbltnNm}
+			    </if>
+				<if test="lnkUrl != null and  lnkUrl !=''"> 
+			    	,#{lnkUrl}
+			    </if>
+			)
+	</insert>
+	
+	<!-- 	COLLABORATION 등록 -->
+	<insert id="collaboRegCnts" parameterType="com.giftiel.shop.dto.IntgBoard">
+		INSERT INTO TBL_CM_INTG_BOARD_CNTS(
+				 IMG_SEQ
+				,TXT_NO
+				,IMG_CLS
+				,IMG_URL
+				,PRIR
+				,REGR_NO
+				,REG_DTS
+				,UPDR_NO
+				,UPD_DTS
+				)
+		VALUES(
+			 SEQ_CM_INTG_BOARD_CNTS.NEXTVAL
+			,SEQ_CM_INTG_BOARD.CURRVAL
+			,'CM00601'
+			,#{imgUrl}
+			,1
+			,#{updrNo}
+			,SYSDATE
+			,#{updrNo}
+			,SYSDATE
+		)
+	</insert>
+	
+	
+	<!-- 	콜라보레이션 명 가져오기 -->
+	<select id="getCollabo"  resultType="STRING">
+		SELECT 
+		  DISTINCT
+		  COLLABORATION
+		FROM UBI09S_WORKS.V_상품정보트리거
+		WHERE COLLABORATION IS NOT NULL
+	</select>
+	
+	<!-- 	News 게시판 총갯수 -->
+	<select id="totalListNews" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+		    COUNT(*) TOTAL_CNT 
+		FROM TBL_CM_NEWS CM_NEWS
+		WHERE 1 = 1
+	    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+	    	AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+	    </if>
+	    <if test="newsType != null and  newsType !=''"> 
+	    	AND TXT_TP = #{newsType}
+	    </if>
+	    <if test="siteNo != null and  siteNo !=''"> 
+		    AND EXISTS (SELECT 'X' FROM TBL_CM_NEWS_SITE WHERE TXT_NO = CM_NEWS.TXT_NO AND SITE_NO = #{siteNo})
+		</if>
+	    <if test="searchGb != null and  searchGb !=''"> 
+	        AND EXISTS (
+					    SELECT 'X' 
+					    FROM DUAL
+					    WHERE ('title' = #{searchGb} AND TITLE LIKE '%' || #{searchText} || '%') 
+					    OR ('content' = #{searchGb} AND TXT LIKE '%' || #{searchText} || '%') 
+					    OR ('all' = #{searchGb} AND (TITLE LIKE '%' || #{searchText} || '%' OR TXT LIKE '%' || #{searchText} || '%'))
+					)
+	    </if>
+	    <if test="searchText != null and searchText !=''">
+	    	AND TITLE LIKE '%'|| #{searchText} || '%' OR TXT LIKE '%' || #{searchText} || '%'
+	    </if>
+	</select>
+	
+	<!-- 	news 리스트 -->
+	<select id="newsList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="newsMap">
+		/*manage.newslist*/
+		SELECT C_TABLE.* FROM(
+			SELECT ROWNUM PRNUM
+			      ,B_TABLE.*
+			 FROM(
+				SELECT
+					<choose>
+						<when test="orderBy != '' and orderBy != null">
+							ROW_NUMBER() OVER(ORDER BY ${orderBy} ${orderFlag}) RNUM
+						</when>
+						<otherwise>
+							ROW_NUMBER() OVER(ORDER BY SORT ASC) RNUM
+						</otherwise>
+				    </choose>
+				    ,A_TABLE.*
+				FROM(
+				    SELECT 
+				        TXT_NO 
+				        ,TITLE 
+				        ,TXT 
+				        ,(SELECT CD_NM FROM TBL_AD_CD WHERE CD_NO = TXT_TP) TXT_TP
+				        ,TXT_CLS 
+				        ,MOV_URL 
+				        ,IMG_URL 
+				        ,DECODE(DISP_YN,'Y','공개','N','비공개') DISP_YN
+				        ,READ_CNT 
+				        ,PRIR 
+				        ,REGR_NO 
+				        ,REG_DTS 
+				        ,UPDR_NO
+				        ,SLD_DISP_YN 
+						,ETC1
+				        ,ETC2 
+						,THMB_URL 
+						,PREVIEW 
+						,ETC1 SORT 
+				        ,TO_CHAR(UPD_DTS, 'YYYY.MM.DD') UPD_DTS
+				        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = CM_NEWS.UPDR_NO) REG_USER_NM
+				    FROM
+				        TBL_CM_NEWS CM_NEWS
+				    WHERE 1 = 1
+				    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+				    	AND ETC1 BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </if>
+				    <if test="newsType != null and  newsType !=''"> 
+				    	AND TXT_TP = #{newsType}
+				    </if>
+				    <if test="siteNo != null and  siteNo !=''"> 
+					    AND EXISTS (SELECT 'X' FROM TBL_CM_NEWS_SITE WHERE TXT_NO = CM_NEWS.TXT_NO AND SITE_NO = #{siteNo})
+					</if>
+				    <if test="searchGb != null and  searchGb !=''"> 
+				        AND EXISTS (
+								    SELECT 'X' 
+								    FROM DUAL
+								    WHERE ('title' = #{searchGb} AND TITLE LIKE '%' || #{searchText} || '%') 
+								    OR ('content' = #{searchGb} AND TXT LIKE '%' || #{searchText} || '%') 
+								    OR ('all' = #{searchGb} AND (TITLE LIKE '%' || #{searchText} || '%' OR TXT LIKE '%' || #{searchText} || '%'))
+								)
+				    </if>
+				    <!-- SEARCH -->
+				    <if test="searchText != null and searchText != ''" >
+				    	AND TITLE LIKE '%'|| #{searchText} ||'%' OR TXT LIKE '%'|| #{searchText} ||'%'
+				    </if>
+				    <if test="topBnnrDispYn != null and  topBnnrDispYn !=''"> 
+					    AND TOP_BNNR_DISP_YN = #{topBnnrDispYn}
+					</if>
+		    <choose>
+				<when test="orderBy != '' and orderBy != null">
+					ORDER BY ${orderBy} ${orderFlag}
+				</when>
+				<otherwise>
+					ORDER BY SORT DESC
+				</otherwise>
+		    </choose>
+				) A_TABLE ORDER BY RNUM DESC
+			) B_TABLE 
+		)C_TABLE
+			WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+	
+	<!-- 	News 등록 -->
+	<insert id="regNewsProc" parameterType="com.giftiel.shop.dto.News">
+		INSERT INTO TBL_CM_NEWS(
+				 TXT_NO
+				,TITLE
+				,TXT
+				,TXT_TP
+				,TXT_CLS
+				,MOV_URL
+				,IMG_URL
+				,DISP_YN
+				,READ_CNT
+				,PRIR
+				,REGR_NO
+				,REG_DTS
+				,UPDR_NO
+				,UPD_DTS
+				,ETC1
+				,ETC2
+				,SLD_DISP_YN
+				,THMB_URL
+				,PREVIEW
+				)
+		VALUES(
+			 SEQ_TBL_CM_NEWS.NEXTVAL
+			,#{title}
+			,#{txt}
+			,#{txtTp}
+			,#{txtCls}
+			,#{movUrl}
+			,#{imgUrl}
+			,#{dispYn}
+			,0
+			,0
+			,#{regrNo}
+			,SYSDATE
+			,#{updrNo}
+			,SYSDATE
+			,#{etc1} 
+    		,#{etc2}
+    		,#{sldDispYn}
+    		,#{thmbUrl}
+    		,#{preview}
+		)
+		
+		<selectKey keyProperty="txtNo" resultType="Integer" order="AFTER">
+			SELECT SEQ_TBL_CM_NEWS.CURRVAL FROM dual
+		</selectKey>
+	</insert>
+	
+	<!-- 	News 추가 컨텐츠 등록 -->
+	<insert id="regNewsCont" parameterType="com.giftiel.shop.dto.News">
+		INSERT ALL
+			
+			
+			<foreach item="newsCont" collection="newsCont" index="index" separator=" ">
+			INTO TBL_CM_NEWS_CONT(
+                     ADD_CONT_NO
+					,TXT_NO
+					,ADD_CONT_TYPE
+					,ADD_CONT_ADDR
+                    )
+             VALUES
+             	(
+             	  #{index}
+             	 ,#{txtNo}
+        	     ,#{newsCont.addContType}
+        	     ,#{newsCont.addContAddr}
+             	)
+       		</foreach>
+             	SELECT * FROM DUAL
+	</insert>
+	
+	<!-- 뉴스 사이트 등록 -->
+	<insert id="regNewsSite" parameterType="com.giftiel.shop.dto.News">
+			INSERT ALL
+			<foreach item="siteNo" collection="siteNo" index="index" separator=" ">
+			INTO TBL_CM_NEWS_SITE(
+                     TXT_NO
+					,SITE_NO
+                    )
+             VALUES
+             	(
+             	  #{txtNo}
+             	 ,#{siteNo}
+             	)
+       		</foreach>
+             	SELECT * FROM DUAL
+             
+	</insert>
+	
+	<!-- 	News 상세 -->
+	<select id="newsDetail" parameterType="INTEGER" resultMap="newsMap">
+	    SELECT 
+	        CM_NEWS.TXT_NO 
+	        ,CM_NEWS.TITLE 
+	        ,CM_NEWS.TXT 
+	        ,CM_NEWS.TXT_TP 
+	        ,CM_NEWS.TXT_CLS 
+	        ,CM_NEWS.MOV_URL 
+	        ,CM_NEWS.IMG_URL 
+	        ,CM_NEWS.DISP_YN 
+	        ,CM_NEWS.READ_CNT 
+	        ,CM_NEWS.PRIR 
+	        ,CM_NEWS.REGR_NO 
+	        ,CM_NEWS.REG_DTS 
+	        ,CM_NEWS.UPDR_NO 
+	        ,TO_CHAR(CM_NEWS.UPD_DTS, 'YYYY.MM.DD HH:MI:SS') UPD_DTS
+	        ,CM_NEWS.ETC1
+	        ,CM_NEWS.ETC2
+	        ,CM_NEWS.SLD_DISP_YN
+	        ,CM_NEWS.THMB_URL
+	        ,CM_NEWS.PREVIEW
+	        ,CM_NEWS_SITE.SITE_NO
+	        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = CM_NEWS.UPDR_NO) REG_USER_NM
+	        
+	        ,CM_NEWS_CONT.ADD_CONT_NO
+	        ,CM_NEWS_CONT.ADD_CONT_TYPE
+	        ,CM_NEWS_CONT.ADD_CONT_ADDR
+	        ,CM_NEWS.TOP_BNNR_DISP_YN
+	    FROM
+	         TBL_CM_NEWS CM_NEWS
+	        ,TBL_CM_NEWS_SITE CM_NEWS_SITE
+	        ,TBL_CM_NEWS_CONT CM_NEWS_CONT
+	    WHERE CM_NEWS.TXT_NO = #{txtNo}
+	    AND CM_NEWS.TXT_NO = CM_NEWS_SITE.TXT_NO(+)
+	    AND CM_NEWS.TXT_NO = CM_NEWS_CONT.TXT_NO(+)
+	</select>
+	
+	<!-- 	뉴스 수정 -->
+	<update id="updateNewsProc" parameterType="com.giftiel.shop.dto.News">
+		UPDATE TBL_CM_NEWS SET
+				TITLE = #{title}
+				,TXT = #{txt}
+				,TXT_TP = #{txtTp}
+				,TXT_CLS = #{txtCls}
+				,MOV_URL = #{movUrl}
+				,IMG_URL = #{imgUrl}
+				,DISP_YN = #{dispYn}
+				,UPDR_NO = #{updrNo}
+				,UPD_DTS = SYSDATE
+				,ETC1 = #{etc1}
+				,ETC2 = #{etc2}
+				,SLD_DISP_YN = #{sldDispYn}
+	        	,THMB_URL = #{thmbUrl}
+	        	,PREVIEW = #{preview}
+	        	,TOP_BNNR_DISP_YN = #{topBnnrDispYn}
+		WHERE TXT_NO = #{txtNo}
+	</update>
+	
+	<!-- 	뉴스 사이트 삭제 -->
+	<delete id="deleteNewsSite"  parameterType="com.giftiel.shop.dto.News">
+		DELETE FROM TBL_CM_NEWS_SITE WHERE TXT_NO = #{txtNo}
+	</delete>
+	
+	<!-- 	뉴스 삭제 -->
+	<delete id="deleteNewsProc"  parameterType="com.giftiel.shop.dto.News">
+		DELETE FROM TBL_CM_NEWS WHERE TXT_NO = #{txtNo}
+	</delete>
+	
+	<!-- 	뉴스 추가 컨텐츠 삭제 -->
+	<delete id="deleteNewsCont"  parameterType="com.giftiel.shop.dto.News">
+		DELETE FROM TBL_CM_NEWS_CONT WHERE TXT_NO = #{txtNo}
+	</delete>
+	
+	<!-- 	lookbook total -->
+	<select id="totalListLookbook" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_CM_INTG_BOARD
+	    WHERE BOARD_CLCD = 'CM00801'
+		    <if test="searchText != null and  searchText !=''"> 
+		    	AND TITLE LIKE '%' || #{searchText} || '%'
+		    </if>
+		    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+		    	AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		    </if>
+	        <if test="siteNo != null and  siteNo !=''"> 
+		  		AND SITE_NO = #{siteNo}
+		    </if>
+	</select>
+		
+	<!-- 	lookbook 리스트 -->
+	<select id="lookbookList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="intgBoardMap">
+		SELECT C_TABLE.* FROM(
+			SELECT ROWNUM PRNUM
+			      ,B_TABLE.*
+			 FROM(
+				SELECT
+					<choose>
+						<when test="orderBy != '' and orderBy != null">
+							ROW_NUMBER() OVER(ORDER BY ${orderBy} ${orderFlag}) RNUM
+						</when>
+						<otherwise>
+							ROW_NUMBER() OVER(ORDER BY ORI_UPD_DTS ASC) RNUM
+						</otherwise>
+				    </choose>
+				    ,A_TABLE.*
+				FROM(
+				    SELECT 
+				         INTG_BOARD.TXT_NO 
+				        ,INTG_BOARD.BOARD_CLCD 
+				        ,INTG_BOARD.SITE_NO 
+				        ,DECODE(INTG_BOARD.DISP_YN,'Y','공개','N','비공개') DISP_YN
+				        ,INTG_BOARD.REGR_NO 
+				        ,INTG_BOARD.REG_DTS 
+				        ,INTG_BOARD.UPDR_NO 
+				        ,INTG_BOARD.UPD_DTS ORI_UPD_DTS
+				        ,TO_CHAR(INTG_BOARD.UPD_DTS, 'YYYY.MM.DD') UPD_DTS
+				        ,INTG_BOARD.TITLE 
+				        ,INTG_BOARD.LNK_URL 
+				        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = INTG_BOARD.UPDR_NO) REG_USER_NM
+				    FROM
+				        TBL_CM_INTG_BOARD INTG_BOARD
+				    WHERE BOARD_CLCD = 'CM00801'
+				    <if test="searchText != null and  searchText !=''"> 
+				    	AND INTG_BOARD.TITLE LIKE '%' || #{searchText} || '%'
+				    </if>
+				    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+				    	AND INTG_BOARD.UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </if>
+			        <if test="siteNo != null and  siteNo !=''"> 
+				  		AND INTG_BOARD.SITE_NO = #{siteNo}
+				    </if>
+				    <choose>
+						<when test="orderBy != '' and orderBy != null">
+							ORDER BY ${orderBy} ${orderFlag}
+						</when>
+						<otherwise>
+							ORDER BY ORI_UPD_DTS DESC
+						</otherwise>
+				    </choose>
+				) A_TABLE ORDER BY RNUM DESC
+			) B_TABLE 
+		)C_TABLE
+			WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+		
+	<!-- 	lookbook 상세 -->
+	<select id="lookbookDetail" parameterType="INTEGER" resultMap="lookbookMap">
+		SELECT 
+		    INTG_BOARD.TXT_NO 
+		    ,INTG_BOARD.BOARD_CLCD 
+		    ,INTG_BOARD.SITE_NO 
+		    ,INTG_BOARD.DISP_YN
+		    ,INTG_BOARD.REGR_NO 
+		    ,INTG_BOARD.REG_DTS 
+		    ,INTG_BOARD.UPDR_NO 
+		    ,TO_CHAR(INTG_BOARD.UPD_DTS, 'YYYY.MM.DD HH:MI:SS') UPD_DTS
+		    ,INTG_BOARD.TITLE 
+		    ,INTG_BOARD.LNK_URL 
+		    ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = INTG_BOARD.UPDR_NO) REG_USER_NM
+		    ,INTG_BOARD_CNTS.IMG_CLS INTG_BOARD_CNTS_IMG_CLS
+		    ,INTG_BOARD_CNTS.IMG_SEQ INTG_BOARD_CNTS_IMG_SEQ
+		    ,INTG_BOARD_CNTS.IMG_URL INTG_BOARD_CNTS_IMG_URL
+		    ,INTG_BOARD_CNTS.PRIR INTG_BOARD_CNTS_PRIR
+		    ,BOARD_GDS.IMG_SEQ BOARD_GDS_IMG_SEQ
+		    ,BOARD_GDS.UBI_GDS_NO BOARD_GDS_UBI_GDS_NO
+		    ,BOARD_GDS.GDS_NM BOARD_GDS_GDS_NM
+		    ,BOARD_GDS.SL_PRC BOARD_GDS_SL_PRC
+		    ,BOARD_GDS.IMG_URL BOARD_GDS_IMG_URL
+		    ,BOARD_GDS.LINK_URL BOARD_GDS_LINK_URL
+		    ,BOARD_GDS.PRIR BOARD_GDS_PRIR
+		    ,DECODE(BOARD_GDS.IMG_SEQ,'', '',DECODE(BOARD_GDS.UBI_GDS_NO,'','직접입력', '상품선택')) BOARD_GDS_GUBUN
+		    ,INTG_BOARD_CNTS.DTL_IMG_URL INTG_BOARD_CNTS_DTL_IMG_URL
+		FROM
+		    TBL_CM_INTG_BOARD INTG_BOARD
+		    ,TBL_CM_INTG_BOARD_CNTS INTG_BOARD_CNTS
+		    ,TBL_CM_BOARD_GDS BOARD_GDS
+		WHERE INTG_BOARD.TXT_NO = #{txtNo}
+		  AND INTG_BOARD.TXT_NO = INTG_BOARD_CNTS.TXT_NO(+)
+		  AND INTG_BOARD_CNTS.IMG_SEQ = BOARD_GDS.IMG_SEQ(+)
+		  ORDER BY INTG_BOARD_CNTS_PRIR ASC, BOARD_GDS_PRIR ASC
+		
+		
+		<!-- 
+		SELECT 
+		    ROWNUM RNUM
+		    ,INTG_BOARD.TXT_NO 
+		    ,INTG_BOARD.BOARD_CLCD 
+		    ,INTG_BOARD.SITE_NO 
+		    ,INTG_BOARD.DISP_YN
+		    ,INTG_BOARD.REGR_NO 
+		    ,INTG_BOARD.REG_DTS 
+		    ,INTG_BOARD.UPDR_NO 
+		    ,TO_CHAR(INTG_BOARD.UPD_DTS, 'YYYY.MM.DD HH:MI:SS') UPD_DTS
+		    ,INTG_BOARD.TITLE 
+		    ,INTG_BOARD.LNK_URL 
+		    ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = INTG_BOARD.UPDR_NO) REG_USER_NM
+		    ,(SELECT IMG_URL FROM TBL_CM_INTG_BOARD_CNTS WHERE TXT_NO = #{txtNo}) IMG_URL
+		FROM
+		    TBL_CM_INTG_BOARD INTG_BOARD
+		WHERE TXT_NO = #{txtNo}
+	    -->
+	</select>
+		
+	<!-- 	lookbook 등록 -->
+	<insert id="regIntgBoard" parameterType="com.giftiel.shop.dto.IntgBoard">
+			INSERT INTO TBL_CM_INTG_BOARD(TXT_NO
+			            ,BOARD_CLCD
+			            ,SITE_NO
+			            ,DISP_YN
+			            ,REGR_NO
+			            ,REG_DTS
+			            ,UPDR_NO
+			            ,UPD_DTS
+			            ,TITLE)
+			VALUES(SEQ_CM_INTG_BOARD.NEXTVAL
+				  ,'CM00801'
+				  ,#{siteNo}
+				  ,#{dispYn}
+				  ,#{regrNo}
+				  ,SYSDATE
+				  ,#{updrNo}
+				  ,SYSDATE
+				  ,#{title}
+			)
+			
+			<selectKey keyProperty="txtNo" resultType="Integer" order="AFTER">
+				SELECT SEQ_CM_INTG_BOARD.CURRVAL FROM DUAL
+			</selectKey>
+             
+	</insert>
+		
+	<!-- 	lookbook 이미지 등록 -->
+	<insert id="regIntgBoardCnts" parameterType="com.giftiel.shop.dto.IntgBoardCnts">
+			INSERT INTO TBL_CM_INTG_BOARD_CNTS(
+                     IMG_SEQ
+		            ,TXT_NO
+		            ,IMG_CLS
+		            ,IMG_URL
+					<if test="dtlImgUrl != null and  dtlImgUrl !=''"> 
+						,DTL_IMG_URL
+					</if>
+		            ,PRIR
+		            ,REGR_NO
+		            ,REG_DTS
+		            ,UPDR_NO
+		            ,UPD_DTS
+                    )
+             VALUES
+             	( SEQ_CM_INTG_BOARD_CNTS.NEXTVAL
+             	 ,#{txtNo}
+             	 ,#{imgCls}
+             	 ,#{imgUrl}
+				 <if test="dtlImgUrl != null and  dtlImgUrl !=''"> 
+					,#{dtlImgUrl}
+				 </if>
+             	 ,#{prir}
+        	     ,#{regrNo}
+        	     ,SYSDATE
+        	     ,#{updrNo}
+        	     ,SYSDATE
+             	)
+             	
+            <selectKey keyProperty="imgSeq" resultType="Integer" order="AFTER">
+				SELECT SEQ_CM_INTG_BOARD_CNTS.CURRVAL FROM DUAL
+			</selectKey>
+             
+	</insert>
+		
+	<!-- 	lookbook 이미지 연결상품등록 -->
+	<insert id="regBoardGds" parameterType="com.giftiel.shop.dto.BoardGds">
+			INSERT INTO TBL_CM_BOARD_GDS(
+                     IMG_SEQ
+                    <if test="ubiGdsNo != null and  ubiGdsNo !=''"> 
+					,UBI_GDS_NO
+					</if>
+					,GDS_NM
+					,SL_PRC
+					,IMG_URL
+					,LINK_URL
+					,PRIR
+                    )
+             VALUES
+             	(
+             	  #{imgSeq}
+             	 <if test="ubiGdsNo != null and  ubiGdsNo !=''"> 
+				 ,#{ubiGdsNo}
+				 </if>
+        	     ,#{gdsNm}
+        	     ,#{slPrc}
+        	     ,#{imgUrl}
+        	     ,#{linkUrl}
+        	     ,#{prir}
+             	)
+             
+	</insert>
+	
+	<!-- 	lookbook 수정 -->
+	<update id="updateIntgBoard" parameterType="com.giftiel.shop.dto.IntgBoard">
+			UPDATE TBL_CM_INTG_BOARD SET 
+			     SITE_NO = #{siteNo}
+			    ,DISP_YN = #{dispYn}
+			    ,UPDR_NO = #{updrNo}
+			    ,UPD_DTS = SYSDATE
+			    ,TITLE = #{title}
+			WHERE TXT_NO = #{txtNo}
+             
+	</update>
+	
+	<!-- 	lookbook 삭제 -->
+	<delete id="delelteIntgBoard" parameterType="com.giftiel.shop.dto.IntgBoard">
+			DELETE FROM TBL_CM_INTG_BOARD 
+			WHERE TXT_NO = #{txtNo}
+	</delete>
+	
+	<!-- 	lookbook 이미지 삭제 -->
+	<delete id="deleteIntgBoardCnts" parameterType="com.giftiel.shop.dto.IntgBoard">
+			DELETE FROM TBL_CM_INTG_BOARD_CNTS 
+			WHERE TXT_NO = #{txtNo}
+	</delete>
+	
+	<!-- 	lookbook 이미지 연결상품 삭제 -->
+	<delete id="deleteBoardGds" parameterType="com.giftiel.shop.dto.IntgBoardCnts">
+			DELETE FROM TBL_CM_BOARD_GDS 
+			WHERE IMG_SEQ = #{imgSeq}
+	</delete>
+		
+	<!-- 	site명 얻기  -->
+	<select id="getSiteNm" parameterType="INTEGER" resultType="String">
+		SELECT SITE_NM FROM TBL_AD_SITE
+		WHERE SITE_NO = #{siteNo}
+	</select>
+	
+	<!-- 	메인관리 Max메인번호  -->
+	<select id="getMaxMainNo" resultType="INTEGER">
+		SELECT SEQ_TBL_CM_MAIN.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 	메인관리 Max메인번호  -->
+	<select id="existMainNo" parameterType="INTEGER" resultType="INTEGER">
+		SELECT count(*)  FROM TBL_CM_MAIN
+		WHERE MAIN_NO = #{targetMainNo}
+	</select>
+	
+	<!-- 	메인관리 메인번호 삭제 -->
+	<delete id="delMainNo" parameterType="INTEGER">
+			DELETE FROM TBL_CM_MAIN 
+			WHERE MAIN_NO = #{mainNo}
+	</delete>
+	
+	
+	<!-- 	메인관리 삭제 -->
+	<delete id="mainManageDel" parameterType="com.giftiel.shop.dto.MainManageForm">
+			DELETE FROM TBL_CM_MAIN 
+			WHERE SITE_NO = #{siteNo}
+	</delete>
+	
+	<!-- 	메인관리 메인등록 -->
+	<update id="mainManageReg" parameterType="com.giftiel.shop.dto.MainManage">
+		MERGE INTO TBL_CM_MAIN
+		    USING DUAL
+		    ON (MAIN_NO = #{mainNo})
+<!-- 		    AND (SITE_NO = #{siteNo}) -->
+		    
+		WHEN MATCHED THEN
+		
+			UPDATE SET
+				 IMG_URL = #{imgUrl}
+				,LNK_URL = #{lnkUrl}
+				,TXT = #{txt}
+				,UPDR_NO = #{updrNo}
+				,UPD_DTS = SYSDATE
+				<if test="sortNo !='' and sortNo != null">
+				,SORT_NO = #{sortNo}
+				</if>
+		
+		WHEN NOT MATCHED THEN
+		
+			INSERT (
+					 MAIN_NO
+					,IMG_URL
+					,LNK_URL
+					,TXT
+					,SITE_NO
+					,REGR_NO
+					,REG_DTS
+					,UPDR_NO
+					,UPD_DTS
+					<if test="sortNo !='' and sortNo != null">
+					,SORT_NO
+					</if>
+					)
+			VALUES(
+				 #{mainNo}
+				,#{imgUrl}
+				,#{lnkUrl}
+				,#{txt}
+				,#{siteNo}
+				,#{regrNo}
+				,SYSDATE
+				,#{updrNo}
+				,SYSDATE
+				<if test="sortNo !='' and sortNo != null">
+				,#{sortNo}
+				</if>
+			)
+	</update>
+	
+	<!-- 	feature관리 등록 -->
+	<update id="featureManageReg" parameterType="com.giftiel.shop.dto.FeatureManage">
+		MERGE INTO TBL_CM_FEATURE
+		    USING DUAL
+		    ON (FEATURE_NO = #{featureNo} AND SITE_NO = #{siteNo} AND SEX = #{sex})
+		    
+		WHEN MATCHED THEN
+		
+			UPDATE SET
+				 IMG_URL = #{imgUrl}
+				,LNK_URL = #{lnkUrl}
+				,TXT = #{txt}
+				,UPDR_NO = #{updrNo}
+				,UPD_DTS = SYSDATE
+		
+		WHEN NOT MATCHED THEN
+		
+			INSERT (
+					 FEATURE_NO
+					,SEX
+					,IMG_URL
+					,LNK_URL
+					,TXT
+					,SITE_NO
+					,REGR_NO
+					,REG_DTS
+					,UPDR_NO
+					,UPD_DTS
+					)
+			VALUES(
+				 #{featureNo}
+				,#{sex}
+				,#{imgUrl}
+				,#{lnkUrl}
+				,#{txt}
+				,#{siteNo}
+				,#{regrNo}
+				,SYSDATE
+				,#{updrNo}
+				,SYSDATE
+			)
+	</update>
+	
+	<!-- 메인관리 리스트 -->
+	<select id="mainManageList" parameterType="INTEGER" resultMap="mainManageMap">
+		SELECT MAIN_NO
+		       ,IMG_URL
+			   ,CASE 
+				   WHEN to_date(substr(IMG_URL,13,8),'YYYYMMDD') <![CDATA[<]]> (SELECT SYNC_DTS FROM TBL_AD_IMG_SYNC WHERE ROWNUM = 1) THEN 'http://googledrive.com/host/0B6HfeD747YiJZFNiZTNKdGphN2M/'||REPLACE(IMG_URL, '/', '_')
+				   ELSE 'http://worksout60.cafe24.com/upload/image'||IMG_URL
+				END AS FRONT_IMG_URL		       
+		       ,LNK_URL
+		       ,TXT
+		       ,SITE_NO
+		       ,REGR_NO
+		       ,REG_DTS
+		       ,UPDR_NO
+		       ,UPD_DTS 
+		       ,SORT_NO
+		FROM TBL_CM_MAIN
+		WHERE SITE_NO = #{siteNo}
+		ORDER BY SORT_NO ASC
+	</select>
+	
+	<!-- feature관리 리스트 -->
+	<select id="featureManageList" parameterType="java.util.HashMap" resultMap="featureManageMap">
+		SELECT FEATURE_NO
+		       ,SEX
+<!-- 		       ,NVL(IMG_URL,' ') IMG_URL -->
+<!-- 		       ,NVL(LNK_URL,' ') LNK_URL -->
+<!-- 		       ,NVL(TXT,' ') TXT -->
+		       
+		       ,IMG_URL
+		       ,LNK_URL
+		       ,TXT
+		       
+		       ,SITE_NO
+		       ,REGR_NO
+		       ,REG_DTS
+		       ,UPDR_NO
+		       ,UPD_DTS 
+		FROM TBL_CM_FEATURE
+		WHERE SITE_NO = #{siteNo}
+		  AND SEX =#{sex}
+	</select>
+	
+	<!-- Work With Us List -->
+	<select id="listWorkWithus" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="WorksWithusMap">
+		SELECT
+		    RNUM
+		    ,CM_WORKS.WITHUS_SEQ 
+		    ,DECODE(WITHUS_STAT,'Y','공개','N','비공개') WITHUS_STAT
+		    ,WITHUS_CLS 
+		    ,WITHUS_AREA 
+		    ,WITHUS_CL 
+		    ,TO_CHAR(STR_DTS, 'YYYY.MM.DD') STR_DTS
+		    ,TO_CHAR(END_DTS, 'YYYY.MM.DD') END_DTS
+		    ,DTL_DESC 
+		    ,REGR_NO 
+		    ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = CM_WORKS.UPDR_NO) REG_USER_NM
+		    ,TO_CHAR(REG_DTS, 'YYYY.MM.DD') REG_DTS 
+		    ,UPDR_NO 
+		    ,TO_CHAR(UPD_DTS, 'YYYY.MM.DD') UPD_DTS
+		FROM(
+		    SELECT 
+		        ROWNUM RNUM
+		        ,WITHUS_SEQ 
+		        ,WITHUS_STAT 
+		        ,WITHUS_CLS 
+		        ,WITHUS_AREA 
+		        ,WITHUS_CL 
+		        ,STR_DTS 
+		        ,END_DTS 
+		        ,DTL_DESC
+		        ,REGR_NO 
+		        ,REG_DTS 
+		        ,UPDR_NO 
+		        ,UPD_DTS 
+		    FROM
+		        TBL_CM_WORKS_WITHUS CM_WORKS
+		    WHERE 1 = 1
+		    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+		    	AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		    </if>
+		    <if test="searchGb != null and  searchGb !=''"> 
+		        AND EXISTS (
+						    SELECT 'X' 
+						    FROM DUAL
+						    WHERE ('stats' = #{searchGb} AND WITHUS_STAT LIKE '%' || #{searchText} || '%') 
+						    OR ('cls' = #{searchGb} AND WITHUS_CLS LIKE '%' || #{searchText} || '%')
+						    OR ('area' = #{searchGb} AND WITHUS_AREA LIKE '%' || #{searchText} || '%')
+						    OR ('cl' = #{searchGb} AND WITHUS_CL LIKE '%' || #{searchText} || '%')
+						    OR ('regr' = #{searchGb} AND UPDR_NO LIKE '%' || #{searchText} || '%')					    
+						)
+		    </if>
+		    <if test="siteNo != null and  siteNo !=''"> 
+			    AND EXISTS (SELECT 'X' FROM TBL_CM_WORKS_WITHUS_SITE WHERE WITHUS_SEQ = CM_WORKS.WITHUS_SEQ AND SITE_NO = #{siteNo})
+			</if>
+		    <choose>
+			    <when test="orderBy != '' and orderBy != null">
+					ORDER BY ${orderBy} ${orderFlag}, WITHUS_SEQ DESC
+				</when>
+				<otherwise>
+					ORDER BY WITHUS_SEQ DESC
+				</otherwise>
+				</choose>
+		) CM_WORKS WHERE 1=1
+		    AND ROWNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+	
+	<!-- 	Work With Us 전체List -->
+	<select id="totalListWorkWithus" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_CM_WORKS_WITHUS CM_WORKS
+	    WHERE 1 = 1
+	    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+	    	AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+	    </if>
+	    <if test="searchGb != null and  searchGb !=''"> 
+	        AND EXISTS (
+					    SELECT 'X' 
+					    FROM DUAL
+					    WHERE ('cls' = #{searchGb} AND WITHUS_CLS LIKE '%' || #{searchText} || '%')
+					    OR ('area' = #{searchGb} AND WITHUS_AREA LIKE '%' || #{searchText} || '%')
+					    OR ('cl' = #{searchGb} AND WITHUS_CL LIKE '%' || #{searchText} || '%')
+					    OR ('regr' = #{searchGb} AND REGR_NO LIKE '%' || #{searchText} || '%')					    
+					)
+	    </if>
+	    <if test="siteNo != null and  siteNo !=''"> 
+		    AND EXISTS (SELECT 'X' FROM TBL_CM_WORKS_WITHUS_SITE WHERE WITHUS_SEQ = CM_WORKS.WITHUS_SEQ AND SITE_NO = #{siteNo})
+		</if>
+	    <choose>
+		    <when test="orderBy != '' and orderBy != null">
+				ORDER BY ${orderBy} ${orderFlag}, CM_WORKS.WITHUS_SEQ DESC
+			</when>
+			<otherwise>
+				ORDER BY CM_WORKS.WITHUS_SEQ DESC
+			</otherwise>
+			</choose>
+	</select>
+
+	<!-- 	Work With Us 등록 -->
+	<insert id="insertWorkWithus" parameterType="com.giftiel.shop.dto.WorkWithUs">
+	    INSERT INTO TBL_CM_WORKS_WITHUS
+	        ( WITHUS_SEQ , WITHUS_STAT , WITHUS_CLS , WITHUS_AREA , WITHUS_CL , STR_DTS , END_DTS , DTL_DESC , REGR_NO , REG_DTS, UPDR_NO, UPD_DTS)
+	    VALUES 
+	        ( SEQ_CM_WORKS_WITHUS.NEXTVAL , #{withusStat} , #{withusCls} , #{withusArea} , #{withusCl} , #{strDts} , #{endDts} , #{dtlDesc} , #{regrNo} , SYSDATE, #{updrNo}, SYSDATE)
+	        
+	        <selectKey keyProperty="withusSeq" resultType="Integer" order="AFTER">
+					SELECT SEQ_CM_WORKS_WITHUS.CURRVAL FROM DUAL
+			</selectKey>
+	</insert>
+
+	<!-- 	Work With Us Site 등록 -->
+	<insert id="insertWorkWithusSite" parameterType="com.giftiel.shop.dto.WorkWithUs">
+		INSERT ALL
+			<foreach item="siteNo" collection="siteNo" index="index" separator=" ">
+			INTO TBL_CM_WORKS_WITHUS_SITE(
+                     WITHUS_SEQ
+                    ,SITE_NO
+                    )
+             VALUES
+             	(
+             	  #{withusSeq}
+             	 ,#{siteNo}
+             	)
+       		</foreach>
+             	SELECT * FROM DUAL
+	</insert>	
+	
+	<!-- 	Work With Us 상세 -->
+	<select id="workWithUsDetail" parameterType="INTEGER" resultMap="WorksWithusMap">
+		SELECT
+		    CM_WORKS_WITHUS.WITHUS_SEQ 
+		    ,WITHUS_STAT
+		    ,WITHUS_CLS 
+		    ,WITHUS_AREA 
+		    ,WITHUS_CL 
+		    ,TO_CHAR(STR_DTS, 'YYYY.MM.DD') STR_DTS
+		    ,TO_CHAR(END_DTS, 'YYYY.MM.DD') END_DTS
+		    ,DTL_DESC 
+		    ,REGR_NO 
+		    ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = REGR_NO) REG_USER_NM
+		    ,TO_CHAR(REG_DTS, 'YYYY.MM.DD') REG_DTS 
+		    ,UPDR_NO 
+		    ,TO_CHAR(UPD_DTS, 'YYYY.MM.DD') UPD_DTS
+		    ,CM_WORKS_WITHUS_SITE.SITE_NO
+		FROM
+	        TBL_CM_WORKS_WITHUS CM_WORKS_WITHUS
+	        ,TBL_CM_WORKS_WITHUS_SITE CM_WORKS_WITHUS_SITE
+	        
+		WHERE CM_WORKS_WITHUS.WITHUS_SEQ = #{withusSeq}
+		AND CM_WORKS_WITHUS.WITHUS_SEQ = CM_WORKS_WITHUS_SITE.WITHUS_SEQ(+)
+	
+	</select>
+	
+	<!-- 	Work With Us 수정 -->
+	<update id="updateWorkWithUs" parameterType="com.giftiel.shop.dto.WorkWithUs">
+		UPDATE TBL_CM_WORKS_WITHUS SET
+				WITHUS_STAT = #{withusStat}
+				,WITHUS_CLS = #{withusCls}
+				,WITHUS_AREA = #{withusArea}
+				,WITHUS_CL = #{withusCl}
+				,STR_DTS = #{strDts}
+				,END_DTS = #{endDts}
+				,DTL_DESC = #{dtlDesc}
+			    ,UPD_DTS = SYSDATE
+				,UPDR_NO = #{updrNo}			    
+		WHERE WITHUS_SEQ = #{withusSeq}
+	</update>
+	
+	<!-- 	Work With Us 삭제 -->
+	<delete id="deleteWorkWithUs"  parameterType="com.giftiel.shop.dto.WorkWithUs">
+		DELETE FROM TBL_CM_WORKS_WITHUS WHERE WITHUS_SEQ = #{withusSeq}
+	</delete>
+	
+	<!-- 	Work With Us Site 삭제 -->
+	<delete id="deleteWorkWithUsSite"  parameterType="com.giftiel.shop.dto.News">
+		DELETE FROM TBL_CM_WORKS_WITHUS_SITE WHERE WITHUS_SEQ = #{withusSeq}
+	</delete>
+
+	<!-- 	메일발송 내역 리스트	 -->
+	<select id="listSndMail" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="mailSend">
+		SELECT C_TABLE.*
+		FROM(
+			SELECT ROWNUM PRNUM
+				,B_TABLE.*
+			FROM(
+				SELECT
+					ROW_NUMBER() OVER(ORDER BY SORT ASC) RNUM
+					,A_TABLE.*
+				FROM(
+				  SELECT 
+				    SND_HIST_NO ,
+				    SNDR_EMAIL ,
+				    RCVR_EMAIL ,
+				    TMPL_URL ,
+				    TITLE ,
+				    TXT_HTML ,
+				    SND_DTS ,
+				    ATCH_FILE ,
+				    REGR_NO ,
+				    REG_DTS ,
+				    UPDR_NO ,
+				    UPD_DTS ,
+				    UPD_DTS SORT,
+				    (SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = CM_SND_MAIL.UPDR_NO) REG_USER_NM
+				  FROM TBL_CM_SND_MAIL CM_SND_MAIL
+				  WHERE REGR_NO != 0 AND UPDR_NO != 0
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+					AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					</if>
+					<if test="searchGb != null and  searchGb !=''"> 
+					AND EXISTS (
+								SELECT 'X' 
+								FROM DUAL
+								WHERE
+								('email' = #{searchGb} AND RCVR_EMAIL LIKE '%' || #{searchText} || '%') 
+								OR ('title' = #{searchGb} AND TITLE LIKE '%' || #{searchText} || '%') 
+								OR ('content' = #{searchGb} AND TXT_HTML LIKE '%' || #{searchText} || '%') 
+								OR ('all' = #{searchGb} AND (TITLE LIKE '%' || #{searchText} || '%' OR TXT_HTML LIKE '%' || #{searchText} || '%'))
+							)
+					</if>
+			<choose>
+				<when test="orderBy != '' and orderBy != null">
+					ORDER BY ${orderBy} ${orderFlag}
+				</when>
+				<otherwise>
+					ORDER BY SORT DESC
+				</otherwise>
+		    </choose>
+  				) A_TABLE
+  				ORDER BY RNUM DESC
+  			)B_TABLE
+  		)C_TABLE
+  		WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+	
+	<!-- 	메일발송 내역 토탈 -->
+	<select id="totalListSndMail" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_CM_SND_MAIL 
+	    WHERE REGR_NO != 0 AND UPDR_NO != 0
+	    
+	    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+			AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		</if>
+
+		<if test="searchGb != null and  searchGb !=''"> 
+			AND EXISTS (
+						SELECT 'X' 
+						FROM DUAL
+						WHERE
+						('email' = #{searchGb} AND RCVR_EMAIL LIKE '%' || #{searchText} || '%') 
+						OR ('title' = #{searchGb} AND TITLE LIKE '%' || #{searchText} || '%') 
+						OR ('content' = #{searchGb} AND TXT_HTML LIKE '%' || #{searchText} || '%') 
+						OR ('all' = #{searchGb} AND (TITLE LIKE '%' || #{searchText} || '%' OR TXT_HTML LIKE '%' || #{searchText} || '%'))
+					)
+		</if>
+	</select>
+	
+	<!-- 	메일발송내역 저장 -->
+	<insert id="insertSndMail" parameterType="com.giftiel.shop.dto.MailManage">
+	    INSERT INTO TBL_CM_SND_MAIL
+	        ( SND_HIST_NO 
+	        , SNDR_EMAIL 
+	        , RCVR_EMAIL 
+	        , TMPL_URL 
+	        , TITLE 
+	        , TXT_HTML 
+	        , SND_DTS 
+	        <if test="atchFile != '' and atchFile != null">
+				, ATCH_FILE
+			</if>
+	        , REGR_NO 
+	        , REG_DTS 
+	        , UPDR_NO 
+	        , UPD_DTS 
+	        , RSV_TG_GB 
+	        , RSV_TG 
+	        , SNDR_NAME 
+	        )
+	    VALUES 
+	        ( SEQ_TBL_CM_SND_MAIL.NEXTVAL ,
+	          #{sndrEmail} 
+	        , #{rcvrEmail} 
+	        , #{tmplUrl} 
+	        , #{title} 
+	        , #{txtHtml} 
+	        , SYSDATE 
+	        <if test="atchFile != '' and atchFile != null">
+				, #{atchFile} 
+			</if>
+	        , #{regrNo} 
+	        , SYSDATE 
+	        , #{updrNo} 
+	        , SYSDATE 
+	        , #{rsvTgGb} 
+	        , #{rsvTg} 
+	        , #{sndrName} 
+	        )
+	</insert>
+
+	<!-- 	메일발송내역 상세 -->
+	<select id="mailSendDetail" parameterType="INTEGER" resultMap="mailSend">
+		 SELECT 
+	            SNDR_EMAIL 
+	            ,REPLACE(RCVR_EMAIL, chr(13)||chr(10),',') RCVR_EMAIL
+	            ,TMPL_URL 
+	            ,TITLE
+	            ,TXT_HTML 
+	            ,SND_DTS 
+	            ,ATCH_FILE 
+	            ,REGR_NO 
+	            ,REG_DTS 
+	            ,UPDR_NO 
+	            ,UPD_DTS
+				,RSV_TG
+  				,RSV_TG_GB
+  				,(SELECT CD_NM FROM TBL_AD_CD WHERE CD_NO = RSV_TG_GB) REG_USER_NM
+		    FROM
+		        TBL_CM_SND_MAIL CM_SND_MAIL
+		    WHERE SND_HIST_NO = #{sndHistNo}
+	
+	</select>
+	
+	<!-- 	메일발송시 발송주체 -->
+	<select id="mailMemGradeList" parameterType="com.giftiel.shop.dto.MailManage" resultMap="mailSend">
+		SELECT 
+			EMAIL SNDR_EMAIL,
+			NM REG_USER_NM 
+		FROM TBL_ME_MEM_INFO
+		WHERE 1=1
+		<if test="getMember != '' and getMember != null">
+		AND MEM_GRD_NO = ${getMember}
+		</if>
+		<if test="getBrnd != '' and getBrnd != null">
+		AND SITE_NO = ${getBrnd}
+		</if>
+	</select>
+	
+	
+	<!-- 	obey awareness 전시여부 체크 -->
+	<select id="chkDsp" resultType="INTEGER">
+		SELECT COUNT(*) FROM TBL_DP_AWNES
+		WHERE DISP_YN = 'Y'
+	</select>
+	
+	
+	
+	
+	
+	<!-- obey awareness 등록(메인) -->
+	<insert id="awnesReg" parameterType="com.giftiel.shop.dto.Awnes">
+		INSERT INTO TBL_DP_AWNES(
+                           AWNES_NO,
+                           DISP_YN,
+                           DTL_TXT,
+                           REGR_NO,
+                           REG_DTS,
+                           UPDR_NO,
+                           UPD_DTS,
+                           TITLE
+                           )
+		             VALUES(
+		             SEQ_DP_AWNES.NEXTVAL
+		             ,#{dispYn}
+		             ,#{dtlTxt}
+		             ,#{regrNo}
+		             ,SYSDATE
+		             ,#{updrNo}
+		             ,SYSDATE
+		             ,#{title}
+		             )
+		<selectKey keyProperty="awnesNo" resultType="Integer" order="AFTER">
+			SELECT SEQ_DP_AWNES.CURRVAL FROM dual
+		</selectKey>
+	</insert>
+	
+	
+	
+	<!-- obey awareness 등록(메인) -->
+	<update id="awnesUpdate" parameterType="com.giftiel.shop.dto.Awnes">
+		UPDATE TBL_DP_AWNES SET
+                           DISP_YN = #{dispYn},
+                           DTL_TXT = #{dtlTxt},
+                           UPDR_NO = #{updrNo},
+                           UPD_DTS = SYSDATE,
+                           TITLE = #{title}
+        WHERE AWNES_NO = #{awnesNo}
+	</update>
+	
+	<delete id="awnesContDel" parameterType="com.giftiel.shop.dto.Awnes">
+		DELETE FROM TBL_DP_AWNES_CONT
+		WHERE AWNES_NO = #{awnesNo}
+	</delete>
+	
+	
+	<!-- obey awareness 등록(컨텐츠) -->
+	<insert id="awnesContReg" parameterType="com.giftiel.shop.dto.Awnes">
+		INSERT ALL
+		
+		<foreach item="awnesCont" collection="awnesCont" index="index" separator=" ">
+		INTO TBL_DP_AWNES_CONT(
+							 AWNES_NO
+							,CONT_CLS
+							<if test="awnesCont.contUrl != null and  awnesCont.contUrl !=''"> 
+							    	,CONT_URL
+							</if>
+							,PRIR
+							,REGR_NO
+							,REG_DTS
+							,UPDR_NO
+							,UPD_DTS
+							<if test="awnesCont.imgUrl != null and  awnesCont.imgUrl !=''"> 
+							    	,IMG_URL
+							</if>
+                           )
+		             VALUES(
+		             #{awnesNo}
+		             ,#{awnesCont.contCls}
+		             <if test="awnesCont.contUrl != null and  awnesCont.contUrl !=''"> 
+					    	,#{awnesCont.contUrl}
+					 </if>
+		             ,#{awnesCont.prir}
+		             ,#{regrNo}
+		             ,SYSDATE
+		             ,#{updrNo}
+		             ,SYSDATE
+		             <if test="awnesCont.imgUrl != null and  awnesCont.imgUrl !=''"> 
+					    	,#{awnesCont.imgUrl}
+					 </if>
+		             
+		             )
+	    </foreach>
+			SELECT * FROM DUAL
+	</insert>
+	
+	
+	<!-- obey Awareness 리스트 총갯수 -->
+	<select id="totalListawnes" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_DP_AWNES 
+	    WHERE 1 = 1
+	    <choose>
+        <when test="searchStrDtm != null and searchEndDtm != null and searchStrDtm != '' and searchEndDtm != ''">
+        	AND UPD_DTS BETWEEN to_date(#{searchEndDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+        </when>
+        <otherwise>
+        </otherwise>
+        </choose>
+	    <if test="searchGb != null and  searchGb !=''">
+	        AND EXISTS (
+					    SELECT 'X' 
+					    FROM DUAL
+					    WHERE ('title' = #{searchGb} AND TITLE LIKE '%' || #{searchText} || '%') 
+					    OR ('content' = #{searchGb} AND DTL_TXT LIKE '%' || #{searchText} || '%') 
+					    OR ('all' = #{searchGb} AND (TITLE LIKE '%' || #{searchText} || '%' OR DTL_TXT LIKE '%' || #{searchText} || '%'))
+					)
+	    </if>
+	    <choose>
+	    <when test="orderBy != '' and orderBy != null">
+			ORDER BY ${orderBy} ${orderFlag}
+		</when>
+		<otherwise>
+			ORDER BY UPD_DTS DESC
+		</otherwise>
+		</choose>
+	</select>
+	
+	
+	<!-- 	obey Awareness 리스트 -->
+	<select id="getAwnesList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="awnesMap">
+	SELECT * from (
+		SELECT
+		     ROWNUM RNUM
+		    ,AWNES_NO
+			,DISP_YN
+			,DTL_TXT
+			,REGR_NO
+			,REG_DTS
+			,UPDR_NO
+			,UPD_DTS
+			,TITLE
+			,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = T.REGR_NO)USER_NM
+		FROM(
+		    SELECT 
+		         AWNES_NO
+				,DISP_YN
+				,DTL_TXT
+				,REGR_NO
+				,REG_DTS
+				,UPDR_NO
+				,UPD_DTS
+				,TITLE
+		    FROM
+		        TBL_DP_AWNES
+		    WHERE 1 = 1
+			<choose>
+	        <when test="searchStrDtm != null and searchEndDtm != null and searchStrDtm != '' and searchEndDtm != ''">
+	        	AND UPD_DTS BETWEEN to_date(#{searchEndDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+	        </when>
+	        <otherwise>
+<!-- 	        	<if test="!allDay">  -->
+<!-- 			    	AND UPD_DTS BETWEEN to_date(TO_CHAR(SYSDATE, 'YYYY-MM-DD') || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(TO_CHAR(SYSDATE, 'YYYY-MM-DD') || '235959', 'YYYY/MM/DD HH24MISS') -->
+<!-- 				</if> -->
+	        </otherwise>
+	        </choose>
+		    <if test="searchGb != null and  searchGb !=''">
+		        AND EXISTS (
+						    SELECT 'X' 
+						    FROM DUAL
+						    WHERE ('title' = #{searchGb} AND TITLE LIKE '%' || #{searchText} || '%') 
+						    OR ('content' = #{searchGb} AND DTL_TXT LIKE '%' || #{searchText} || '%') 
+						    OR ('all' = #{searchGb} AND (TITLE LIKE '%' || #{searchText} || '%' OR DTL_TXT LIKE '%' || #{searchText} || '%'))
+						)
+		    </if>
+		    <choose>
+		    <when test="orderBy != '' and orderBy != null">
+				ORDER BY ${orderBy} ${orderFlag}
+			</when>
+			<otherwise>
+				ORDER BY UPD_DTS DESC
+			</otherwise>
+			</choose>
+		)T
+	) WHERE 1=1
+	       AND RNUM BETWEEN #{startListNum} AND #{endListNum}
+	
+	</select>
+	
+	
+	<select id="getFrontAwnes" resultMap="awnesMap">
+		SELECT   AWNES.AWNES_NO
+				,AWNES.DISP_YN
+				,AWNES.DTL_TXT
+				,AWNES.UPDR_NO
+				,AWNES.UPD_DTS
+				,AWNES.TITLE 
+				
+				,AWNES_CONT.CONT_CLS
+				,AWNES_CONT.CONT_URL
+				,AWNES_CONT.PRIR
+				,AWNES_CONT.IMG_URL
+				
+				,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = AWNES.UPDR_NO)USER_NM
+		FROM TBL_DP_AWNES AWNES
+		    ,TBL_DP_AWNES_CONT AWNES_CONT
+		WHERE AWNES.AWNES_NO = AWNES_CONT.AWNES_NO(+)
+		  AND AWNES.DISP_YN = 'Y'
+		  ORDER BY PRIR ASC
+	</select>
+	
+	
+	<!-- 	obey Awareness 상세 -->
+	<select id="getAwnes" parameterType="INTEGER" resultMap="awnesMap">
+		SELECT   AWNES.AWNES_NO
+				,AWNES.DISP_YN
+				,AWNES.DTL_TXT
+				,AWNES.UPDR_NO
+				,AWNES.UPD_DTS
+				,AWNES.TITLE 
+				
+				,AWNES_CONT.CONT_CLS
+				,AWNES_CONT.CONT_URL
+				,AWNES_CONT.PRIR
+				,AWNES_CONT.IMG_URL
+				
+				,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = AWNES.UPDR_NO)USER_NM
+		FROM TBL_DP_AWNES AWNES
+		    ,TBL_DP_AWNES_CONT AWNES_CONT
+		WHERE AWNES.AWNES_NO = AWNES_CONT.AWNES_NO(+)
+		  AND AWNES.AWNES_NO = #{awnesNo}
+		  ORDER BY PRIR ASC
+	
+	</select>
+	
+	
+	
+	
+	<!-- 	칼하트 라디오 리스트 -->
+	<select id="carharttRadioList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="carharttRadioMap">
+	SELECT C_TABLE.* FROM(
+			SELECT ROWNUM PRNUM
+					,B_TABLE.*
+				FROM (
+						SELECT
+							ROW_NUMBER() OVER(ORDER BY SORT ASC) RNUM
+							,A_TABLE.*
+						FROM (
+						    SELECT 
+						        RADIO_NO 
+						    	,DECODE(DISP_YN,'Y','공개','N','비공개') DISP_YN
+						        ,BAN_IMG_URL 
+						        ,CV_IMG_URL 
+						        ,BG_IMG_URL 
+						        ,RADIO_LINK 
+						        ,RADIO_TITLE 
+						        ,RADIO_ARTIST 
+						        ,RADIO_INFO 
+						        ,RADIO_TRACK_LIST 
+						        ,REGR_NO 
+						        ,REG_DTS 
+						        ,UPDR_NO 
+						        ,UPD_DTS SORT
+						        ,TO_CHAR(UPD_DTS, 'YYYY.MM.DD') UPD_DTS 
+						        ,RADIO_ARTIST_INFO
+						        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = DR.UPDR_NO) REG_USER_NM 
+						    FROM
+						        TBL_DP_RADIO DR 
+						    WHERE 1 = 1
+						    <if test="dispYn != null and dispYn != ''"> 
+						        AND DISP_YN = #{dispYn}
+						    </if>
+						    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+								AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+							</if>
+							<if test="searchGb != null and  searchGb !=''">
+						        AND EXISTS (
+										    SELECT 'X' 
+										    FROM DUAL
+										    WHERE ('radioTitle' = #{searchGb} AND RADIO_TITLE LIKE '%' || #{searchText} || '%') 
+										    OR ('radioArtist' = #{searchGb} AND RADIO_ARTIST LIKE '%' || #{searchText} || '%') 
+										    OR ('all' = #{searchGb} AND RADIO_TITLE LIKE '%' || #{searchText} || '%' OR RADIO_ARTIST LIKE '%' || #{searchText} || '%')
+										)
+							</if>
+							<choose>
+							<when test="orderBy != '' and orderBy != null">
+								ORDER BY ${orderBy} ${orderFlag}
+							</when>
+							<otherwise>
+								ORDER BY SORT DESC
+							</otherwise>
+							</choose>
+  				) A_TABLE
+  				ORDER BY RNUM DESC
+  			)B_TABLE
+  		)C_TABLE
+  		WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+
+	<!-- 	칼하트 라디오 토탈 -->
+	<select id="totalListCarharttRadio" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_DP_RADIO 
+	    WHERE 1 = 1
+
+	    <if test="dispYn != null"> 
+	        AND DISP_YN = #{dispYn}
+	    </if>
+	    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+			AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		</if>
+		<if test="searchGb != null and  searchGb !=''">
+	        AND EXISTS (
+					    SELECT 'X' 
+					    FROM DUAL
+					    WHERE ('radioTitle' = #{searchGb} AND RADIO_TITLE LIKE '%' || #{searchText} || '%') 
+					    OR ('radioArtist' = #{searchGb} AND RADIO_ARTIST LIKE '%' || #{searchText} || '%') 
+					    OR ('all' = #{searchGb} AND RADIO_TITLE LIKE '%' || #{searchText} || '%' OR RADIO_ARTIST LIKE '%' || #{searchText} || '%')
+					)
+		</if>
+	</select>
+
+	<!-- 	칼하트 라디오 등록 -->
+	<insert id="insertCarharttRadio" parameterType="com.giftiel.shop.dto.CarharttRadioForm">
+	    INSERT INTO TBL_DP_RADIO
+	        ( RADIO_NO , DISP_YN , BAN_IMG_URL , CV_IMG_URL , BG_IMG_URL , RADIO_LINK , RADIO_TITLE , RADIO_ARTIST , RADIO_INFO , RADIO_TRACK_LIST , REGR_NO , REG_DTS , UPDR_NO , UPD_DTS , RADIO_ARTIST_INFO )
+	    VALUES 
+	        ( SEQ_TBL_DP_RADIO.NEXTVAL , #{dispYn} , #{banImgUrl} , #{cvImgUrl} , #{bgImgUrl} , #{radioLink} , #{radioTitle} , #{radioArtist} , #{radioInfo} , #{radioTrackList} , #{regrNo} , SYSDATE , #{updrNo} , SYSDATE , #{radioArtistInfo} )
+	</insert>
+	<!-- 	칼하트 라디오 상세,수정 -->
+	<select id="carharttRadioDetail" parameterType="INTEGER" resultMap="carharttRadioMap">
+	    SELECT 
+	        RADIO_NO 
+	        ,DISP_YN 
+	        ,BAN_IMG_URL 
+	        ,CV_IMG_URL 
+	        ,BG_IMG_URL 
+	        ,RADIO_LINK 
+	        ,RADIO_TITLE 
+	        ,RADIO_ARTIST 
+	        ,RADIO_INFO 
+	        ,RADIO_TRACK_LIST 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	        ,RADIO_ARTIST_INFO 
+	        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = DR.UPDR_NO) REG_USER_NM
+	    FROM
+	        TBL_DP_RADIO DR
+	    WHERE 1 = 1
+	    AND RADIO_NO = #{radioNo}
+	</select>
+	<update id="carharttRadioUpdate" parameterType="com.giftiel.shop.dto.CarharttRadioForm">
+		UPDATE TBL_DP_RADIO SET 
+			DISP_YN = #{dispYn},
+	        BAN_IMG_URL = #{banImgUrl},
+	        CV_IMG_URL = #{cvImgUrl},
+	        BG_IMG_URL = #{bgImgUrl},
+	        RADIO_LINK = #{radioLink},
+	        RADIO_TITLE = #{radioTitle},
+	        RADIO_ARTIST = #{radioArtist},
+	        RADIO_INFO = #{radioInfo},
+	        RADIO_TRACK_LIST = #{radioTrackList},
+	        UPDR_NO = #{updrNo},
+	        UPD_DTS = SYSDATE,
+	        RADIO_ARTIST_INFO = #{radioArtistInfo}
+		WHERE RADIO_NO  = #{radioNo}             
+	</update>
+	<delete id="carharttRadioDelete" parameterType="com.giftiel.shop.dto.CarharttRadioForm">
+		DELETE FROM TBL_DP_RADIO
+		WHERE RADIO_NO = #{radioNo}
+	</delete>
+	
+	<resultMap id="currentAuthMenu" type="com.giftiel.shop.dto.Menu">
+	    <result property="pageUrl" column="page_url"/>
+	</resultMap>
+	
+	<!-- 운영자 권한 리스트 -->
+	<select id="currentAuthMenu" parameterType="INTEGER" resultMap="currentAuthMenu" >
+		select page_url from TBL_AD_USER_AUTH_GRP authgrp, TBL_AD_ACCESS_AUTH auth, tbl_ad_menu menu
+		where user_no = #{userNo}
+		and authgrp.AUTH_GRP_NO = auth.AUTH_GRP_NO
+		and auth.MENU_NO = menu.menu_no
+		and menu.use_yn = 'Y'
+		
+		UNION ALL
+		
+		<!-- 환경설정 권한 기본 으로 가짐-->
+		SELECT PAGE_URL FROM 
+		TBL_AD_ACCESS_AUTH auth, 
+		TBL_AD_MENU menu
+
+		WHERE auth.AUTH_GRP_NO = 9
+		AND auth.MENU_NO = menu.MENU_NO
+		AND menu.USE_YN = 'Y'
+	</select>
+	
+	<!-- 통합게시판 결과수 -->
+	<select id="totalBoardCnt" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_CM_INTG_BOARD
+	    WHERE BOARD_CLCD = #{boardClcd}
+		    <if test="searchText != null and  searchText !=''"> 
+		    	AND TITLE LIKE '%' || #{searchText} || '%'
+		    </if>
+		    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+		    	AND UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		    </if>
+	        <if test="siteNo != null and  siteNo !=''"> 
+		  		AND SITE_NO = #{siteNo}
+		    </if>
+	</select>
+	
+	<!-- 	통합게시판 리스트 -->
+	<select id="boardList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="intgBoardMap">
+		SELECT C_TABLE.* FROM(	/* collaboList */
+			SELECT ROWNUM PRNUM
+			      ,B_TABLE.*
+			 FROM(
+				SELECT
+					<choose>
+						<when test="orderBy != '' and orderBy != null">
+							ROW_NUMBER() OVER(ORDER BY ${orderBy} ${orderFlag}) RNUM
+						</when>
+						<otherwise>
+							ROW_NUMBER() OVER(ORDER BY UPD_DTS DESC) RNUM
+						</otherwise>
+				    </choose>
+				    ,A_TABLE.*
+				FROM(
+				    SELECT 
+				         INTG_BOARD.TXT_NO 
+				        ,INTG_BOARD.BOARD_CLCD 
+				        ,INTG_BOARD.SITE_NO 
+				        ,DECODE(INTG_BOARD.DISP_YN,'Y','공개','N','비공개') DISP_YN
+				        ,INTG_BOARD.REGR_NO 
+				        ,INTG_BOARD.REG_DTS 
+				        ,INTG_BOARD.UPDR_NO 
+				        ,INTG_BOARD.UPD_DTS
+				        ,INTG_BOARD.TITLE 
+				        ,INTG_BOARD.LNK_URL 
+				        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = INTG_BOARD.UPDR_NO) REG_USER_NM
+						,(SELECT IMG_URL FROM TBL_CM_INTG_BOARD_CNTS WHERE TXT_NO = INTG_BOARD.TXT_NO) IMG_URL
+						,CLBLTN_NM
+						,SEASON_CD
+				    FROM
+				        TBL_CM_INTG_BOARD INTG_BOARD
+				    WHERE BOARD_CLCD = #{boardClcd}
+				    <if test="searchText != null and  searchText !=''"> 
+				    	AND INTG_BOARD.TITLE LIKE '%' || #{searchText} || '%'
+				    </if>
+				    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+				    	AND INTG_BOARD.UPD_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </if>
+			        <if test="siteNo != null and  siteNo !=''"> 
+				  		AND INTG_BOARD.SITE_NO = #{siteNo}
+				    </if>
+				    <choose>
+						<when test="orderBy != '' and orderBy != null">
+							ORDER BY ${orderBy} ${orderFlag}
+						</when>
+						<otherwise>
+							ORDER BY UPD_DTS DESC
+						</otherwise>
+				    </choose>
+				) A_TABLE
+			) B_TABLE 
+		)C_TABLE
+			WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.giftiel.shop.dto.IntgBoard">
+		INSERT INTO TBL_CM_INTG_BOARD(
+			 TXT_NO
+			,BOARD_CLCD
+			,SITE_NO
+			,DISP_YN
+			,REGR_NO
+			,REG_DTS
+			,UPDR_NO
+			,UPD_DTS
+			,TITLE
+			<if test="seasonCd != null and  seasonCd !=''"> 
+		    	,SEASON_CD
+		    </if>
+		    <if test="clbltnNm != null and  clbltnNm !=''"> 
+		    	,CLBLTN_NM
+		    </if>
+			<if test="lnkUrl != null and  lnkUrl !=''"> 
+		    	,LNK_URL
+		    </if>
+			
+			)
+			VALUES(
+				 SEQ_CM_INTG_BOARD.NEXTVAL
+				,#{boardClcd}
+				,#{siteNo}
+				,#{dispYn}
+				,#{updrNo}
+				,SYSDATE
+				,#{updrNo}
+				,SYSDATE
+				,#{title}
+				<if test="seasonCd != null and  seasonCd !=''"> 
+			    	,#{seasonCd}
+			    </if>
+			    <if test="clbltnNm != null and  clbltnNm !=''"> 
+			    	,#{clbltnNm}
+			    </if>
+				<if test="lnkUrl != null and  lnkUrl !=''"> 
+			    	,#{lnkUrl}
+			    </if>
+			)
+	</insert>
+	
+	<resultMap id="listBoardGds" type="com.giftiel.shop.dto.Goods">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="dispGdsNm" column="DISP_GDS_NM"/> 
+	    <result property="gdsStat" column="GDS_STAT"/> 
+	    <result property="bsDesc" column="BS_DESC" jdbcType="CLOB" javaType="java.lang.String" />
+	    <result property="dtlDesc" column="DTL_DESC" jdbcType="CLOB" javaType="java.lang.String" /> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="expPnt" column="EXP_PNT"/> 
+	    <result property="pntRsvCls" column="PNT_RSV_CLS"/> 
+	    <result property="gdsRsvPntaplYn" column="GDS_RSV_PNTAPL_YN"/> 
+	    <result property="dlvCst" column="DLV_CST"/> 
+	    <result property="slTermCls" column="SL_TERM_CLS"/> 
+	    <result property="slStrDtm" column="SL_STR_DTM"/> 
+	    <result property="slEndDtm" column="SL_END_DTM"/> 
+	    <result property="gdsDlvCstPayway" column="GDS_DLV_CST_PAYWAY"/> 
+	    <result property="minPaypntPntRt" column="MIN_PAYPNT_PNT_RT"/> 
+	    <result property="mktprcDispYn" column="MKTPRC_DISP_YN"/> 
+	    <result property="gdsSlFeeaplYn" column="GDS_SL_FEEAPL_YN"/> 
+	    <result property="gdsMinPaypntaplYn" column="GDS_MIN_PAYPNTAPL_YN"/> 
+	    <result property="sndPosbTm" column="SND_POSB_TM"/> 
+	    <result property="perMaxPurqty" column="PER_MAX_PURQTY"/> 
+	    <result property="feeRt" column="FEE_RT"/> 
+	    <result property="oosDts" column="OOS_DTS"/> 
+	    <result property="sortNo" column="SORT_NO"/> 
+	    <result property="gdsInfoNo" column="GDS_INFO_NO"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="totalStock" column="TOTAL_STOCK"/>
+	    <result property="cllbSortNo" column="CLLB_SORT_NO"/>
+	    
+	    <result property="newArvl" column="NEW_ARVL"/>
+	    <result property="sortNo2" column="SORT_NO2"/> 
+
+		<result property="ubiGoods.ubiGdsNo" column="UBI_GDS_NO"/>
+	    <result property="ubiGoods.ubiGdsNm" column="UBI_GDS_NM"/>
+	    <result property="ubiGoods.ubiGdsColorCd" column="UBI_GDS_COLOR_CD"/>
+	    <result property="ubiGoods.ubiGdsColorNm" column="UBI_GDS_COLOR_NM"/>
+	    <result property="ubiGoods.ubiGdsSize" column="UBI_GDS_SIZE"/>
+	    <result property="ubiGoods.brandCode" column="BRAND_CODE"/>
+	    <result property="ubiGoods.yearCode" column="YEAR_CODE"/>
+	    <result property="ubiGoods.seasongroupCode" column="SEASONGROUP_CODE"/>
+	    <result property="ubiGoods.category2Code" column="CATEGORY2_CODE"/>
+	    <result property="ubiGoods.colorCode" column="COLOR_CODE"/>
+	    <result property="ubiGoods.brand" column="BRAND"/>
+	    <result property="ubiGoods.year" column="YEAR"/>
+	    <result property="ubiGoods.seasongroup" column="SEASONGROUP"/>
+	    <result property="ubiGoods.category2" column="CATEGORY2"/>
+	    <result property="ubiGoods.color" column="COLOR"/>
+	    <result property="ubiGoods.collectionCode" column="COLLECTION_CODE"/>
+	    <result property="ubiGoods.seasonCode" column="SEASON_CODE"/>
+	    <result property="ubiGoods.category1Code" column="CATEGORY1_CODE"/>
+	    <result property="ubiGoods.buyingcodeCode" column="BUYINGCODE_CODE"/>
+	    <result property="ubiGoods.deliverdateCode" column="DELIVERDATE_CODE"/>
+	    <result property="ubiGoods.collection" column="COLLECTION"/>
+	    <result property="ubiGoods.season" column="SEASON"/>
+	    <result property="ubiGoods.category1" column="CATEGORY1"/>
+	    <result property="ubiGoods.buyingcode" column="BUYINGCODE"/>
+	    <result property="ubiGoods.deliverdate" column="DELIVERDATE"/>
+	    <result property="ubiGoods.production" column="PRODUCTION"/>
+	    <result property="ubiGoods.material" column="MATERIAL"/>
+	    <result property="ubiGoods.ubiCostPrc" column="UBI_COST_PRC"/>
+	    <result property="ubiGoods.stock" column="STOCK"/>
+	    <result property="ubiGoods.ubiDctCost" column="UBI_DCT_COST"/>
+	    <result property="ubiGoods.ubiCost" column="UBI_COST"/>
+	    <result property="ubiGoods.ubiSlPrc" column="UBI_SL_PRC"/>
+	    <result property="ubiGoods.ubiRegDtm" column="UBI_REG_DTM"/>	    
+	    
+		<result property="mainImg" column="MAIN_IMG"/> 
+	</resultMap>
+	
+	<select id="listSpecialGoods" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listBoardGds">
+	SELECT DISTINCT MAIN.*
+	FROM (
+		SELECT
+			UBIGDS.품번 as UBI_GDS_NO
+			,UBIGDS.품명 as UBI_GDS_NM
+			,UBIGDS.색상 as UBI_GDS_COLOR_CD
+			,UBIGDS.색상명 as UBI_GDS_COLOR_NM
+			,UBIGDS.BRAND코드 as BRAND_CODE
+			,UBIGDS.YEAR코드 as YEAR_CODE
+			,UBIGDS.SEASONGROUP코드 AS SEASONGROUP_CODE
+			,UBIGDS.CATEGORY2코드 AS CATEGORY2_CODE
+			,UBIGDS.COLOR코드 AS COLOR_CODE
+			,UBIGDS.BARND AS BRAND
+			,UBIGDS.YEAR
+			,UBIGDS.SEASONGROUP
+			,UBIGDS.CATEGORY2
+			,UBIGDS.COLOR
+			,UBIGDS.COLLECTION코드 AS COLLECTION_CODE
+			,UBIGDS.SEASON코드 AS SEASON_CODE
+			,UBIGDS.CATEGORY1코드 AS CATEGORY1_CODE 
+			,UBIGDS.BUYINGCODE코드 AS BUYINGCODE_CODE
+			,UBIGDS.DELIVERDATE코드 AS DELIVERDATE_CODE
+			,UBIGDS.COLLECTION
+			,UBIGDS.SEASON
+			,UBIGDS.CATEGORY1
+			,UBIGDS.BUYINGCODE
+			,UBIGDS.DELIVERDATE
+			,UBIGDS.PRODUCTION
+			,UBIGDS.MATERIAL
+			,UBIGDS.최초판매가 AS UBI_COST_PRC
+			,UBIGDS.사전원가	AS UBI_DCT_COST
+			,UBIGDS.사후원가	AS UBI_COST
+			,NVL(UBIGDS.현판매가, UBIGDS.최초판매가)	AS UBI_SL_PRC		
+		    ,GDS.GDS_INFO_NO 
+		    ,GDS.GDS_STAT 
+		    ,GDS.DISP_YN 
+		    ,GDS.SL_TERM_CLS 
+		    ,TO_CHAR(GDS.SL_STR_DTM,'YYYY-MM-DD') SL_STR_DTM
+		    ,TO_CHAR(GDS.SL_END_DTM,'YYYY-MM-DD') SL_END_DTM
+		    ,TO_CHAR(GDS.OOS_DTS,'YYYY-MM-DD') OOS_DTS
+		    ,BOARD_GDS.PRIR SORT_NO 
+		    ,GDS.REGR_NO
+		    ,TO_CHAR(GDS.REG_DTS,'YYYY-MM-DD') REG_DTS
+		    ,GDS.UPDR_NO
+		    ,TO_CHAR(GDS.UPD_DTS,'YYYY-MM-DD') UPD_DTS
+		    ,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = GDS.UBI_GDS_NO AND ROWNUM = 1) AS MAIN_IMG
+		FROM
+		    TBL_CM_BOARD_GDS BOARD_GDS, TBL_GD_GDS GDS, UBI09S_WORKS.V_상품정보트리거 UBIGDS 
+		WHERE BOARD_GDS.IMG_SEQ = #{imgSeq}
+			AND GDS.UBI_GDS_NO = UBIGDS.품번
+			AND BOARD_GDS.UBI_GDS_NO = GDS.UBI_GDS_NO
+	)MAIN
+	ORDER BY SORT_NO ASC		
+	</select>
+	
+	<update id="updateSpecialSort" parameterType="com.giftiel.shop.dto.BoardGds">
+		UPDATE TBL_CM_BOARD_GDS SET 
+			PRIR = #{prir}
+		WHERE UBI_GDS_NO  = #{ubiGdsNo}
+		AND IMG_SEQ = #{imgSeq}
+	</update>
+	
+	<update id="updateInquiryRepl" parameterType="com.giftiel.shop.dto.InquiryRepl">
+		UPDATE TBL_CM_CNSL_MEMO
+		SET MEMO_TXT = #{memoTxt}, UPDR_NO = #{updrNo}, UPD_DTS = sysdate
+		WHERE CNSL_NO = #{cnslNo} and MEMO_NO = ${memoNo}
+	</update>
+	
+	<delete id="deleteInquiryRepl" parameterType="com.giftiel.shop.dto.InquiryRepl">
+		DELETE FROM TBL_CM_CNSL_MEMO
+		WHERE CNSL_NO = #{cnslNo} and MEMO_NO = ${memoNo}
+	</delete>		
+</mapper>

@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="category">
+	<resultMap id="listCategory" type="com.giftiel.shop.dto.Category">
+	    <result property="gubun" column="GUBUN"/>
+	    <result property="cateCd" column="CATECD"/>
+	    <result property="cateNm" column="CATENM"/>
+	    <result property="gubunCd" column="GUBUNCD"/>
+	</resultMap>
+	
+	
+	<resultMap id="cateSeasonMap" type="com.giftiel.shop.dto.CateSeason">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="seasonSeq" column="SEASON_SEQ"/> 
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="seasonCd" column="SEASON_CD"/> 
+	    <result property="seasonGubun" column="SEASON_GUBUN"/> 
+	    <result property="seasonCdDisp" column="SEASON_CD_DISP"/> 
+	    <result property="seasonStart" column="SEASON_START"/> 
+	    <result property="seasonEnd" column="SEASON_END"/> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="useYn" column="USE_YN"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="topYn" column="TOP_YN"/> 
+	</resultMap>
+	
+	
+	
+	
+	
+	<resultMap id="ubiCodeMap" type="com.giftiel.shop.dto.UbiCode">
+	    <result property="gubun"   column="GUBUN1"/>
+	    <result property="cateCd"  column="CATECD1"/>
+	    <result property="cateNm"  column="CATENM1"/>
+	    <result property="gubunCd" column="GUBUNCD1"/>
+	    
+	    <collection property="subUbiCode" ofType="com.giftiel.shop.dto.UbiCode">
+	    	<result property="gubun"   column="GUBUN2"/>
+		    <result property="cateCd"  column="CATECD2"/>
+		    <result property="cateNm"  column="CATENM2"/>
+		    <result property="gubunCd" column="GUBUNCD2"/>
+	    </collection>
+	</resultMap>
+	
+	
+	
+	<resultMap id="listCd" type="com.giftiel.shop.dto.Code">
+	    <result property="cdNo" column="CD_NO"/>
+	    <result property="supCdNo" column="SUP_CD_NO"/>
+	    <result property="cdNm" column="CD_NM"/>
+	    <result property="cdDesc" column="CD_DESC"/>
+	    <result property="cdTp" column="CD_TP"/>
+	    <result property="wrkClsCd" column="WRK_CLS_CD"/>
+	    <result property="prir" column="PRIR"/>
+	    <result property="useYn" column="USE_YN"/>
+	    <result property="regrNo" column="REGR_NO"/>
+	    <result property="regDts" column="REG_DTS"/>
+	    <result property="updrNo" column="UPDR_NO"/>
+	    <result property="updDts" column="UPD_DTS"/>
+	    <result property="sex" column="SEX"/>
+	</resultMap>
+	
+	
+	
+	
+	<sql id = "inSeasonSeq0">
+		AND 코드 IN(
+          WITH TT AS
+      (
+          SELECT (
+          	SELECT CATE_DEPTH_2 
+          	FROM TBL_AD_CATE_CONFIG 
+          	WHERE SEASON_SEQ = #{seasonSeq}
+          	<choose>
+				<when test="gubun == 'CATEGORY1'">
+					AND CATE_DEPTH_1='CM01501' 
+				</when>
+				<otherwise>
+					AND CATE_DEPTH_1='CM01502' 
+				</otherwise>
+			</choose>
+          	
+          	AND USE_YN='Y'
+          ) TXT FROM DUAL
+      )
+      SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+          FROM TT
+          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+    )
+	</sql>
+	
+	<sql id = "depth2">
+		 AND TAB1.코드 IN(
+          WITH TT AS
+      (
+          SELECT (SELECT CATE_DEPTH_2 FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ = '94' AND CATE_DEPTH_1='CM01501' AND USE_YN='Y') TXT FROM DUAL
+      )
+      SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+          FROM TT
+          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+    )
+	</sql>
+	
+	
+	<sql id = "categoryCondition">
+		 AND TAB1.코드 IN(
+	          WITH TT AS
+	      (
+	          SELECT (SELECT CATE_DEPTH_2 FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ = #{seasonSeq} AND CATE_DEPTH_1=#{cateDepth1} AND USE_YN='Y') TXT FROM DUAL
+	      )
+	      SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+	          FROM TT
+	          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+	    )
+	    
+	     AND TAB2.코드 IN(
+	          WITH TT AS
+	      (
+	          SELECT (SELECT CATE_DEPTH_3 FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ = #{seasonSeq} AND CATE_DEPTH_1=#{cateDepth1} AND USE_YN='Y') TXT FROM DUAL
+	      )
+	      SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+	          FROM TT
+	          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+	     )
+	</sql>
+	
+	
+	
+	<select id="listCategory" parameterType="String" resultMap="listCategory">
+		select /* listCategory */
+		구분 AS GUBUN
+		,코드 AS CATECD
+		,코드명 AS CATENM
+		,구분코드 AS GUBUNCD
+		from UBI09S_WORKS.V_코드정보
+		where 구분 = #{id}
+<!-- 		<include refid="inSeasonSeq"/> -->
+	</select>	
+	
+	
+	
+	<select id="getSeasonCategory" parameterType="HashMap" resultMap="cateSeasonMap">
+		SELECT SEASON_SEQ /* getSeasonCategory */
+				,SITE_NO
+				,SEASON_CD
+				,SEASON_GUBUN
+				,SEASON_CD_DISP
+				,SEASON_START
+				,SEASON_END
+				,DISP_YN
+				,USE_YN
+				,REGR_NO
+				,REG_DTS
+				,UPDR_NO
+				,UPD_DTS
+				,TOP_YN
+		FROM TBL_AD_CATE_SEASON
+		WHERE SITE_NO = #{siteNo}
+		AND SEASON_GUBUN = #{seasonGubunCode}
+		AND USE_YN = 'Y'
+	</select>	
+	
+	
+	<insert id="setSeasonCategory" parameterType="com.giftiel.shop.dto.CateSeason">
+		MERGE INTO TBL_AD_CATE_SEASON /* setSeasonCategory */
+		    USING DUAL
+		    ON (SITE_NO = #{siteNo}
+		    AND SEASON_GUBUN = #{seasonGubun})
+		    
+		WHEN MATCHED THEN
+		
+			UPDATE SET
+				SEASON_CD = #{seasonCd}
+        		,SEASON_CD_DISP = #{seasonCdDisp}
+        		<choose>
+					<when test="dispYn != null and  dispYn !=''">
+						,DISP_YN = #{dispYn}
+					</when>
+					<otherwise>
+						 ,DISP_YN = 'N'
+					</otherwise>
+				</choose>
+				,UPDR_NO = #{updrNo}
+				,UPD_DTS = SYSDATE
+				<choose>
+					<when test="topYn != null and  topYn !=''">
+						,TOP_YN = #{topYn}
+					</when>
+					<otherwise>
+						,TOP_YN = 'N'
+					</otherwise>
+				</choose>
+		
+		WHEN NOT MATCHED THEN
+		
+			INSERT (
+					 SEASON_SEQ
+					,SITE_NO
+					,SEASON_CD
+					,SEASON_GUBUN
+					,SEASON_CD_DISP
+					,SEASON_START
+					,SEASON_END
+					,DISP_YN
+					,USE_YN
+					,REGR_NO
+					,REG_DTS
+					,UPDR_NO
+					,UPD_DTS
+					,TOP_YN
+					)
+			VALUES(
+				 SEQ_TBL_AD_CATE_SEASON.NEXTVAL
+				,#{siteNo}
+				,#{seasonCd}
+				,#{seasonGubun}
+				,#{seasonCdDisp}
+				,''
+				,''
+				<choose>
+					<when test="dispYn != null and  dispYn !=''">
+						,#{dispYn}
+					</when>
+					<otherwise>
+						,'N'
+					</otherwise>
+				</choose>
+				,'Y'
+				,#{updrNo}
+				,SYSDATE
+				,#{updrNo}
+				,SYSDATE
+				<choose>
+					<when test="topYn != null and  topYn !=''">
+						,#{topYn}
+					</when>
+					<otherwise>
+						,'N'
+					</otherwise>
+				</choose>
+			)
+	</insert>
+	
+	<select id="listCategoryGdsCnt" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCategory">
+		select /*category.listCategoryGdsCnt*/
+		  main.*
+		  from (
+				select 
+				구분 AS GUBUN
+				,코드 AS CATECD
+				,코드명 AS CATENM
+				,구분코드 AS GUBUNCD
+		   	from UBI09S_WORKS.V_코드정보
+		    where 구분 = #{gubun}
+<!-- 		    AND 코드 IN( -->
+<!-- 		          WITH TT AS -->
+<!-- 		      ( -->
+<!-- 		      <if test="gubun == 'CATEGORY1'"> -->
+<!-- 		      	SELECT (SELECT CATE_DEPTH_2 FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ = #{nowSeq} AND CATE_DEPTH_1=#{cateGubun} AND USE_YN='Y') TXT FROM DUAL -->
+<!-- 		      </if> -->
+<!-- 		      <if test="gubun == 'CATEGORY2'"> -->
+<!-- 		      	SELECT (SELECT CATE_DEPTH_3 FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ = #{nowSeq} AND CATE_DEPTH_1=#{cateGubun} AND USE_YN='Y') TXT FROM DUAL -->
+<!-- 		      </if> -->
+<!-- 		      ) -->
+<!-- 		      SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT  -->
+<!-- 		          FROM TT -->
+<!-- 		          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0 -->
+<!-- 		    	) -->
+		    	
+		)main
+		where
+			(select count(*) from tbl_gd_gds gds<!-- , UBI09S_WORKS.V_상품정보트리거 ubigds -->
+		      where <!-- gds.ubi_gds_no = ubigds.품번
+		      and --> gds.DISP_YN = 'Y'
+		      and gds.GDS_STAT = 'GD00402'
+		      <if test="seasonCode != 'OUTLET'">
+		      	and SEASON_CODE = #{seasonCode}
+		      </if>
+		      <if test="seasonCode == 'OUTLET'">
+		      	and SEASON_CODE != #{curSeason}
+<!-- 		      	and UBIGDS.재고수량 > 0 -->
+		      </if>
+		      <if test="gubun == 'CATEGORY1'">
+		      	and CATEGORY1 = MAIN.CATECD
+		      </if>
+		      <if test="gubun == 'CATEGORY2'">
+		      	and CATEGORY1 = #{category1Code}
+		      	and CATEGORY2 = MAIN.CATECD
+		      </if>
+			  <if test="siteNo != '' and siteNo != null">
+				AND BRAND_CODE = (SELECT 코드 FROM UBI09S_WORKS.V_코드정보 WHERE 구분 = 'BRAND' AND 코드명 = (select site_desc from tbl_ad_site where site_no = #{siteNo}))
+			  </if>
+              <if test="sex != '' and sex != null">
+ 				AND SEX = #{sex}
+			  </if>
+              <if test="brand != '' and brand != null">
+ 				AND BRAND_CODE = #{brand}
+			  </if>			  
+			  <!-- AND UBIGDS.COLLABORATION is null -->
+		      ) > 0
+	</select>	
+	
+	<select id="listBrandGdsCnt" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCategory">
+		SELECT CD_NM AS CATENM
+		 FROM (
+		  SELECT MAIN.*,
+		    (select count(품번) from tbl_gd_gds gds, UBI09S_WORKS.V_상품정보트리거 ubigds
+		    where gds.ubi_gds_no = ubigds.품번
+		    and gds.DISP_YN = 'Y'
+		    and gds.GDS_STAT = 'GD00402'
+		    and ubigds.brand코드 = MAIN.CD_NM
+            <if test="seasonCode != 'OUTLET'">
+		    and ubigds.SEASON코드 = #{seasonCode}
+	  		</if>
+            <if test="seasonCode == 'OUTLET'">
+ 			and ubigds.SEASON코드 != #{curSeason}
+		  	</if>
+		    )GDS_CNT
+		  FROM (
+		        SELECT 
+		            CD_NO 
+		            ,SUP_CD_NO 
+		            ,CD_NM 
+		            ,CD_DESC 
+		            ,CD_TP 
+		            ,WRK_CLS_CD 
+		            ,PRIR 
+		            ,USE_YN 
+		            ,REGR_NO 
+		            ,REG_DTS 
+		            ,UPDR_NO 
+		            ,UPD_DTS 
+		        FROM
+		            TBL_AD_CD 
+		        WHERE SUP_CD_NO = 'CM013'
+		        AND USE_YN = 'Y' 
+		        
+		        AND CD_NM IN(
+		            WITH TT AS
+		        (
+		            SELECT (SELECT CATE_DEPTH_2 FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ =4 AND CATE_DEPTH_1='CM01503' AND USE_YN='Y') TXT FROM DUAL
+		        )
+		        SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+		            FROM TT
+		            CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+		        )
+		        ORDER BY PRIR ASC
+		  )MAIN
+		)WHERE GDS_CNT = 0
+	</select>		
+	
+	
+	<select id="getUbiCategory" resultMap="ubiCodeMap" parameterType="com.giftiel.shop.dto.CategoryForm">
+		SELECT  /*category.getUbiCategory*/
+			TAB1.구분 AS GUBUN1
+			,TAB1.코드 AS CATECD1
+			,TAB1.코드명 AS CATENM1
+			,TAB1.구분코드 AS GUBUNCD1
+	    
+	    ,TAB2.구분 AS GUBUN2
+			,TAB2.코드 AS CATECD2
+			,TAB2.코드명 AS CATENM2
+			,TAB2.구분코드 AS GUBUNCD2
+	    
+			FROM UBI09S_WORKS.V_코드정보 TAB1,
+	    	UBI09S_WORKS.V_코드정보 TAB2
+	    
+	    WHERE TAB1.구분 = 'CATEGORY1'
+	    AND TAB2.구분 = 'CATEGORY2'
+	    AND TAB1.코드 = SUBSTR(TAB2.코드 , 1 , 2)
+	    AND TAB1.코드 != '00'
+	    <if test="search != 'all'">
+	    	<include refid="categoryCondition"/>
+	    </if>
+	</select>
+	
+	
+	
+	<select id="getUbiCategoryTot" resultType="java.util.HashMap" parameterType="com.giftiel.shop.dto.CategoryForm">
+		SELECT GRPTOT FROM(  /*category.getUbiCategoryTot*/
+			SELECT COUNT(GRP_LIST.CATECD1) GRPTOT FROM
+				 (SELECT 
+			          TAB1.구분 AS GUBUN1
+			          ,TAB1.코드 AS CATECD1
+			          ,TAB1.코드명 AS CATENM1
+			          ,TAB1.구분코드 AS GUBUNCD1
+			          
+			          ,TAB2.구분 AS GUBUN2
+			          ,TAB2.코드 AS CATECD2
+			          ,TAB2.코드명 AS CATENM2
+			          ,TAB2.구분코드 AS GUBUNCD2
+			          
+			          FROM UBI09S_WORKS.V_코드정보 TAB1,
+			          UBI09S_WORKS.V_코드정보 TAB2
+			          
+			          WHERE TAB1.구분 = 'CATEGORY1'
+			          AND TAB2.구분 = 'CATEGORY2'
+			          AND TAB1.코드 = SUBSTR(TAB2.코드 , 1 , 2)
+			          AND TAB1.코드 != '00'
+			          <if test="search != 'all'">
+				      	<include refid="categoryCondition"/>
+				      </if>
+				  )GRP_LIST
+			 GROUP by CATECD1
+			 ORDER BY CATECD1 ASC
+	     )
+	</select>
+	
+	
+	
+	
+	<select id="getCateDepth" resultType="java.util.HashMap" parameterType="com.giftiel.shop.dto.CategoryForm">
+		SELECT  /*category.getCateDepth*/
+      		A.CATE_DEPTH_2 MEN2,
+			A.CATE_DEPTH_3 MEN3, 
+			A.NA_DISP_YN MEN_NA_DISP_YN,
+      		B.CATE_DEPTH_2 WOMEN2,
+			B.CATE_DEPTH_3 WOMEN3,
+			B.NA_DISP_YN WOMEN_NA_DISP_YN,      
+			C.CATE_DEPTH_2 BRAND,
+			A.NA_DISP_NM MEN_NA_DISP_NM,
+          	B.NA_DISP_NM WOMEN_NA_DISP_NM
+		FROM TBL_AD_CATE_CONFIG A,
+			TBL_AD_CATE_CONFIG B,
+			TBL_AD_CATE_CONFIG C
+		WHERE A.SEASON_SEQ = #{seasonSeq}
+			AND A.SEASON_SEQ = B.SEASON_SEQ
+			AND A.SEASON_SEQ = C.SEASON_SEQ
+			AND A.CATE_DEPTH_1='CM01501'
+			AND B.CATE_DEPTH_1='CM01502'
+			AND C.CATE_DEPTH_1='CM01503'
+			AND A.USE_YN='Y'
+			AND B.USE_YN='Y'     	  
+	</select>
+	
+	
+	
+	<select id="getBrand" resultType="java.util.HashMap" parameterType="com.giftiel.shop.dto.CategoryForm">
+		SELECT CATE_DEPTH_1 /*category.getBrand*/
+			  ,CATE_DEPTH_2
+		FROM TBL_AD_CATE_CONFIG
+		WHERE CATE_DEPTH_1 = #{depthCode}
+		AND SEASON_SEQ = #{seasonSeq}
+	</select>
+	
+	<select id="getdefaultSeason" resultType="java.util.HashMap">
+		SELECT * FROM ( /*category.getdefaultSeason*/
+		SELECT SEASON_SEQ
+		      ,SITE_NO
+		      ,SEASON_CD
+		      ,SEASON_GUBUN
+		FROM TBL_AD_CATE_SEASON
+		WHERE USE_YN = 'Y'
+		AND   DISP_YN = 'Y'
+		AND   SEASON_GUBUN != 'CM01403'
+		<choose>
+			<when test="siteNo != null and  siteNo !=0">
+				AND  SITE_NO = #{siteNo}
+			</when>
+			<otherwise>
+				AND  SITE_NO = '10001'
+			</otherwise>
+		</choose>
+		
+		ORDER BY SEASON_GUBUN DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
+	
+	
+	<insert id="setCateDepth" parameterType="com.giftiel.shop.dto.CategoryForm">
+	
+		INSERT ALL  /*category.setCateDepth*/
+	
+			INTO TBL_AD_CATE_CONFIG(
+					 SEASON_SEQ
+					,CATE_DEPTH_1
+					,CATE_DEPTH_2
+					,CATE_DEPTH_3
+					,NA_DISP_YN
+					,USE_YN
+					,REGR_NO
+					,REG_DTS
+					,UPDR_NO
+					,UPD_DTS
+					,NA_DISP_NM
+					)
+			VALUES(
+				 #{seasonSeq}
+				,'CM01501'
+				<choose>
+					<when test="cateMenDepth2 != null and  cateMenDepth2 !=''">
+						,#{cateMenDepth2}
+					</when>
+					<otherwise>
+						,''
+					</otherwise>
+				</choose>
+				<choose>
+					<when test="cateMenDepth3 != null and  cateMenDepth3 !=''">
+						,#{cateMenDepth3}
+					</when>
+					<otherwise>
+						,''
+					</otherwise>
+				</choose>
+				
+				<choose>
+					<when test="menNaDispYn != null and  menNaDispYn !=''">
+						,#{menNaDispYn}
+					</when>
+					<otherwise>
+						,'N'
+					</otherwise>
+				</choose>
+				,'Y'
+				,#{userNo}
+				,SYSDATE
+				,#{userNo}
+				,SYSDATE
+				,'NEW ARRIVAL'
+			)
+			
+			
+			
+			INTO TBL_AD_CATE_CONFIG(
+					 SEASON_SEQ
+					,CATE_DEPTH_1
+					,CATE_DEPTH_2
+					,CATE_DEPTH_3
+					,NA_DISP_YN
+					,USE_YN
+					,REGR_NO
+					,REG_DTS
+					,UPDR_NO
+					,UPD_DTS
+					)
+			VALUES(
+				 #{seasonSeq}
+				,'CM01502'
+				<choose>
+					<when test="cateWomenDepth2 != null and  cateWomenDepth2 !=''">
+						,#{cateWomenDepth2}
+					</when>
+					<otherwise>
+						,''
+					</otherwise>
+				</choose>
+				<choose>
+					<when test="cateWomenDepth3 != null and  cateWomenDepth3 !=''">
+						,#{cateWomenDepth3}
+					</when>
+					<otherwise>
+						,''
+					</otherwise>
+				</choose>
+				<choose>
+					<when test="womenNaDispYn != null and  womenNaDispYn !=''">
+						,#{womenNaDispYn}
+					</when>
+					<otherwise>
+						,'N'
+					</otherwise>
+				</choose>
+				,'Y'
+				,#{userNo}
+				,SYSDATE
+				,#{userNo}
+				,SYSDATE
+			)
+			
+			
+		SELECT * FROM DUAL
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	<insert id="setBrandCate" parameterType="com.giftiel.shop.dto.CategoryForm">
+		INSERT /*category.setBrandCate*/
+			INTO TBL_AD_CATE_CONFIG(  
+					 SEASON_SEQ
+					,CATE_DEPTH_1
+					,CATE_DEPTH_2
+					,CATE_DEPTH_3
+					,NA_DISP_YN
+					,USE_YN
+					,REGR_NO
+					,REG_DTS
+					,UPDR_NO
+					,UPD_DTS
+					)
+			VALUES(
+				 #{seasonSeq}
+				,'CM01503'
+				,''
+				,''
+				,''
+				,'Y'
+				,#{userNo}
+				,SYSDATE
+				,#{userNo}
+				,SYSDATE
+			)
+	</insert>
+	
+	<insert id="setBrandCate2" parameterType="com.giftiel.shop.dto.CategoryForm">
+		INSERT /*category.setBrandCate*/
+			INTO TBL_AD_CATE_CONFIG(  
+					 SEASON_SEQ
+					,CATE_DEPTH_1
+					,CATE_DEPTH_2
+					,CATE_DEPTH_3
+					,NA_DISP_YN
+					,USE_YN
+					,REGR_NO
+					,REG_DTS
+					,UPDR_NO
+					,UPD_DTS
+					)
+			VALUES(
+				 #{seasonSeq}
+				,'CM01504'
+				,''
+				,''
+				,''
+				,'Y'
+				,#{userNo}
+				,SYSDATE
+				,#{userNo}
+				,SYSDATE
+			)
+	</insert>	
+	
+	
+	
+	
+	
+	
+	
+	<select id="getSeasonList" resultType="java.util.HashMap" parameterType="com.giftiel.shop.dto.CategoryForm">
+		SELECT  SEASON_SEQ  /*category.getSeasonList*/
+		       ,SITE_NO
+		       ,SEASON_CD
+		       ,SEASON_GUBUN
+		       ,SEASON_CD_DISP
+		FROM TBL_AD_CATE_SEASON
+		WHERE SITE_NO = #{siteNo}
+		AND   DISP_YN = 'Y'
+		AND   USE_YN = 'Y'
+		ORDER BY SEASON_GUBUN ASC
+	</select>
+	
+	
+	
+	<update id="saveCate" parameterType="com.giftiel.shop.dto.CategoryForm">
+		UPDATE TBL_AD_CATE_CONFIG /*category.saveCate*/
+		SET CATE_DEPTH_2 = CASE CATE_DEPTH_1 
+						   WHEN 'CM01501' THEN
+						   <choose>
+								<when test="cateMenDepth2 != null and  cateMenDepth2 !=''">
+									#{cateMenDepth2}
+								</when>
+								<otherwise>
+									''
+								</otherwise>
+							</choose> 
+						   
+		                   WHEN 'CM01502' THEN 
+		                   <choose>
+								<when test="cateWomenDepth2 != null and  cateWomenDepth2 !=''">
+									#{cateWomenDepth2}
+								</when>
+								<otherwise>
+									''
+								</otherwise>
+							</choose> 
+		                   ELSE '' END
+		   ,CATE_DEPTH_3 = CASE CATE_DEPTH_1 
+						   WHEN 'CM01501' THEN 
+						   <choose>
+								<when test="cateMenDepth3 != null and  cateMenDepth3 !=''">
+									#{cateMenDepth3}
+								</when>
+								<otherwise>
+									''
+								</otherwise>
+							</choose> 
+		                   WHEN 'CM01502' THEN 
+		                   <choose>
+								<when test="cateWomenDepth3 != null and  cateWomenDepth3 !=''">
+									#{cateWomenDepth3}
+								</when>
+								<otherwise>
+									''
+								</otherwise>
+							</choose> 
+		                   ELSE '' END
+		     ,NA_DISP_YN = CASE CATE_DEPTH_1 
+						   WHEN 'CM01501' THEN 
+						   <choose>
+								<when test="menNaDispYn != null and  menNaDispYn !=''">
+									#{menNaDispYn}
+								</when>
+								<otherwise>
+									'N'
+								</otherwise>
+							</choose> 
+		                   WHEN 'CM01502' THEN 
+		                   <choose>
+								<when test="womenNaDispYn != null and  womenNaDispYn !=''">
+									#{womenNaDispYn}
+								</when>
+								<otherwise>
+									'N'
+								</otherwise>
+							</choose> 
+		                   ELSE '' END
+		WHERE SEASON_SEQ = #{seasonSeq}
+		AND CATE_DEPTH_1 != 'CM01503'
+	</update>
+	
+	
+	
+	<update id="saveBrand" parameterType="com.giftiel.shop.dto.CategoryForm">
+		UPDATE TBL_AD_CATE_CONFIG  /*category.saveBrand*/
+		SET CATE_DEPTH_2 = #{brandCd}
+		WHERE SEASON_SEQ = #{seasonSeq}
+		  AND CATE_DEPTH_1 = 'CM01503'
+	</update>
+	
+	<update id="saveBrand2" parameterType="com.giftiel.shop.dto.CategoryForm">
+		UPDATE TBL_AD_CATE_CONFIG  /*category.saveBrand*/
+		SET CATE_DEPTH_2 = #{brandCd2}
+		WHERE SEASON_SEQ = #{seasonSeq}
+		  AND CATE_DEPTH_1 = 'CM01504'
+	</update>	
+	
+	
+	
+	<select id="listCd" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCd">
+	    SELECT 
+	               코드 AS CD_NM 
+	        ,코드명 AS CD_DESC 
+	    FROM
+	        UBI09S_WORKS.V_코드정보 
+	    WHERE 구분 = 'BRAND'
+	    
+	    
+	    AND 코드 IN(
+          WITH TT AS
+      (
+          SELECT (SELECT CATE_DEPTH_2 FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ = #{nowSeq} AND CATE_DEPTH_1='CM01503' AND USE_YN='Y') TXT FROM DUAL
+      )
+      SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+          FROM TT
+          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+    	)
+    	ORDER BY 코드명 ASC
+	</select>
+	
+	<select id="listCdAll" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCd">
+	    SELECT 
+	               코드 AS CD_NM 
+	        ,코드명 AS CD_DESC 
+	    FROM
+	        UBI09S_WORKS.V_코드정보 
+	    WHERE 구분 = 'BRAND'
+    	ORDER BY 코드명 ASC
+	</select>	
+	
+	
+	<!-- 시즌 시퀀스 가져오기 -->
+	<select id="getSeasonSeq" parameterType="HashMap" resultType="int">
+		SELECT SEASON_SEQ /* getSeasonSeq */
+				
+		FROM TBL_AD_CATE_SEASON
+		WHERE SITE_NO = #{siteNo}
+<!-- 		AND SEASON_GUBUN != 'CM01403' -->
+		AND USE_YN = 'Y'
+		AND DISP_YN = 'Y'
+		<choose>
+			<when test="seasonCd != null and  seasonCd !=''">
+<!-- 				AND   SEASON_CD = #{seasonCd} -->
+				AND   SEASON_CD = (
+				SELECT 
+				DECODE(
+				(SELECT SEASON_CD FROM TBL_AD_CATE_SEASON
+				WHERE SITE_NO = #{siteNo}
+				AND DISP_YN = 'Y'
+				AND USE_YN = 'Y'
+				AND SEASON_CD = #{seasonCd})
+				,NULL
+				,(SELECT SEASON_CD FROM TBL_AD_CATE_SEASON
+									      WHERE SITE_NO = #{siteNo}
+									      AND SEASON_GUBUN = 'CM01403')
+				,#{seasonCd}
+				)SEASON_CD
+				FROM DUAL)
+				
+			</when>
+			<otherwise>
+<!-- 				상품번호로 시즌코드 얻어오는 쿼리 ....얻어온 시즌코드가 현설정시즌이 아닐때에는 OUTLET처리 -->
+				AND   SEASON_CD =
+				(SELECT 
+					DECODE(
+					(SELECT SEASON코드
+					  FROM UBI09S_WORKS.V_상품정보트리거
+					  WHERE 품번   = #{ubiGdsNo}
+					  AND ROWNUM = 1
+					  AND SEASON코드 IN(
+					    SELECT SEASON_CD FROM (
+					      SELECT * FROM TBL_AD_CATE_SEASON
+					      WHERE SITE_NO = #{siteNo}
+					      AND SEASON_GUBUN != 'CM01403'
+					      AND DISP_YN = 'Y'
+						  AND USE_YN = 'Y'
+					    )
+					  )
+					)
+					, NULL
+					, (SELECT SEASON_CD FROM TBL_AD_CATE_SEASON
+					      WHERE SITE_NO = #{siteNo}
+					      AND SEASON_GUBUN = 'CM01403')
+					,(SELECT SEASON코드
+					  FROM UBI09S_WORKS.V_상품정보트리거
+					  WHERE 품번   = #{ubiGdsNo}
+					  AND ROWNUM = 1)
+					) SEASON_CD
+				FROM DUAL)
+			</otherwise>
+		</choose> 
+	</select>	
+	
+	
+	
+	<!-- 	NEW ARRIVAL명 수정 -->
+	<update id="updateNa" parameterType="com.giftiel.shop.dto.CategoryForm">
+		UPDATE TBL_AD_CATE_CONFIG  /*category.updateNa*/
+		SET NA_DISP_NM = 
+		<choose>
+			<when test="cateDepth1 == 'CM01501'">
+				#{menNaDispNm}
+			</when>
+			<when test="cateDepth1 == 'CM01502'">
+				#{womenNaDispNm}
+			</when>
+		</choose>
+		WHERE SEASON_SEQ = #{seasonSeq}
+		  AND CATE_DEPTH_1 = #{cateDepth1}
+		
+	</update>
+	
+	<select id="listBrand" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCd">
+		/*category.listBrand*/
+	    SELECT 
+	               코드 AS CD_NM 
+	        ,코드명 AS CD_DESC
+	        ,(SELECT MIN(CATE_DEPTH_1) FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ  = 3 AND CATE_DEPTH_1 IN ('CM01503','CM01504') AND CATE_DEPTH_2 like '%'||code.코드||'%') SEX
+	    FROM
+	        UBI09S_WORKS.V_코드정보 code
+	    WHERE 구분 = 'BRAND'
+	    
+	     
+	    AND 코드 IN(
+          WITH TT AS
+      (
+          SELECT (SELECT WMSYS.WM_CONCAT(CATE_DEPTH_2) FROM TBL_AD_CATE_CONFIG WHERE SEASON_SEQ = #{nowSeq} AND CATE_DEPTH_1 IN (${depthCode}) AND USE_YN='Y') TXT FROM DUAL
+      )
+      SELECT TRIM(REGEXP_SUBSTR(TXT, '[^,]+', 1, LEVEL)) AS TXT 
+          FROM TT
+          CONNECT BY INSTR(TXT, ',', 1, LEVEL - 1) > 0
+    	)
+    	ORDER BY 코드명 ASC
+	</select>	
+</mapper>

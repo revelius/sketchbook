@@ -1,0 +1,35 @@
+select main.MONTH, main.적립액 + offline_y.적립액 - offline_n.적립액 적립액, use.사용액 from (
+  select to_char(reg_dts, 'YYYYMM') MONTH, SUM(RSV_PNT) 적립액 from tbl_me_reserve
+  where RSV_YN = 'Y'
+  group by to_char(reg_dts, 'YYYYMM')
+)main
+
+left outer join
+(
+  select to_char(reg_dts, 'YYYYMM') MONTH, SUM(RSV_PNT)*-1 사용액 from tbl_me_reserve
+  where RSV_YN = 'N'
+  group by to_char(reg_dts, 'YYYYMM')
+)use
+on main.month = use.month
+
+left outer join
+(
+  select TO_CHAR(TO_DATE(판매일자),'YYYYMM') MONTH, NVL(SUM(적립포인트),0) 적립액 from UBI09S_WORKS.V_구매정보
+  where 작업구분 = 0 
+  AND 매장코드 != 'WE001'
+  group by TO_CHAR(TO_DATE(판매일자),'YYYYMM')
+  order by TO_CHAR(TO_DATE(판매일자),'YYYYMM') desc
+)offline_y
+on main.month = offline_y.month
+
+left outer join
+(
+  select TO_CHAR(TO_DATE(판매일자),'YYYYMM') MONTH, NVL(SUM(적립포인트),0) 적립액 from UBI09S_WORKS.V_구매정보
+  where 작업구분 = 1 
+  AND 매장코드 != 'WE001'
+  group by TO_CHAR(TO_DATE(판매일자),'YYYYMM')
+)offline_n
+on main.month = offline_n.month
+
+order by month asc
+;

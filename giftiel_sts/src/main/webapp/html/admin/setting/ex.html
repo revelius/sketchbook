@@ -1,0 +1,117 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+	<script>
+		function addTab(title, url){
+			if ($('#tt').tabs('exists', title)){
+				$('#tt').tabs('select', title);
+			} else {
+				var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+				$('#tt').tabs('add',{
+					title:title,
+					content:content,
+					closable:true
+				});
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">
+					<h3>환경설정</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">상점기본정보관리</a>
+							<ul>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('상점환경설정','store_setting.html')">상점환경설정</a></li>
+							</ul>
+						</li>
+						<li><a href="#">사이트정보관리</a>
+							<ul>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('사이트환경설정','site_setting.html')">사이트환경설정</a></li>
+							</ul>
+						</li>
+						<li><a href="#">전체운영설정</a>
+							<ul>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('배송설정','delivery_setting.html')">배송설정</a></li>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('회원등급관리','member_setting.html')">회원등급관리</a></li>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('포인트설정','point_setting.html')">포인트설정</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상점운영정책</a>
+							<ul>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('상점운영정책','store_manage.html')">상점운영정책</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents productList">
+					<!--[s] 카테고리관리 -->
+					<div class="section a1">
+						<!-- [s]  -->
+						<div class="cateOpen">							
+							<div id="tt" class="easyui-tabs tabBody">							
+							</div>
+							
+						</div>
+						<!-- [e]  -->
+					</div>
+					<!--[e] 카테고리관리 -->
+				</div>
+				<!--[e] contents -->
+			</div>
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

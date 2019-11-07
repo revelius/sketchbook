@@ -1,0 +1,343 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	
+</head> 
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">			
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">					
+					<h3>회원관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">회원관리</a>
+							<ul>
+								<li class="on">- <a href="#">회원목록</a></li>
+								<li class="last">- <a href="#">포인트관리</a></li>
+							</ul>
+						</li>						
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents memberList">
+					<!--[s] 검색목록 -->
+					<div class="section a1">
+						<h3><span class="icon1"></span>회원목록</h3>						
+						<div class="tableType2">
+							<p class="boxP"> 다음은 회원목록 입니다.<span>총 회원수 : 16,975 / 탈퇴 : 0</span> </p>
+							<table>
+							<caption>회원목록 검색</caption>
+							<colgroup>
+								<col width="56px" />
+								<col width="132px" />
+								<col width="400px" />
+								<col width="132px" />
+								<col width="300px" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th><input type="checkbox" id="" name="" /></th>
+									<th>최근 접속일</th>
+									<td  colspan="3">
+										<div class="wrap">
+											<input type="text" id="" name="" />
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a> ~
+											<input type="text" id="" name="" />
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a>										
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th><input type="checkbox" id="" name="" /></th>
+									<th>구매일</th>
+									<td  colspan="3">
+										<div class="wrap">
+											<input type="text" id="" name="" />
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a> ~
+											<input type="text" id="" name="" />
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a>										
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th><input type="checkbox" id="" name="" /></th>
+									<th>가입일</th>
+									<td  colspan="3">
+										<div class="wrap">
+											<input type="text" id="" name="" />
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a> ~
+											<input type="text" id="" name="" />
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a>										
+										</div>
+									</td>
+								</tr>
+								
+								<tr>
+									<th><input type="checkbox" id="" name="" /></th>
+									<th>등급별</th>
+									<td  colspan="3">
+										<div class="wrap">
+											<select>
+												<option>회원등급</option>
+											</select>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th><input type="checkbox" id="" name="" /></th>
+									<th>총 구매금액</th>
+									<td>
+										<input type="text" id="" name="" /> 원 ~ <input type="text" id="" name="" /> 원 
+									</td>									
+									<th>총 구매건수</th>
+									<td><input type="text" id="" name="" /> 건</td>
+								</tr>
+								<tr>
+									<th><input type="checkbox" id="" name="" /></th>
+									<th>포인트 적립</th>
+									<td colspan="3"><input type="text" id="" name="" /> &nbsp;P ~ <input type="text" id="" name="" /> &nbsp;P </td>
+								</tr>
+								<tr>
+									<th><input type="checkbox" id="" name="" /></th>
+									<th>직점검색</th>
+									<td colspan="3">
+										<div class="wrap">
+											<select>
+												<option>ID</option>
+												<option>이름</option>
+												<option>핸드폰</option>
+											</select>
+											<input type="text" id="" name="" class="searchText" />
+										</div>
+									</td>
+								</tr>
+								
+							</tbody>
+							</table>
+						</div>
+						<div class="btn">
+							<a href="#" class="btnType2">검색</a>
+						</div>
+					</div>
+					<!--[e] 검색목록 -->
+
+					<!--[s] 검색결과 리스트 -->
+					<div class="section a2">
+						<div class="tableTitle">
+							<div class="left"><span class="icon2"></span>검색된 회원은 <span class="blue">00</span> 명 입니다.</div>					
+							<div class="select2">								
+								<select>
+									<option>회원등급</option>
+								</select>
+								<select>
+									<option>선택</option>
+									<option>15개 보기</option>
+									<option>30개 보기</option>
+									<option>50개 보기</option>
+									<option>100개 보기</option>
+									<option>200개 보기</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="tableType1">
+							<table>
+							<caption>회원목록 검색 결과 리스트</caption>
+							<colgroup>
+								<col width="5%" />
+								<col width="7%" />
+								<col width="*" />
+								<col width="8%" />
+								<col width="10%" />
+								<col width="11%" />
+								<col width="5%" />
+								<col width="9%" />
+								<col width="9%" />
+								<col width="6%" />
+								<col width="9%" />
+								<col width="9%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th><input type="checkbox" id="" name="" /></th>
+									<th>구분</th>
+									<th>Email 계정</th>
+									<th>이름</th>
+									<th>회원등급</th>
+									<th>멤버쉽 번호</th>
+									<th>성별</th>
+									<th>나이</th>
+									<th>포인트</th>
+									<th>접속 수</th>
+									<th>총 구매금액</th>
+									<th>총 구매건수</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input type="checkbox" id="" name="" /></td>
+									<td>회원</td>
+									<td>iamvuae@naver.com</td>
+									<td>김보미</td>
+									<td>일반회원</td>
+									<td>1234-1234-1234</td>
+									<td>여</td>
+									<td>29</td>
+									<td>3,000P</td>
+									<td>1</td>
+									<td>0원</td>
+									<td>15</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" id="" name="" /></td>
+									<td><span class="c_f00">탈퇴</span></td>
+									<td>iamvuae@naver.com</td>
+									<td>김보미</td>
+									<td>일반회원</td>
+									<td>1234-1234-1234</td>
+									<td>여</td>
+									<td>29</td>
+									<td>3,000P</td>
+									<td>1</td>
+									<td>0원</td>
+									<td>15</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" id="" name="" /></td>
+									<td>회원</td>
+									<td>iamvuae@naver.com</td>
+									<td>김보미</td>
+									<td>일반회원</td>
+									<td>1234-1234-1234</td>
+									<td>여</td>
+									<td>29</td>
+									<td>3,000P</td>
+									<td>1</td>
+									<td>0원</td>
+									<td>15</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" id="" name="" /></td>
+									<td><span class="c_f00">탈퇴</span></td>
+									<td>iamvuae@naver.com</td>
+									<td>김보미</td>
+									<td>일반회원</td>
+									<td>1234-1234-1234</td>
+									<td>여</td>
+									<td>29</td>
+									<td>3,000P</td>
+									<td>1</td>
+									<td>0원</td>
+									<td>15</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" id="" name="" /></td>
+									<td>회원</td>
+									<td>iamvuae@naver.com</td>
+									<td>김보미</td>
+									<td>일반회원</td>
+									<td>1234-1234-1234</td>
+									<td>여</td>
+									<td>29</td>
+									<td>3,000P</td>
+									<td>1</td>
+									<td>0원</td>
+									<td>15</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" id="" name="" /></td>
+									<td>회원</td>
+									<td>iamvuae@naver.com</td>
+									<td>김보미</td>
+									<td>일반회원</td>
+									<td>1234-1234-1234</td>
+									<td>여</td>
+									<td>29</td>
+									<td>3,000P</td>
+									<td>1</td>
+									<td>0원</td>
+									<td>15</td>
+								</tr>
+							</tbody>
+							</table>
+						</div>
+					</div>
+					<!--[e] 검색결과 리스트 -->
+
+					<!--[s] 페이징 -->
+					<div class="paging">
+						<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+						<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+						<span class="num">
+							<a href="#" class="on">1</a>
+							<a href="#">2</a>
+							<a href="#">3</a>
+							<a href="#">4</a>
+							<a href="#">5</a>
+							<a href="#">6</a>
+							<a href="#">7</a>
+							<a href="#">8</a>
+							<a href="#">9</a>
+							<a href="#">10</a>
+						</span>
+						<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+						<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+						<div class="right">
+							<a href="#" class="btnType2">엑셀출력</a>
+						</div>
+					</div>
+					<!--[e] 페이징 -->
+
+				</div>
+				<!--[e] contents -->
+			</div>
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

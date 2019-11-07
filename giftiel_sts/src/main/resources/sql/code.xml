@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="code">
+	<resultMap id="listCd" type="com.giftiel.shop.dto.Code">
+	    <result property="cdNo" column="CD_NO"/>
+	    <result property="supCdNo" column="SUP_CD_NO"/>
+	    <result property="cdNm" column="CD_NM"/>
+	    <result property="cdDesc" column="CD_DESC"/>
+	    <result property="cdTp" column="CD_TP"/>
+	    <result property="wrkClsCd" column="WRK_CLS_CD"/>
+	    <result property="prir" column="PRIR"/>
+	    <result property="useYn" column="USE_YN"/>
+	    <result property="regrNo" column="REGR_NO"/>
+	    <result property="regDts" column="REG_DTS"/>
+	    <result property="updrNo" column="UPDR_NO"/>
+	    <result property="updDts" column="UPD_DTS"/>
+	    <result property="outletUseYn" column="OUTLET_USE_YN"/>
+	</resultMap>
+	
+	
+	
+	<resultMap id="siteMap" type="com.giftiel.shop.dto.Site">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="siteNm" column="SITE_NM"/> 
+	    <result property="siteDesc" column="SITE_DESC"/> 
+	    <result property="kwd" column="KWD"/> 
+	    <result property="fabiconNm" column="FABICON_NM"/> 
+	    <result property="fabiconImg" column="FABICON_IMG"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+	
+	
+	
+
+	<select id="listCd" parameterType="String" resultMap="listCd">
+	    SELECT 
+	        CD_NO 
+	        ,SUP_CD_NO 
+	        ,CD_NM 
+	        ,CD_DESC 
+	        ,CD_TP 
+	        ,WRK_CLS_CD 
+	        ,PRIR 
+	        ,USE_YN 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	    FROM
+	        TBL_AD_CD 
+	    WHERE SUP_CD_NO = #{id}
+	    AND USE_YN = 'Y'
+	    ORDER BY PRIR ASC
+	</select>
+	
+	<select id="listUbiBrand" parameterType="String" resultMap="listCd">
+	    SELECT 
+	               코드 AS CD_NM 
+	        ,코드명 AS CD_DESC 
+	    FROM
+	        UBI09S_WORKS.V_코드정보 
+	    WHERE 구분 = 'BRAND'
+	</select>	
+	
+	<insert id="insertCd" parameterType="com.giftiel.shop.dto.Code">
+	    INSERT INTO TBL_AD_CD
+	        ( CD_NO , SUP_CD_NO , CD_NM , CD_DESC , CD_TP , WRK_CLS_CD , PRIR , USE_YN , REGR_NO , REG_DTS )
+	    VALUES 
+	        ( #{cdNo} , #{supCdNo} , #{cdNm} , #{cdDesc} , #{cdTp} , #{wrkClsCd} , #{prir} , #{useYn} , #{regrNo} , #{regDts})
+	</insert>	
+	
+	
+	
+	
+	<!-- 	사이트 리스트  -->
+	<select id="getSiteList"  resultMap="siteMap">
+		SELECT 
+		    SITE_NO
+		    ,SITE_NM
+		    ,SITE_DESC
+		    ,KWD
+		    ,FABICON_NM
+		    ,FABICON_IMG
+		    ,REGR_NO
+		    ,REG_DTS
+		    ,UPDR_NO
+		    ,UPD_DTS
+		FROM TBL_AD_SITE
+		ORDER BY SITE_NO ASC
+	</select>
+	
+	
+		
+</mapper>

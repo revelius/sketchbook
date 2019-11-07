@@ -1,0 +1,64 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>	
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>환경설정 > 전체운영설정 > 배송설정</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- 총 구매액 설정으로 배송비 무료로 설정합니다.</li>
+						<li>- 총 구매액 미만일 경우의 배송비 선불 처리를 설정합니다.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- [s] 전체운영설정 컨텐츠 -->
+				<div class="tabCon_inner">
+					<!-- [s] 기본 배송정책 설정 테이블 -->
+					<div class="tableType2">
+						<table>
+							<caption>기본 배송정책</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="2" class="row_tit">기본 배송정책</th>
+							    </tr>
+								<tr>
+									<th scope="col">기본 배송정책</th>
+									<td>총 구매액 <input type="text" />원 이상일 때 <span class="highlight">무료</span>
+									 	<p class="pt_14 under">미만일 때 <input type="text" /> 원 선불</p></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 기본 배송정책 설정 테이블 -->
+					<div class="pt20"></div>
+					<div class="section a2 btn">
+						<a href="#" class="btnType2">저장</a> 
+						<a href="#" class="btnType1">취소</a>
+					</div>
+				</div>
+				<!-- [e] 상점환경설정 컨텐츠 -->	
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

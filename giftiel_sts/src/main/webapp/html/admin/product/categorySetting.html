@@ -1,0 +1,220 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">
+					<h3>상품관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">카테고리관리</a>
+							<ul>
+								<li class="on">- <a href="#">상품카테고리관리</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상품관리</a>
+							<ul>
+								<li>- <a href="#">상품등록</a></li>
+								<li>- <a href="#">상품 아이콘 관리</a></li>
+								<li>- <a href="#">상품목록</a></li>
+								<li>- <a href="#">상품진열설정</a></li>
+								<li>- <a href="#">상품휴지통</a></li>
+								<li>- <a href="#">상품 엑셀 일괄 등록</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상품정보고시 관리</a>
+							<ul>
+								<li>- <a href="#">상품정보고시 관리</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents productList">
+					<!--[s] 카테고리관리 -->
+					<div class="section a1">
+						<h3><span class="icon1"></span>일반카테고리관리</h3>
+						<div class="tableType2">
+							<ul class="boxLi">
+								<li>- 카테고리를 설정합니다.</li>
+							</ul>
+							<!-- []  -->
+							<div class="leftbox">
+								<div class="cateOpen">
+									<span class="tit">전체 펼쳐보기</span>
+									<div class="scroll">
+										<ul>
+											<li>- 대 카테고리1</li>
+											<li>- 대 카테고리2</li>
+											<li>- 대 카테고리3</li>
+											<li>- 대 카테고리4</li>
+										</ul>
+									</div>
+									<a href="#" class="btnType1">대 카테고리 추가</a>
+									<a href="#" class="btnType1">중 카테고리 추가</a>
+									<a href="#" class="btnType1">소 카테고리 추가</a>
+								</div>
+							</div>
+							<!-- []  -->
+							<!-- []  -->
+							<div class="rightbox">
+								<div class="tableTitle">
+									<div class="left"><span class="icon2"></span>카테고리 정보</div>
+								</div>
+
+								<!-- 대 카테고리 정보 -->
+								<table class="cateinfo">
+								<colgroup>
+									<col width="132px" />
+									<col width="*" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>현재 카테고리</th>
+										<td><strong>추가</strong></td>
+									</tr>
+									<tr>
+										<th>대 카테고리 명</th>
+										<td>대 카테고리 1</td>
+									</tr>
+									<tr>
+										<th>공개 설정</th>
+										<td>
+											<input type="radio" id="" name="" /> <label for="">공개</label>
+											<input type="radio" id="" name="" /> <label for="">비공개</label>
+										</td>
+									</tr>
+									<tr>
+										<th>중 카테고리 수</th>
+										<td>1개</td>
+									</tr>
+									<tr>
+										<th>전체 상품 수</th>
+										<td>1개</td>
+									</tr>
+								</tbody>
+								</table>
+								<!-- //대 카테고리 정보 -->
+								<!-- 중 카테고리 정보 -->
+								<table class="cateinfo">
+								<colgroup>
+									<col width="132px" />
+									<col width="*" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>상위카테고리</th>
+										<td><strong>대 카테고리 명</strong></td>
+									</tr>
+									<tr>
+										<th>중 카테고리 명</th>
+										<td>중 카테고리 명</td>
+									</tr>
+									<tr>
+										<th>공개 설정</th>
+										<td>
+											<input type="radio" id="" name="" /> <label for="">공개</label>
+											<input type="radio" id="" name="" /> <label for="">비공개</label>
+										</td>
+									</tr>
+									<tr>
+										<th>상품 수</th>
+										<td>0</td>
+									</tr>
+								</tbody>
+								</table>
+								<!-- //중 카테고리 정보 -->
+								<!-- 소 카테고리 정보 -->
+								<table class="cateinfo">
+								<colgroup>
+									<col width="132px" />
+									<col width="*" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>상위 카테고리 선택</th>
+										<td><strong>대 카테고리 &gt; 중 카테고리</strong></td>
+									</tr>
+									<tr>
+										<th>소 카테고리 명</th>
+										<td>소 카테고리 명</td>
+									</tr>
+									<tr>
+										<th>공개 설정</th>
+										<td>
+											<input type="radio" id="" name="" /> <label for="">공개</label>
+											<input type="radio" id="" name="" /> <label for="">비공개</label>
+										</td>
+									</tr>
+									<tr>
+										<th>상품 수</th>
+										<td>0개</td>
+									</tr>
+								</tbody>
+								</table>
+								<!-- //소 카테고리 정보 -->
+
+								<a href="#" class="btnType1 right">수정</a>
+							</div>
+							<!-- []  -->
+							<div style="clear:both;"></div>
+
+						</div>
+					</div>
+					<!--[e] 카테고리관리 -->
+				</div>
+				<!--[e] contents -->
+			</div>
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

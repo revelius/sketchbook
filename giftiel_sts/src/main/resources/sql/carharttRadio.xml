@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="carharttRadio">
+
+	<resultMap id="RadioMap" type="com.giftiel.shop.dto.CarharttRadioForm">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="radioNo" column="RADIO_NO"/> 
+	    <result property="dispYn" column="DISP_YN"/> 
+	    <result property="banImgUrl" column="BAN_IMG_URL"/> 
+	    <result property="cvImgUrl" column="CV_IMG_URL"/> 
+	    <result property="bgImgUrl" column="BG_IMG_URL"/> 
+	    <result property="radioLink" column="RADIO_LINK"/> 
+	    <result property="radioTitle" column="RADIO_TITLE"/> 
+	    <result property="radioArtist" column="RADIO_ARTIST"/> 
+	    <result property="radioInfo" column="RADIO_INFO"/> 
+	    <result property="radioTrackList" column="RADIO_TRACK_LIST"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/>
+	    <result property="radioArtistInfo" column="RADIO_ARTIST_INFO"/>
+	    <result property="regUserNm" column="REG_USER_NM"/>
+	    <result property="frontBgImgUrl" column="FRONT_BG_IMG_URL"/>
+	</resultMap>
+	
+	<!-- 	Carhartt Radio List -->
+	<select id="carharttRadioList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="RadioMap">
+		SELECT C_TABLE.* FROM(
+			SELECT ROWNUM PRNUM
+					,B_TABLE.*
+				FROM (
+						SELECT
+							ROW_NUMBER() OVER(ORDER BY SORT ASC) RNUM
+							,A_TABLE.*
+						FROM (
+						    SELECT 
+						        RADIO_NO 
+						    	,DECODE(DISP_YN,'Y','공개','N','비공개') DISP_YN
+						        ,BAN_IMG_URL 
+						        ,CV_IMG_URL 
+						        ,BG_IMG_URL 
+								
+								,CASE 
+								   WHEN REG_DTS <![CDATA[<]]> (SELECT SYNC_DTS FROM TBL_AD_IMG_SYNC WHERE ROWNUM = 1) THEN 'http://googledrive.com/host/0B6HfeD747YiJZFNiZTNKdGphN2M/'||REPLACE(BG_IMG_URL, '/', '_')
+								   ELSE 'http://worksout60.cafe24.com/upload/image'||BG_IMG_URL
+								END AS FRONT_BG_IMG_URL						        
+						        
+						        ,RADIO_LINK 
+						        ,RADIO_TITLE 
+						        ,RADIO_ARTIST 
+						        ,RADIO_INFO 
+						        ,RADIO_TRACK_LIST 
+						        ,REGR_NO 
+						        ,REG_DTS 
+						        ,UPDR_NO 
+						        ,UPD_DTS SORT
+						        ,TO_CHAR(UPD_DTS, 'YYYY.MM.DD') UPD_DTS 
+						        ,RADIO_ARTIST_INFO
+						        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = DR.UPDR_NO) REG_USER_NM 
+						    FROM
+						        TBL_DP_RADIO DR 
+						    WHERE DISP_YN = 'Y'
+							ORDER BY SORT DESC
+  				) A_TABLE
+  				ORDER BY RNUM DESC
+  			)B_TABLE
+  		)C_TABLE
+	</select> 
+	
+	
+	
+	<!-- 	칼하트 라디오 토탈 -->
+	<select id="carharttRadioTotalList" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_DP_RADIO 
+	    WHERE DISP_YN = 'Y'
+	</select>
+	
+	<!-- 	Carharrt Radio Popup -->
+	<select id="carharttRadioPopup" parameterType="INTEGER" resultMap="RadioMap">
+		SELECT 
+	        RADIO_NO 
+	        ,DISP_YN 
+	        ,BAN_IMG_URL 
+	        ,CV_IMG_URL 
+	        ,BG_IMG_URL 
+	        ,RADIO_LINK 
+	        ,RADIO_TITLE 
+	        ,RADIO_ARTIST 
+	        ,RADIO_INFO 
+	        ,RADIO_TRACK_LIST 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	        ,RADIO_ARTIST_INFO 
+	        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = DR.UPDR_NO) REG_USER_NM
+	    FROM
+	        TBL_DP_RADIO DR
+	    WHERE 1 = 1
+	    AND RADIO_NO = #{radioNo}	
+	</select>
+	
+</mapper>

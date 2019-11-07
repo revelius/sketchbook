@@ -1,0 +1,321 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	
+</head> 
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">			
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">					
+					<h3>회원관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">회원관리</a>
+							<ul>
+								<li class="on">- <a href="#">회원목록</a></li>
+								<li class="last">- <a href="#">포인트관리</a></li>
+							</ul>
+						</li>						
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents memberList">
+					<!--[s] 회원정보 목록 -->
+					<div class="section a1">
+						<h3><span class="icon1"></span>회원정보</h3>	
+						<p class="pt_14">ididididid 님의 정보</p>
+
+						<div class="tabType1">
+							<ul>
+								<li class="on"><a href="/admin/member/membershipInfo.html">회원정보</a></li>
+								<li><a href="/admin/member/orderList.html">주문내역</a></li>
+								<li><a href="/admin/member/inquire.html">1:1 문의</a></li>
+								<li><a href="/admin/member/cart.html">Cart</a></li>
+							</ul>
+						</div>
+
+						<!--[s] 기본정보 -->
+						<div class="section a2">
+							<div class="tableType1 table_left">
+								<table class="mb_16">
+								<caption>기본정보</caption>
+									<colgroup>
+										<col width="10%" />
+										<col width="20%" />
+										<col width="10%" />
+										<col width="20%" />
+										<col width="10%" />
+										<col width="20%" />
+									</colgroup>
+									<thead>
+										<tr>
+											<th colspan="6" class="th_title">기본정보</th>					
+										</tr>
+									</thead>
+									<tbody>
+									 	<tr>
+									 		<th>구분</th>
+									 		<td colspan="5" class="tl">회원 / <span class="c_f00">탈퇴</span></td>
+									 	</tr>
+										<tr>
+											<th>ID</th>
+											<td>ID</td>
+											<th>생년월일</th>
+											<td>1983/04/05</td>
+											<th>회원등급</th>
+											<td>3등급
+												<select>
+													<option value="0">3등급</option>
+													<option value="1">2등급</option>
+													<option value="2">1등급</option>
+												</select>
+												<a href="#" class="btnType1">수정</a>
+											</td>
+										</tr>
+										<tr>									
+											<th>성별</th>
+											<td>여(33)</td>
+											<th>휴대폰번호</th>
+											<td>010.1234.5678</td>
+											<th>포인트</th>
+											<td>500 P</td>
+										</tr>
+										<tr>
+									 		<th>주소1</th>
+									 		<td colspan="5" class="tl">서울시 구로구 구로동 현대아파트 101-1001</td>
+									 	</tr>
+									 	<tr>
+									 		<th>주소2</th>
+									 		<td colspan="5" class="tl">서울시 구로구 구로동 현대아파트 101-1001</td>
+									 	</tr>
+									 	<tr>
+									 		<th>주소3</th>
+									 		<td colspan="5" class="tl">서울시 구로구 구로동 현대아파트 101-1001</td>
+									 	</tr>	
+										<tr>									
+											<th>최초가입일</th>
+											<td>yyyy.mm.dd <br> HH:MM:SS </td>
+											<th>최소가입<br>사이트</th>
+											<td>www.worksout.co.kr</td>
+											<th>최근 접속일</th>
+											<td>yyyy.mm.dd <br>HH:MM:SS </td>
+										</tr>		
+									</tbody>
+								</table>						
+							</div>
+						</div>
+						<!--[e] 기본정보 -->	
+
+						<!--[s] 탈퇴정보 -->
+						<div class="section a2">
+							<div class="tableType1">
+								<table class="mb_16">
+									<caption>탈퇴정보</caption>
+									<colgroup>
+										<col width="20%" />
+										<col width="*" />
+									</colgroup>
+									<thead>
+										<tr>
+											<th colspan="2" class="th_title">탈퇴정보</th>					
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>탈퇴일자</th>
+											<td class="tl">yyyy.mm.dd HH:MM:SS</td>
+										</tr>
+										<tr>
+											<th>탈퇴사유</th>
+											<td class="tl">기타(다른 아이디로 재 가입)</td>
+										</tr>										
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!--[e] 탈퇴정보 -->			
+
+						<!--[s] 구매정보 -->
+						<div class="section a2">
+							<div class="tableType1">
+								<table class="mb_16">
+								<caption>구매정보</caption>
+								<colgroup>
+									<col width="20%" />
+									<col width="20%" />
+									<col width="20%" />
+									<col width="20%" />
+									<col width="20%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th colspan="5" class="th_title">구매정보</th>					
+									</tr>
+									<tr>
+										<th>구매횟수</th>
+										<th>(누적)구매갯수</th>
+										<th>구매 총 금액</th>
+										<th>최초 구매일</th>
+										<th>최종 구매일</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>									
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>yyyy-mm-dd</td>
+										<td>yyyy-mm-dd</td>								
+									</tr>										
+								</tbody>
+								</table>
+							</div>
+						</div>
+						<!--[e] 구매정보 -->		
+
+						<!--[s] 회원코멘트 -->
+						<div class="section a2">
+							<div class="tableType1">
+								<table class="mb_16">
+								<caption>회원코멘트</caption>
+								<colgroup>
+									<col width="20%" />
+									<col width="*" />
+									<col width="20%" />
+									<col width="20%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th colspan="4" class="th_title">회원코멘트</th>					
+									</tr>
+									<tr>
+										<th>NO</th>
+										<th>내용</th>
+										<th>작성일</th>
+										<th>작성자</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>									
+										<td>1</td>
+										<td>구매 번복을 자주 요청하는 회원…</td>
+										<td>yyyy.mm.dd</td>
+										<td>CS팀 홍길동</td>							
+									</tr>
+									<tr>
+										<td colspan="4">
+											<p class="coment">구매 번복을 자주 요청하는 회원으로 변덕이 심함. 전화 통화 시 반말을 자주하므로 주의를 요함</p>
+											<a href="#" class="btnType1 comentDel">삭제</a>
+										</td>
+									</tr>										
+								</tbody>
+								</table>
+								<div class="btn">
+									<a href="#" class="btnType2 right">글쓰기</a>
+								</div>
+							</div>
+						</div>
+						<!--[e] 회원코멘트 -->
+
+						<!--[s] 회원코멘트 글쓰기 -->
+						<div class="section a2">
+							<div class="tableType1">
+								<table class="mb_16">
+								<caption>회원코멘트</caption>
+								<colgroup>
+									<col width="5%" />
+									<col width="*" />
+									<col width="20%" />
+									<col width="20%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th colspan="4" class="th_title">회원코멘트</th>					
+									</tr>
+									<tr>
+										<th>NO</th>
+										<th>내용</th>
+										<th>작성일</th>
+										<th>작성자</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>									
+										<td>1</td>
+										<td>구매 번복을 자주 요청하는 회원…</td>
+										<td>yyyy.mm.dd</td>
+										<td>CS팀 홍길동</td>							
+									</tr>
+									<tr>
+										<td>2</td>
+										<td><input type="text" class="ip_tit" /></td>
+										<td><input type="text" /></td>
+										<td><input type="text" /></td>		
+									</tr>										
+								</tbody>
+								</table>
+								<div class="btn">
+									<div class="right">
+										<a href="#" class="btnType2">등록</a>
+										<a href="#" class="btnType2">취소</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--[e] 회원코멘트 글쓰기 -->					
+					</div>
+					<!--[e] 회원정보목록 -->				
+
+				</div>
+				<!--[e] contents -->
+			</div>
+			<!--[e] subWrap -->
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

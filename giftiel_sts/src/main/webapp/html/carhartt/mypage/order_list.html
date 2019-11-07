@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html lang="ko" class="ie7"><![endif]-->
+<!--[if IE 8]><html lang="ko" class="ie8"><![endif]-->
+<!--[if IE 9]><html lang="ko" class="ie9"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="ko">
+	<!--<![endif]-->
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta charset="utf-8">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<title>주문배송내역 리스트 - Mypage - CARHARTT WIP</title>
+		<link href="http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700"
+		type="text/css" rel="stylesheet">
+		<link href="/html/carhartt/inc/css/reset.css" type="text/css" rel="stylesheet">
+		<link href="/html/carhartt/inc/css/print.css" type="text/css" rel="stylesheet">
+		<link href="/html/carhartt/inc/css/common.css" type="text/css" rel="stylesheet">
+		<script src="/html/carhartt/inc/js/modernizr.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/jquery.mousewheel.min.js" type="text/javascript"
+		charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/swipe.js" type="text/javascript"
+		charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/TweenMax.min.js" type="text/javascript"
+		charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/common.js" type="text/javascript"
+		charset="utf-8"></script>
+	</head>
+	<body>
+		<!--[if lte IE 8]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+		<h1 class="hide_txt">CARHARTT WIP</h1>
+		<div class="dimm">
+			<img src="/html/carhartt/images/common/blank_size_100.png" alt="">
+		</div>
+		<div id="wrap">
+			<h2 class="hide_txt">주요 메뉴 영역</h2>
+			<div id="header">
+				<!-- header include -->
+				<!-- header include -->
+			</div>
+			<h2 class="hide_txt">본문 영역</h2>
+			<div id="container">
+				<div id="content">
+					<div class="content_wrap">
+						<div class="location_list_wrap">
+							<div class="location_list_container">
+								<ul class="location_list clfix">
+									<li class="home">
+										<a href="#">HOME</a>
+									</li>
+									<li>
+										<a href="#">MY PAGE</a>
+									</li>
+									<li>
+										<a href="#">ORDER LIST</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="menu_section">
+							<div id="snb_mypage_area">
+								<!-- snbMain include -->
+								<!-- snbMain include -->
+							</div>
+						</div>
+						<div class="content_section">
+							<div class="content_area">
+								<div class="mypage_area">
+									<div class="mypage_tit clfix">
+										<span class="txt01">주문/배송 내역</span>
+									</div>
+									<div class="mypage_search_box">
+										<ul class="search_box01 clfix">
+											<li class="on">
+												<a href="#">3개월</a>
+											</li>
+											<li>
+												<a href="#">6개월</a>
+											</li>
+											<li>
+												<a href="#">1년</a>
+											</li>
+											<li>
+												<a href="#">2년</a>
+											</li>
+										</ul>
+										<div class="search_box02 clfix">
+											<div class="search_select_area">
+												<div class="calendar_input">
+													<span class="input_txt">
+														<input type="text" id="" name="" placeholder="20150420">
+													</span>
+													<a href="#" class="btn_calendar">
+														<img src="/html/carhartt/images/common/ico_calendar.png" alt="달력">
+													</a>
+												</div>
+											</div>
+											<div class="bu">~</div>
+											<div class="search_select_area">
+												<div class="calendar_input">
+													<span class="input_txt">
+														<input type="text" id="" name="" placeholder="20150420">
+													</span>
+													<a href="#" class="btn_calendar">
+														<img src="/html/carhartt/images/common/ico_calendar.png" alt="달력">
+													</a>
+												</div>
+											</div>
+											<div class="search_submit_area">
+												<a href="#" class="btn_black01">조회하기</a>
+											</div>
+										</div>
+									</div>
+									<p class="mypage_txt_style02">- 주문번호를 누르시면 주문/배송 결과에 대한 상세내역을 보실 수 있습니다.</p>
+									<table class="tbl_col02 tbl_col02_mypage_order_list ui_reponsible_table_type01">
+										<caption>주문/배송 내역 테이블로 브랜드, 매장명, 주문번호, 상품, 주문일시, 가격, 상태 에 대한 정보를 알 수 있습니다.</caption>
+										<thead>
+											<tr>
+												<th scope="col">매장명</th>
+												<th scope="col">주문번호</th>
+												<th scope="col">상품</th>
+												<th scope="col">주문일시</th>
+												<th scope="col">가격</th>
+												<th scope="col">상태</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- 주문/배송내역이 없을 경우 노출 -->
+											<tr>
+												<td colspan="7" class="no_content">
+													<img src="/html/carhartt/images/common/img_no_order.gif" alt="주문/배송내역이 없습니다.">
+												</td>
+											</tr>
+											<!-- 주문/배송내역이 없을 경우 노출 -->
+											<tr>
+												<td class="tbl_layout02">
+													<div class="mobile_th">매장명</div>
+													<div class="tbl_cont">홍대 와우산</div>
+												</td>
+												<td class="tbl_layout03">
+													<div class="mobile_th">주문번호</div>
+													<div class="tbl_cont">
+														<a href="#" class="btn_order">14122600003</a>
+													</div>
+												</td>
+												<td class="tbl_layout04">
+													<div class="mobile_th">상품</div>
+													<div class="tbl_cont">
+														<div class="p_tit">[OBEY] obey Surveillance Eye</div>
+														<div class="info">Color = Black / SIZE = S</div>
+													</div>
+												</td>
+												<td class="tbl_layout05">
+													<div class="mobile_th">주문일시</div>
+													<div class="tbl_cont">2015.02.28</div>
+												</td>
+												<td class="tbl_layout06">
+													<div class="mobile_th">가격</div>
+													<div class="tbl_cont">
+														<span class="ico_price">95,000</span>
+													</div>
+												</td>
+												<td class="tbl_layout07">
+													<div class="mobile_th">상태</div>
+													<div class="tbl_cont clfix">
+														<span class="state">배송완료</span>
+														<span class="btn_state">
+															<a href="#" class="btn_in_table">반품</a>
+															<a href="#" class="btn_in_table">교환</a>
+														</span>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="tbl_layout02">
+													<div class="mobile_th">매장명</div>
+													<div class="tbl_cont">홍대 와우산 와우산</div>
+												</td>
+												<td class="tbl_layout03">
+													<div class="mobile_th">주문번호</div>
+													<div class="tbl_cont">
+														<a href="#" class="btn_order">14122600003</a>
+													</div>
+												</td>
+												<td class="tbl_layout04">
+													<div class="mobile_th">상품</div>
+													<div class="tbl_cont">
+														<div class="p_tit">[OBEY] obey Surveillance Eye</div>
+														<div class="info">Color = Black / SIZE = S</div>
+													</div>
+												</td>
+												<td class="tbl_layout05">
+													<div class="mobile_th">주문일시</div>
+													<div class="tbl_cont">2015.02.28</div>
+												</td>
+												<td class="tbl_layout06">
+													<div class="mobile_th">가격</div>
+													<div class="tbl_cont">
+														<span class="ico_price">95,000</span>
+													</div>
+												</td>
+												<td class="tbl_layout07">
+													<div class="mobile_th">상태</div>
+													<div class="tbl_cont clfix">
+														<span class="state">배송완료</span>
+														<span class="btn_state">
+															<a href="#" class="btn_in_table">배송추적</a>
+														</span>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="tbl_layout02">
+													<div class="mobile_th">매장명</div>
+													<div class="tbl_cont">홍대 와우산 와우산</div>
+												</td>
+												<td class="tbl_layout03">
+													<div class="mobile_th">주문번호</div>
+													<div class="tbl_cont">
+														<a href="#" class="btn_order">14122600003</a>
+													</div>
+												</td>
+												<td class="tbl_layout04">
+													<div class="mobile_th">상품</div>
+													<div class="tbl_cont">
+														<div class="p_tit">[OBEY] obey Surveillance Eye</div>
+														<div class="info">Color = Black / SIZE = S</div>
+													</div>
+												</td>
+												<td class="tbl_layout05">
+													<div class="mobile_th">주문일시</div>
+													<div class="tbl_cont">2015.02.28</div>
+												</td>
+												<td class="tbl_layout06">
+													<div class="mobile_th">가격</div>
+													<div class="tbl_cont">
+														<span class="ico_price">95,000</span>
+													</div>
+												</td>
+												<td class="tbl_layout07">
+													<div class="mobile_th">상태</div>
+													<div class="tbl_cont clfix">
+														<span class="state">배송중</span>
+														<span class="btn_state">
+															<a href="#" class="btn_in_table">주문취소</a>
+														</span>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="tbl_layout02">
+													<div class="mobile_th">매장명</div>
+													<div class="tbl_cont">홍대 와우산 와우산</div>
+												</td>
+												<td class="tbl_layout03">
+													<div class="mobile_th">주문번호</div>
+													<div class="tbl_cont">
+														<a href="#" class="btn_order">14122600003</a>
+													</div>
+												</td>
+												<td class="tbl_layout04">
+													<div class="mobile_th">상품</div>
+													<div class="tbl_cont">
+														<div class="p_tit">[OBEY] obey Surveillance Eye</div>
+														<div class="info">Color = Black / SIZE = S</div>
+													</div>
+												</td>
+												<td class="tbl_layout05">
+													<div class="mobile_th">주문일시</div>
+													<div class="tbl_cont">2015.02.28</div>
+												</td>
+												<td class="tbl_layout06">
+													<div class="mobile_th">가격</div>
+													<div class="tbl_cont">
+														<span class="ico_price">95,000</span>
+													</div>
+												</td>
+												<td class="tbl_layout07">
+													<div class="mobile_th">상태</div>
+													<div class="tbl_cont clfix">
+														<span class="state">결제대기</span>
+														<span class="btn_state">
+															<a href="#" class="btn_in_table">주문취소</a>
+														</span>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="tbl_layout02">
+													<div class="mobile_th">매장명</div>
+													<div class="tbl_cont">홍대 와우산 와우산</div>
+												</td>
+												<td class="tbl_layout03">
+													<div class="mobile_th">주문번호</div>
+													<div class="tbl_cont">
+														<a href="#" class="btn_order">14122600003</a>
+													</div>
+												</td>
+												<td class="tbl_layout04">
+													<div class="mobile_th">상품</div>
+													<div class="tbl_cont">
+														<div class="p_tit">[OBEY] obey Surveillance Eye</div>
+														<div class="info">Color = Black / SIZE = S</div>
+													</div>
+												</td>
+												<td class="tbl_layout05">
+													<div class="mobile_th">주문일시</div>
+													<div class="tbl_cont">2015.02.28</div>
+												</td>
+												<td class="tbl_layout06">
+													<div class="mobile_th">가격</div>
+													<div class="tbl_cont">
+														<span class="ico_price">95,000</span>
+													</div>
+												</td>
+												<td class="tbl_layout07">
+													<div class="mobile_th">상태</div>
+													<div class="tbl_cont clfix">
+														<span class="state">결제대기</span>
+														<span class="btn_state">
+															<a href="#" class="btn_in_table">주문취소</a>
+														</span>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<!-- a태그에 on 붙으면 활성화 됨. -->
+									<!-- 처음, 이전, 끝, 다음으로는 활성화 없음 -->
+									<!-- 웹에서는 페이징 모바일에서는 아래 더보기 버튼 사용 -->
+									<!-- 화면사이즈에 따라 나오고 안나오게 CSS 처리함 -->
+									<div class="pagenavi_loadmoer_select_ctr">
+										<div class="pagenavi space01">
+											<a href="#" class="btn_go_home">
+												<span class="hide_txt">맨 처음으로</span>
+											</a>
+											<a href="#" class="btn_go_prev">
+												<span class="hide_txt">이전으로</span>
+											</a>
+											<a href="#" class="on">
+												<span>1</span>
+											</a>
+											<a href="#">
+												<span>2</span>
+											</a>
+											<a href="#">
+												<span>3</span>
+											</a>
+											<a href="#">
+												<span>4123</span>
+											</a>
+											<a href="#">
+												<span>5123</span>
+											</a>
+											<a href="#" class="btn_go_next">
+												<span class="hide_txt">맨 끝으로</span>
+											</a>
+											<a href="#" class="btn_go_end">
+												<span class="hide_txt">다음으로</span>
+											</a>
+										</div>
+										<!-- 화면사이즈에 따라 나오고 안나오게 CSS 처리함 -->
+										<!-- 모바일에서는 아래 더보기 버튼 사용.  -->
+										<div class="btn_area">
+											<a href="#">
+												<img src="/html/carhartt/images/common/btn_loadmore.png" alt="LOAD MORE">
+											</a>
+										</div>
+									</div>
+									<div class="mypage_tit clfix space01">
+										<span class="txt01">주문/배송 절차안내</span>
+										<span class="link01">
+											<a href="#" class="btn_mobile_active01 ui_expand_btn_mypage"></a>
+										</span>
+									</div>
+									<div class="mypage_step_info ui_expand_body_mypage">
+										<div class="web_step">
+											<img src="/html/carhartt/images/common/txt_step01.gif" alt="주문/배송 절차안내">
+										</div>
+										<div class="mobile_step">
+											<img src="/html/carhartt/images/common/txt_m_step01.gif" alt="주문/배송 절차안내">
+										</div>
+										<p class="hide_txt">STEP1 결제대기 결제이전의 입금확인중인 상태입니다. 24시간 내 주문취소가 가능하며, 24시간 내 미입금 시 자동취소 됩니다.</p>
+										<p
+										class="hide_txt">STEP2 결제완료 결제가 확인된 상태이며 24시간 내 결제취소가 가능합니다.</p>
+											<p class="hide_txt">STEP3 배송준비 주문한 상품의 배송을 준비하는 과정입니다. * 출고지연 배송준비가 길어지거나 품절상태로 인해 배송이 지연되는
+												상태입니다.</p>
+											<p class="hide_txt">STEP4 배송중 상품이 배송되어 배송중 인 상태입니다.</p>
+											<p class="hide_txt">STEP5 배송완료 상품이 전달되어 배송이 완료된 상태이며, 7일 내 교환/반품신청이 가능합니다. 배송완료 3일 후 포인트가
+												적립됩니다.
+											</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="etc_section"></div>
+					</div>
+				</div>
+			</div>
+			<h2 class="hide_txt">하단 영역</h2>
+			<div id="footer">
+				<!-- footer include -->
+				<!-- footer include -->
+			</div>
+		</div>
+	</body>
+</html>

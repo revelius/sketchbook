@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="member">
+	<resultMap id="listMemInfo" type="com.giftiel.shop.dto.Member">
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="memGrdNo" column="MEM_GRD_NO"/> 
+	    <result property="pwd" column="PWD"/> 
+	    <result property="nm" column="NM"/> 
+	    <result property="email" column="EMAIL"/> 
+	    <result property="birthDt" column="BIRTH_DT"/> 
+	    <result property="sex" column="SEX"/> 
+	    <result property="mySlfCertYn" column="MY_SLF_CERT_YN"/> 
+	    <result property="cpNo" column="CP_NO"/> 
+	    <result property="mailSndYn" column="MAIL_SND_YN"/> 
+	    <result property="smsSndYn" column="SMS_SND_YN"/> 
+	    <result property="countryCd" column="COUNTRY_CD"/> 
+<!-- 	    <result property="joinPathCd" column="JOIN_PATH_CD"/>  -->
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    
+	    <result property="age" column="AGE"/>
+	    <result property="curPoint" column="CUR_POINT"/>
+	    <result property="loginCnt" column="LOGIN_CNT"/>
+	    <result property="orderCnt" column="ORDER_CNT"/>
+	    <result property="orderAmt" column="ORDER_AMT"/>
+        <result property="bsAddr" column="BS_ADDR"/>
+        <result property="bsAddr1" column="BS_ADDR1"/>
+        <result property="bsAddr2" column="BS_ADDR2"/>
+        <result property="bsAddr3" column="BS_ADDR3"/>
+        <result property="dtlAddr1" column="DTL_ADDR1"/>
+        <result property="dtlAddr2" column="DTL_ADDR2"/>
+        <result property="dtlAddr3" column="DTL_ADDR3"/>
+        
+        <result property="countOrd" column="COUNT_ORD"/>
+        <result property="slPrc" column="SL_PRC"/>
+        <result property="loginDts" column="LOGIN_DTS"/>
+        <result property="grdNm" column="GRD_NM"/>
+        <result property="siteDesc" column="SITE_DESC"/>
+        
+        <result property="cmntNo" column="CMNT_NO"/>
+        <result property="cmntTxt" column="CMNT_TXT"/>     
+        
+        <result property="cmtCnt" column="CMT_CNT"/>  
+        <result property="wdrwYn" column="WDRW_YN"/>  
+        <result property="wdrwRsnCd" column="WDRW_RSN_CD"/>   
+        <result property="wdrwDtlRsn" column="WDRW_DTL_RSN"/>   
+        
+        <result property="curDcPer" column="CUR_DC_PER"/>
+        <result property="curRsvPer" column="CUR_RSV_PER"/>        
+	</resultMap>
+	
+	
+	
+	
+	
+	<resultMap id="deliveryAddrMap" type="com.giftiel.shop.dto.MydlvAddr">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="dlvAddrSeq" column="DLV_ADDR_SEQ"/> 
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="addrBynm" column="ADDR_BYNM"/> 
+	    <result property="nm" column="NM"/> 
+	    <result property="tel" column="TEL"/> 
+	    <result property="cpNo" column="CP_NO"/> 
+	    <result property="zipCd" column="ZIP_CD"/> 
+	    <result property="bsAddr" column="BS_ADDR"/> 
+	    <result property="dtlAddr" column="DTL_ADDR"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="baseValYn" column="BASE_VAL_YN"/> 
+	    <result property="ubiMemNo" column="UBI_MEM_NO"/> 
+	</resultMap>
+	
+	
+	
+	<resultMap id="reserveMap" type="com.giftiel.shop.dto.Reserve">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="rsvPnt" column="RSV_PNT"/> 
+	    <result property="rsvRsnCd" column="RSV_RSN_CD"/> 
+	    <result property="rsvYn" column="RSV_YN"/> 
+	    <result property="ordNo" column="ORD_NO"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+	
+	
+	
+	
+	
+	<sql id = "memInfo">
+	        ,MEM_NO 
+	        ,MEM_GRD_NO 
+	        ,PWD 
+	        ,NM 
+	        ,EMAIL 
+	        ,BIRTH_DT 
+	        ,SEX 
+	        ,MY_SLF_CERT_YN 
+	        ,CP_NO 
+	        ,MAIL_SND_YN 
+	        ,SMS_SND_YN 
+	        ,COUNTRY_CD 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 	
+	</sql>
+	
+	<sql id = "ordInGdsSlPrc">
+		<if test="(actlPayStrPrc ==null?0:actlPayStrPrc.toString() != ''  and actlPayStrPrc ==null?0:actlPayStrPrc.toString() != null) 
+		       or (actlPayEndPrc ==null?0:actlPayEndPrc.toString() != ''  and actlPayEndPrc ==null?0:actlPayEndPrc.toString() != null)">
+		   AND NVL(MEM_NO,'') IN (SELECT NVL(MEM_NO,'')
+		    FROM(
+		      SELECT MEM_NO, NVL(SUM(SL_PRC),0) SL_PRC
+		      FROM TBL_OR_ORD ORD, TBL_OR_ORD_GDS ORDGDS
+		      WHERE ORD.ORD_NO = ORDGDS.ORD_NO
+		      	AND ORD.ORD_STAT = 'OR00203'
+		        AND ORDGDS.PER_ORD_STAT = 'OR00505'
+		      GROUP BY MEM_NO
+		    )
+		    WHERE 1=1
+		    <if test="actlPayStrPrc ==null?0:actlPayStrPrc.toString() != ''  and actlPayStrPrc ==null?0:actlPayStrPrc.toString() != null">
+		    	AND SL_PRC >= #{actlPayStrPrc}
+		    </if>
+		    <if test="actlPayEndPrc ==null?0:actlPayEndPrc.toString() != ''  and actlPayEndPrc ==null?0:actlPayEndPrc.toString() != null">
+		    	AND SL_PRC <![CDATA[<=]]> #{actlPayEndPrc}
+		    </if>
+		     ) 
+	    </if>
+	</sql>	
+	
+	<sql id = "ordInGdsCnt">
+		<if test="ordGdsCnt ==null?0:ordGdsCnt.toString() != '' and ordGdsCnt==null?0:ordGdsCnt.toString() != null">
+		   AND MEM_NO IN (SELECT MEM_NO
+		    FROM(
+		      SELECT MEM_NO, NVL(COUNT(ORD_NO),0) ORDER_CNT
+		      FROM TBL_OR_ORD ORD
+		     WHERE ORD_STAT = 'OR00203'
+		      GROUP BY MEM_NO
+		    )
+		    WHERE 1 = 1
+		    <if test="ordGdsCnt ==null?0:ordGdsCnt.toString() != '' and ordGdsCnt==null?0:ordGdsCnt.toString() != null">
+		    	AND ORDER_CNT >= #{ordGdsCnt}
+		    </if>
+		    )
+	    </if>
+	</sql>	
+	
+	<sql id = "ordInGdsPnt">
+		<if test="(rsvStrPnt ==null?0:rsvStrPnt.toString() != '' and rsvStrPnt==null?0:rsvStrPnt.toString() != null) 
+		       or (rsvEndPnt ==null?0:rsvEndPnt.toString() != '' and rsvEndPnt==null?0:rsvEndPnt.toString() != null) ">
+		   AND NVL(MEM_NO,'') IN (SELECT NVL(MEM_NO,'')
+		    FROM(
+		      SELECT MEM_NO, NVL((SELECT NVL((SUM(DECODE(RSV_YN,'Y',RSV_PNT,0)) - SUM(DECODE(RSV_YN,'N',RSV_PNT,0))), 0) FROM TBL_ME_RESERVE WHERE MEM_NO = SUBRESERVE.MEM_NO),0) AS POINT
+		        FROM TBL_ME_RESERVE SUBRESERVE
+		       WHERE RSV_YN = 'Y'
+		       GROUP BY MEM_NO
+<!-- 		     (SELECT NVL((SUM(DECODE(RSV_YN,'Y',RSV_PNT,0)) - SUM(DECODE(RSV_YN,'N',RSV_PNT,0))), 0) FROM TBL_ME_RESERVE WHERE MEM_NO = MAIN.MEM_NO) AS CUR_POINT  -->
+		     )
+		     WHERE 1=1
+		    <if test="rsvStrPnt ==null?0:rsvStrPnt.toString() != '' and rsvStrPnt==null?0:rsvStrPnt.toString() != null ">
+		    	AND POINT >= #{rsvStrPnt}
+		    </if>
+		    <if test="rsvEndPnt ==null?0:rsvEndPnt.toString() != '' and rsvEndPnt==null?0:rsvEndPnt.toString() != null">
+		    	AND POINT <![CDATA[<=]]> #{rsvEndPnt}
+		    </if>
+		   )
+	    </if>
+	</sql>
+	
+	
+	<select id="listMemInfo" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listMemInfo">
+		SELECT * FROM( /* member.listMemInfo */
+		SELECT 
+<!-- 			ROWNUM RNUM , -->
+			<choose>
+				<when test="orderBy != '' and orderBy != null">
+				ROW_NUMBER () OVER (ORDER BY ${orderBy} ${orderFlag}) AS  RNUM,
+				</when>
+				<otherwise>
+				ROW_NUMBER () OVER (ORDER BY T1.REG_DTS DESC) AS  RNUM,
+				</otherwise>
+			</choose>
+			T1.* FROM(
+		    SELECT
+		    	GRD_NM
+		    	<include refid="memInfo" />
+		        ,TRUNC(MONTHS_BETWEEN(sysdate,BIRTH_DT)/12) AS AGE
+<!-- 		        ,NVL((SELECT SUM(RSV_PNT) FROM TBL_ME_RESERVE WHERE MEM_NO = MAIN.MEM_NO AND RSV_YN = 'Y'),0) AS CUR_POINT -->
+		        ,F_CUR_POINT(MAIN.MEM_NO) AS CUR_POINT
+		        ,NVL((SELECT COUNT(MEM_NO) FROM TBL_ME_LOGIN_HIST WHERE MEM_NO = MAIN.MEM_NO),0) AS LOGIN_CNT
+		        ,NVL((SELECT COUNT(ORD_NO) FROM TBL_OR_ORD WHERE MEM_NO = MAIN.MEM_NO AND ORD_STAT = 'OR00203'),0) AS ORDER_CNT
+		        ,NVL(
+		        	(SELECT SUM(ORDGDS.SL_PRC) 
+		        		FROM TBL_OR_ORD ORD, TBL_OR_ORD_GDS ORDGDS
+		        		WHERE ORD.ORD_NO = ORDGDS.ORD_NO
+		        			  AND ORD.MEM_NO = MAIN.MEM_NO 
+		        			  AND ORD.ORD_STAT = 'OR00203'
+		        			  AND ORDGDS.PER_ORD_STAT = 'OR00505'
+		        	)
+		        ,0) AS ORDER_AMT
+		        ,NVL((SELECT COUNT(CMNT_NO) FROM TBL_ME_MEM_CMNT WHERE MEM_NO = MAIN.MEM_NO),0) AS CMT_CNT
+		        ,WDRW_YN
+		        ,SITE_DESC
+		    FROM(
+			    SELECT 
+			    	WDRW_YN
+					<include refid="memInfo" />
+					,(SELECT MEMGRD.GRD_NM FROM TBL_ME_GRD MEMGRD WHERE MEMGRD.MEM_GRD_NO = INFO.MEM_GRD_NO) AS GRD_NM
+					,(SELECT SITE_DESC FROM TBL_AD_SITE WHERE SITE_NO = INFO.SITE_NO) AS SITE_DESC
+			    FROM
+			        TBL_ME_MEM_INFO INFO
+			    WHERE 1 = 1
+			    <if test="loginStrDtm != '' and loginStrDtm != null or loginEndDtm != '' and loginEndDtm != null">
+			    	AND MEM_NO IN (
+		                SELECT DISTINCT MEM_NO
+		                FROM TBL_ME_LOGIN_HIST
+		                WHERE 1 = 1
+		                <if test="loginStrDtm != '' and loginStrDtm != null">
+		                	AND REG_DTS >= TO_DATE(#{loginStrDtm} || '000000', 'YYYY/MM/DD HH24MISS')
+		                </if>
+		                <if test="loginEndDtm != '' and loginEndDtm != null">
+							AND REG_DTS <![CDATA[<]]> TO_DATE(#{loginEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+			        )
+			    </if>
+			    <if test="ordStrDtm != '' and ordStrDtm != null or ordEndDtm != '' and ordEndDtm != null">
+			    	AND MEM_NO IN (
+		                SELECT DISTINCT MEM_NO
+		                FROM TBL_OR_ORD
+		                WHERE 1 = 1
+		                <if test="ordStrDtm != '' and ordStrDtm != null">
+		                	AND ORD_DTS >= TO_DATE(#{ordStrDtm} || '000000', 'YYYY/MM/DD HH24MISS')
+		                </if>
+		                <if test="ordEndDtm != '' and ordEndDtm != null">
+							AND ORD_DTS <![CDATA[<]]> TO_DATE(#{ordEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+			        )
+			    </if>
+			    <if test="joinStrDtm != '' and joinStrDtm != null or joinEndDtm != '' and joinEndDtm != null">
+			    	AND MEM_NO IN (
+		                SELECT DISTINCT MEM_NO
+		                FROM TBL_ME_MEM_INFO
+		                WHERE 1 = 1
+		                <if test="joinStrDtm != '' and joinStrDtm != null">
+		                	AND REG_DTS >= TO_DATE(#{joinStrDtm} || '000000', 'YYYY/MM/DD HH24MISS')
+		                </if>
+		                <if test="joinEndDtm != '' and joinEndDtm != null">
+							AND REG_DTS <![CDATA[<]]> TO_DATE(#{joinEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+			        )
+			    </if>
+			    <if test="memGrdNo != '' and memGrdNo != null">
+					AND MEM_GRD_NO = #{memGrdNo}
+			    </if>
+		    	<include refid="ordInGdsSlPrc" />
+		    	<include refid="ordInGdsCnt" />
+		    	<include refid="ordInGdsPnt" />
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+			)MAIN
+		)T1
+		)
+		WHERE RNUM BETWEEN #{startListNum} AND #{endListNum} 		    
+	</select>
+	
+	<select id="totalListMemInfo" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		    SELECT
+		        COUNT(*) TOTAL_CNT 
+		    FROM
+		        TBL_ME_MEM_INFO
+		    WHERE 1 = 1
+		    	<if test="loginStrDtm != '' and loginStrDtm != null or loginEndDtm != '' and loginEndDtm != null">
+			    	AND MEM_NO IN (
+		                SELECT DISTINCT MEM_NO
+		                FROM TBL_ME_LOGIN_HIST
+		                WHERE 1 = 1
+		                <if test="loginStrDtm != '' and loginStrDtm != null">
+		                	AND REG_DTS >= TO_DATE(#{loginStrDtm} || '000000', 'YYYY/MM/DD HH24MISS')
+		                </if>
+		                <if test="loginEndDtm != '' and loginEndDtm != null">
+							AND REG_DTS <![CDATA[<]]> TO_DATE(#{loginEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+			        )
+			    </if>
+			    <if test="ordStrDtm != '' and ordStrDtm != null or ordEndDtm != '' and ordEndDtm != null">
+			    	AND MEM_NO IN (
+		                SELECT DISTINCT MEM_NO
+		                FROM TBL_OR_ORD
+		                WHERE 1 = 1
+		                <if test="ordStrDtm != '' and ordStrDtm != null">
+		                	AND ORD_DTS >= TO_DATE(#{ordStrDtm} || '000000', 'YYYY/MM/DD HH24MISS')
+		                </if>
+		                <if test="ordEndDtm != '' and ordEndDtm != null">
+							AND ORD_DTS <![CDATA[<]]> TO_DATE(#{ordEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+			        )
+			    </if>
+			    <if test="joinStrDtm != '' and joinStrDtm != null or joinEndDtm != '' and joinEndDtm != null">
+			    	AND MEM_NO IN (
+		                SELECT DISTINCT MEM_NO
+		                FROM TBL_ME_MEM_INFO
+		                WHERE 1 = 1
+						<if test="joinStrDtm != '' and joinStrDtm != null">
+		                	AND REG_DTS >= TO_DATE(#{joinStrDtm} || '000000', 'YYYY/MM/DD HH24MISS')
+		                </if>
+		                <if test="joinEndDtm != '' and joinEndDtm != null">
+							AND REG_DTS <![CDATA[<]]> TO_DATE(#{joinEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+			        )
+			    </if>
+			    <if test="memGrdNo != '' and memGrdNo != null">
+					AND MEM_GRD_NO = #{memGrdNo}
+			    </if>
+		    	<include refid="ordInGdsSlPrc" />
+		    	<include refid="ordInGdsCnt" />
+		    	<include refid="ordInGdsPnt" />
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+	</select>	
+	
+	<select id="totalListWdrwCnt" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		SELECT
+		        NVL(COUNT(*),0) TOTAL_CNT 
+		    FROM
+		        TBL_ME_MEM_INFO
+		   WHERE WDRW_YN = 'Y'
+				<if test="loginStrDtm != '' and loginStrDtm != null or loginEndDtm != '' and loginEndDtm != null">
+			    	AND MEM_NO IN (
+		                SELECT DISTINCT MEM_NO
+		                FROM TBL_ME_LOGIN_HIST
+		                WHERE 1 = 1
+		                <if test="loginStrDtm != '' and loginStrDtm != null">
+		                	AND REG_DTS >= TO_DATE(#{loginStrDtm} || '000000', 'YYYY/MM/DD HH24MISS')
+		                </if>
+		                <if test="loginEndDtm != '' and loginEndDtm != null">
+							AND REG_DTS <![CDATA[<]]> TO_DATE(#{loginEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+			        )
+			    </if>
+			    <if test="ordStrDtm != '' and ordStrDtm != null or ordEndDtm != '' and ordEndDtm != null">
+			    	AND MEM_NO IN (
+		                SELECT DISTINCT MEM_NO
+		                FROM TBL_OR_ORD
+		                WHERE 1 = 1
+		                <if test="ordStrDtm != '' and ordStrDtm != null">
+		                	AND ORD_DTS >= TO_DATE(#{ordStrDtm} || '000000', 'YYYY/MM/DD HH24MISS')
+		                </if>
+		                <if test="ordEndDtm != '' and ordEndDtm != null">
+							AND ORD_DTS <![CDATA[<]]> TO_DATE(#{ordEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+			        )
+			    </if>
+			    <if test="joinStrDtm != '' and joinStrDtm != null or joinEndDtm != '' and joinEndDtm != null">
+			    	AND MEM_NO IN (
+		                SELECT DISTINCT MEM_NO
+		                FROM TBL_ME_MEM_INFO
+		                WHERE 1 = 1
+		                <if test="joinStrDtm != '' and joinStrDtm != null">
+		                	AND REG_DTS >= TO_DATE(#{joinStrDtm} || '000000', 'YYYY/MM/DD HH24MISS')
+		                </if>
+		                <if test="joinEndDtm != '' and joinEndDtm != null">
+							AND REG_DTS <![CDATA[<]]> TO_DATE(#{joinEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+			        )
+			    </if>
+			    <if test="memGrdNo != '' and memGrdNo != null">
+					AND MEM_GRD_NO = #{memGrdNo}
+			    </if>
+		    	<include refid="ordInGdsSlPrc" />
+		    	<include refid="ordInGdsCnt" />
+		    	<include refid="ordInGdsPnt" />
+			    <if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like '%'||#{searchText}||'%'
+			    </if>
+	</select>
+	
+	<insert id="insertMemInfo" parameterType="com.giftiel.shop.dto.Member">
+	    INSERT INTO TBL_ME_MEM_INFO
+	        ( MEM_NO , MEM_GRD_NO , PWD , NM , EMAIL , BIRTH_DT , SEX , MY_SLF_CERT_YN , CP_NO , MAIL_SND_YN , SMS_SND_YN , COUNTRY_CD  , REGR_NO , REG_DTS , UPDR_NO , UPD_DTS )
+	    VALUES 
+	        ( #{memNo} , #{memGrdNo} , #{pwd} , #{nm} , #{email} , #{birthDt} , #{sex} , #{mySlfCertYn} , #{cpNo} , #{mailSndYn} , #{smsSndYn} , #{countryCd} , #{joinPathCd} , #{regrNo} , SYSDATE , #{updrNo} , SYSDATE )
+	</insert>	
+	
+	<select id="selectMemInfo" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listMemInfo">
+	SELECT /* member.selectMemInfo */
+		AGE
+		,NM
+		,PWD
+		,EMAIL
+		,BIRTH_DT
+		,(SELECT MEMGRD.GRD_NM FROM TBL_ME_GRD MEMGRD WHERE MEMGRD.MEM_GRD_NO = MAIN.MEM_GRD_NO) AS GRD_NM
+		,MEM_GRD_NO
+		,SEX
+		,CP_NO
+		,F_CUR_POINT(MAIN.MEM_NO) AS CUR_POINT
+	    <if test="memNo != '' and memNo != null">
+		,(SELECT ADDR.BS_ADDR FROM ( SELECT ROWNUM RNUM,MEM_NO,BS_ADDR ,BASE_VAL_YN FROM TBL_ME_MYDLV_ADDR MEDLV  WHERE #{memNo} = MEDLV.MEM_NO AND MEDLV.BASE_VAL_YN = 'Y' ) ADDR WHERE RNUM = 1) AS BS_ADDR
+		,(SELECT ADDR.BS_ADDR FROM ( SELECT ROWNUM RNUM,MEM_NO,BS_ADDR ,BASE_VAL_YN FROM TBL_ME_MYDLV_ADDR MEDLV  WHERE #{memNo} = MEDLV.MEM_NO) ADDR WHERE RNUM = 1) AS BS_ADDR1
+		,(SELECT ADDR.DTL_ADDR FROM ( SELECT ROWNUM RNUM,MEM_NO,DTL_ADDR ,BASE_VAL_YN FROM TBL_ME_MYDLV_ADDR MEDLV  WHERE #{memNo} = MEDLV.MEM_NO) ADDR WHERE RNUM = 1) AS DTL_ADDR1
+		,(SELECT ADDR.BS_ADDR FROM ( SELECT ROWNUM RNUM,MEM_NO,BS_ADDR ,BASE_VAL_YN FROM TBL_ME_MYDLV_ADDR MEDLV  WHERE #{memNo} = MEDLV.MEM_NO) ADDR WHERE RNUM = 2) AS BS_ADDR2
+		,(SELECT ADDR.DTL_ADDR FROM ( SELECT ROWNUM RNUM,MEM_NO,DTL_ADDR ,BASE_VAL_YN FROM TBL_ME_MYDLV_ADDR MEDLV  WHERE #{memNo} = MEDLV.MEM_NO) ADDR WHERE RNUM = 2) AS DTL_ADDR2
+		,(SELECT ADDR.BS_ADDR FROM ( SELECT ROWNUM RNUM,MEM_NO,BS_ADDR ,BASE_VAL_YN FROM TBL_ME_MYDLV_ADDR MEDLV  WHERE #{memNo} = MEDLV.MEM_NO) ADDR WHERE RNUM = 3) AS BS_ADDR3
+		,(SELECT ADDR.DTL_ADDR FROM ( SELECT ROWNUM RNUM,MEM_NO,DTL_ADDR ,BASE_VAL_YN FROM TBL_ME_MYDLV_ADDR MEDLV  WHERE #{memNo} = MEDLV.MEM_NO) ADDR WHERE RNUM = 3) AS DTL_ADDR3
+		</if>
+		,REG_DTS
+		,LOGIN_DTS
+		,MEM_NO
+		,SITE_DESC
+		,WDRW_YN
+		,WDRW_RSN_CD
+		,WDRW_DTL_RSN
+		,MAIL_SND_YN
+		,(SELECT DC_AMT FROM TBL_ME_GRD A WHERE A.MEM_GRD_NO = MAIN.MEM_GRD_NO) AS CUR_DC_PER
+		,(SELECT PNT_RSV_RT FROM TBL_ME_GRD A WHERE A.MEM_GRD_NO = MAIN.MEM_GRD_NO) AS CUR_RSV_PER
+	FROM(	
+		SELECT TRUNC(MONTHS_BETWEEN(sysdate,BIRTH_DT)/12) AS AGE
+			  ,NM
+			  ,PWD
+			  ,EMAIL
+			  ,BIRTH_DT
+			  ,MEM_GRD_NO
+			  ,SEX
+			  ,CP_NO
+			  ,REG_DTS
+			  ,(SELECT MAX(LOGINHIST.REG_DTS) FROM TBL_ME_LOGIN_HIST LOGINHIST WHERE TBL_ME_MEM_INFO.MEM_NO = LOGINHIST.MEM_NO) AS LOGIN_DTS
+			  ,MEM_NO
+			  ,(SELECT SITE_DESC FROM TBL_AD_SITE WHERE SITE_NO = TBL_ME_MEM_INFO.SITE_NO) AS SITE_DESC
+			  ,WDRW_YN
+			  ,WDRW_RSN_CD
+			  ,WDRW_DTL_RSN
+			  ,MAIL_SND_YN
+	   FROM TBL_ME_MEM_INFO
+	  WHERE 1=1 
+	  		
+	  		<if test="allMember != true or allMember = null">
+	  			AND WDRW_YN = 'N'
+	  		</if>
+	  		
+		    <if test="memNo != '' and memNo != null">
+				AND MEM_NO = #{memNo}
+		    </if>
+		    <if test="email != '' and email != null">
+				AND EMAIL = #{email}
+		    </if>
+		    <if test="nm != '' and nm != null">
+				AND NM = #{nm}
+		    </if>
+		    <if test="cpNo != '' and cpNo != null">
+				AND CP_NO = #{cpNo}
+		    </if>
+		    )MAIN  
+	</select>
+	
+	<select id="selectOrdInfo" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listMemInfo">
+		SELECT NVL((SELECT COUNT(ORD_NO) FROM TBL_OR_ORD WHERE MEM_NO = #{memNo} AND ORD_STAT = 'OR00203'),0) AS COUNT_ORD
+	          ,NVL(
+		        	(SELECT SUM(ORDGDS.SL_PRC) 
+		        		FROM TBL_OR_ORD ORD, TBL_OR_ORD_GDS ORDGDS
+		        		WHERE ORD.ORD_NO = ORDGDS.ORD_NO
+		        			  AND ORD.MEM_NO = #{memNo}
+		        			  AND ORD.ORD_STAT = 'OR00203'
+		        			  AND ORDGDS.PER_ORD_STAT = 'OR00505'
+		        	)
+		        ,0)  AS SL_PRC
+	          ,(SELECT MIN(ORDGDS.REG_DTS) FROM TBL_OR_ORD ORORD , TBL_OR_ORD_GDS ORDGDS 
+	             WHERE ORORD.ORD_NO = ORDGDS.ORD_NO
+	               AND ORORD.MEM_NO =  #{memNo}
+	               AND ORORD.ORD_STAT = 'OR00203'
+		           AND ORDGDS.PER_ORD_STAT = 'OR00505' )
+            AS REG_DTS 
+	          ,(SELECT MAX(ORDGDS.REG_DTS) FROM TBL_OR_ORD ORORD , TBL_OR_ORD_GDS ORDGDS 
+	             WHERE ORORD.ORD_NO = ORDGDS.ORD_NO
+	               AND ORORD.MEM_NO =  #{memNo} 
+	               AND ORORD.ORD_STAT = 'OR00203'
+		           AND ORDGDS.PER_ORD_STAT = 'OR00505'
+	               )
+             AS UPD_DTS
+            , NVL((SELECT COUNT(ORD.ORD_NO) 
+		        		FROM TBL_OR_ORD ORD, TBL_OR_ORD_GDS ORDGDS
+		        		WHERE ORD.ORD_NO = ORDGDS.ORD_NO
+		        			  AND ORD.ORD_STAT = 'OR00203'
+		        			  AND ORDGDS.PER_ORD_STAT = 'OR00505'
+		        			  AND ORD.MEM_NO =  #{memNo}),0) AS ORDER_CNT
+	     FROM DUAL 
+	</select>
+	
+	<update id="updateMemGrd" parameterType="com.giftiel.shop.dto.Member">
+	    UPDATE TBL_ME_MEM_INFO
+	       SET MEM_GRD_NO = #{memGrdNo}
+	     WHERE MEM_NO     = #{memNo} 
+	</update>
+	
+	
+	<!-- 	멤버 탈퇴 -->
+	<update id="withDrow" parameterType="com.giftiel.shop.dto.Member">
+	    UPDATE TBL_ME_MEM_INFO
+	       SET WDRW_YN = #{wdrwYn},
+	       	   WDRW_RSN_CD = #{wdrwRsnCd},
+	       	   WDRW_DTL_RSN = #{wdrwDtlRsn},
+	       	   UPDR_NO = #{memNo},
+	       	   UPD_DTS = SYSDATE
+	     WHERE MEM_NO     = #{memNo} 
+	</update>
+	
+   <select id="selectloginHist" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listMemInfo">
+	   	SELECT MAX(REG_DTS)  AS REG_DTS
+	      FROM TBL_ME_LOGIN_HIST
+	     WHERE MEM_NO = #{memNo}
+   </select>
+   
+   
+   <!--    ID 중복체크 -->
+   <select id="idDuplChk" parameterType="STRING" resultType="INTEGER">
+	    SELECT COUNT(EMAIL) FROM TBL_ME_MEM_INFO /* idDuplChk */
+    	 WHERE EMAIL = #{email}
+    	 AND   WDRW_YN = 'N'
+   </select>
+   
+   
+   <!--    핸드폰 번호 중복체크 -->
+   <select id="cpDuplChk" parameterType="STRING" resultType="INTEGER">
+	    SELECT COUNT(CP_NO) FROM TBL_ME_MEM_INFO /* cpDuplChk */
+		WHERE  CP_NO = #{cpNo}
+		AND    WDRW_YN = 'N'
+   </select>
+   
+   <!--    회원가입 -->
+   <insert id="memberJoin" parameterType="com.giftiel.shop.dto.MemInfo">
+	    INSERT INTO TBL_ME_MEM_INFO
+	        (    MEM_NO
+				,UBI_MEM_NO
+				,MEM_GRD_NO
+				,EMAIL
+				,PWD
+				,NM
+				,BIRTH_DT
+				,SEX
+				,MY_SLF_CERT_YN
+				,CP_NO
+				,MAIL_SND_YN
+				,SMS_SND_YN
+				,COUNTRY_CD
+				,SITE_NO
+				,WDRW_YN
+				<if test="wdrwRsnCd != '' and wdrwRsnCd != null">
+					,WDRW_RSN_CD
+			    </if>
+			    <if test="wdrwDtlRsn != '' and wdrwDtlRsn != null">
+					,WDRW_DTL_RSN
+			    </if>
+			    <if test="regrNo != '' and regrNo != null">
+					,REGR_NO
+			    </if>
+			    ,REG_DTS
+			    <if test="updrNo != '' and updrNo != null">
+					,UPDR_NO
+			    </if>
+				,UPD_DTS )
+	    VALUES 
+	        (  #{memNo}
+	        , #{memNo}
+	        , 4
+	        , #{email} 
+	        , #{pwd} 
+	        , #{nm} 
+	        , TO_DATE(#{birthDt}, 'YYYY.MM.DD')
+	        , #{sex} 
+	        , 'Y' 
+	        , #{cpNo} 
+	        , #{mailSndYn} 
+	        , #{smsSndYn} 
+	        , #{countryCd} 
+	        , #{siteNo} 
+	        , 'N'
+	        <if test="wdrwRsnCd != '' and wdrwRsnCd != null">
+				, #{wdrwRsnCd} 
+		    </if>
+		    <if test="wdrwDtlRsn != '' and wdrwDtlRsn != null">
+				, #{wdrwDtlRsn} 
+		    </if>
+		     <if test="regrNo != '' and regrNo != null">
+				, #{regrNo}
+		    </if>
+	        , SYSDATE 
+	        <if test="updrNo != '' and updrNo != null">
+				, #{updrNo} 
+		    </if>
+	        , SYSDATE )
+	</insert>
+	
+	<!-- 	회원정보변경 -->
+	<update id="changeMemberInfo" parameterType="com.giftiel.shop.dto.MemInfo">
+	    UPDATE TBL_ME_MEM_INFO
+	       SET 
+	       <if test="cpNo != '' and cpNo != null">
+				CP_NO  = #{cpNo}
+		   </if>
+	       <if test="pwd != '' and pwd != null">
+				PWD  = #{pwd}
+		   </if>
+		   <if test="mailSndYn != '' and mailSndYn != null">
+				MAIL_SND_YN = #{mailSndYn}
+		   </if>
+	     WHERE MEM_NO = #{memNo} 
+	        <if test="email != '' and email != null">
+				AND EMAIL = #{email}  
+		    </if>
+	</update>
+	
+	
+	<!-- 	배송지 주소 -->
+	<select id="getDeliveryAddr" parameterType="com.giftiel.shop.dto.Member" resultMap="deliveryAddrMap">
+	   	SELECT /* member.getDeliveryAddr */
+		    RNUM
+		    ,DLV_ADDR_SEQ 
+		    ,MEM_NO 
+		    ,ADDR_BYNM 
+		    ,NM 
+		    ,TEL 
+		    ,CP_NO 
+		    ,ZIP_CD 
+		    ,BS_ADDR 
+		    ,DTL_ADDR 
+		    ,REGR_NO 
+		    ,REG_DTS 
+		    ,UPDR_NO 
+		    ,UPD_DTS 
+		    ,BASE_VAL_YN 
+		    ,UBI_MEM_NO 
+		FROM(
+		    SELECT 
+		        ROWNUM RNUM
+		        ,DLV_ADDR_SEQ 
+		        ,MEM_NO 
+		        ,ADDR_BYNM 
+		        ,NM 
+		        ,TEL 
+		        ,CP_NO 
+		        ,ZIP_CD 
+		        ,BS_ADDR 
+		        ,DTL_ADDR 
+		        ,REGR_NO 
+		        ,REG_DTS 
+		        ,UPDR_NO 
+		        ,UPD_DTS 
+		        ,BASE_VAL_YN 
+		        ,UBI_MEM_NO 
+		    FROM
+		        TBL_ME_MYDLV_ADDR 
+		    WHERE 1 = 1
+		     AND MEM_NO = #{memNo}
+		     ORDER BY DLV_ADDR_SEQ ASC
+		    )
+   </select>
+   
+   
+	<!--    배송지 기본 주소지 변경 -->
+    <update id="setBaseValYn" parameterType="com.giftiel.shop.dto.MydlvAddr">
+	     UPDATE TBL_ME_MYDLV_ADDR
+	       SET BASE_VAL_YN  =  decode(DLV_ADDR_SEQ,#{dlvAddrSeq},'Y','N')
+	     WHERE MEM_NO = #{memNo} 
+	</update>
+	
+	<!-- 	배송지 정보 수정 -->
+	<update id="modMydlvAddr" parameterType="com.giftiel.shop.dto.MydlvAddr">
+	     UPDATE TBL_ME_MYDLV_ADDR SET
+	     	ADDR_BYNM = #{addrBynm}
+	       ,NM  =  #{nm}
+	       ,TEL  =  #{tel}
+	       ,CP_NO  =  #{cpNo}
+	       ,ZIP_CD  =  #{zipCd}
+	       ,BS_ADDR  =  #{bsAddr}
+	       ,DTL_ADDR  =  #{dtlAddr}
+	       ,UPDR_NO  =  #{updrNo}
+	       ,UPD_DTS  =  SYSDATE
+	     WHERE MEM_NO = #{memNo} 
+	       AND DLV_ADDR_SEQ = #{dlvAddrSeq} 
+	</update>
+	
+	<!-- 	배송지 추가 -->
+	<update id="addMydlvAddr" parameterType="com.giftiel.shop.dto.MydlvAddr">
+	     INSERT INTO TBL_ME_MYDLV_ADDR(
+				     	 DLV_ADDR_SEQ
+						,MEM_NO
+						,ADDR_BYNM
+						,NM
+						,TEL
+						,CP_NO
+						,ZIP_CD
+						,BS_ADDR
+						,DTL_ADDR
+						,REGR_NO
+						,REG_DTS
+						,UPDR_NO
+						,UPD_DTS
+						,BASE_VAL_YN
+						,UBI_MEM_NO
+	     ) VALUES(
+	     				SEQ_ME_MYDLV_ADDR.NEXTVAL 
+						,#{memNo}
+						,#{addrBynm}
+						,#{nm}
+						,#{tel}
+						,#{cpNo}
+						,#{zipCd}
+						,#{bsAddr}
+						,#{dtlAddr}
+						,#{regrNo}
+						,SYSDATE
+						,#{updrNo}
+						,SYSDATE
+						,#{baseValYn}
+						,#{memNo}
+	     
+	     )
+	</update>
+	
+	<!-- 	배송지 정보 삭제 -->
+	<delete id="delMydlvAddr" parameterType="com.giftiel.shop.dto.MydlvAddr">
+	     DELETE FROM TBL_ME_MYDLV_ADDR
+		  WHERE MEM_NO = #{memNo} 
+		    AND DLV_ADDR_SEQ = #{dlvAddrSeq}
+	</delete>
+   
+	<!--   	배송지 별칭 정렬   ex) 주소지 삭제후 별칭 주소1,주소2.주소3 지정-->
+	<delete id="sortAddrBynm" parameterType="com.giftiel.shop.dto.MydlvAddr">
+	     MERGE INTO TBL_ME_MYDLV_ADDR A 
+			USING ( 
+				SELECT DLV_ADDR_SEQ,ROW_NUMBER() OVER(ORDER BY DLV_ADDR_SEQ) RM 
+				FROM TBL_ME_MYDLV_ADDR 
+				WHERE MEM_NO = 10015
+			) B 
+			
+			ON (A.DLV_ADDR_SEQ=B.DLV_ADDR_SEQ) 
+			
+			WHEN MATCHED THEN 
+				UPDATE SET A.ADDR_BYNM='주소'||B.RM 
+			WHEN NOT MATCHED THEN 
+<!-- 			CD 는 테이블의 PK이다. 순번을 업데이트하므로 절대 INSERT가 되어서는 안되지만 만일 어떤 비정상적인 이유로 해서 INSERT문이 실행된다면 PK값이 NULL 이므로 오라클에서 에러를 뱉어낼 것이다 -->
+				INSERT (DLV_ADDR_SEQ) VALUES(NULL)
+	</delete>
+	
+	<!-- 	포인트 총갯수 -->
+	<select id="totalListReserve" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	 	SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_ME_RESERVE
+	    WHERE MEM_NO = #{memNo}
+	    AND RSV_PNT <![CDATA[<>]]> 0
+	</select>
+	
+	<!-- 	보유 총 포인트 -->
+	<select id="totalPoint" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	 	SELECT 
+		        NVL((SUM(DECODE(RSV_YN,'Y',RSV_PNT,0)) - SUM(DECODE(RSV_YN,'N',RSV_PNT,0))), 0) TOT_POINT
+		    FROM
+		        TBL_ME_RESERVE 
+		    WHERE 1 = 1
+		      AND MEM_NO = #{memNo}
+	</select>
+	
+	
+	
+	<!-- 	회원 포인트 현황 리스트 -->
+    <select id="getReserveList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="reserveMap">
+    	
+    	SELECT * FROM
+    	(
+	    	SELECT
+			    ROW_NUMBER() OVER(ORDER BY SORT DESC) RNUM
+			    ,MEM_NO 
+			    ,RSV_PNT 
+			    ,RSV_RSN_CD 
+			    ,RSV_YN 
+			    ,ORD_NO 
+			    ,REGR_NO 
+			    ,REG_DTS 
+			    ,UPDR_NO 
+			    ,UPD_DTS 
+			FROM(
+			    SELECT 
+			        MEM_NO 
+			        ,RSV_PNT 
+			        ,(SELECT CD_NM FROM TBL_AD_CD WHERE CD_NO = RSV_RSN_CD) RSV_RSN_CD
+			        ,RSV_YN 
+			        ,ORD_NO 
+			        ,REGR_NO 
+			        ,REG_DTS SORT
+			        ,TO_CHAR(REG_DTS, 'YYYY.MM.DD') REG_DTS
+			        ,UPDR_NO 
+			        ,UPD_DTS 
+			    FROM
+			        TBL_ME_RESERVE 
+			    WHERE 1 = 1
+					AND RSV_PNT <![CDATA[<>]]> 0
+			      AND MEM_NO = #{memNo}
+			    )
+		) 
+		WHERE 1=1
+	    AND RNUM BETWEEN #{startListNum} AND #{endListNum}
+    </select>
+    
+    
+    
+    <!-- 	비회원 인증 -->
+	<select id="nMemConfirm" parameterType="java.util.HashMap" resultType="INTEGER">
+	 	SELECT COUNT(*) FROM TBL_OR_ORD
+		WHERE ORDR_NM = #{nMemNm}
+		  AND ORDR_CP = #{nMemPhone}
+		  AND ORD_NO = #{nMemOrderNo}
+		  AND ORDR_EMAIL = 'GUEST'
+	</select>
+	
+	
+	
+	<!-- 회원 최근 배송지 주소 -->
+	<select id="getRecentAddr" parameterType="Integer" resultMap="deliveryAddrMap">
+	 	SELECT * FROM(
+		  SELECT RCPN_NM NM
+		        ,RCPN_TEL_NO TEL
+		        ,RCPN_CP_NO CP_NO
+		        ,RCPN_ZIP_CD ZIP_CD
+		        ,RCPN_BS_ADDR BS_ADDR
+		        ,RCPN_DTL_ADDR DTL_ADDR
+		  FROM TBL_OR_ORD
+		  WHERE MEM_NO = #{memNo}
+		  ORDER BY ORD_DTS DESC
+		) WHERE ROWNUM = 1
+	</select>
+	
+   	<insert id="insertUbiMember" parameterType="com.giftiel.shop.dto.UbiMember">
+		INSERT INTO UBI09S_WORKS.고객정보
+	        ( 
+			    온라인고객코드,
+			    성명,
+			    핸드폰번호,
+			    성별,
+			    가입매장코드,
+			    고객카드번호,
+			    생일구분,
+			    생년월일,
+			    자택전화번호,
+			    자택우편번호,
+			    자택주소1,
+			    자택주소2,
+			    직업코드,
+			    직장명,
+			    직장전화번호,
+			    직장우편번호,
+			    직장주소1,
+			    직장주소2,
+			    이메일,
+			    DM발송지,
+			    SMS수신,
+			    이메일수신,
+			    탈퇴일자,
+			    입력일,
+			    수정여부,
+			    처리여부,
+			    에러사유,
+			    적립율,
+			    고객등급	        
+	        )
+	    VALUES 
+	        (
+		        #{온라인고객코드, jdbcType=VARCHAR},
+				#{성명, jdbcType=VARCHAR},
+				#{핸드폰번호, jdbcType=VARCHAR},
+				#{성별, jdbcType=VARCHAR},
+				#{가입매장코드, jdbcType=VARCHAR},
+				#{고객카드번호, jdbcType=VARCHAR},
+				#{생일구분, jdbcType=VARCHAR},
+				#{생년월일, jdbcType=VARCHAR},
+				#{자택전화번호, jdbcType=VARCHAR},
+				#{자택우편번호, jdbcType=VARCHAR},
+				#{자택주소1, jdbcType=VARCHAR},
+				#{자택주소2, jdbcType=VARCHAR},
+				#{직업코드, jdbcType=VARCHAR},
+				#{직장명, jdbcType=VARCHAR},
+				#{직장전화번호, jdbcType=VARCHAR},
+				#{직장우편번호, jdbcType=VARCHAR},
+				#{직장주소1, jdbcType=VARCHAR},
+				#{직장주소2, jdbcType=VARCHAR},
+				#{이메일, jdbcType=VARCHAR},
+				#{DM발송지, jdbcType=VARCHAR},
+				#{SMS수신, jdbcType=VARCHAR},
+				#{이메일수신, jdbcType=VARCHAR},
+				#{탈퇴일자, jdbcType=VARCHAR},
+				sysdate,
+				#{수정여부, jdbcType=VARCHAR},
+				#{처리여부, jdbcType=VARCHAR},
+				#{에러사유, jdbcType=VARCHAR},
+				#{적립율, jdbcType=VARCHAR},
+				#{고객등급, jdbcType=VARCHAR}
+	        )
+	</insert>	
+	
+   	<insert id="updateUbiMember" parameterType="com.giftiel.shop.dto.UbiMember">
+		INSERT INTO UBI09S_WORKS.고객정보
+	</insert>
+	
+	
+	
+	
+	
+	<insert id="setLoginHist" parameterType="com.giftiel.shop.dto.StatisticsForm">
+	    INSERT INTO TBL_ME_LOGIN_HIST
+        (    LOGIN_SEQ
+			,MEM_NO
+			,UBI_MEM_NO
+			,LOGIN_LCTN
+			,BRWS
+			,SITE_NO
+			,LOGIN_IP
+			,REGR_NO
+			,REG_DTS
+			,UPDR_NO
+			,UPD_DTS 
+		)VALUES( 
+			SEQ_TBL_ME_LOGIN_HIST.nextval
+		   ,#{memNo}
+		   ,#{memNo}
+		   ,#{connDomain}
+		   ,#{connBrws}
+		   ,#{connBrnd}
+		   ,#{connIpAddr}
+		   ,#{memNo}
+		   ,SYSDATE
+		   ,#{memNo}
+		   ,SYSDATE
+		)
+	</insert>
+	
+	
+	<insert id="ubiMemGrdUpdate" parameterType="com.giftiel.shop.dto.Member">
+		INSERT INTO UBI09S_WORKS.고객정보
+		SELECT
+		  온라인고객코드,
+		  성명,
+		  핸드폰번호,
+		  성별,
+		  가입매장코드,
+		  고객카드번호,
+		  생일구분,
+		  생년월일,
+		  자택전화번호,
+		  자택우편번호,
+		  자택주소1,
+		  자택주소2,
+		  직업코드,
+		  직장명,
+		  직장전화번호,
+		  직장우편번호,
+		  직장주소1,
+		  직장주소2,
+		  이메일,
+		  DM발송지,
+		  SMS수신,
+		  이메일수신,
+		  탈퇴일자,
+		  SYSDATE,
+		  'U' AS 수정여부,
+		  처리여부,
+		  에러사유,
+		  ${curRsvPer} AS 적립율,
+		  ${memGrdNo} AS 고객등급
+		FROM UBI09S_WORKS.고객정보 WHERE 온라인고객코드 = #{memNo} and rownum = 1
+    	order by 입력일 desc
+	</insert>	
+	
+	
+	
+	<select id="memberListXlsx" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listMemInfo">
+		SELECT EMAIL, NM, CP_NO, SITE_DESC, MAIL_SND_YN, SMS_SND_YN
+		FROM
+		  (SELECT ROW_NUMBER () OVER (ORDER BY T1.REG_DTS DESC) AS RNUM,
+		    T1.*
+		  FROM
+		    (SELECT GRD_NM ,
+		      MEM_NO ,
+		      MEM_GRD_NO ,
+		      PWD ,
+		      NM ,
+		      EMAIL ,
+		      BIRTH_DT ,
+		      SEX ,
+		      MY_SLF_CERT_YN ,
+		      CP_NO ,
+		      MAIL_SND_YN ,
+		      SMS_SND_YN ,
+		      COUNTRY_CD ,
+		      REGR_NO ,
+		      REG_DTS ,
+		      UPDR_NO ,
+		      UPD_DTS ,
+		      TRUNC(MONTHS_BETWEEN(sysdate,BIRTH_DT)/12) AS AGE ,
+		      F_CUR_POINT(MAIN.MEM_NO)                   AS CUR_POINT ,
+		      NVL(
+		      (SELECT COUNT(MEM_NO) FROM TBL_ME_LOGIN_HIST WHERE MEM_NO = MAIN.MEM_NO
+		      ),0) AS LOGIN_CNT ,
+		      NVL(
+		      (SELECT COUNT(ORD_NO)
+		      FROM TBL_OR_ORD
+		      WHERE MEM_NO = MAIN.MEM_NO
+		      AND ORD_STAT = 'OR00203'
+		      ),0) AS ORDER_CNT ,
+		      NVL(
+		      (SELECT SUM(ORDGDS.SL_PRC)
+		      FROM TBL_OR_ORD ORD,
+		        TBL_OR_ORD_GDS ORDGDS
+		      WHERE ORD.ORD_NO        = ORDGDS.ORD_NO
+		      AND ORD.MEM_NO          = MAIN.MEM_NO
+		      AND ORD.ORD_STAT        = 'OR00203'
+		      AND ORDGDS.PER_ORD_STAT = 'OR00505'
+		      ) ,0) AS ORDER_AMT ,
+		      NVL(
+		      (SELECT COUNT(CMNT_NO) FROM TBL_ME_MEM_CMNT WHERE MEM_NO = MAIN.MEM_NO
+		      ),0) AS CMT_CNT ,
+		      WDRW_YN ,
+		      SITE_DESC
+		    FROM
+		      (SELECT WDRW_YN ,
+		        MEM_NO ,
+		        MEM_GRD_NO ,
+		        PWD ,
+		        NM ,
+		        EMAIL ,
+		        BIRTH_DT ,
+		        SEX ,
+		        MY_SLF_CERT_YN ,
+		        CP_NO ,
+		        MAIL_SND_YN ,
+		        SMS_SND_YN ,
+		        COUNTRY_CD ,
+		        REGR_NO ,
+		        REG_DTS ,
+		        UPDR_NO ,
+		        UPD_DTS ,
+		        (SELECT MEMGRD.GRD_NM
+		        FROM TBL_ME_GRD MEMGRD
+		        WHERE MEMGRD.MEM_GRD_NO = INFO.MEM_GRD_NO
+		        ) AS GRD_NM ,
+		        (SELECT SITE_DESC FROM TBL_AD_SITE WHERE SITE_NO = INFO.SITE_NO
+		        ) AS SITE_DESC
+		      FROM TBL_ME_MEM_INFO INFO
+		      WHERE 1 = 1
+		      AND WDRW_YN = 'N'
+		      )MAIN
+		    )T1
+		  )
+	</select>
+	
+	
+</mapper>

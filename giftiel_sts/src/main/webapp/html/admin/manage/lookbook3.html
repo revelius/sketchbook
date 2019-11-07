@@ -1,0 +1,176 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+	<script type="text/javascript" src="../static/js/jquery.tablednd.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>운영관리 > 게시판관리 > Lookbook</h3>
+				<!-- section -->
+				<div class="section a1 tabCon_inner">
+					<div class="tableType2">
+						<table>
+							<caption>Lookbook</caption>
+							<colgroup>
+								<col width="130px">
+								<col width="*">
+								<col width="130px">
+								<col width="350px">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">작성자</th>
+									<td>관리자</td>
+									<th scope="col">작성일</th>
+									<td>2015.05.05 11:00:11</td>
+								</tr>
+								<tr>
+									<th scope="col">브랜드</th>
+									<td colspan="3">
+										<div class="wrap">
+											<input type="checkbox" id="chk1" /> <label for="chk1">WORKSOUT</label>
+											<input type="checkbox" id="chk2" /> <label for="chk2">CARHARTT</label>
+											<input type="checkbox" id="chk3" /> <label for="chk3">OBEY</label>
+											<input type="checkbox" id="chk4" /> <label for="chk4">BRIXTON</label>
+											<input type="checkbox" id="chk5" /> <label for="chk5">LEXDRAY</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">분류</th>
+									<td>
+										<select>
+											<option value="0">선택</option>
+										</select>
+										<a href="#" class="btnType1">추가</a>
+									</td>
+									<th scope="col">상태</th>
+									<td>
+										<div class="wrap">
+											<input type="radio" id="radio1" name="radio" checked="checked" /> <label for="radio1">공개</label>
+											<input type="radio" id="radio2" name="radio" /> <label for="radio2">비공개</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">제목</th>
+									<td colspan="3"><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col">메인이미지</th>
+									<td  colspan="3" class="mainImg">
+										<span class="imgBox"><img src="../static/images/temp/temp1.jpg" alt="" /></span> 
+										<div class="imgUpload">
+											<input type="file" class="mb5" /> 
+											<p class="addtxt">*이미지 최대 크기는 3MB입니다. 가로 사이즈  700픽셀의 jpg,gif,png 파일로 업로드 바랍니다.</p>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">연결상품</th>
+									<td colspan="3" class="tblDndWrap">
+										<a href="#" class="btnType1">상품선택</a> <a href="#" class="btnType1">직접입력</a> <span class="addtxt">* 연결상품은 최대 50개까지 가능합니다.</span> <br />
+										<div class="tableType1 tableInTbl tblYscroll" style="height: 147px;">
+											<table class="tbl_DnD" >
+												<caption></caption>
+												<colgroup>
+													<col width="5%" />
+													<col width="10%" />
+													<col width="*" />
+													<col width="25%" />
+													<col width="10%" />
+													<col width="10%" />
+												</colgroup>
+												<thead>
+													<tr>
+														<th scope="row"><input type="checkbox" /></th>
+														<th scope="row">구분</th>
+														<th scope="row">제목(상품명)</th>
+														<th scope="row">연결(URL)</th>
+														<th scope="row">금액</th>
+														<th scope="row">노출순서</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr id="1">
+														<td><input type="checkbox" /></td>
+														<td>상품선택</td>
+														<td class="tl">Wharf Cap</td>
+														<td>Worksout > man > cap > whar’f</td>
+														<td class="tr">15,000</td>
+														<td>↕</td>
+													</tr>
+													<tr id="2">
+														<td><input type="checkbox" /></td>
+														<td>직접입력</td>
+														<td class="tl">Rift Snap Back</td>
+														<td>Worksout > man > cap > whar’f</td>
+														<td class="tr">15,000</td>
+														<td>↕</td>
+													</tr>
+													<tr id="3">
+														<td><input type="checkbox" /></td>
+														<td>직접입력</td>
+														<td class="tl">Wharf Cap</td>
+														<td>Worksout > man > cap > whar’f</td>
+														<td class="tr">15,000</td>
+														<td>↕</td>
+													</tr>
+													<tr id="4">
+														<td><input type="checkbox" /></td>
+														<td>직접입력</td>
+														<td class="tl">Wharf Cap</td>
+														<td>www.carhartt.co.kr</td>
+														<td class="tr">11,000</td>
+														<td>↕</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="btn">
+											<div class="right"><a href="#" class="btnType2">삭제</a></div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+										에디터 영역 :)
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- //section -->
+				<!-- section -->
+				<div class="section a2 btn">
+					<div class="left">
+						<a href="#" class="btnType2">이미지추가</a>
+						<a href="#" class="btnType1">이미지삭제</a>
+					</div>
+					<div class="right">
+						<a href="#" class="btnType2">수정</a>
+						<a href="#" class="btnType1">취소</a>
+						<a href="#" class="btnType1">삭제</a>
+					</div>
+				</div>
+				<!-- //section -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

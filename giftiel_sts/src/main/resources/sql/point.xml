@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="point">
+	<resultMap id="listPointInfo" type="com.giftiel.shop.dto.Point">
+	    <result property="rnum" column="RNUM"/> 
+	    <result property="nm" column="NM"/> 
+	    <result property="email" column="EMAIL"/> 
+	    <result property="cpNo" column="CP_NO"/> 
+	    <result property="ordNo" column="ORD_NO"/> 
+	    <result property="rsvYn" column="RSV_YN"/>
+	    <result property="rsvRsnCd" column="RSV_RSN_CD"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    
+	    <result property="curPoint" column="CUR_POINT"/>
+	    <result property="usePoint" column="USE_POINT"/>
+	    <result property="memNo" column="MEM_NO"/>
+	    <result property="totPoint" column="TOT_POINT"/>
+	    <result property="grdNm" column="GRD_NM"/>
+	    
+	    <result property="rsvCls" column="RSV_CLS"/>
+	    
+	</resultMap>	
+	
+	<select id="selectPointList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listPointInfo">
+		SELECT * FROM ( /* point.selectPointList */
+			SELECT 
+				<choose>
+				<when test="orderBy != '' and orderBy != null">
+				ROW_NUMBER () OVER (ORDER BY T1.${orderBy} ${orderFlag}) AS RNUM,
+				</when>
+				<otherwise>
+				ROW_NUMBER () OVER (ORDER BY T1.REG_DTS DESC) AS RNUM,
+				</otherwise>
+				</choose>
+				T1.* 
+			FROM (
+				SELECT 
+					MAIN.* 
+				FROM(
+					SELECT 
+						  INFO.EMAIL
+					      ,INFO.NM
+					      ,TO_CHAR(RES.REG_DTS,'YYYY-MM-DD HH:MM:SS') AS REG_DTS
+					      ,RES.ORD_NO
+					      ,(SELECT CD_NM FROM TBL_AD_CD WHERE RES.RSV_RSN_CD = CD_NO) AS RSV_RSN_CD
+					      ,CASE WHEN RES.RSV_YN = 'N' THEN NVL(RES.RSV_PNT,0) ELSE 0 END AS USE_POINT  /*사용포인트*/
+					      ,CASE WHEN RES.RSV_YN = 'Y' THEN NVL(RES.RSV_PNT,0) ELSE 0 END  AS CUR_POINT  /*적립포인트*/
+					      ,F_CUR_POINT(INFO.MEM_NO) AS TOT_POINT
+					      ,INFO.MEM_NO
+					      ,INFO.CP_NO
+					      ,(SELECT MEMGRD.GRD_NM FROM TBL_ME_GRD MEMGRD WHERE MEMGRD.MEM_GRD_NO = INFO.MEM_GRD_NO) AS GRD_NM
+					      ,(SELECT CD_NM FROM TBL_AD_CD WHERE CD_NO = RES.RSV_CLS) RSV_CLS
+					 FROM TBL_ME_MEM_INFO INFO , TBL_ME_RESERVE RES
+					WHERE INFO.MEM_NO = RES.MEM_NO(+)
+				<if test="searchGb != '' and searchGb != null and searchText != ''">
+					<choose>
+						<when test="searchGb == 'RSV_RSN_CD'">
+							AND RES.RSV_RSN_CD = (SELECT CD_NO FROM TBL_AD_CD WHERE SUP_CD_NO = 'MT002' AND CD_NM LIKE '%'||#{searchText}||'%')
+						</when>
+						<otherwise>
+							AND INFO.${searchGb} like  '%'||#{searchText}||'%'
+						</otherwise>
+					</choose>
+			    </if>
+				    AND RES.REG_DTS IS NOT NULL
+				)MAIN
+			)T1
+		)
+		 WHERE RNUM BETWEEN #{startListNum} AND #{endListNum} 		    
+	</select>
+	
+	<select id="totalListPoint" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		   SELECT /* point.totallistPoint */
+		          COUNT(*) TOTAL_CNT 
+		     FROM TBL_ME_MEM_INFO INFO , TBL_ME_RESERVE RES
+			WHERE INFO.MEM_NO(+) = RES.MEM_NO
+			<if test="searchGb != '' and searchGb != null and searchText != ''">
+					AND ${searchGb} like  '%'||#{searchText}||'%'
+			</if>
+	</select>
+	
+	<select id="totalSumPoint" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		SELECT /* point.totalSumPoint */
+		  NVL(SUM(CUR_POINT),0) AS CUR_POINT 
+		FROM
+		  (
+		  SELECT 
+		  	NM,
+		    EMAIL,
+		    CP_NO,
+		    F_CUR_POINT(MEM_NO) AS CUR_POINT
+		  FROM TBL_ME_MEM_INFO
+		  WHERE 1=1
+			<if test="searchGb != '' and searchGb != null and searchText != ''">
+			<choose>
+				<when test="searchGb == 'RSV_RSN_CD'">
+				  AND EXISTS
+				    (
+				      SELECT MEM_NO FROM TBL_ME_RESERVE WHERE RSV_RSN_CD = (SELECT CD_NO FROM TBL_AD_CD WHERE SUP_CD_NO = 'MT002' AND CD_NM LIKE '%'||#{searchText}||'%')
+				    )
+				</when>
+				<otherwise>
+						AND ${searchGb} LIKE  '%'||#{searchText}||'%'
+				</otherwise>
+			</choose>
+			</if>  
+		  )
+	</select>	
+	
+	<insert id="insertPoint" parameterType="com.giftiel.shop.dto.Point">
+			INSERT INTO TBL_ME_RESERVE
+			            (
+			            	MEM_NO
+			               ,RSV_PNT
+			               ,RSV_RSN_CD
+			               ,RSV_YN
+			               ,REGR_NO
+			               ,REG_DTS
+			               ,ORD_NO
+			               ,RSV_CLS		               	
+			            )
+			     VALUES (
+			     			 #{memNo}
+			     		   , #{rsvPnt}
+			     		   , #{rsvRsnCd}
+			     		   , #{rsvYn}
+			     		   , #{regrNo}
+						   , SYSDATE
+			     		   , #{ordNo, jdbcType=VARCHAR}
+			     		   ,#{rsvCls}  
+			       		)			       
+	</insert>	
+	
+</mapper>

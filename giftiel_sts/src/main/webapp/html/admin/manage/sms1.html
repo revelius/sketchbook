@@ -1,0 +1,291 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>운영관리 > SMS관리 > 문구관리</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- SMS로 발송되는 문구를 관리합니다.</li>
+						<li>- 사용자모드는 사용자에게 자동 발송되는 항목입니다.</li>
+						<li>- 관리자모드는 관리자에게 자동 발송되는 항목입니다.</li>
+						<li>- 자동발송 선택된 항목만 자동으로 발송되며, 휴대폰번호가 정확하지 않을 시에는 발송되지 않습니다.</li>
+						<li>- 도움문구 <br /> [NAME] : 회원이름. [ORDERNUMBER] : 주문번호. [BRANDSITE] : 브랜드사이트.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- section -->
+				<div class="section a1 tabCon_inner">
+					<div class="tableTitle">
+						<div class="left"><span class="icon2"></span>[사용자모드] : 고객에게 보내지는 메세지를 설정합니다.</div>		
+					</div>
+					<div class="smsWrap">
+						<div class="sms">
+							<p class="smsTit">회원가입</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님, [BRANDSITE]에 회원 가입해 주셔서 감사합니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">회원탈퇴</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 [BRANDSITE]에서 회원탈퇴 처리되었습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">주문완료</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님께서 신청하신 주문이 완료되었습니다. 주문번호는 [ORDERNUMBER]입니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">주문입금확인</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 [BRANDNAME]에서 [ORDERNUMBER] 주문의 입금이 확인되었습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">주문발송완료</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 주문하신 물품의 발송이 완료 되었습니다. 구매확정 부탁 드립니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">취소신청</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[BRANDNAME]에서 [ORDERNUMBER] 주문을 취소 신청하셨습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">취소완료</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 주문이 취소되었습니다. 취소 주문번호는 [ORDERNUMBER] 입니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">교환신청</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[BRANDNAME]에서 [ORDERNUMBER] 주문의 물품을 교환 신청하셨습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">반품신청</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[BRANDSITE]에서 [ORDERNUMBER] 주문의 물품을 반품 신청하셨습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">반품동의</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 [BRANDSITE]에서 회원탈퇴 처리되었습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">반품거부</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님께서 신청하신 주문이 완료되었습니다. 주문번호는 [ORDERNUMBER]입니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">반품완료</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 [BRANDSITE]에서 [ORDERNUMBER] 주문의 입금이 확인되었습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">1:1문의답변</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 주문하신 물품의 발송이 완료 되었습니다. 구매확정 부탁 드립니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+					</div>
+				</div>
+				<!-- //section -->
+				<div class="section a2">
+					<div class="tableTitle">
+						<div class="left"><span class="icon2"></span>[관리자모드] : 관리자에게 보내지는 메세지를 설정합니다.</div>		
+					</div>
+					<div class="smsWrap">
+						<div class="sms">
+							<p class="smsTit">회원가입</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님, [BRANDSITE]에 회원 가입해 주셔서 감사합니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">회원탈퇴</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 [BRANDSITE]에서 회원탈퇴 처리되었습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">주문완료</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님께서 신청하신 주문이 완료되었습니다. 주문번호는 [ORDERNUMBER]입니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">주문입금확인</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 [BRANDNAME]에서 [ORDERNUMBER] 주문의 입금이 확인되었습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">주문발송완료</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 주문하신 물품의 발송이 완료 되었습니다. 구매확정 부탁 드립니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">취소신청</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[BRANDNAME]에서 [ORDERNUMBER] 주문을 취소 신청하셨습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">취소완료</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 주문이 취소되었습니다. 취소 주문번호는 [ORDERNUMBER] 입니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">교환신청</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[BRANDNAME]에서 [ORDERNUMBER] 주문의 물품을 교환 신청하셨습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">반품신청</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[BRANDSITE]에서 [ORDERNUMBER] 주문의 물품을 반품 신청하셨습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">반품동의</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 [BRANDSITE]에서 회원탈퇴 처리되었습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">반품거부</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님께서 신청하신 주문이 완료되었습니다. 주문번호는 [ORDERNUMBER]입니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">반품완료</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 [BRANDSITE]에서 [ORDERNUMBER] 주문의 입금이 확인되었습니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+						<div class="sms">
+							<p class="smsTit">1:1문의답변</p>
+							<div class="smsBox">
+								<strong>SMS</strong>
+								<textarea cols="30" rows="10" class="smsTxt" >[NAME]님 주문하신 물품의 발송이 완료 되었습니다. 구매확정 부탁 드립니다.</textarea>
+								<p>61/<span>80 Byte</span></p>
+							</div>
+							<span class="autoSend"><input type="checkbox" /> <label for="">자동발송</label></span>
+						</div>
+					</div>
+				</div>
+				<div class="section a2 btn">
+					<a href="#" class="btnType2">저장</a>
+					<a href="#" class="btnType1">취소</a>
+				</div>
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

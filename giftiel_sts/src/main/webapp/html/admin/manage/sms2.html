@@ -1,0 +1,127 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>운영관리 > SMS관리 > SMS발송</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- SMS로 즉시 발송됩니다.</li>
+						<li>- 자동발송 메세지를 선택하여 불러온 후 편집하여 발송 가능합니다.</li>
+						<li>- 자동발송 메세지는 선택 목록은 회원용과 관리자용으로 구분됩니다.</li>
+						<li>- 회원 개인 또는 등급별 메세지를 보낼 수 있습니다.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- section -->
+				<div class="section a1 tabCon_inner">
+					<!-- [s] 문의 테이블 -->
+					<div class="tableType2">
+						<table>
+							<caption>문의</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">내용</th>
+									<td>
+										<div class="smsWrap smsSel">
+											<div class="sms">
+												<div class="smsBox">
+													<strong>SMS</strong>
+													<textarea cols="30" rows="10" class="smsTxt" >[NAME]님, [BRANDSITE]에 회원 가입해 주셔서 감사합니다.</textarea>
+													<p>61/<span>80 Byte</span></p>
+												</div>
+											</div>
+											<div class="smsM">
+												[자동발송 메세지 선택] <br />
+												<select>
+													<option value="0">선택해주세요.</option>
+												</select>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col" rowspan="5">수신자 선택</th>
+									<td class="receiverSel">
+										<input type="radio" id="radio1" name="radio" checked="checked" /> <label for="radio1">개별발송</label>
+										<a href="#" class="btnType1">회원 주소록</a> <br /><br />
+										<textarea cols="30" rows="10" class="receiver" ></textarea>
+										<ul>
+											<li>*한줄당 하나의 발송번호를 입력해 주세요.</li>
+											<li>*번호는 “-”없이 숫자만 입력해 주세요.</li>
+											<li>*개별 발송시 100명 이상보낼시 부하가 발생합니다.</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="radio" id="radio2" name="radio"/> <label for="radio2">등급별 발송</label>
+										<select>
+											<option value="0">선택해주세요</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="radio" id="radio3" name="radio"/> <label for="radio3">브랜드별 발송</label>
+										<select>
+											<option value="0">선택해주세요</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="radio" id="radio4" name="radio"/> <label for="radio4">매장별 발송</label>
+										<select>
+											<option value="0">선택해주세요</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="radio" id="radio5" name="radio"  /> <label for="radio5">전체회원 발송</label>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">발송 번호</th>
+									<td>
+										<input type="text" class="wd_200" />
+										<p class="addtxt">*발송자 핸드폰 번호를 “-” 없이 숫자만 입력해 주세요.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 문의 테이블 -->
+				</div>
+				<!-- //section -->
+				<!-- section -->
+				<div class="section btn a2">
+					<a href="#" class="btnType2">발송</a>
+				</div>
+				<!-- //section -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

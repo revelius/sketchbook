@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="comment">
+	
+	<insert id="insertMemComment" parameterType="com.giftiel.shop.dto.Comment">
+		INSERT INTO TBL_ME_MEM_CMNT 
+		  			(
+		  			 CMNT_NO
+		  			,MEM_NO
+		  			,CMNT_TXT
+		  			,REGR_NO
+		  			,REG_DTS
+		  			)	
+		    VALUES (
+		    		SEQ_ME_MEM_CMNT.NEXTVAL
+		    		,#{memNo}
+		    		,#{comment}
+		    		,#{regrNo}
+		    		,SYSDATE
+		    	   )		    
+	</insert>
+	
+	
+	<resultMap id="listCmtInfo" type="com.giftiel.shop.dto.Comment">
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="memGrdNo" column="MEM_GRD_NO"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="regrNm" column="REGR_NM"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+        
+        <result property="loginDts" column="LOGIN_DTS"/>
+        <result property="cmntNo" column="CMNT_NO"/>
+        <result property="cmntTxt" column="CMNT_TXT"/>     
+        <result property="cmtCnt" column="CMT_CNT"/>    
+	</resultMap>
+	
+	<select id="memberCmtList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listCmtInfo">
+		  SELECT CMNT_NO
+	  			,MEM_NO
+	  			,CMNT_TXT
+	  			,REGR_NO
+	  			,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO  = REGR_NO )REGR_NM
+	  			,REG_DTS
+	        FROM TBL_ME_MEM_CMNT
+	       WHERE MEM_NO  = #{memNo}
+	       ORDER BY REG_DTS DESC
+	</select>
+	
+	<delete id="deleteMemComment" parameterType="com.giftiel.shop.dto.Comment">
+		DELETE FROM TBL_ME_MEM_CMNT
+		 WHERE CMNT_NO = #{cmntNo}
+	</delete>
+	
+</mapper>

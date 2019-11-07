@@ -1,0 +1,271 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	
+</head> 
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">			
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">					
+					<h3>회원관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">회원관리</a>
+							<ul>
+								<li class="on">- <a href="#">회원목록</a></li>
+								<li class="last">- <a href="#">포인트관리</a></li>
+							</ul>
+						</li>						
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents memberList">
+					<!--[s] 검색목록 -->
+					<div class="section a1">
+						<h3><span class="icon1"></span>회원정보</h3>	
+						<p class="pt_14">ididididid 님의 정보<span>최종로그인 yyyy-mm-dd HH:MM:SS </span></p>
+
+						<div class="tabType1">
+							<ul>
+								<li><a href="/admin/member/membershipInfo.html">회원정보</a></li>
+								<li class="on"><a href="/admin/member/orderList.html">주문내역</a></li>
+								<li><a href="/admin/member/inquire.html">1:1 문의</a></li>
+								<li><a href="/admin/member/cart.html">Cart</a></li>
+							</ul>
+						</div>
+
+						<!--[s] 주문내역 리스트 -->
+						<div class="section a2">
+							<div class="tableTitle">
+								<div class="left"><span class="icon2"></span>총 주문내역 <span class="blue">00</span>건</div>					
+								<div class="select2">								
+									<select>
+										<option>결제방법</option>
+										<option>신용카드</option>
+										<option>무통장</option>
+										<option>가상계좌</option>
+										<option>계좌이체</option>
+										<option>포인트</option>
+									</select>
+									<select>
+										<option>주문상태구분</option>
+										<option>주문접수</option>
+										<option>주문취소</option>
+										<option>결제대기</option>
+										<option>결제완료</option>
+										<option>결제취소</option>
+										<option>배송준비</option>
+										<option>출고지연</option>
+										<option>배송 중</option>
+										<option>배송완료</option>
+										<option>구매확정</option>
+										<option>교환요청</option>
+										<option>교환취소</option>
+										<option>교환진행</option>
+										<option>교환완료</option>
+										<option>반품요청</option>
+										<option>반품취소</option>
+										<option>반품진행</option>
+										<option>환불완료</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="tableType1">
+								<table>
+								<caption>회원목록 검색 결과 리스트</caption>
+								<colgroup>
+									<col width="10%" />
+									<col width="10%" />
+									<col width="10%" />
+									<col width="*" />
+									<col width="15%" />
+									<col width="13%" />
+									<col width="13%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th>브랜드</th>
+										<th>매장명</th>
+										<th>주문서번호</th>
+										<th>상품</th>
+										<th>주문일시</th>
+										<th>가격</th>
+										<th>상태</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>34,900</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>34,900</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>34,900</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>34,900</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>34,900</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>34,900</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>34,900</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>14,900</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>74,900</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+									<tr>
+										<td>웍스아웃</td>
+										<td>온라인</td>
+										<td>1412260003</td>
+										<td>주문상품명</td>
+										<td>yyyy-mm-dd</td>
+										<td>53,300</td>
+										<td><a href="#">배송중</a> <br>[배송추적]</td>
+									</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+						<!--[e] 주문내역 리스트 -->
+
+						<!--[s] 페이징 -->
+						<div class="paging">
+							<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+							<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+							<span class="num">
+								<a href="#" class="on">1</a>
+								<a href="#">2</a>
+								<a href="#">3</a>
+								<a href="#">4</a>
+								<a href="#">5</a>
+								<a href="#">6</a>
+								<a href="#">7</a>
+								<a href="#">8</a>
+								<a href="#">9</a>
+								<a href="#">10</a>
+							</span>
+							<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+							<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+
+							<div class="left">
+								<a href="#" class="btnType2">회원목록</a>
+							</div>
+						</div>
+						<!--[e] 페이징 -->				
+
+				</div>
+				<!--[e] contents -->
+			</div>
+			<!--[e] subWrap -->
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

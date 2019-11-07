@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+
+</head>
+<body>
+<!-- 대 카테고리 추가 -->
+<div class="layerWrap">
+	<div class="title">
+		<h1>우편번호</h1>
+		<a href="javascript:;" onclick="window.close()">Close</a>
+	</div>
+	<div class="wrap">
+		<div class="section a1">
+			<div class="zipcode_sel">
+				<span class="pr26"><input type="radio" checked="checked">동(읍/면)+지번</span>
+				<span class="pr26"><input type="radio">도로명주소+건물번호</span>
+				<span><input type="radio">건물명(아파트명)</span>
+			</div>
+			<p class="srh_way">검색방법 : 시/도 및 시/군/구 선택 후 동(읍/면) + 지번 입력 <br /> <span>예) 역삼동 737 → 서울특별시 선택 후 역삼동 (동명) + 737(지번)</span></p>
+			<div class="zipcode_box">
+				<div class="zipcode_srh">
+					<span>시도</span>
+					<select>
+						<option value="0">선택</option>
+					</select>
+					<span class="pl30">시군구</span>
+					<select>
+						<option value="0">선택</option>
+					</select>
+					<div class="pt20">
+						<span>검색어</span>
+						<input type="text" class="txt_zipcode" placeholder="동(읍/면)" />
+						+ <input type="text" class="txt_zipcode" placeholder="지번" /> 
+						<a href="#" class="btnType2">검색</a>
+					</div>
+				</div>
+			</div>
+			<p class="srh_way">※ 도로명 주소가 검색되지 않는 경우는 행정안전부 새주소안내시스템 <br /> <span>(<a href="http://www.juso.go.kr">http://www.juso.go.kr</a>) 에서 확인하시기 바랍니다.</span></p>
+			<div class="btn">
+				<a href="#" class="btnType1">창닫기</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //대 카테고리 추가 -->
+</body>
+</html>

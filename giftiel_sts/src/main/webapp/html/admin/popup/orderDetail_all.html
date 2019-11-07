@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>주문 상세내역</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script type="text/javascript" src="/static/js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+</head> 
+<body>
+<!-- 쿠폰함 레이어 팝업 -->	
+<div class="layerWrap">
+	<div class="title">
+		<h1 class="barcodIn"><div class="title">주문상세내역 – (주문일자 : 2014.05.10 주문번호 : A1234567890)</div> <div class="barcode">바코드</div></h1>
+		<a href="javascript:;" onclick="window.close()">Close</a>
+	</div>
+	<div class="wrap order">
+		<div class="section a1">
+			<div class="tableTitle"><span class="icon2"></span>상태값</div>
+			<div class="tableType1">
+				<table>
+					<caption>상품 리스트</caption>
+					<colgroup>
+						<col width="*" />
+						<col width="12%" />
+						<col width="12%" />
+						<col width="10%" />
+						<col width="10%" />
+						<col width="20%" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th>주문상품</th>
+							<th>공급가</th>
+							<th>판매가</th>
+							<th>포인트사용</th>
+							<th>배송비</th>
+							<th>배송정보</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="imgBox">
+								<img src="../static/images/temp/temp1.jpg" alt="" />
+								<div class="productText">
+									<a href="#">W LITE WALK 4 PW0WW13F (red/240)</a>
+								</div>
+							</td>
+							<td>30,000원</td>
+							<td>30,000원</td>
+							<td>30,000원</td>
+							<td>3000원</td>
+							<td>
+								<span class="block">CJ대한통운</span>
+								(36512852286) <br />
+								YYYY.MM.DD HH:MM:SS
+							</td>
+						</tr>
+						<tr>
+							<td class="imgBox">
+								<img src="../static/images/temp/temp1.jpg" alt="" />
+								<div class="productText">
+									<a href="#">W LITE WALK 4 PW0WW13F (red/240)</a>
+								</div>
+							</td>
+							<td>30,000원</td>
+							<td>30,000원</td>
+							<td>30,000원</td>
+							<td>3000원</td>
+							<td>
+								<span class="block">CJ대한통운</span>
+								(36512852286) <br />
+								YYYY.MM.DD HH:MM:SS
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tableType2 first">
+				<table>
+					<caption>주문금액</caption>
+					<colgroup>
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>주문금액</th>
+							<td>#,###,### 원</td>
+							<th>배송비</th>
+							<td>#,###,### 원</td>
+						</tr>
+						<tr>
+							<th>합계금액</th>
+							<td>#,###,### 원</td>
+							<th>포인트사용</th>
+							<td>#,###,### 원</td>
+						</tr>
+						<tr>
+							<th>총 결제금액</th>
+							<td>#,###,### 원</td>
+							<th>적립금액</th>
+							<td>#,###,### 원</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tableType2 first">
+				<table>
+					<caption>결제 정보</caption>
+					<colgroup>
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>E-mail계정</th>
+							<td>ID@DOMAIN</td>
+							<th>주문일자</th>
+							<td>YYYY.MM.DD HH:MM:SS</td>
+						</tr>
+						<tr>
+							<th>결제 정보</th>
+							<td colspan="3">
+								YYYY.MM.DD  HH:MM:SS, 계좌이체, #,###,###원(할인명:#,###,###원) <br />
+								YYYY.MM.DD  HH:MM:SS, 가상계좌, [은행명], [계좌번호], [입금자명] #,###,###원 <br />
+								YYYY.MM.DD  HH:MM:SS, 신용카드, [카드사], #,###,###원
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="section a2">
+			<div class="tableTitle"><span class="icon2"></span>주문자정보</div>
+			<div class="tableType2">
+				<table>
+					<caption>결제 정보</caption>
+					<colgroup>
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>이름</th>
+							<td><input type="text" class="txt_all" /></td>
+							<th>이메일</th>
+							<td><input type="text" class="txt_all" /></td>
+						</tr>
+						<tr>
+							<th>전화</th>
+							<td>
+								<input type="text" class="phone" /> - <input type="text" class="phone" /> - <input type="text" class="phone"/>
+							</td>
+							<th>휴대폰</th>
+							<td>
+								<input type="text" class="phone" /> - <input type="text" class="phone" /> - <input type="text" class="phone"/>
+							</td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td colspan="3">
+								<div class="mb5"><input type="text" /> <a href="#" class="btnType1">우편번호 찾기</a></div>
+								<input type="text" class="wd_300"/><input type="text" class="wd_300 ml_5"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="section a2">
+			<div class="tableTitle"><span class="icon2"></span> 받는분 정보</div>
+			<div class="tableType2">
+				<table>
+					<caption>결제 정보</caption>
+					<colgroup>
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>이름</th>
+							<td colspan="3"><input type="text" class="txt_all" /></td>
+						</tr>
+						<tr>
+							<th>전화</th>
+							<td>
+								<input type="text" class="phone" /> - <input type="text" class="phone" /> - <input type="text" class="phone"/>
+							</td>
+							<th>휴대폰</th>
+							<td>
+								<input type="text" class="phone" /> - <input type="text" class="phone" /> - <input type="text" class="phone"/>
+							</td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td colspan="3">
+								<div class="mb5"><input type="text" /> <a href="#" class="btnType1">우편번호 찾기</a></div>
+								<input type="text" class="wd_300"/><input type="text" class="wd_300 ml_5"/>
+							</td>
+						</tr>
+						<tr>
+							<th>요청사항</th>
+							<td colspan="3">
+								<textarea name="" id="" cols="30" rows="10" class="txtareaAll"></textarea>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="section btn">
+			<a href="#" class="btnType2">출력하기</a> 
+			<a href="#" class="btnType1">수정</a>
+			<a href="#" class="btnType1">닫기</a>
+		</div>
+	</div>
+</div>
+<!--// 쿠폰함 레이어 팝업 -->
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+	<script>
+		function addTab(title, url){
+			if ($('#tt').tabs('exists', title)){
+				$('#tt').tabs('select', title);
+			} else {
+				var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%; height:100%;"></iframe>';
+				$('#tt').tabs('add',{
+					title:title,
+					content:content,
+					closable:true
+				});
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">
+					<h3>통계/분석</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">매출통계</a>
+							<ul>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('전체매출통계','sales_statistics.html')">전체매출통계</a></li>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('상품별매출통계','product_statistics.html')">상품별매출통계</a></li>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('회원별매출통계','mem_statistics.html')">회원별매출통계</a></li>
+							</ul>
+						</li>
+						<li><a href="#">회원통계</a>
+							<ul>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('남녀비율통계','gender_statistics.html')">남녀비율통계</a></li>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('연령대별통계','age_statistics.html')">연령대별통계</a></li>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('거주지별통계','residence_statistics.html')">거주지별통계</a></li>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('소셜미디어통계','sns_statistics.html')">소셜미디어통계</a></li>
+							</ul>
+						</li>
+						<li><a href="#">접속통계</a>
+							<ul>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('방문자접속통계','visitant_statistics.html')">방문자접속통계</a></li>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('접속방향통계','contact_statistics.html')">접속방향통계</a></li>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('검색어통계','search_statistics.html')">검색어통계</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상품통계</a>
+							<ul>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('상품별통계','product_statistics02.html')">상품별통계</a></li>
+							</ul>
+						</li>
+						<li><a href="#">마케팅통계</a>
+							<ul>
+								<li>- <a href="#" class="easyui-linkbutton" onclick="addTab('적립금사용통계','saving_statistics.html')">적립금사용통계</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents productList">
+					<!--[s] 카테고리관리 -->
+					<div class="section a1">
+						<!-- [s]  -->
+						<div class="cateOpen">							
+							<div id="tt" class="easyui-tabs tabBody">							
+							</div>
+						</div>
+						<!-- [e]  -->
+					</div>
+					<!--[e] 카테고리관리 -->
+				</div>
+				<!--[e] contents -->
+			</div>
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

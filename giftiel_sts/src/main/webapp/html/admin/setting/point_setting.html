@@ -1,0 +1,102 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>	
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>환경설정 > 전체운영설정 > 포인트설정</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- 기본포인트, 상품포인트에 대한 설정이 가능합니다.</li>
+						<li>- 기본포인트는 회원 가입시 발생하는 적립금 설정입니다.</li>
+						<li>- 상품포인트는 상품 구매시 사용 및 적립에 대한 설정이 가능합니다.</li>
+						<li>- 내용 수정 후 저장시 즉시 시스템에 적용되오니 유의하시기 바랍니다.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- [s] 전체운영설정 컨텐츠 -->
+				<div class="tabCon_inner">
+					<!-- [s] 기본 배송정책 설정 테이블 -->
+					<div class="tableType2">
+						<table>
+							<caption>기본 포인트</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="2" class="row_tit">기본 포인트</th>
+							    </tr>
+								<tr>
+									<th scope="col">회원가입 포인트</th>
+									<td><input type="text" /> point <span class="addtxt ml_5">* 회원가입시 적립될 포인트를 입력바랍니다.</span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 기본 배송정책 설정 테이블 -->
+					<!-- [s] 상품 포인트 테이블 -->
+					<div class="tableType2 pt20">
+						<table>
+							<caption>상품 포인트</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="2" class="row_tit">상품 포인트</th>
+							    </tr>
+								<tr>
+									<th scope="col">적립 설정</th>
+									<td>
+										<div class="inputList">
+											<input type="radio" id="radio2_1" name="radio2" checked="checked" /> <label for="radio2_1">포인트 지급 안함</label> <br />
+											<input type="radio" id="radio2_2" name="radio2" /> <label for="radio2_2">회원등급관리 설정에 따라 지급</label><br />
+											<input type="radio" id="radio2_3" name="radio2" /> <label for="radio2_3">판매가의 <input type="text" class="txt100" />% 지급</label><br />
+											<input type="radio" id="radio2_4" name="radio2" /> <label for="radio2_4">결제가의 <input type="text" class="txt100" />% 지급</label><br />
+											<input type="radio" id="radio2_5" name="radio2" /> <label for="radio2_5">구매 상품(개수) 당 <input type="text" class="txt100" />point 지급</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">사용 설정</th>
+									<td>
+										<div class="inputList">
+											회원보유 point <input type="text" class="txt100" /> point 이상 보유시 사용가능 <br />
+											구매시 최초 <input type="text" class="txt100" /> point 이상 보유시 사용가능 <br />
+											구매시 최대 <input type="text" class="txt100" /> point 이상 보유시 사용가능 
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 상품 포인트 테이블 -->
+					<div class="section a2 btn">
+						<a href="#" class="btnType2">저장</a> 
+						<a href="#" class="btnType1">취소</a>
+					</div>
+				</div>
+				<!-- [e] 상점환경설정 컨텐츠 -->	
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

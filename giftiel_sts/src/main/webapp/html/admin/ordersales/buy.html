@@ -1,0 +1,256 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	
+</head> 
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">			
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">					
+					<h3>주문매출관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">전체주문</a>
+							<ul>
+								<li>- <a href="#">전체주문</a></li>
+							</ul>
+						</li>		
+						<li><a href="#">주문관리</a>
+							<ul>
+								<li>- <a href="#">배송관리</a></li>
+								<li class="on last">- <a href="#">구매확정</a></li>
+							</ul>
+						</li>		
+						<li><a href="#">취소/교환/반품신청관리</a>
+							<ul>
+								<li>- <a href="#">취소관리</a></li>
+								<li>- <a href="#">교환관리</a></li>
+								<li class="last">- <a href="#">반품관리</a></li>
+							</ul>
+						</li>						
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents">
+					<!--[s] 검색목록 -->
+					<div class="section a1">
+						<h3><span class="icon1"></span>구매확정</h3>						
+						<div class="tableType2">
+							<p class="boxP">구매확정한 내역을 관리 할 수 있는 곳입니다.</p>
+							<table>
+								<caption>배송검색</caption>
+								<colgroup>
+									<col width="56px" />
+									<col width="132px" />
+									<col width="*" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th><input type="checkbox" id="" name="" /></th>
+										<th>결제수단</th>
+										<td>
+											<div class="wrap">
+												<input type="radio" id="pay1" name="pay" checked="checked" />
+												<label for="pay1">전체</label>
+												<input type="radio" id="pay2" name="pay" />
+												<label for="pay2">신용카드</label>
+												<input type="radio" id="pay3" name="pay" />
+												<label for="pay3">무통장</label>
+												<input type="radio" id="pay4" name="pay" />
+												<label for="pay4">계좌이체</label>
+												<input type="radio" id="pay5" name="pay" />
+												<label for="pay5">포인트</label>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th><input type="checkbox" id="" name="" /></th>
+										<th>기간</th>
+										<td >
+											<div class="wrap">
+												<input type="text" id="" name="" />
+												<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a> ~
+												<input type="text" id="" name="" />
+												<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a>								
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th><input type="checkbox" id="" name="" /></th>
+										<th>브랜드</th>
+										<td>
+											<select>
+												<option>입점브랜드</option>
+											</select>
+										</td>									
+									</tr>
+									<tr>
+										<th><input type="checkbox" id="" name="" /></th>
+										<th>주문금액</th>
+										<td><input type="text" id="" name="" /> &nbsp;원 ~ <input type="text" id="" name="" /> &nbsp;원 </td>
+									</tr>
+									<tr>
+										<th><input type="checkbox" id="" name="" /></th>
+										<th>상품분류</th>
+										<td>
+											<select>
+												<option>카테고리</option>
+											</select>
+											<select>
+												<option>카테고리</option>
+											</select>
+											<select>
+												<option>카테고리</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th><input type="checkbox" id="" name="" /></th>
+										<th>직접검색</th>
+										<td>
+											<select>
+												<option>제품명</option>
+											</select>
+											<input type="text" class="searchText" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="btn">
+							<a href="#" class="btnType2">검색</a>
+						</div>
+						
+						<!--[s] 검색결과리스트 -->
+						<div class="section a2">
+							<div class="tableType1 overflow">
+								<table class="w2600">
+									<caption>구매확정 검색 결과 리스트</caption>
+									<thead>
+										<tr>
+											<th>구매확정일자</th>
+											<th>ID</th>
+											<th>주문일자</th>
+											<th>주문번호</th>
+											<th>상품코드</th>
+											<th>상품명</th>
+											<th>옵션</th>
+											<th>판매가</th>
+											<th>수량</th>
+											<th>주문자<br />휴대폰번호</th>
+											<th>수취인</th>
+											<th>수취인<br />연락처</th>
+											<th>우편번호</th>
+											<th>주소</th>
+											<th>배송시<br />요구사항</th>
+											<th>배송승인일자</th>
+											<th>배송일자</th>
+											<th>택배사명</th>
+											<th>송장번호</th>
+											<th>구매확정일</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>2014.07.20</td>
+											<td>abcd12</td>
+											<td>2014.07.20</td>
+											<td><a href="#">A120966378165</a></td>
+											<td>12345678</td>
+											<td>원피스</td>
+											<td>꽃무늬</td>
+											<td>30000원</td>
+											<td>1</td>
+											<td>010.1234.1234</td>
+											<td>홍길동</td>
+											<td>010.1234.1234</td>
+											<td>123-123</td>
+											<td>서울특별시 구로구 구로동</td>
+											<td>관리실에 맡겨주세요.</td>
+											<td>2014.07.20</td>
+											<td>2014.07.20</td>
+											<td>CJ택배</td>
+											<td>1234-123456-1234</td>
+											<td>2014.07.20</td>
+										</tr>
+										<tr>
+											<td>2014.07.20</td>
+											<td>abcd12</td>
+											<td>2014.07.20</td>
+											<td><a href="#">A120966378165</a></td>
+											<td>12345678</td>
+											<td>원피스</td>
+											<td>꽃무늬</td>
+											<td>30000원</td>
+											<td>1</td>
+											<td>010.1234.1234</td>
+											<td>홍길동</td>
+											<td>010.1234.1234</td>
+											<td>123-123</td>
+											<td>서울특별시 구로구 구로동</td>
+											<td>관리실에 맡겨주세요.</td>
+											<td>2014.07.20</td>
+											<td>2014.07.20</td>
+											<td>CJ택배</td>
+											<td>1234-123456-1234</td>
+											<td>2014.07.20</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!--[e] 검색결과리스트 -->
+				</div>
+				<!--[e] contents -->
+			</div>
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

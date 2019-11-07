@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html lang="ko" class="ie7"><![endif]-->
+<!--[if IE 8]><html lang="ko" class="ie8"><![endif]-->
+<!--[if IE 9]><html lang="ko" class="ie9"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="ko">
+	<!--<![endif]-->
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta charset="utf-8">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<title>Order - Shopping Cart - CARHARTT WIP</title>
+		<link href="http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700"
+		type="text/css" rel="stylesheet">
+		<link href="/html/carhartt/inc/css/reset.css" type="text/css" rel="stylesheet">
+		<link href="/html/carhartt/inc/css/print.css" type="text/css" rel="stylesheet">
+		<link href="/html/carhartt/inc/css/common.css" type="text/css" rel="stylesheet">
+		<script src="/html/carhartt/inc/js/modernizr.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/jquery.mousewheel.min.js" type="text/javascript"
+		charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/swipe.js" type="text/javascript"
+		charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/TweenMax.min.js" type="text/javascript"
+		charset="utf-8"></script>
+		<script src="/html/carhartt/inc/js/common.js" type="text/javascript"
+		charset="utf-8"></script>
+	</head>
+	<body>
+		<!--[if lte IE 8]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+		<h1 class="hide_txt">CARHARTT WIP</h1>
+		<div class="dimm">
+			<img src="/html/carhartt/images/common/blank_size_100.png" alt="">
+		</div>
+		<div id="wrap">
+			<h2 class="hide_txt">주요 메뉴 영역</h2>
+			<div id="header">
+				<!-- header include -->
+				<!-- header include -->
+			</div>
+			<h2 class="hide_txt">본문 영역</h2>
+			<div id="container">
+				<div id="content">
+					<div class="content_wrap">
+						<div class="location_list_wrap">
+							<div class="location_list_container">
+								<ul class="location_list clfix">
+									<li class="home">
+										<a href="#">HOME</a>
+									</li>
+									<li>
+										<a href="#">SHOPPING CART</a>
+									</li>
+									<li>
+										<a href="#">ORDER</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="menu_section">
+							<div id="snb_order_area">
+								<!-- snbOrder include -->
+								<!-- snbOrder include -->
+							</div>
+						</div>
+						<div class="content_section">
+							<div class="content_area">
+								<div class="content_top">
+									<div class="content_menu_step clfix">
+										<!-- on 클래스 붙으면 활성화 됨 -->
+										<span class="menu_link">
+											<a href="#">
+												<span class="txt">상품선택</span>
+											</a>
+											<a href="#" class="on">
+												<span class="txt">주문/결제</span>
+											</a>
+											<a href="#">
+												<span class="txt">주문확인</span>
+											</a>
+											<a href="#" class="last_child">
+												<span class="txt">주문완료</span>
+											</a>
+										</span>
+									</div>
+								</div>
+								<div class="cart_order_area">
+									<table class="tbl_col02 tbl_col02_mypage_order_detail ui_reponsible_table_type01">
+										<caption>상품선택 테이블로 체크박스, 상품, 가격, 적립포인트, 삭제 항목을 확인 할 수 있습니다.</caption>
+										<thead>
+											<tr>
+												<th scope="col">상품</th>
+												<th scope="col">가격</th>
+												<th scope="col">적립포인트</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="tbl_layout01">
+													<div class="mobile_th">상품</div>
+													<div class="tbl_cont clfix">
+														<span class="p_img">
+															<img src="/html/carhartt/images/onlineshop/img_mypage01.jpg" alt="관리자에서 등록될 수 있도록 개발필요.">
+														</span>
+														<ul class="p_info">
+															<li>[OBEY] obey Surveillance Eye</li>
+															<li>Color = Black / SIZE = S</li>
+															<li>DE15SPJALL00002001</li>
+														</ul>
+													</div>
+												</td>
+												<td class="tbl_layout02">
+													<div class="mobile_th">가격</div>
+													<div class="tbl_cont">
+														<span href="#" class="ico_price">95,000</span>
+													</div>
+												</td>
+												<td class="tbl_layout03">
+													<div class="mobile_th">적립포인트</div>
+													<div class="tbl_cont">900</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="mypage_tit clfix space01">
+										<span class="txt01">주문자정보</span>
+									</div>
+									<div class="box_gray01 clfix">
+										<ul class="cart_order_info01">
+											<li class="clfix">
+												<div class="tit">
+													<label for="delivery01">배송지</label>
+												</div>
+												<div class="desc">
+													<div class="radio_group01">
+														<span class="input_radio">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="radio" id="delivery01" name="delivery">
+														</span>
+														<label for="delivery01">기본배송지</label>
+														<span class="input_radio">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="radio" id="delivery02" name="delivery">
+														</span>
+														<label for="delivery02">이전배송지</label>
+														<span class="input_radio">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="radio" id="delivery03" name="delivery">
+														</span>
+														<label for="delivery03">신규배송지</label>
+													</div>
+													<div class="radio_group02">
+														<span class="input_radio">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="radio" id="address01" name="address">
+														</span>
+														<label for="address01">주소1</label>
+														<span class="input_radio">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="radio" id="address02" name="address">
+														</span>
+														<label for="address02">주소2</label>
+														<span class="input_radio">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="radio" id="address03" name="address">
+														</span>
+														<label for="address03">주소3</label>
+													</div>
+												</div>
+											</li>
+											<li class="clfix">
+												<div class="tit02">
+													<label for="user_name">이름</label>
+												</div>
+												<div class="desc">
+													<span class="input_txt">
+														<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+														<input type="text" id="user_name" name="user_name">
+													</span>
+												</div>
+											</li>
+											<li class="clfix">
+												<div class="tit02">
+													<label for="tel_number01">전화번호</label>
+												</div>
+												<div class="desc">
+													<div class="input_area02 clfix">
+														<span class="input_txt">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="text" id="tel_number01" name="tel_number">
+														</span>
+														<span class="input_txt">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="text" id="tel_number02" name="tel_number">
+														</span>
+														<span class="input_txt last_child">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="text" id="tel_number03" name="tel_number">
+														</span>
+													</div>
+												</div>
+											</li>
+											<li class="clfix">
+												<div class="tit02">
+													<label for="phone_number01">휴대폰번호</label>
+												</div>
+												<div class="desc">
+													<div class="input_area02 clfix">
+														<span class="input_txt">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="text" id="phone_number01" name="phone_number">
+														</span>
+														<span class="input_txt">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="text" id="phone_number02" name="phone_number">
+														</span>
+														<span class="input_txt last_child">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="text" id="phone_number03" name="phone_number">
+														</span>
+													</div>
+												</div>
+											</li>
+										</ul>
+										<ul class="cart_order_info01">
+											<li class="clfix">
+												<div class="tit02">
+													<label for="post01">주소</label>
+												</div>
+												<div class="desc">
+													<div class="input_area01 clfix">
+														<span style="width:57px;" class="input_txt">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="text" id="post01" name="post">
+														</span>
+														<span style="width:57px;" class="input_txt">
+															<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+															<input type="text" id="post02" name="post">
+														</span>
+														<a href="#" data-template="ui_popup_post_search" data-callback="callback_test01"
+														class="btn_white03 ui_btn_popup">우편번호검색</a>
+													</div>
+													<span class="input_txt etc_input_txt01">
+														<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+														<input type="text" id="address01" name="address">
+													</span>
+													<span class="input_txt etc_input_txt02">
+														<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+														<input type="text" id="address02" name="address">
+													</span>
+												</div>
+											</li>
+											<li class="clfix">
+												<div class="tit">
+													<label fot="delivery_wish">배송시
+														<br> 요청사항
+													</label>
+												</div>
+												<div class="desc">
+													<div class="input_textarea input_textarea_type01">
+														<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+														<textarea id="delivery_wish" name="delivery_wish" placeholder="부재시 경비실에 맡겨주세요"></textarea>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="mypage_tit clfix space01">
+										<span class="txt01">결제정보</span>
+									</div>
+									<div class="box_gray01 clfix">
+										<div class="clfix">
+											<ul class="mypage_info05 clfix mypage_position">
+												<li class="size03">
+													<div class="bg_container">
+														<div class="tit">포인트</div>
+														<div class="desc">
+															<dl class="clfix">
+																<dt>보유포인트 :
+																	<strong>3,100</strong>
+																</dt>
+																<dd class="point_check">
+																	<span class="input_check">
+																		<input type="checkbox" id="all_pay" name="all_pay">
+																		<!-- id값 변경시 아래 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	</span>
+																	<label for="all_pay">모두사용</label>
+																</dd>
+															</dl>
+															<dl class="point_area clfix">
+																<dt class="point_input">
+																	<span class="input_txt">
+																		<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																		<input type="text" id="point_num" name="point_num">
+																	</span>
+																</dt>
+																<dd class="point_txt">
+																	<label for="point_num">Point</label>
+																</dd>
+															</dl>
+															<p class="notice_txt">* 3천점 이상, 1천단위로 사용 가능합니다.</p>
+														</div>
+													</div>
+													<div class="line_bg"></div>
+												</li>
+												<li class="size03_2">
+													<div class="bg_container">
+														<div class="tit">
+															<label for="pay_type01">결제수단</label>
+														</div>
+														<div class="desc clfix">
+															<div class="pay_area first_child">
+																<span class="input_radio">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="radio" id="pay_type01" name="pay_type">
+																</span>
+																<label for="pay_type01">신용카드</label>
+															</div>
+															<div class="pay_area">
+																<span class="input_radio">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="radio" id="pay_type02" name="pay_type">
+																</span>
+																<label for="pay_type02">계좌이체</label>
+															</div>
+															<div class="pay_area">
+																<span class="input_radio">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="radio" id="pay_type03" name="pay_type">
+																</span>
+																<label for="pay_type03">가상계좌</label>
+															</div>
+														</div>
+													</div>
+													<div class="line_bg02"></div>
+												</li>
+												<li class="size03">
+													<div class="bg_container">
+														<div class="tit clfix">
+															<span class="tit_cell01">
+																<label for="pay_receipt01">현금영수증</label>
+															</span>
+															<span class="tit_cell02">
+																<span class="input_check">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="checkbox" id="no_receipt" name="no_receipt">
+																</span>
+																<label for="no_receipt">신청안함</label>
+															</span>
+														</div>
+														<div class="desc clfix">
+															<div class="pay_area first_child">
+																<span class="input_radio">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="radio" id="pay_receipt01" name="pay_receipt">
+																</span>
+																<label for="pay_receipt01">소득공제용 (개인)</label>
+															</div>
+															<div class="pay_area">
+																<span class="input_radio">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="radio" id="pay_receipt02" name="pay_receipt">
+																</span>
+																<label for="pay_receipt02">지출증빙용 (사업자)</label>
+															</div>
+															<!-- 소득공제용(개인) 선택시 노출 -->
+															<div class="select_show_area clfix">
+																<div class="s_tit">
+																	<label for="receipt_phone01">휴대폰번호</label>
+																</div>
+																<span class="input_select">
+																	<select id="receipt_phone01">
+																		<option>010</option>
+																	</select>
+																</span>
+																<span class="input_txt first_child">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="text" id="receipt_phone02" name="receipt_phone">
+																</span>
+																<span class="input_txt">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="text" id="receipt_phone03" name="receipt_phone">
+																</span>
+															</div>
+															<!-- 소득공제용(개인) 선택시 노출 -->
+															<!-- 지출증빙용(사업자) 선택시 노출 -->
+															<div class="select_show_area clfix">
+																<div class="s_tit">
+																	<label for="receipt_biz01">사업자등록번호</label>
+																</div>
+																<span class="input_txt receipt_biz01">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="text" id="receipt_biz01" name="receipt_biz">
+																</span>
+																<span class="input_txt receipt_biz02">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="text" id="receipt_biz02" name="receipt_biz">
+																</span>
+																<span class="input_txt receipt_biz03">
+																	<!-- id값 변경시 위에 <label> 태그내 for="" 값도 같이 변경 해야함. -->
+																	<input type="text" id="receipt_biz03" name="receipt_biz">
+																</span>
+															</div>
+															<!-- 지출증빙용(사업자) 선택시 노출 -->
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<table class="tbl_col02 space01 tbl_col02_mypage_order_list02 ui_reponsible_table_type01">
+										<caption>주문 정보 테이블로 총 가격, 포인트사용액, 배송비, 적립 예정포인트, 총 결제금액을 확인 할 수 있습니다.</caption>
+										<thead>
+											<tr>
+												<th scope="col">총 가격</th>
+												<th scope="col">포인트사용액</th>
+												<th scope="col">배송비</th>
+												<th scope="col">적립 예정포인트</th>
+												<th scope="col">총 결제금액</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="tbl_layout01">
+													<div class="mobile_th">총 가격</div>
+													<div class="tbl_cont">95,000</div>
+												</td>
+												<td class="tbl_layout02">
+													<div class="mobile_th">포인트사용액</div>
+													<div class="tbl_cont clfix">-1,000</div>
+												</td>
+												<td class="tbl_layout03">
+													<div class="mobile_th">배송비</div>
+													<div class="tbl_cont">+3,000</div>
+												</td>
+												<td class="tbl_layout04">
+													<div class="mobile_th">적립 예정포인트</div>
+													<div class="tbl_cont">900</div>
+												</td>
+												<td class="tbl_layout05">
+													<div class="mobile_th">총 결제금액</div>
+													<div class="tbl_cont">
+														<span class="ico_price">97,000</span>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="mypage_tit clfix space04">
+										<span class="txt01">주문정보제공 동의</span>
+									</div>
+									<div id="join_agreement_load03" class="join_agreement"></div>
+									<!-- /inc/layout/agreement03.html -->
+									<div class="join_agree_check02">
+										<label for="agree" class="inputu_check_type01">
+											<input type="checkbox" id="agree" name="agree">
+											<span class="txt">위 내용을 확인하였으며, 동의합니다.</span>
+										</label>
+									</div>
+									<!-- 상황에 맞게 아래 btn01, btn02 영역을 삭제 할 수 있습니다. -->
+									<div class="btn_area04 clfix">
+										<div class="btn01">
+											<a href="#" class="btn_gray01">뒤로</a>
+										</div>
+										<div class="btn02">
+											<a href="#" class="btn_black01">다음</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="etc_section"></div>
+					</div>
+				</div>
+			</div>
+			<h2 class="hide_txt">하단 영역</h2>
+			<div id="footer">
+				<!-- footer include -->
+				<!-- footer include -->
+			</div>
+		</div>
+	</body>
+</html>

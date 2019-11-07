@@ -1,0 +1,77 @@
+SELECT EMAIL AS EMAIL계정, NM AS 이름, CP_NO AS 휴대전화번호, SITE_DESC AS 가입사이트, MAIL_SND_YN AS MAIL수신여부, SMS_SND_YN AS SMS수신여부
+FROM
+  (SELECT ROW_NUMBER () OVER (ORDER BY T1.REG_DTS DESC) AS RNUM,
+    T1.*
+  FROM
+    (SELECT GRD_NM ,
+      MEM_NO ,
+      MEM_GRD_NO ,
+      PWD ,
+      NM ,
+      EMAIL ,
+      BIRTH_DT ,
+      SEX ,
+      MY_SLF_CERT_YN ,
+      CP_NO ,
+      MAIL_SND_YN ,
+      SMS_SND_YN ,
+      COUNTRY_CD ,
+      REGR_NO ,
+      REG_DTS ,
+      UPDR_NO ,
+      UPD_DTS ,
+      TRUNC(MONTHS_BETWEEN(sysdate,BIRTH_DT)/12) AS AGE ,
+      F_CUR_POINT(MAIN.MEM_NO)                   AS CUR_POINT ,
+      NVL(
+      (SELECT COUNT(MEM_NO) FROM TBL_ME_LOGIN_HIST WHERE MEM_NO = MAIN.MEM_NO
+      ),0) AS LOGIN_CNT ,
+      NVL(
+      (SELECT COUNT(ORD_NO)
+      FROM TBL_OR_ORD
+      WHERE MEM_NO = MAIN.MEM_NO
+      AND ORD_STAT = 'OR00203'
+      ),0) AS ORDER_CNT ,
+      NVL(
+      (SELECT SUM(ORDGDS.SL_PRC)
+      FROM TBL_OR_ORD ORD,
+        TBL_OR_ORD_GDS ORDGDS
+      WHERE ORD.ORD_NO        = ORDGDS.ORD_NO
+      AND ORD.MEM_NO          = MAIN.MEM_NO
+      AND ORD.ORD_STAT        = 'OR00203'
+      AND ORDGDS.PER_ORD_STAT = 'OR00505'
+      ) ,0) AS ORDER_AMT ,
+      NVL(
+      (SELECT COUNT(CMNT_NO) FROM TBL_ME_MEM_CMNT WHERE MEM_NO = MAIN.MEM_NO
+      ),0) AS CMT_CNT ,
+      WDRW_YN ,
+      SITE_DESC
+    FROM
+      (SELECT WDRW_YN ,
+        MEM_NO ,
+        MEM_GRD_NO ,
+        PWD ,
+        NM ,
+        EMAIL ,
+        BIRTH_DT ,
+        SEX ,
+        MY_SLF_CERT_YN ,
+        CP_NO ,
+        MAIL_SND_YN ,
+        SMS_SND_YN ,
+        COUNTRY_CD ,
+        REGR_NO ,
+        REG_DTS ,
+        UPDR_NO ,
+        UPD_DTS ,
+        (SELECT MEMGRD.GRD_NM
+        FROM TBL_ME_GRD MEMGRD
+        WHERE MEMGRD.MEM_GRD_NO = INFO.MEM_GRD_NO
+        ) AS GRD_NM ,
+        (SELECT SITE_DESC FROM TBL_AD_SITE WHERE SITE_NO = INFO.SITE_NO
+        ) AS SITE_DESC
+      FROM TBL_ME_MEM_INFO INFO
+      WHERE 1 = 1
+      AND WDRW_YN = 'N'
+      )MAIN
+    )T1
+  )

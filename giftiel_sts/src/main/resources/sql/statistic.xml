@@ -1,0 +1,2023 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="statistic">
+	<resultMap id="visitMap" type="com.giftiel.shop.dto.StatisticsForm">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="connSeq" column="CONN_SEQ"/> 
+	    <result property="connDtm" column="CONN_DTM"/> 
+	    <result property="connIpAddr" column="CONN_IP_ADDR"/> 
+	    <result property="connBrnd" column="CONN_BRND"/> 
+	    <result property="connDomain" column="CONN_DOMAIN"/> 
+	    <result property="connBrws" column="CONN_BRWS"/> 
+	    <result property="connOs" column="CONN_OS"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/>
+	    <result property="brndNm" column="BRNDNM"/>
+	    <result property="visitCnt" column="CNT"/>
+	    
+	    <!-- 	    첫컬럼명 -->
+	    <result property="firstColumn" column="F_COLUMN"/>
+	    <!-- 	    비율 -->
+	    <result property="totAvg" column="TOT_AVG"/>
+	    
+		<!-- 	    남녀비율통계 -->
+	    <result property="sexCnt" column="SEX_CNT"/>
+	    <result property="newSex" column="NEW_SEX"/>
+	    <result property="benSex" column="BEN_SEX"/>
+	    
+		<!-- 	    연령대별통계 -->
+	    <result property="ageCnt" column="AGE_CNT"/>
+	    
+		<!-- 	    거지지별통계 -->
+		<result property="areaCnt" column="AREA_CNT"/>
+		<result property="guGun" column="GUGUN"/>
+		
+		<!-- 		적립금사용통계 -->
+		<result property="totPay" column="TOT_PAY"/>
+		<result property="memGradeDc" column="MEM_GRADE_DC"/>
+		<result property="totPoint" column="TOT_POINT"/>
+		<result property="usePoint" column="USE_POINT"/>
+		
+		<result property="ordDts" column="ORD_DTS"/>	<!-- 주문일자 -->
+		<result property="ordCnt" column="ORD_CNT"/>	<!-- 주문건수 -->
+		<result property="slPrc" column="SL_PRC"/>		<!-- 판매가 -->
+		<result property="cancelCnt" column="CANCEL_CNT"/>	<!-- 취소건수 -->
+		<result property="cancelSlPrc" column="CANCEL_SL_PRC"/>	<!-- 취소액 -->
+		<result property="actlCnt" column="ACTL_CNT"/>	<!-- 결제건수 -->
+		<result property="expPnt" column="EXP_PNT"/>	<!-- 포인트적립 -->
+		<result property="usePnt" column="USE_PNT"/>	<!-- 포인트사용 -->
+		<result property="actlDlvCst" column="ACTL_DLV_CST"/> <!-- 배송비 -->
+		<result property="actlPayPrc" column="ACTL_PAY_PRC"/>	<!-- 결재금액 -->
+		<result property="sumPrc" column="SUM_PRC"/>	<!-- 총매출 -->
+		<result property="sumPayPrc" column="SUM_PAY_PRC"/>	<!-- 총매출(실결제) -->
+		
+		<result property="seasonGroupCode" column="SEASONGROUP_CODE"/>	<!-- 시즌코드 -->
+		<result property="category1Code" column="CATEGORY1_CODE" />	<!-- 카테고리1 -->
+		<result property="category2Code" column="CATEGORY2_CODE" />	<!-- 카테고리2 -->
+		<result property="ubiGdsNo" column="UBI_GDS_NO" />	<!-- 주문번호 -->
+		<result property="ubiGdsNm" column="UBI_GDS_NM" />	<!-- 상품명 -->
+		<result property="color" column="COLOR" />	<!-- 색상 -->
+		<result property="size" column="UBI_GDS_SIZE" /> <!-- 사이즈 -->
+
+		<result property="nm" column="NM" />	<!-- 회원명 -->
+		<result property="email" column="EMAIL" />	<!-- email 계정 -->
+		<result property="age" column="AGE" />	<!-- 나이 -->
+		<result property="sex" column="SEX" />	<!-- 성별 -->
+		<result property="memGrdNo" column="MEM_GRD_NO" />	<!-- 회원등급 -->
+		<result property="ordrBsAddr" column="ORDR_BS_ADDR" />	<!-- 주소 -->
+
+	</resultMap>	
+	
+	<resultMap id="StatisticsBrandMap" type="com.giftiel.shop.dto.StatisticsConn">
+		<result property="period" column="PERIOD"/>
+
+		<collection property="brand" ofType="com.giftiel.shop.dto.StatisticsBrand">
+			<result property="connBrnd" column="CONN_BRND"/>
+			<result property="brandTot" column="BRNDTOT"/>
+			
+			<result property="brandNm" column="BRAND_NM"/>
+			<result property="detailTot" column="DETAIL_TOT"/>
+			<result property="cartTot" column="CART_TOT"/>
+			<result property="ordTot" column="ORD_TOT"/>
+			<result property="ordGdTot" column="ORD_GD_TOT"/>
+			<result property="payTot" column="PAY_TOT"/>
+		</collection>
+	</resultMap>
+
+	<select id="countVisit" parameterType="com.giftiel.shop.dto.StatisticsForm" resultType="INTEGER">
+		SELECT 
+			COUNT(*)
+		FROM
+			TBL_ST_VISIT
+		WHERE
+			TO_CHAR(UPD_DTS, 'yyyy/mm/dd') = TO_CHAR(SYSDATE, 'yyyy/mm/dd') AND 
+			CONN_IP_ADDR = '${connIpAddr}' AND 
+			CONN_BRND = ${connBrnd} AND 
+			CONN_BRWS = '${connBrws}'
+	</select>
+	<insert id="insertVisit" parameterType="com.giftiel.shop.dto.StatisticsForm">
+	
+	    INSERT INTO TBL_ST_VISIT
+	        ( CONN_SEQ , CONN_DTM , CONN_IP_ADDR , CONN_BRND , CONN_DOMAIN , CONN_BRWS , CONN_OS , REGR_NO , REG_DTS , UPDR_NO , UPD_DTS )
+	    VALUES 
+	        ( SEQ_TBL_ST_VISIT.NEXTVAL , SYSDATE , #{connIpAddr} , #{connBrnd} , #{connDomain} , #{connBrws} , #{connOs} , '100001' , SYSDATE , '100001' , SYSDATE )
+	</insert>
+	
+	
+	<sql id = "salesQuery">
+		SELECT 
+			ALL_MAIN.* 
+		FROM (
+			SELECT 
+  				ROWNUM RNUM,
+  				ROWMAIN.*
+			FROM (
+		
+				SELECT 
+				  NVL(MAIN.ORD_DTS,0) ORD_DTS,
+				  NVL(MAIN.ORD_CNT,0) ORD_CNT,
+				  NVL(MAIN.SL_PRC,0) SL_PRC,
+				  NVL(MAIN.EXP_PNT,0) EXP_PNT,
+				  NVL(MAIN.USE_PNT,0) USE_PNT,
+				  NVL(MAIN.ACTL_PAY_PRC,0) ACTL_PAY_PRC,
+				  NVL(ACTL.ACTL_CNT,0) ACTL_CNT,
+				  NVL(CANCELORDER.CANCEL_CNT,0) CANCEL_CNT,
+				  NVL(CANCELORDER.CANCEL_SL_PRC,0) CANCEL_SL_PRC,
+				  NVL(DLVCST.ACTL_DLV_CST,0) ACTL_DLV_CST,
+				  (NVL(MAIN.SL_PRC,0) - NVL(CANCELORDER.CANCEL_SL_PRC,0) + NVL(DLVCST.ACTL_DLV_CST,0) - NVL(CANCEL_DLVCST.CANCEL_DLV_CST,0)) AS SUM_PRC
+				FROM(
+				  SELECT 
+				    판매일자 AS ORD_DTS, 
+				    COUNT(판매일자) AS ORD_CNT, 
+				    SUM(실판매금액) AS SL_PRC,
+				    SUM(적립포인트) AS EXP_PNT,
+				    SUM(사용포인트) AS USE_PNT,
+				    SUM(실판매금액) AS ACTL_PAY_PRC
+				  FROM (
+				    SELECT 온라인고객코드,      판매일자,      매장코드,      판매번호,      판매연번,      작업구분,      품번,
+				      색상,      사이즈,      판매수량,      실판매금액,      적립포인트,      사용포인트,      주문번호
+				    FROM UBI09S_WORKS.V_구매정보 UBIORD
+				    where 매장코드 = 'WE001'
+				    AND 작업구분 = '0'
+				    AND 품번 != '000000000000000001'
+				    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+				    	AND TO_DATE(판매일자, 'YYYY/MM/DD HH24MISS') BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </if>
+					<if test="payWays != null and payWays.length > 0">
+				    	AND 주문번호 IN (
+				    		SELECT DISTINCT ORD_NO FROM TBL_OR_PAY WHERE PAY_WAY IN 
+							<foreach item ="item" index="index" collection="payWays" open="(" separator="," close=")">
+								#{item}
+							</foreach>
+				    	)
+					</if>
+					<if test="siteNo != null and siteNo != ''">
+				    	AND 주문번호 IN (
+				    		SELECT ORD_NO FROM TBL_OR_ORD WHERE SITE_NO = #{siteNo}
+				    	)
+					</if>
+					
+					
+					<if test="web == true or mobile == true">
+						AND (SELECT BRWS_CLS FROM TBL_OR_ORD WHERE ORD_NO = UBIORD.주문번호) in (
+						<if test="web == true">'CM00901'</if>
+						<if test="web == true and mobile == true">
+						,
+						</if>	
+						<if test="mobile == true">'CM00902'</if>
+						)
+					</if>
+					
+				  )
+				  GROUP BY 판매일자
+				)MAIN
+				
+				
+				
+				
+				LEFT OUTER JOIN
+			      (SELECT ORD_DTS,
+			       COUNT(ORDER_NO) ACTL_CNT
+			      FROM(
+			      SELECT 판매일자  AS ORD_DTS,
+			              주문번호 ORDER_NO
+			            FROM
+			              (SELECT 온라인고객코드,      판매일자,      매장코드,      판매번호,      판매연번,      작업구분,      품번,
+						      색상,      사이즈,      판매수량,      실판매금액,      적립포인트,      사용포인트,      주문번호
+						    FROM UBI09S_WORKS.V_구매정보 UBIORD
+						    where 매장코드 = 'WE001'
+						    AND 작업구분 = '0'
+						    AND 품번 != '000000000000000001'
+						    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+						    	AND TO_DATE(판매일자, 'YYYY/MM/DD HH24MISS') BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						    </if>
+							<if test="payWays != null and payWays.length > 0">
+						    	AND 주문번호 IN (
+						    		SELECT DISTINCT ORD_NO FROM TBL_OR_PAY WHERE PAY_WAY IN 
+									<foreach item ="item" index="index" collection="payWays" open="(" separator="," close=")">
+										#{item}
+									</foreach>
+						    	)
+							</if>
+							<if test="siteNo != null and siteNo != ''">
+						    	AND 주문번호 IN (
+						    		SELECT ORD_NO FROM TBL_OR_ORD WHERE SITE_NO = #{siteNo}
+						    	)
+							</if>
+							<if test="web == true or mobile == true">
+								AND (SELECT BRWS_CLS FROM TBL_OR_ORD WHERE ORD_NO = UBIORD.주문번호) in (
+								<if test="web == true">'CM00901'</if>
+								<if test="web == true and mobile == true">
+								,
+								</if>	
+								<if test="mobile == true">'CM00902'</if>
+								)
+							</if>							
+							)
+			              GROUP BY 판매일자,주문번호
+			              )
+			          GROUP BY ORD_DTS
+			      )ACTL
+			    ON ACTL.ORD_DTS = MAIN.ORD_DTS
+				
+				
+				
+				
+				
+				
+				LEFT OUTER JOIN
+				(
+				  SELECT 
+				    판매일자 AS ORD_DTS, 
+				    COUNT(판매일자) AS CANCEL_CNT, 
+				    SUM(실판매금액) AS CANCEL_SL_PRC
+				  FROM (
+				    SELECT 온라인고객코드,      판매일자,      매장코드,      판매번호,      판매연번,      작업구분,      품번,
+				      색상,      사이즈,      판매수량,      실판매금액,      적립포인트,      사용포인트,      주문번호
+				    FROM UBI09S_WORKS.V_구매정보 UBIORD
+				    where 매장코드 = 'WE001'
+				    AND 작업구분 = '1'
+				    AND 품번 != '000000000000000001'
+				    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+				    	AND TO_DATE(판매일자, 'YYYY/MM/DD HH24MISS') BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </if>
+					<if test="payWays != null and payWays.length > 0">
+				    	AND 주문번호 IN (
+				    		SELECT DISTINCT ORD_NO FROM TBL_OR_PAY WHERE PAY_WAY IN 
+							<foreach item ="item" index="index" collection="payWays" open="(" separator="," close=")">
+								#{item}
+							</foreach>
+				    	)
+					</if>	
+					<if test="siteNo != null and siteNo != ''">
+				    	AND 주문번호 IN (
+				    		SELECT ORD_NO FROM TBL_OR_ORD WHERE SITE_NO = #{siteNo}
+				    	)
+					</if>		
+					<if test="web == true or mobile == true">
+						AND (SELECT BRWS_CLS FROM TBL_OR_ORD WHERE ORD_NO = UBIORD.주문번호) in (
+						<if test="web == true">'CM00901'</if>
+						<if test="web == true and mobile == true">
+						,
+						</if>	
+						<if test="mobile == true">'CM00902'</if>
+						)
+					</if>
+				  )
+				  GROUP BY 판매일자
+				)CANCELORDER
+				ON CANCELORDER.ORD_DTS = MAIN.ORD_DTS
+				
+				LEFT OUTER JOIN
+				
+				(
+				  SELECT 
+				    판매일자 AS ORD_DTS, 
+				    SUM(실판매금액) AS ACTL_DLV_CST
+				  FROM (
+				    SELECT 온라인고객코드,      판매일자,      매장코드,      판매번호,      판매연번,      작업구분,      품번,
+				      색상,      사이즈,      판매수량,      실판매금액,      적립포인트,      사용포인트,      주문번호
+				    FROM UBI09S_WORKS.V_구매정보 UBIORD
+				    where 매장코드 = 'WE001'
+				    AND 작업구분 = '0'
+				    AND 품번 = '000000000000000001'
+				    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+				    	AND TO_DATE(판매일자, 'YYYY/MM/DD HH24MISS') BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </if>
+					<if test="payWays != null and payWays.length > 0">
+				    	AND 주문번호 IN (
+				    		SELECT DISTINCT ORD_NO FROM TBL_OR_PAY WHERE PAY_WAY IN 
+							<foreach item ="item" index="index" collection="payWays" open="(" separator="," close=")">
+								#{item}
+							</foreach>
+				    	)
+					</if>	
+					<if test="siteNo != null and siteNo != ''">
+				    	AND 주문번호 IN (
+				    		SELECT ORD_NO FROM TBL_OR_ORD WHERE SITE_NO = #{siteNo}
+				    	)
+					</if>		
+					<if test="web == true or mobile == true">
+						AND (SELECT BRWS_CLS FROM TBL_OR_ORD WHERE ORD_NO = UBIORD.주문번호) in (
+						<if test="web == true">'CM00901'</if>
+						<if test="web == true and mobile == true">
+						,
+						</if>	
+						<if test="mobile == true">'CM00902'</if>
+						)
+					</if>	    
+				  )
+				  GROUP BY 판매일자
+				)DLVCST
+				ON MAIN.ORD_DTS = DLVCST.ORD_DTS
+				
+				LEFT OUTER JOIN
+				
+				(
+				  SELECT 
+				    판매일자 AS ORD_DTS, 
+				    SUM(실판매금액) AS CANCEL_DLV_CST
+				  FROM (
+				    SELECT 온라인고객코드,      판매일자,      매장코드,      판매번호,      판매연번,      작업구분,      품번,
+				      색상,      사이즈,      판매수량,      실판매금액,      적립포인트,      사용포인트,      주문번호
+				      FROM UBI09S_WORKS.V_구매정보 UBIORD
+				    where 매장코드 = 'WE001'
+				    AND 작업구분 = '1'
+				    AND 품번 = '000000000000000001'
+				    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+				    	AND TO_DATE(판매일자, 'YYYY/MM/DD HH24MISS') BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </if>
+					<if test="payWays != null and payWays.length > 0">
+				    	AND 주문번호 IN (
+				    		SELECT DISTINCT ORD_NO FROM TBL_OR_PAY WHERE PAY_WAY IN 
+							<foreach item ="item" index="index" collection="payWays" open="(" separator="," close=")">
+								#{item}
+							</foreach>
+				    	)
+					</if>	
+					<if test="siteNo != null and siteNo != ''">
+				    	AND 주문번호 IN (
+				    		SELECT ORD_NO FROM TBL_OR_ORD WHERE SITE_NO = #{siteNo}
+				    	)
+					</if>			  
+					<if test="web == true or mobile == true">
+						AND (SELECT BRWS_CLS FROM TBL_OR_ORD WHERE ORD_NO = UBIORD.주문번호) in (
+						<if test="web == true">'CM00901'</if>
+						<if test="web == true and mobile == true">
+						,
+						</if>	
+						<if test="mobile == true">'CM00902'</if>
+						)
+					</if>  
+				  )
+				  GROUP BY 판매일자
+				)CANCEL_DLVCST
+				ON MAIN.ORD_DTS = CANCEL_DLVCST.ORD_DTS
+				
+				<choose>
+					<when test="orderBy != '' and orderBy != null">
+						ORDER BY ${orderBy} ${orderFlag}
+					</when>
+				</choose>	
+		
+			)ROWMAIN
+		)ALL_MAIN
+		WHERE 1=1
+		
+	</sql>
+
+	<!-- 전체매출통계 --> 
+ 	<select id="salesGraphStatistics" parameterType="com.giftiel.shop.dto.StatisticsForm" resultMap="visitMap">
+ 			/* statistic.salesGraphStatistics */
+		<include refid="salesQuery"/>
+		<if test="(startListNum != '' and startListNum != null) and (endListNum != '' and endListNum != null)">
+		AND RNUM BETWEEN #{startListNum} AND #{endListNum}
+		</if>
+	</select>
+	
+	
+	
+	<select id="sumSalesGraphStatistics" parameterType="com.giftiel.shop.dto.StatisticsForm" resultMap="visitMap">
+		SELECT /* statistic.sumSalesGraphStatistics */
+			SUM(ORD_CNT) AS ORD_CNT
+			, SUM(SL_PRC) AS SL_PRC
+			, SUM(CANCEL_CNT) AS CANCEL_CNT
+			, SUM(CANCEL_SL_PRC) AS CANCEL_SL_PRC
+			, SUM(ACTL_CNT) AS ACTL_CNT
+			, SUM(EXP_PNT) AS EXP_PNT
+			, SUM(USE_PNT) AS USE_PNT
+			, SUM(ACTL_DLV_CST) AS ACTL_DLV_CST
+			, SUM(ACTL_PAY_PRC) AS ACTL_PAY_PRC
+			, SUM(SUM_PRC) AS SUM_PRC
+		FROM(
+		<include refid="salesQuery"/>
+		)
+	</select>
+	
+	<select id="totalSalesGraphStatistics" parameterType="com.giftiel.shop.dto.StatisticsForm" resultType="INTEGER">
+		SELECT /* statistic.totalSalesGraphStatistics */
+			COUNT(*) AS ORD_CNT
+		FROM(
+		<include refid="salesQuery"/>
+		)
+	</select>
+	
+	
+	
+	
+	<sql id = "salesProductQuery">
+		SELECT 
+			ALL_MAIN.* 
+		FROM (
+			SELECT 
+				ROWNUM RNUM,
+  				ROWMAIN.*
+			FROM (
+			
+			SELECT TB_ORDER.UBI_GDS_NO
+			      ,TB_ORDER.UBI_GDS_SIZE
+			      ,NVL(TB_ORDER.ORD_CNT,0) ORD_CNT
+			      ,NVL(TB_ORDER.SUM_PAY_PRC,0) SUM_PAY_PRC
+			      ,(NVL(TB_ORDER.ORD_CNT,0) * NVL(TB_GOODS.SL_PRC,0) ) SUM_PRC
+			      ,NVL(TB_ORDER.EXP_PNT,0) EXP_PNT
+			      ,NVL(TB_ORDER.USE_PNT,0) USE_PNT
+			      
+			      ,TB_GOODS.UBI_GDS_NM
+			      ,TB_GOODS.COLOR
+			      ,TB_GOODS.CATEGORY1_CODE
+			      ,TB_GOODS.CATEGORY2_CODE
+			      ,TB_GOODS.BRNDNM
+			      ,TB_GOODS.SEASONGROUP_CODE
+			      ,TB_GOODS.SL_PRC
+			      ,TB_GOODS.BRNDCD
+			      
+			      ,NVL(TB_CANCEL.CANCEL_CNT,0) CANCEL_CNT
+			      ,NVL(TB_CANCEL.CANCEL_SL_PRC,0) CANCEL_SL_PRC
+			      ,NVL(TB_CANCEL.CANCEL_EXP_PNT,0) CANCEL_EXP_PNT
+			      ,NVL(TB_CANCEL.CANCEL_USE_PNT,0) CANCEL_USE_PNT
+			  
+			FROM(
+			select 품번 UBI_GDS_NO
+			      ,사이즈 UBI_GDS_SIZE
+			      ,SUM(판매수량) ORD_CNT
+			      ,SUM(실판매금액) SUM_PAY_PRC
+			      ,SUM(적립포인트) EXP_PNT
+			      ,SUM(사용포인트) USE_PNT
+			from UBI09S_WORKS.V_구매정보 
+			WHERE 매장코드 = 'WE001'
+			AND 작업구분 = '0'
+			AND 품번 != '000000000000000001'
+			AND 품번 not like '0000%'
+			<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+		    	AND TO_DATE(판매일자, 'YYYY/MM/DD HH24MISS') BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		    </if>
+		    <if test="siteNo != null and siteNo != ''">
+		    	AND 주문번호 IN (
+		    		SELECT ORD_NO FROM TBL_OR_ORD WHERE SITE_NO = #{siteNo}
+		    	)
+			</if>	
+			
+			group by 품번,사이즈
+			)TB_ORDER
+			
+			
+			
+			LEFT OUTER JOIN (
+			SELECT 품번 UBI_GDS_NO
+			      ,품명 UBI_GDS_NM
+			      ,색상명 COLOR
+			      ,사이즈 UBI_GDS_SIZE
+			      ,CATEGORY1코드 CATEGORY1_CODE
+			      ,CATEGORY2코드 CATEGORY2_CODE
+			      ,BARND BRNDNM
+			      ,BRAND코드 BRNDCD
+			      ,SEASON코드 SEASONGROUP_CODE
+			      ,현판매가 SL_PRC
+			FROM UBI09S_WORKS.V_상품정보트리거
+			WHERE 품번 not like '0000%'
+			)TB_GOODS
+			ON TB_ORDER.UBI_GDS_NO = TB_GOODS.UBI_GDS_NO
+			AND TB_ORDER.UBI_GDS_SIZE = TB_GOODS.UBI_GDS_SIZE
+			
+			
+			
+			LEFT OUTER JOIN (
+			select 품번 UBI_GDS_NO
+			      ,사이즈 UBI_GDS_SIZE
+			      ,SUM(판매수량) CANCEL_CNT
+			      ,SUM(실판매금액) CANCEL_SL_PRC
+			      ,SUM(적립포인트) CANCEL_EXP_PNT
+			      ,SUM(사용포인트) CANCEL_USE_PNT
+			
+			from UBI09S_WORKS.V_구매정보 
+			WHERE 매장코드 = 'WE001'
+			AND 작업구분 = '1'
+			AND 품번 != '000000000000000001'
+			group by 품번,사이즈
+			)TB_CANCEL
+			ON TB_ORDER.UBI_GDS_NO = TB_CANCEL.UBI_GDS_NO
+			AND TB_ORDER.UBI_GDS_SIZE = TB_CANCEL.UBI_GDS_SIZE
+			
+			<choose>
+				<when test="orderBy != '' and orderBy != null">
+					ORDER BY ${orderBy} ${orderFlag}
+				</when>
+			</choose>
+			)ROWMAIN
+			WHERE 1=1
+			<if test="oneDepth != null and oneDepth != ''">
+		    	AND SEASONGROUP_CODE = #{oneDepth}
+			</if>
+			<if test="twoDepth != null and twoDepth != '' and twoDepth != '00'">
+		    	AND CATEGORY1_CODE = #{twoDepth}
+			</if>
+			<if test="threeDepth != null and threeDepth != '' and threeDepth != '0000'">
+		    	AND CATEGORY2_CODE = #{threeDepth}
+			</if>
+			<if test="ubiGdsSize != null and ubiGdsSize != ''">
+		    	AND UBI_GDS_SIZE = #{ubiGdsSize}
+			</if>
+			<if test="ubiGdsNo != null and ubiGdsNo != ''">
+		    	AND UBI_GDS_NO = #{ubiGdsNo}
+			</if>
+<!-- 			<if test="siteNo = null or siteNo = '' or siteNo='10001'"> -->
+			<if test="siteNo =='10001'">
+		    	<if test="brand != null and brand != ''  and brand != '00'" >
+			    	AND BRNDCD = #{brand}
+				</if>
+			</if>
+			
+		)ALL_MAIN
+		WHERE 1=1
+	</sql>
+	
+	<!-- 상품별매출통계 -->
+	<select id="salesProductStatistics" parameterType="com.giftiel.shop.dto.StatisticsForm" resultMap="visitMap">
+		/* statistic.salesProductStatistics */
+		<include refid="salesProductQuery"/>
+		<if test="(startListNum != '' and startListNum != null) and (endListNum != '' and endListNum != null)">
+		AND RNUM BETWEEN #{startListNum} AND #{endListNum}
+		</if>
+	</select>
+	
+	
+	<select id="sumSalesProductStatistics" parameterType="com.giftiel.shop.dto.StatisticsForm" resultMap="visitMap">
+			
+		SELECT /* statistic.sumSalesProductStatistics */
+			 SUM(SUM_PRC) AS SUM_PRC
+			, SUM(SL_PRC) AS SL_PRC
+			, SUM(SUM_PAY_PRC) AS SUM_PAY_PRC
+			, SUM(ORD_CNT) AS ORD_CNT
+			, SUM(NVL(CANCEL_CNT,0)) AS CANCEL_CNT
+			, SUM(NVL(CANCEL_SL_PRC,0)) AS CANCEL_SL_PRC
+			, SUM(EXP_PNT) AS EXP_PNT
+			, SUM(USE_PNT) AS USE_PNT
+		FROM(
+		<include refid="salesProductQuery"/>
+		)
+	</select>
+	
+	
+	<select id="totalSalesProductStatistics" parameterType="com.giftiel.shop.dto.StatisticsForm" resultType="INTEGER">
+		SELECT /* statistic.totalSalesProductStatistics */
+			COUNT(*) CNT
+		FROM(
+		<include refid="salesProductQuery"/>
+		)
+	</select>
+	
+	
+	
+	<sql id = "salesMemQuery">
+	SELECT 
+			ALL_MAIN.* 
+		FROM (
+			SELECT 
+				ROWNUM RNUM,
+  				ROWMAIN.*
+			FROM (
+			
+			
+			
+				SELECT MEM_GRD_NO
+				      ,NVL(NM,'GUEST') AS NM
+				      ,NVL(EMAIL,'GUEST') AS EMAIL
+				      ,NVL(SEX,'-') AS SEX
+				      ,NVL(AGE,0) AS AGE
+				      ,ORDR_BS_ADDR
+				      ,SUM(NVL(ORD_CNT,0)) ORD_CNT
+				      ,SUM(NVL(SL_PRC,0)) SL_PRC
+				      ,SUM(NVL(EXP_PNT,0)) EXP_PNT
+				      ,SUM(NVL(CANCEL_SL_PRC,0)) CANCEL_SL_PRC
+				FROM(
+					SELECT * 
+					FROM(
+						SELECT TB_MEMBER.MEM_NO
+						      ,TB_MEMBER.MEM_GRD_NO
+						      ,TB_MEMBER.NM
+						      ,TB_MEMBER.EMAIL
+						      ,TB_MEMBER.SEX
+						      ,TRUNC(MONTHS_BETWEEN(SYSDATE,TB_MEMBER.BIRTH_DT)/12) AS AGE
+						      
+						      ,TB_ORDER.ORDR_BS_ADDR
+						      
+						      ,TB_UBI_ORDER.판매수량 ORD_CNT
+						      ,TB_UBI_ORDER.실판매금액 SL_PRC
+						      ,TB_UBI_ORDER.적립포인트 EXP_PNT
+						FROM UBI09S_WORKS.V_구매정보  TB_UBI_ORDER
+						    ,TBL_ME_MEM_INFO TB_MEMBER
+						    ,TBL_OR_ORD TB_ORDER
+						WHERE TB_UBI_ORDER.주문번호 = TB_ORDER.ORD_NO(+)
+						AND   TB_ORDER.MEM_NO = TB_MEMBER.MEM_NO(+)
+						AND   TB_UBI_ORDER.품번 not like '0000%'
+						AND   TB_UBI_ORDER.품번 != '000000000000000001'
+						AND   TB_UBI_ORDER.작업구분 = 0
+						AND   TB_UBI_ORDER.매장코드 = 'WE001'
+						<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+					    	AND TO_DATE(TB_UBI_ORDER.판매일자, 'YYYY/MM/DD HH24MISS') BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					    </if>
+					    <if test="memGrdNo != '' and memGrdNo != null">
+				    		<choose>
+				    			<when test="memGrdNo == 99999999">
+				    			AND TB_MEMBER.MEM_GRD_NO IS NULL
+				    			</when>
+				    			<otherwise>
+				    			AND TB_MEMBER.MEM_GRD_NO = #{memGrdNo}
+				    			</otherwise>
+				    		</choose>
+				    	</if>
+				    	<if test="sex != '' and sex != null">
+					    	AND TB_MEMBER.SEX = #{sex}
+					    </if>
+					    
+					    <if test="sAge != '' and sAge != null">
+					    	<choose>
+					    		<when test="eAge != '' and eAge != null">
+					    			AND TRUNC(MONTHS_BETWEEN(SYSDATE,TB_MEMBER.BIRTH_DT)/12) BETWEEN #{sAge} AND #{eAge}
+					    		</when>
+					    		<otherwise>
+					    			AND TRUNC(MONTHS_BETWEEN(SYSDATE,TB_MEMBER.BIRTH_DT)/12) <![CDATA[>=]]> #{sAge}
+					    		</otherwise>
+					    	</choose>
+					    </if>
+					    
+					    <if test="searchGb != '' and searchGb != null and searchText != ''">
+							AND ${searchGb} LIKE '%'||#{searchText}||'%'
+						</if>
+						
+						<if test="sido != '' and sido != null">
+							<choose>
+								<when test="gugun != '' and gugun != null">
+									AND TB_ORDER.ORDR_BS_ADDR LIKE '%'||#{sido}||' '||#{gugun}||'%'
+								</when>
+								<otherwise>
+									AND TB_ORDER.ORDR_BS_ADDR LIKE '%'||#{sido}||'%'
+								</otherwise>
+							</choose>
+						</if>
+					    
+					    
+						)MAIN
+						
+						
+						LEFT OUTER JOIN (
+						SELECT TB_MEMBER.MEM_NO SUB_MEM_NO
+						      ,TB_UBI_ORDER.실판매금액 CANCEL_SL_PRC
+						FROM UBI09S_WORKS.V_구매정보  TB_UBI_ORDER
+						    ,TBL_ME_MEM_INFO TB_MEMBER
+						    ,TBL_OR_ORD TB_ORDER
+						WHERE TB_UBI_ORDER.주문번호 = TB_ORDER.ORD_NO(+)
+						AND   TB_ORDER.MEM_NO = TB_MEMBER.MEM_NO(+)
+						AND   TB_UBI_ORDER.품번 not like '0000%'
+						AND   TB_UBI_ORDER.품번 != '000000000000000001'
+						AND   TB_UBI_ORDER.작업구분 = 1
+						AND   TB_UBI_ORDER.매장코드 = 'WE001'
+					
+					)SUB
+					ON MAIN.MEM_NO = SUB.SUB_MEM_NO
+				)
+				GROUP BY MEM_NO,MEM_GRD_NO,NM,EMAIL,SEX,AGE,ORDR_BS_ADDR
+			
+				<choose>
+					<when test="orderBy != '' and orderBy != null">
+						ORDER BY ${orderBy} ${orderFlag}
+					</when>
+				</choose>
+		
+		)ROWMAIN
+			WHERE 1=1
+			
+			
+		)ALL_MAIN
+		WHERE 1=1
+	</sql>
+	
+	
+	<!-- 회원별매출통계 -->	
+	<select id="memStatistics" parameterType="com.giftiel.shop.dto.StatisticsForm" resultMap="visitMap">
+		/* statistic.memStatistics */
+		<include refid="salesMemQuery"/>
+		<if test="(startListNum != '' and startListNum != null) and (endListNum != '' and endListNum != null)">
+		AND RNUM BETWEEN #{startListNum} AND #{endListNum}
+		</if>
+	</select>
+	
+	
+	<select id="sumMemStatistics" parameterType="com.giftiel.shop.dto.StatisticsForm" resultMap="visitMap">
+		SELECT /* statistic.sumMemStatistics */
+			SUM(ORD_CNT) AS ORD_CNT ,
+			SUM(SL_PRC) AS SL_PRC ,
+			SUM(EXP_PNT) AS EXP_PNT ,
+			SUM(CANCEL_SL_PRC) AS CANCEL_SL_PRC 
+		FROM(
+		<include refid="salesMemQuery"/>
+		)
+	</select>
+	
+	<select id="totalMemStatistics" parameterType="com.giftiel.shop.dto.StatisticsForm" resultType="INTEGER">
+		SELECT /* statistic.totalMemStatistics */
+			COUNT(*) CNT
+		FROM(
+		<include refid="salesMemQuery"/>
+		)
+	</select>
+	
+
+	
+	
+ 
+	<!-- 남녀비율 통계 -->
+	<select id="genderVisit"  parameterType="com.giftiel.shop.dto.SearchForm" resultMap="visitMap">
+		SELECT 
+			F_COLUMN,
+			SEX_CNT,
+			NEW_SEX,
+			BEN_SEX,
+			TOT_AVG FROM
+		(	
+			SELECT 
+				DECODE(0,0,'남') F_COLUMN, 
+				(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE SEX='M' ) SEX_CNT, 
+				(
+					SELECT COUNT(*) 
+					FROM TBL_ME_MEM_INFO 
+					WHERE 
+					SEX='M'
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+					AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					</if>
+				) NEW_SEX, 
+				(
+					SELECT COUNT(*) 
+					FROM TBL_ME_MEM_INFO 
+					WHERE 
+					SEX='M' AND WDRW_YN	='Y'
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+					AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					</if> 
+				) BEN_SEX,
+				CEIL((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE SEX='M')/(SELECT COUNT(*) FROM TBL_ME_MEM_INFO)*100) TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+				DECODE(0,0,'여') F_COLUMN, 
+				(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE SEX='W' ) SEX_CNT, 
+				(
+					SELECT COUNT(*) 
+					FROM TBL_ME_MEM_INFO 
+					WHERE 
+					SEX='W'
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+					AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					</if> 
+				) NEW_SEX, 
+				(
+					SELECT COUNT(*) 
+					FROM TBL_ME_MEM_INFO 
+					WHERE 
+					SEX='W' AND WDRW_YN	='Y'
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+					AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					</if> 
+				) BEN_SEX,
+				CEIL((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE SEX='W')/(SELECT COUNT(*) FROM TBL_ME_MEM_INFO)*100) TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+				DECODE(0,0,'기타') F_COLUMN, 
+				(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE SEX != 'M' AND SEX != 'W' ) SEX_CNT, 
+				(
+					SELECT COUNT(*) 
+					FROM TBL_ME_MEM_INFO
+					WHERE 
+					SEX != 'M' AND SEX != 'W'
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+					AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					</if> 
+				) NEW_SEX, 
+				(
+					SELECT COUNT(*) 
+					FROM TBL_ME_MEM_INFO 
+					WHERE 
+					SEX != 'M' AND SEX != 'W' AND WDRW_YN	='Y'
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+					AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					</if> 
+				) BEN_SEX,
+				CEIL((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE SEX != 'M' AND SEX != 'W')/(SELECT COUNT(*) FROM TBL_ME_MEM_INFO)*100) TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+				DECODE(0,0,'합계') F_COLUMN, 
+				(SELECT COUNT(*) FROM TBL_ME_MEM_INFO ) SEX_CNT, 
+				(
+					SELECT COUNT(*) 
+					FROM TBL_ME_MEM_INFO 
+					WHERE 1=1 
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+					AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					</if>
+				) NEW_SEX, 
+				(
+					SELECT COUNT(*) 
+					FROM TBL_ME_MEM_INFO 
+					WHERE 
+					WDRW_YN	='Y'
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+					AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					</if> 
+				) BEN_SEX ,
+				100 TOT_AVG
+			FROM DUAL
+		)
+	</select>
+	<!-- 연령대별 통계 -->
+	<select id="ageVisit"  parameterType="com.giftiel.shop.dto.SearchForm" resultMap="visitMap">
+		<if test="orderBy == 'All'">
+			SELECT 
+			DECODE(0,0,'10대이하') F_COLUMN,
+			(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 0 AND 9 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT ,
+			RTRIM(TO_CHAR(ROUND(
+			  (
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 0 AND 9 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO) * 100
+			  ),2			  
+			),'FM9990D99'),'.') TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+			DECODE(0,0,'10대') F_COLUMN,
+			(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 10 AND 19 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT ,
+			RTRIM(TO_CHAR(ROUND(
+			  (
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 10 AND 19 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO) * 100
+			  ),2
+			),'FM9990D99'),'.') TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+			DECODE(0,0,'20대') F_COLUMN,
+			(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 20 AND 29 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT ,
+			RTRIM(TO_CHAR(ROUND(
+			  (
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 20 AND 29 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO) * 100
+			  ),2
+			),'FM9990D99'),'.') TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+			DECODE(0,0,'30대') F_COLUMN,
+			(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 30 AND 39 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT ,
+			RTRIM(TO_CHAR(ROUND(
+			  (
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 30 AND 39 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO) * 100
+			  ),2
+			),'FM9990D99'),'.') TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+			DECODE(0,0,'40대') F_COLUMN,
+			(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 40 AND 49 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT ,
+			RTRIM(TO_CHAR(ROUND(
+			  (
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 40 AND 49 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO) * 100
+			  ),2
+			),'FM9990D99'),'.') TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+			DECODE(0,0,'50대') F_COLUMN,
+			(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 50 AND 59 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT ,
+			RTRIM(TO_CHAR(ROUND(
+			  (
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN 50 AND 59 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO) * 100
+			  ),2
+			),'FM9990D99'),'.') TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+			DECODE(0,0,'60대이상') F_COLUMN,
+			(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) >=60 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT ,
+			RTRIM(TO_CHAR(ROUND(
+			  (
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) >=60 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO) * 100
+			  ),2
+			),'FM9990D99'),'.') TOT_AVG
+			FROM DUAL
+			UNION ALL
+			SELECT 
+			DECODE(0,0,'합계') F_COLUMN,
+			(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT ,
+			TO_CHAR(CEIL(
+			  (
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) > 0 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO) * 100
+			  )
+			)) TOT_AVG
+			FROM DUAL
+		</if>
+		<if test = "orderBy != 'All'">
+		<foreach collection="value" item="value" index="index"  open="" close="" separator="UNION ALL">
+			SELECT 
+				(${index}*(${value.age})) || '~' || (((${index}+1)*(${value.age}))-1) F_COLUMN,
+				(
+				      SELECT COUNT(*) 
+				      FROM TBL_ME_MEM_INFO 
+				      WHERE 1=1 AND
+				      NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN (${index}*(${value.age})) AND (((${index}+1)*(${value.age}))-1) AND 
+				      UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				) AGE_CNT ,
+				RTRIM(TO_CHAR(ROUND(
+				  (
+				    (
+				      SELECT COUNT(*) 
+				      FROM TBL_ME_MEM_INFO 
+				      WHERE 1=1 AND
+				      NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) BETWEEN (${index}*(${value.age})) AND (((${index}+1)*(${value.age}))-1) AND 
+				      UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    )/(
+				      SELECT COUNT(*) 
+				      FROM TBL_ME_MEM_INFO
+				    ) * 100
+				  ),2
+				),'FM9990D99'),'.') TOT_AVG
+			FROM DUAL
+			GROUP BY (${index}*(${value.age})) || '~' || (((${index}+1)*(${value.age}))-1)
+		</foreach>
+		UNION ALL
+		SELECT  
+		'60대이상' F_COLUMN, 
+		(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY') > = 60 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT,
+		RTRIM(TO_CHAR(ROUND(
+		(
+			(
+				SELECT COUNT(*) 
+				FROM TBL_ME_MEM_INFO 
+				WHERE 1=1 AND
+		      		NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) >=60 AND 
+		      		UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		    )/(
+		      SELECT COUNT(*) 
+		      FROM TBL_ME_MEM_INFO
+		    ) * 100
+		  ),2
+		),'FM9990D99'),'.') TOT_AVG
+		FROM DUAL
+		UNION ALL
+		SELECT 
+			DECODE(0,0,'합계') F_COLUMN,
+			(SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AGE_CNT ,
+			TO_CHAR(ROUND(
+			  (
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE NVL(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(BIRTH_DT,'YYYY'),0) > 0 AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/
+			    (SELECT COUNT(*) FROM TBL_ME_MEM_INFO) * 100
+				),2
+			)) TOT_AVG
+			FROM DUAL
+		
+		</if>
+	</select>
+	<!-- 거주지별 통계 -->
+	<select id="residenceVisit" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="visitMap">
+		<choose>
+			<when test="sido != null and sido !='' ">
+				SELECT #{sido} F_COLUMN, 
+				SIGUNGU_NM GUGUN, 
+				(SELECT COUNT(BS_ADDR) FROM TBL_ME_MYDLV_ADDR  WHERE BASE_VAL_YN='Y' AND
+				(BS_ADDR LIKE '%'||#{sido}||'%' AND BS_ADDR LIKE '%'||SIGUNGU_NM||'%'<if test="gugun !='' and gugun != null"> OR BS_ADDR LIKE '%'|| #{gugun} ||'%'</if>) AND 
+				UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT,
+				RTRIM(TO_CHAR(ROUND((
+					(SELECT COUNT(BS_ADDR) FROM TBL_ME_MYDLV_ADDR  WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%'||SIGUNGU_NM||'%' AND (BS_ADDR LIKE '%'||#{sido}||'%'<if test="gugun !='' and gugun != null"> OR BS_ADDR LIKE '%'|| #{gugun} ||'%'</if>) AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+					)/(
+					SELECT COUNT(*) FROM TBL_ME_MEM_INFO) *100
+				),2),'FM9990D99'),'.') TOT_AVG
+				FROM 
+				(
+					<choose>
+					<when test="sido == '세종특별자치시' ">
+						SELECT DISTINCT LAW_EMD_NM SIGUNGU_NM FROM TBL_AD_ZIP_CD WHERE SIDO_NM=#{sido}
+						<if test="gugun != null and gugun != ''">
+						AND LAW_EMD_NM=#{gugun}
+						</if>
+					</when>
+					<otherwise>
+						SELECT DISTINCT SIGUNGU_NM FROM TBL_AD_ZIP_CD WHERE SIDO_NM=#{sido}
+						<if test="gugun != null and gugun != ''">
+						AND SIGUNGU_NM=#{gugun}
+						</if>
+					</otherwise>
+					</choose>
+				)
+				GROUP BY SIGUNGU_NM
+				<choose>
+					<when test="orderBy != '' and orderBy != null">
+						ORDER BY ${orderBy} ${orderFlag}
+					</when>
+					<otherwise>
+						ORDER BY GUGUN DESC
+					</otherwise>
+			    </choose>
+			</when>
+			<otherwise>
+				SELECT * FROM (
+				  SELECT '강원' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%강원%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%강원%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '경기' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%경기%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%경기%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '경남' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%경남%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%경남%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '경북' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%경북%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%경북%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '광주' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%광주%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%광주%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '대구' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%대구%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%대구%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '대전' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%대전%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%대전%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '부산' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%부산%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%부산%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '서울' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%서울%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%서울%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '세종특별자치시' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%세종특별자치시%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%세종특별자치시%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '울산' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%울산%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%울산%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '인천' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%인천%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%인천%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '전남' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%전남%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%전남%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '전북' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%전북%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%전북%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '제주특별자치도' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%제주특별자치도%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%제주특별자치도%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '충남' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%충남%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%충남%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL UNION ALL
+				  SELECT '충북' F_COLUMN,'각 구 전체' GUGUN, (SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%충북%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')) AREA_CNT, RTRIM(TO_CHAR(ROUND(NVL(((SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR WHERE BASE_VAL_YN='Y' AND BS_ADDR LIKE '%충북%' AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))/(DECODE((SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')), 0, NULL, (SELECT COUNT(*) FROM TBL_ME_MEM_INFO WHERE UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS'))))) *100,0),2),'FM9990D99'),'.') TOT_AVG FROM DUAL
+				)
+				<choose>
+					<when test="orderBy != '' and orderBy != null">
+						ORDER BY ${orderBy} ${orderFlag}
+					</when>
+					<otherwise>
+						ORDER BY F_COLUMN ASC
+					</otherwise>
+			    </choose>
+			</otherwise>
+		</choose>
+	</select>
+	<!-- 거주지별 통계 총합 -->
+	<select id="residenceTotal" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="visitMap">
+		SELECT /* statistic.residenceTotal*/
+			(SELECT COUNT(*) FROM TBL_ME_MYDLV_ADDR
+			WHERE 1=1 AND
+			BASE_VAL_YN='Y'
+				<if test="sido !='' and sido != null">
+				AND BS_ADDR LIKE '%' || #{sido} || '%'
+					<if test="gugun !='' and gugun != null">
+					AND BS_ADDR LIKE '%' || #{gugun} || '%'
+					</if> 
+				</if>
+				<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+				AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				</if>
+			) CNT,
+			(
+				CEIL(
+					(
+						SELECT COUNT(BS_ADDR) FROM TBL_ME_MYDLV_ADDR  WHERE BASE_VAL_YN='Y'
+						<if test="sido !='' and sido != null">
+						AND 
+						(
+							BS_ADDR LIKE '%'||#{sido}||'%'
+							<if test="gugun !='' and gugun != null">
+							 OR BS_ADDR LIKE '%'|| #{gugun} ||'%'
+							 </if>
+						 ) 
+						</if> 
+						<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+						AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+					)/(
+						SELECT COUNT(*) FROM TBL_ME_MEM_INFO
+					)*100
+				)
+			) TOT_AVG
+		FROM DUAL
+	</select>
+	<!-- 거지지지역 Ajax 가져오기 -->
+	<select id="residenceVisitAjax" parameterType="com.giftiel.shop.dto.SearchForm" resultType="java.util.HashMap">
+		<if test="sido !='' and sido != null">
+			<choose>
+				<when test="sido == '세종특별자치시' ">
+					SELECT DISTINCT LAW_EMD_NM SIGUNGU_NM FROM TBL_AD_ZIP_CD WHERE SIDO_NM =#{sido}				
+				</when>
+				<otherwise>
+					SELECT DISTINCT SIGUNGU_NM FROM TBL_AD_ZIP_CD WHERE SIDO_NM =#{sido}
+				</otherwise>
+			</choose>
+		</if>
+	</select>
+
+	<!-- 방문자 접속 통계 리스트 -->
+	<select id="listVisit" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="StatisticsBrandMap">
+	 	
+	 	<foreach collection="value" item="value" index="index"  open="" close="" separator="UNION ALL">
+	 	SELECT * FROM (
+	 	<if test="dateType == 'Day'">
+		 	SELECT LPAD(#{index},2,'0') PERIOD, CONN_BRND, SUM(BRNDTOT) BRNDTOT, SITE_NO  FROM(
+		</if>
+		<if test="dateType == 'Month'">
+		 	SELECT #{value.day} || '.' || LPAD(#{index}+1,2,'0') PERIOD, CONN_BRND, SUM(BRNDTOT) BRNDTOT, SITE_NO  FROM(
+		</if>
+		<if test="dateType == 'Year'">
+		 	SELECT SUBSTR(#{value.day},1,4) || '.' || LPAD((SUBSTR(#{value.day},-2,2)+#{index}),2,'0') PERIOD, CONN_BRND, SUM(BRNDTOT) BRNDTOT, SITE_NO  FROM(
+		</if>
+		<if test="dateType == 'Hour'">
+		 	SELECT LPAD(#{index},2,'0') PERIOD, CONN_BRND, SUM(BRNDTOT) BRNDTOT, SITE_NO  FROM(
+		</if>
+				<if test="dateType == 'Day'">
+				SELECT (SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = CONN_BRND) CONN_BRND,
+				       COUNT(CONN_BRND) BRNDTOT,
+				       CONN_BRND SITE_NO
+				FROM TBL_ST_VISIT
+				WHERE 1 = 1
+					AND CONN_DTM BETWEEN 
+					TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || LPAD(#{index},2,'0') || '0000', 'YYYY/MM/DD HH24MISS') AND 
+					TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || LPAD(#{index},2,'0') || '5959', 'YYYY/MM/DD HH24MISS')
+				</if>
+				<if test="dateType == 'Month'">
+				SELECT (SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = CONN_BRND) CONN_BRND,
+				       COUNT(CONN_BRND) BRNDTOT,
+				       CONN_BRND SITE_NO
+				FROM TBL_ST_VISIT
+				WHERE 1 = 1
+					AND CONN_DTM BETWEEN 
+					TO_DATE(TO_CHAR(TO_DATE(#{value.day} || '.' || LPAD(#{index}+1,2,'0')),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND 
+					TO_DATE(TO_CHAR(TO_DATE(#{value.day} || '.' || LPAD(#{index}+1,2,'0')),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+				</if>
+				<if test="dateType == 'Year'">
+				SELECT (SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = CONN_BRND) CONN_BRND,
+				       COUNT(CONN_BRND) BRNDTOT,
+				       CONN_BRND SITE_NO
+				FROM TBL_ST_VISIT
+				WHERE 1 = 1
+					AND CONN_DTM BETWEEN 
+					TO_DATE(SUBSTR(#{value.day},1,4) || '.' || LPAD((SUBSTR(#{value.day},-2,2)+#{index}),2,'0') || '.01','YYYY/MM/DD') AND
+					TO_DATE(TO_CHAR(LAST_DAY(TO_DATE(SUBSTR(#{value.day},1,4) || '.' || LPAD((SUBSTR(#{value.day},-2,2)+#{index}),2,'0') || '.01','YYYY/MM/DD')),'YYYY/MM/DD'),'YYYY/MM/DD')
+				</if>
+				<if test="dateType == 'Hour'">
+				SELECT (SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = CONN_BRND) CONN_BRND,
+				       COUNT(CONN_BRND) BRNDTOT,
+				       CONN_BRND SITE_NO
+				FROM TBL_ST_VISIT
+				WHERE 1 = 1
+				  AND (TO_DATE(TO_CHAR(CONN_DTM,'YYYYMMDD'), 'YYYY/MM/DD HH24MISS') BETWEEN TO_DATE(#{searchStrDtm}) AND TO_DATE(#{searchEndDtm})) 
+                  AND (TO_CHAR(CONN_DTM,'HH24MISS') BETWEEN LPAD(#{index},2,'0') || '0000' AND LPAD(#{index},2,'0') || '5959')
+					
+				</if>
+				
+				
+				<if test="siteName != null and  siteName !=''"> 
+				    AND CONN_BRND = #{siteName}
+				</if>
+				GROUP BY CONN_BRND
+				
+				UNION
+				
+				SELECT SITE_NM CONN_BRND, 0 BRNDTOT, SITE_NO FROM TBL_AD_SITE
+				<if test="siteName != null and  siteName !=''"> 
+				    WHERE SITE_NO = #{siteName}
+				</if>
+				
+				
+				<if test="siteName == null or  siteName ==''"> 
+				UNION
+				
+				SELECT '합계' CONN_BRND, 
+							(SELECT COUNT(*) FROM TBL_ST_VISIT 
+							 WHERE 1 = 1
+							 	
+							 	<if test="dateType == 'Day'">
+							 	AND CONN_DTM BETWEEN
+							 	TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || LPAD(#{index},2,'0') || '0000', 'YYYY/MM/DD HH24MISS') AND 
+							 	TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || LPAD(#{index},2,'0') || '5959', 'YYYY/MM/DD HH24MISS')
+							 	</if>
+							 	<if test="dateType == 'Month'">
+							 	AND CONN_DTM BETWEEN
+							 	TO_DATE(TO_CHAR(TO_DATE(#{value.day} || '.' || LPAD(#{index}+1,2,'0')),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND 
+							 	TO_DATE(TO_CHAR(TO_DATE(#{value.day} || '.' || LPAD(#{index}+1,2,'0')),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+							 	</if>
+							 	<if test="dateType == 'Year'">
+							 	AND CONN_DTM BETWEEN
+								TO_DATE(SUBSTR(#{value.day},1,4) || '.' || LPAD((SUBSTR(#{value.day},-2,2)+#{index}),2,'0') || '.01','YYYY/MM/DD') AND
+								TO_DATE(TO_CHAR(LAST_DAY(TO_DATE(SUBSTR(#{value.day},1,4) || '.' || LPAD((SUBSTR(#{value.day},-2,2)+#{index}),2,'0') || '.01','YYYY/MM/DD')),'YYYY/MM/DD'),'YYYY/MM/DD')
+							 	</if>
+							 	<if test="dateType == 'Hour'">
+								AND (TO_DATE(to_char(CONN_DTM,'YYYYMMDD')) BETWEEN TO_DATE(#{searchStrDtm}) AND TO_DATE(#{searchEndDtm})) 
+                     			AND (TO_CHAR(CONN_DTM,'HH24MISS') BETWEEN LPAD(#{index},2,'0') || '0000' AND LPAD(#{index},2,'0') || '5959') 
+							 	</if>
+							 <if test="siteName != null and  siteName !=''"> 
+							     AND CONN_BRND = #{siteName}
+							 </if> 
+							 ) BRNDTOT,
+					 		100000 SITE_NO from dual
+					</if>
+					)T1
+			GROUP BY CONN_BRND,SITE_NO
+			ORDER BY SITE_NO ASC
+		)
+		</foreach>
+	</select>
+	<!-- 방문자 접속 통계 리스트 [요일별]-->
+	<select id="listVisitWeek" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="StatisticsBrandMap">
+			SELECT T2.PERIOD, 
+				NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = T2.CONN_BRND),'합계') BRAND_NM,CONN_BRND, 
+				DECODE(T2.PERIOD,'일요일',1,'월요일',2,'화요일',3,'수요일',4,'목요일',5,'금요일',6,'토요일',7,8) SORT,
+				BRNDTOT 
+				FROM(
+				SELECT WEEK PERIOD , CONN_BRND ,MAX(CONN_BRND_TOT) BRNDTOT FROM(
+					SELECT * FROM(
+						SELECT 
+						      WEEK,
+						      CONN_BRND,
+						      COUNT(CONN_BRND) CONN_BRND_TOT
+						FROM(
+							SELECT  
+							UPPER(TO_CHAR(CONN_DTM, 'DAY', 'NLS_DATE_LANGUAGE=KOREAN')) WEEK,
+							CONN_BRND
+							FROM TBL_ST_VISIT
+							WHERE CONN_DTM BETWEEN TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+							<if test="siteName != null and  siteName !=''"> 
+							    AND CONN_BRND = #{siteName}
+							</if>
+							ORDER BY CONN_BRND DESC
+						)T1 GROUP BY WEEK , CONN_BRND
+					)
+					UNION ALL
+					
+					SELECT '월요일' WEEK, SITE_NO CONN_BRND, 0 CONN_BRND_TOT FROM TBL_AD_SITE UNION ALL
+					SELECT '화요일' WEEK, SITE_NO CONN_BRND, 0 CONN_BRND_TOT FROM TBL_AD_SITE UNION ALL
+					SELECT '수요일' WEEK, SITE_NO CONN_BRND, 0 CONN_BRND_TOT FROM TBL_AD_SITE UNION ALL
+					SELECT '목요일' WEEK, SITE_NO CONN_BRND, 0 CONN_BRND_TOT FROM TBL_AD_SITE UNION ALL
+					SELECT '금요일' WEEK, SITE_NO CONN_BRND, 0 CONN_BRND_TOT FROM TBL_AD_SITE UNION ALL
+					SELECT '토요일' WEEK, SITE_NO CONN_BRND, 0 CONN_BRND_TOT FROM TBL_AD_SITE UNION ALL
+					SELECT '일요일' WEEK, SITE_NO CONN_BRND, 0 CONN_BRND_TOT FROM TBL_AD_SITE 
+					
+					UNION ALL
+					
+					SELECT '월요일' WEEK, 
+					       1000000 CONN_BRND, 
+					       (SELECT COUNT(*)FROM TBL_ST_VISIT
+	 							 WHERE CONN_DTM BETWEEN TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+	 							   AND UPPER(TO_CHAR(CONN_DTM, 'DAY', 'NLS_DATE_LANGUAGE=KOREAN')) = '월요일'
+	 							 <if test="siteName != null and  siteName !=''">
+	 							     AND CONN_BRND = #{siteName}
+	 							 </if>
+	 							 ) CONN_BRND_TOT 
+					       FROM TBL_AD_SITE 
+					UNION ALL
+					
+					SELECT '화요일' WEEK, 
+					       1000000 CONN_BRND, 
+					       (SELECT COUNT(*)FROM TBL_ST_VISIT
+	 							 WHERE CONN_DTM BETWEEN TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+	 							   AND UPPER(TO_CHAR(CONN_DTM, 'DAY', 'NLS_DATE_LANGUAGE=KOREAN')) = '화요일'
+	 							 <if test="siteName != null and  siteName !=''">
+	 							     AND CONN_BRND = #{siteName}
+	 							 </if>
+	 							 ) CONN_BRND_TOT 
+					       FROM TBL_AD_SITE 
+					UNION ALL
+					
+					SELECT '수요일' WEEK, 
+					       1000000 CONN_BRND, 
+					       (SELECT COUNT(*)FROM TBL_ST_VISIT
+	 							 WHERE CONN_DTM BETWEEN TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+	 							   AND UPPER(TO_CHAR(CONN_DTM, 'DAY', 'NLS_DATE_LANGUAGE=KOREAN')) = '수요일'
+	 							 <if test="siteName != null and  siteName !=''">
+	 							     AND CONN_BRND = #{siteName}
+	 							 </if>
+	 							 ) CONN_BRND_TOT 
+					       FROM TBL_AD_SITE 
+					UNION ALL
+					
+					SELECT '목요일' WEEK, 
+					       1000000 CONN_BRND, 
+					       (SELECT COUNT(*)FROM TBL_ST_VISIT
+	 							 WHERE CONN_DTM BETWEEN TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+	 							   AND UPPER(TO_CHAR(CONN_DTM, 'DAY', 'NLS_DATE_LANGUAGE=KOREAN')) = '목요일'
+	 							 <if test="siteName != null and  siteName !=''">
+	 							     AND CONN_BRND = #{siteName}
+	 							 </if>
+	 							 ) CONN_BRND_TOT 
+					       FROM TBL_AD_SITE 
+					UNION ALL
+					
+					SELECT '금요일' WEEK, 
+					       1000000 CONN_BRND, 
+					       (SELECT COUNT(*)FROM TBL_ST_VISIT
+	 							 WHERE CONN_DTM BETWEEN TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+	 							   AND UPPER(TO_CHAR(CONN_DTM, 'DAY', 'NLS_DATE_LANGUAGE=KOREAN')) = '금요일'
+	 							 <if test="siteName != null and  siteName !=''">
+	 							     AND CONN_BRND = #{siteName}
+	 							 </if>
+	 							 ) CONN_BRND_TOT 
+					       FROM TBL_AD_SITE 
+					UNION ALL
+					
+					SELECT '토요일' WEEK, 
+					       1000000 CONN_BRND, 
+					       (SELECT COUNT(*)FROM TBL_ST_VISIT
+	 							 WHERE CONN_DTM BETWEEN TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+	 							   AND UPPER(TO_CHAR(CONN_DTM, 'DAY', 'NLS_DATE_LANGUAGE=KOREAN')) = '토요일'
+	 							 <if test="siteName != null and  siteName !=''">
+	 							     AND CONN_BRND = #{siteName}
+	 							 </if>
+	 							 ) CONN_BRND_TOT 
+					       FROM TBL_AD_SITE 
+					UNION ALL
+					
+					SELECT '일요일' WEEK, 
+					       1000000 CONN_BRND, 
+					       (SELECT COUNT(*)FROM TBL_ST_VISIT
+	 							 WHERE CONN_DTM BETWEEN TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+	 							   AND UPPER(TO_CHAR(CONN_DTM, 'DAY', 'NLS_DATE_LANGUAGE=KOREAN')) = '일요일'
+	 							 <if test="siteName != null and  siteName !=''">
+	 							     AND CONN_BRND = #{siteName}
+	 							 </if>
+	 							 ) CONN_BRND_TOT 
+					       FROM TBL_AD_SITE 
+					)
+					<if test="siteName != null and  siteName !=''"> 
+					    WHERE CONN_BRND = #{siteName}
+					</if>
+					GROUP BY WEEK , CONN_BRND
+				)T2
+			ORDER BY CONN_BRND, SORT
+	</select>
+
+	<!-- 접속방향 통계 -->
+	<select id="selectVisitAll" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="visitMap">
+		SELECT C_TABLE.* FROM 
+			(
+				SELECT ROWNUM PRNUM
+					,B_TABLE.*
+				FROM
+				 	(
+						SELECT
+							ROW_NUMBER() OVER(ORDER BY SORT ASC) RNUM, A_TABLE.*
+						FROM
+							(
+							    SELECT 
+								    CONN_SEQ
+									,TO_CHAR(CONN_DTM, 'YYYY-MM-DD HH24:MI:SS') CONN_DTM
+									,CONN_IP_ADDR
+									,(SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = ST_VISIT.CONN_BRND) BRNDNM
+									,CONN_DOMAIN
+									,CONN_BRWS
+									,CONN_OS
+						    		,REGR_NO 
+							        ,REG_DTS 
+							        ,UPDR_NO 
+							        ,UPD_DTS SORT
+							        ,TO_CHAR(UPD_DTS, 'YYYY.MM.DD') UPD_DTS
+							        ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = ST_VISIT.UPDR_NO) REG_USER_NM
+							    FROM
+							        TBL_ST_VISIT ST_VISIT
+							    WHERE 1 = 1
+							    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+							    	AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+							    </if>
+							    <if test="siteNo != null and  siteNo !=''"> 
+								    AND CONN_BRND = #{siteNo}
+								</if>
+								ORDER BY SORT DESC
+							) A_TABLE 
+							ORDER BY RNUM DESC
+					) B_TABLE 
+			)C_TABLE
+		WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select>
+
+	<!-- 접속방향 통계(접속경로, 브라우저, OS) -->
+	<select id="selectVisitEtc" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="visitMap">
+		SELECT C_TABLE.* FROM 
+			(
+				SELECT ROWNUM PRNUM
+					,B_TABLE.*
+				FROM
+				 	(
+						SELECT
+							ROW_NUMBER() OVER(ORDER BY ${orderBy} ASC) RNUM, A_TABLE.*
+						FROM
+							(
+							SELECT 
+								${orderBy},
+								COUNT(*) CNT
+							FROM TBL_ST_VISIT 
+							WHERE 1=1
+								<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+									AND CONN_DTM BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+								</if>
+								<if test="siteNo != null and  siteNo !=''"> 
+								    AND CONN_BRND = #{siteNo}
+								</if>
+								<if test="orderBy == 'CONN_BRND'">
+									AND CONN_BRND = #{siteNo}
+								</if>
+							GROUP BY ${orderBy}
+							HAVING COUNT(*) > 0
+							ORDER BY ${orderBy} DESC
+							) A_TABLE 
+							ORDER BY RNUM DESC
+					) B_TABLE 
+			)C_TABLE
+		WHERE PRNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select>
+
+	<!-- 상품별통계	 -->
+	<select id="goodsProductStatisticsList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="StatisticsBrandMap">
+		SELECT C_TABLE.* FROM
+		  (
+		    SELECT ROWNUM PRNUM
+		      ,B_TABLE.*
+		    FROM
+		      (
+				SELECT 
+		          ROW_NUMBER () OVER (ORDER BY PERIOD ASC) RNUM, A_TABLE.*
+		        FROM
+		          ( 	
+					<foreach collection="value" item="value" index="index"  open="" close="" separator="UNION ALL">
+					SELECT TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') PERIOD,TABLE1.*,TABLE2.*,TABLE3.*,TABLE4.*,TABLE5.* FROM
+					(
+						SELECT SITE_NM BRAND_NM,SUM(CNT1) DETAIL_TOT,SITE_NO
+					  	FROM(
+					    	SELECT 
+					    		NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = GGV.SITE_NO),'WORKSOUT') SITE_NM,COUNT(*) CNT1,NVL(SITE_NO,'10001') SITE_NO
+					    	FROM TBL_GD_GDS_VIEW GGV 
+					    	WHERE 1=1
+							  <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+							  AND GGV.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+							  </if>
+							  <if test="siteNo !='' and siteNo != null ">
+							  AND GGV.SITE_NO = ${siteNo}
+							  </if>
+							  <if test="ubiGdsNo !='' and ubiGdsNo != null">
+							  AND GGV.UBI_GDS_NO = #{ubiGdsNo}
+							  </if>
+						    GROUP BY SITE_NO
+					    UNION
+					    SELECT 
+					      SITE_NM,0 CNT1,SITE_NO 
+					    FROM TBL_AD_SITE
+					  )T1
+					  GROUP BY SITE_NM,SITE_NO
+					  ORDER BY T1.SITE_NO ASC
+					) TABLE1,
+					(
+						SELECT SITE_NM SITE_NM2,SUM(CNT1) CART_TOT
+					  	FROM(
+					    	SELECT 
+					    		NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = MC.SITE_NO),'WORKSOUT') SITE_NM,COUNT(*) CNT1,NVL(SITE_NO,'10001') SITE_NO
+					    	FROM TBL_ME_CART MC 
+							WHERE 1=1
+							  <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+							  AND MC.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+							  </if>
+							  <if test="siteNo !='' and siteNo != null ">
+							  AND MC.SITE_NO = ${siteNo}
+							  </if>
+							  <if test="ubiGdsNo !='' and ubiGdsNo != null">
+							  AND MC.UBI_GDS_NO = #{ubiGdsNo}
+							  </if>
+					    	GROUP BY SITE_NO
+					    	UNION
+					    	SELECT SITE_NM,0 CNT1,SITE_NO 
+					    	FROM TBL_AD_SITE
+					  	)T1
+						GROUP BY SITE_NM,SITE_NO
+						ORDER BY T1.SITE_NO ASC
+					)TABLE2,
+					(
+						SELECT SITE_NM SITE_NM3,SUM(CNT1) ORD_TOT
+					  	FROM(
+					    	SELECT 
+					    		NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = OO.SITE_NO),'WORKSOUT') SITE_NM,COUNT(*) CNT1,NVL(SITE_NO,'10001') SITE_NO
+					    	FROM TBL_OR_ORD OO,TBL_OR_ORD_GDS OOG 
+					    	WHERE OO.ORD_NO=OOG.ORD_NO(+)
+							  <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+							  AND OO.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+							  </if>
+							  <if test="siteNo !='' and siteNo != null ">
+							  AND OO.SITE_NO = ${siteNo}
+							  </if>
+							  <if test="ubiGdsNo !='' and ubiGdsNo != null">
+							  AND OOG.UBI_GDS_NO = #{ubiGdsNo}
+							  </if>    
+					    	GROUP BY OO.SITE_NO
+					    	UNION
+					    	SELECT SITE_NM,0 CNT1,SITE_NO 
+					    	FROM TBL_AD_SITE
+						)T1
+						GROUP BY SITE_NM,SITE_NO
+						ORDER BY T1.SITE_NO ASC
+					)TABLE3,
+					(
+					  SELECT SITE_NM SITE_NM4,SUM(CNT1) ORD_GD_TOT
+					  FROM(
+					    SELECT 
+					    	NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = OO.SITE_NO),'WORKSOUT') SITE_NM,COUNT(*) CNT1,NVL(SITE_NO,'10001') SITE_NO
+					    FROM TBL_OR_ORD OO,TBL_OR_ORD_GDS OOG 
+					    WHERE OO.ORD_NO=OOG.ORD_NO(+) AND ORD_STAT='OR00203'
+							<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+							AND OO.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+							</if>
+							<if test="siteNo !='' and siteNo != null ">
+							AND OO.SITE_NO = ${siteNo}
+							</if>
+							<if test="ubiGdsNo !='' and ubiGdsNo != null">
+							AND OOG.UBI_GDS_NO = #{ubiGdsNo}
+							</if>     
+					    GROUP BY OO.SITE_NO
+					    UNION
+					    SELECT SITE_NM,0 CNT1,SITE_NO 
+					    FROM TBL_AD_SITE
+					  )T1
+					  GROUP BY SITE_NM,SITE_NO
+					  ORDER BY T1.SITE_NO ASC
+					)TABLE4,
+					(
+					  SELECT SITE_NM SITE_NM5,SUM(CNT1) PAY_TOT
+					  FROM(
+					    SELECT 
+					    	NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = OO.SITE_NO),'WORKSOUT') SITE_NM,SUM(OOG.SL_PRC) CNT1,NVL(SITE_NO,'10001') SITE_NO
+					    FROM TBL_OR_ORD OO,TBL_OR_ORD_GDS OOG 
+					    WHERE OO.ORD_NO=OOG.ORD_NO(+)
+						  <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+						  AND OO.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+						  </if>
+						  <if test="siteNo !='' and siteNo != null ">
+						  AND OO.SITE_NO = ${siteNo}
+						  </if>
+						  <if test="ubiGdsNo !='' and ubiGdsNo != null">
+						  AND OOG.UBI_GDS_NO = #{ubiGdsNo}
+						  </if>
+						  AND OOG.PER_ORD_STAT <![CDATA[<>]]> 'OR00501' AND OOG.PER_ORD_STAT <![CDATA[<>]]> 'OR00507' AND OOG.PER_ORD_STAT <![CDATA[<>]]> 'OR00514' 
+					    GROUP BY OO.SITE_NO
+					    UNION
+					    SELECT SITE_NM,0 CNT1,SITE_NO 
+					    FROM TBL_AD_SITE
+					  )T1
+					  GROUP BY SITE_NM,SITE_NO
+					  ORDER BY T1.SITE_NO ASC
+					)TABLE5
+					WHERE TABLE1.BRAND_NM = TABLE2.SITE_NM2
+					AND TABLE1.BRAND_NM = TABLE3.SITE_NM3
+					AND TABLE1.BRAND_NM = TABLE4.SITE_NM4
+					AND TABLE1.BRAND_NM = TABLE5.SITE_NM5
+					<if test="siteNo !='' and siteNo != null ">
+					AND TABLE1.SITE_NO = ${siteNo}
+					</if>
+					</foreach>
+				) A_TABLE 
+				ORDER BY RNUM,SITE_NO ASC
+		      )B_TABLE
+		  )C_TABLE
+<!-- 		WHERE  -->
+<!-- 		PRNUM BETWEEN #{startListNum} AND #{endListNum}			 -->
+	</select>
+
+	<!-- 방문자 접속 통계 총합 -->
+	<select id="StatisticsTot" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		SELECT COUNT(*) TOT
+		FROM TBL_ST_VISIT
+		WHERE 1 = 1
+			<if test="dateType == 'Day'">
+			AND TO_CHAR(CONN_DTM,'YYYY/MM/DD') = TO_DATE(#{searchStrDtm}, 'YYYY/MM/DD')
+			</if>
+			<if test="dateType == 'Month'">
+			AND CONN_DTM BETWEEN TO_DATE(#{searchStrDtm},'YYYY/MM/DD') AND TO_DATE(#{searchEndDtm},'YYYY/MM/DD')
+			</if>
+			<if test="dateType == 'Year'">
+			AND CONN_DTM BETWEEN TO_DATE(#{searchStrDtm},'YYYY/MM/DD') AND TO_DATE(#{searchEndDtm},'YYYY/MM/DD')
+			</if>
+			<if test="dateType == 'Hour'">
+			AND CONN_DTM BETWEEN 
+			TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND							 	
+			TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+			</if>
+			<if test="siteName != null and  siteName !=''"> 
+			    AND CONN_BRND = #{siteName}
+			</if>
+	</select>
+	
+	<!-- 접속방향 총합 브라우저,OS -->
+	<select id="totalVisitEtc" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		SELECT COUNT(*) TOTAL_CNT FROM 
+		(
+		  SELECT ROWNUM PRNUM
+		    ,B_TABLE.*
+		  FROM
+		    (
+		      SELECT
+		        ROW_NUMBER() OVER(ORDER BY ${orderBy} ASC) RNUM, A_TABLE.*
+		      FROM
+		        (
+		        SELECT 
+		        ${orderBy},
+		          COUNT(*) CNT
+		        FROM TBL_ST_VISIT 
+		        WHERE 1=1
+		        <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+			    	AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+			    </if>
+			    <if test="siteNo != null and  siteNo !=''"> 
+				    AND CONN_BRND = #{siteNo}
+				</if>
+		        GROUP BY ${orderBy}
+		        HAVING COUNT(*) > 0
+		        ORDER BY ${orderBy} DESC
+		        ) A_TABLE 
+		        ORDER BY RNUM DESC
+		    ) B_TABLE 
+		)C_TABLE
+	</select>
+	<!-- 접속방향 총합 ALL -->
+	<select id="totalVisitAll" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	 	SELECT 
+		    COUNT(*) TOTAL_CNT
+		FROM TBL_ST_VISIT ST_VISIT
+		WHERE 1 = 1
+		<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+	    	AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+	    </if>
+	    <if test="siteNo != null and  siteNo !=''"> 
+		    AND CONN_BRND = #{siteNo}
+		</if>
+	</select>
+	<!-- 접속방향 총합 DOMIN -->
+	<select id="totalVisitDomain" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		SELECT MAX(RNUM) FROM (
+			SELECT ROWNUM RNUM,T1.* FROM (
+	 			SELECT 
+		    		COUNT(*) TOTAL_CNT,CONN_DOMAIN
+				FROM TBL_ST_VISIT ST_VISIT
+				WHERE 1 = 1
+				<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+			    	AND UPD_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+			    </if>
+			    <if test="siteNo != null and  siteNo !=''"> 
+				    AND CONN_BRND = #{siteNo}
+				</if>
+			GROUP BY CONN_DOMAIN
+			)T1
+		)
+	</select>
+
+	<!-- 방문자 접속 통계 총합[요일별]	 -->
+	<select id="StatisticsWeekTot" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		SELECT COUNT(*) FROM TBL_ST_VISIT
+		WHERE CONN_DTM BETWEEN TO_DATE(TO_CHAR(TO_DATE(#{searchStrDtm}),'YYYYMMDD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE(#{searchEndDtm}),'YYYYMMDD') || '235959', 'YYYY/MM/DD HH24MISS')
+		<if test="siteName != null and  siteName !=''"> 
+		    AND CONN_BRND = #{siteName}
+		</if>
+	</select>
+	<!-- 상품별통계 합계	 -->
+	<select id="goodsProductStatisticsTot" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="StatisticsBrandMap">
+		SELECT '합계' PERIOD,SUM(C_TABLE.DETAIL_TOT)DETAIL_TOT,SUM(C_TABLE.CART_TOT)CART_TOT,SUM(C_TABLE.ORD_TOT)ORD_TOT,SUM(C_TABLE.ORD_GD_TOT)ORD_GD_TOT,SUM(C_TABLE.PAY_TOT)PAY_TOT FROM
+			  (
+			    SELECT B_TABLE.*
+			    FROM
+			      (
+					SELECT 
+			          A_TABLE.*
+			        FROM
+			          ( 
+						<foreach collection="value" item="value" index="index"  open="" close="" separator="UNION ALL">
+			SELECT TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') PERIOD,TABLE1.*,TABLE2.*,TABLE3.*,TABLE4.*,TABLE5.* FROM
+			(
+				SELECT SITE_NM BRAND_NM,SUM(CNT1) DETAIL_TOT,SITE_NO
+			  	FROM(
+			    	SELECT 
+			    		NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = GGV.SITE_NO),'WORKSOUT') SITE_NM,COUNT(*) CNT1,NVL(SITE_NO,'10001') SITE_NO
+			    	FROM TBL_GD_GDS_VIEW GGV 
+			    	WHERE 1=1
+					  <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+					  AND GGV.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+					  </if>
+					  <if test="siteNo !='' and siteNo != null ">
+					  AND GGV.SITE_NO = ${siteNo}
+					  </if>
+					  <if test="ubiGdsNo !='' and ubiGdsNo != null">
+					  AND GGV.UBI_GDS_NO = #{ubiGdsNo}
+					  </if>
+				    GROUP BY SITE_NO
+			    UNION
+			    SELECT 
+			      SITE_NM,0 CNT1,SITE_NO 
+			    FROM TBL_AD_SITE
+			    WHERE 1=1
+					<if test="siteNo !='' and siteNo != null ">
+					AND SITE_NO = ${siteNo}
+					</if>
+			  )T1
+			  GROUP BY SITE_NM,SITE_NO
+			  ORDER BY T1.SITE_NO ASC
+			) TABLE1,
+			(
+				SELECT SITE_NM SITE_NM2,SUM(CNT1) CART_TOT
+			  	FROM(
+			    	SELECT 
+			    		NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = MC.SITE_NO),'WORKSOUT') SITE_NM,COUNT(*) CNT1,NVL(SITE_NO,'10001') SITE_NO
+			    	FROM TBL_ME_CART MC 
+					WHERE 1=1
+					  <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+					  AND MC.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+					  </if>
+					  <if test="siteNo !='' and siteNo != null ">
+					  AND MC.SITE_NO = ${siteNo}
+					  </if>
+					  <if test="ubiGdsNo !='' and ubiGdsNo != null">
+					  AND MC.UBI_GDS_NO = #{ubiGdsNo}
+					  </if>
+			    	GROUP BY SITE_NO
+			    	UNION
+			    	SELECT SITE_NM,0 CNT1,SITE_NO 
+			    	FROM TBL_AD_SITE
+			    	WHERE 1=1
+					<if test="siteNo !='' and siteNo != null ">
+					AND SITE_NO = ${siteNo}
+					</if>
+			  	)T1
+				GROUP BY SITE_NM,SITE_NO
+				ORDER BY T1.SITE_NO ASC
+			)TABLE2,
+			(
+				SELECT SITE_NM SITE_NM3,SUM(CNT1) ORD_TOT
+			  	FROM(
+			    	SELECT 
+			    		NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = OO.SITE_NO),'WORKSOUT') SITE_NM,COUNT(*) CNT1,NVL(SITE_NO,'10001') SITE_NO
+			    	FROM TBL_OR_ORD OO,TBL_OR_ORD_GDS OOG 
+			    	WHERE OO.ORD_NO=OOG.ORD_NO(+)
+					  <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+					  AND OO.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+					  </if>
+					  <if test="siteNo !='' and siteNo != null ">
+					  AND OO.SITE_NO = ${siteNo}
+					  </if>
+					  <if test="ubiGdsNo !='' and ubiGdsNo != null">
+					  AND OOG.UBI_GDS_NO = #{ubiGdsNo}
+					  </if>    
+			    	GROUP BY OO.SITE_NO
+			    	UNION
+			    	SELECT SITE_NM,0 CNT1,SITE_NO 
+			    	FROM TBL_AD_SITE
+			    	WHERE 1=1
+					<if test="siteNo !='' and siteNo != null ">
+					AND SITE_NO = ${siteNo}
+					</if>
+				)T1
+				GROUP BY SITE_NM,SITE_NO
+				ORDER BY T1.SITE_NO ASC
+			)TABLE3,
+			(
+			  SELECT SITE_NM SITE_NM4,SUM(CNT1) ORD_GD_TOT
+			  FROM(
+			    SELECT 
+			    	NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = OO.SITE_NO),'WORKSOUT') SITE_NM,COUNT(*) CNT1,NVL(SITE_NO,'10001') SITE_NO
+			    FROM TBL_OR_ORD OO,TBL_OR_ORD_GDS OOG 
+			    WHERE OO.ORD_NO=OOG.ORD_NO(+) AND ORD_STAT='OR00203'
+					<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+					AND OO.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+					</if>
+					<if test="siteNo !='' and siteNo != null ">
+					AND OO.SITE_NO = ${siteNo}
+					</if>
+					<if test="ubiGdsNo !='' and ubiGdsNo != null">
+					AND OOG.UBI_GDS_NO = #{ubiGdsNo}
+					</if>     
+			    GROUP BY OO.SITE_NO
+			    UNION
+			    SELECT SITE_NM,0 CNT1,SITE_NO 
+			    FROM TBL_AD_SITE
+			    WHERE 1=1
+					<if test="siteNo !='' and siteNo != null ">
+					AND SITE_NO = ${siteNo}
+					</if>
+			  )T1
+			  GROUP BY SITE_NM,SITE_NO
+			  ORDER BY T1.SITE_NO ASC
+			)TABLE4,
+			(
+			  SELECT SITE_NM SITE_NM5,SUM(CNT1) PAY_TOT
+			  FROM(
+			    SELECT 
+			    	NVL((SELECT SITE_NM FROM TBL_AD_SITE WHERE SITE_NO = OO.SITE_NO),'WORKSOUT') SITE_NM,SUM(OOG.SL_PRC) CNT1,NVL(SITE_NO,'10001') SITE_NO
+			    FROM TBL_OR_ORD OO,TBL_OR_ORD_GDS OOG 
+			    WHERE OO.ORD_NO=OOG.ORD_NO(+)
+				  <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+				  AND OO.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+				  </if>
+				  <if test="siteNo !='' and siteNo != null ">
+				  AND OO.SITE_NO = ${siteNo}
+				  </if>
+				  <if test="ubiGdsNo !='' and ubiGdsNo != null">
+				  AND OOG.UBI_GDS_NO = #{ubiGdsNo}
+				  </if>     
+				AND OOG.PER_ORD_STAT <![CDATA[<>]]> 'OR00501' AND OOG.PER_ORD_STAT <![CDATA[<>]]> 'OR00507' AND OOG.PER_ORD_STAT <![CDATA[<>]]> 'OR00514'
+			    GROUP BY OO.SITE_NO
+			    UNION
+			    SELECT SITE_NM,0 CNT1,SITE_NO 
+			    FROM TBL_AD_SITE
+			    WHERE 1=1
+					<if test="siteNo !='' and siteNo != null ">
+					AND SITE_NO = ${siteNo}
+					</if>
+			  )T1
+			  GROUP BY SITE_NM,SITE_NO
+			  ORDER BY T1.SITE_NO ASC
+			)TABLE5
+			WHERE TABLE1.BRAND_NM = TABLE2.SITE_NM2
+			AND TABLE1.BRAND_NM = TABLE3.SITE_NM3
+			AND TABLE1.BRAND_NM = TABLE4.SITE_NM4
+			AND TABLE1.BRAND_NM = TABLE5.SITE_NM5
+			<if test="siteNo !='' and siteNo != null ">
+			AND TABLE1.SITE_NO = ${siteNo}
+			</if>
+			</foreach>
+					) A_TABLE
+			      )B_TABLE
+			  )C_TABLE
+
+
+	</select>
+	<!-- 상품별통계 토탈 -->
+	<select id="goodsProductStatisticsTotCnt" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		SELECT #{totalCnt} FROM DUAL
+	</select>
+
+	<!-- 적립금사용통계 -->
+	<select id="savingStatisticsList" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="visitMap">
+		SELECT C_TABLE.* FROM
+		  (
+		    SELECT ROWNUM PRNUM
+		      ,B_TABLE.*
+		    FROM
+		      (
+				SELECT 
+		          ROW_NUMBER () OVER (ORDER BY F_COLUMN ASC) RNUM, A_TABLE.*
+		        FROM
+		          ( 
+				<foreach collection="value" item="value" index="index"  open="" close="" separator="UNION ALL">
+				SELECT 
+				TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') F_COLUMN, 
+				NVL(T1.TOT_PAY,0) TOT_PAY, 
+				NVL(T2.MEM_GRADE_DC,0) MEM_GRADE_DC,
+				NVL(T3.TOT_POINT,0) TOT_POINT, 
+				NVL(T4.USE_POINT,0) USE_POINT
+				FROM 
+					(
+						SELECT 
+							SUM(OOG.ACTL_PAY_PRC) TOT_PAY
+						FROM TBL_OR_ORD_GDS OOG, TBL_OR_ORD OO
+						WHERE OOG.ORD_NO = OO.ORD_NO
+						<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+						AND OOG.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+						<if test="memGrdNo != '' and memGrdNo != null ">
+						AND OOG.MEM_GRD_NO = ${memGrdNo}
+						</if>
+						<if test="siteNo !='' and siteNo != null ">
+						AND OO.SITE_NO = ${siteNo}
+						</if>
+					
+					) T1,
+					(
+						SELECT 
+							SUM(OOG.MEM_GRD_DC_AMT) MEM_GRADE_DC
+						FROM TBL_OR_ORD_GDS OOG, TBL_OR_ORD OO
+						WHERE OOG.ORD_NO = OO.ORD_NO
+						<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+						AND OOG.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+						<if test="memGrdNo != '' and memGrdNo != null ">
+						AND OOG.MEM_GRD_NO = ${memGrdNo}
+						</if>
+						<if test="siteNo !='' and siteNo != null ">
+						AND OO.SITE_NO = ${siteNo}
+						</if>
+					) T2,
+					(
+						SELECT 
+							SUM(MR.RSV_PNT) TOT_POINT
+						FROM TBL_ME_RESERVE MR, TBL_ME_MEM_INFO MM, TBL_ME_GRD MG
+						WHERE MR.MEM_NO = MM.MEM_NO AND MM.MEM_GRD_NO = MG.MEM_GRD_NO
+						
+						<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+						AND MR.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+						<if test="memGrdNo != '' and memGrdNo != null ">
+						AND MG.MEM_GRD_NO = ${memGrdNo}
+						</if>
+						<if test="siteNo !='' and siteNo != null ">
+						AND MM.SITE_NO = ${siteNo}
+						</if>
+					) T3,
+					(
+						SELECT 
+							SUM(MR.RSV_PNT) USE_POINT
+						FROM TBL_ME_RESERVE MR, TBL_ME_MEM_INFO MM, TBL_ME_GRD MG
+						WHERE MR.MEM_NO = MM.MEM_NO AND MM.MEM_GRD_NO = MG.MEM_GRD_NO
+						AND RSV_YN='Y' 
+						
+						<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+						AND MR.REG_DTS BETWEEN TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(TO_CHAR(TO_DATE('${value.day}','YYYY.MM.DD')+${index},'YYYY.MM.DD') || '235959', 'YYYY/MM/DD HH24MISS')
+						</if>
+						<if test="memGrdNo != '' and memGrdNo != null ">
+						AND MG.MEM_GRD_NO = ${memGrdNo}
+						</if>
+						<if test="siteNo !='' and siteNo != null ">
+						AND MM.SITE_NO = ${siteNo}
+						</if>
+					) T4
+				</foreach>
+				) A_TABLE 
+				ORDER BY RNUM ASC
+		      )B_TABLE
+		  )C_TABLE
+<!-- 		WHERE  -->
+<!-- 		PRNUM BETWEEN #{startListNum} AND #{endListNum}	 -->
+		
+	</select>
+	<!-- 적립금사용통계 합계 -->	
+	<select id="savingStatisticsTotal" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="visitMap">
+	SELECT '합계' F_COLUMN, NVL(T1.TOT_PAY,0) TOT_PAY, NVL(T2.MEM_GRADE_DC,0) MEM_GRADE_DC,NVL(T3.TOT_POINT,0) TOT_POINT, NVL(T4.USE_POINT,0) USE_POINT
+	FROM
+		(
+			SELECT 
+				SUM(OOG.ACTL_PAY_PRC) TOT_PAY
+			FROM TBL_OR_ORD_GDS OOG, TBL_OR_ORD OO
+			WHERE OOG.ORD_NO = OO.ORD_NO
+			<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+			AND OOG.REG_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+			</if>
+			<if test="memGrdNo != '' and memGrdNo != null ">
+			AND OOG.MEM_GRD_NO = ${memGrdNo}
+			</if>
+			<if test="siteNo !='' and siteNo != null ">
+			AND OO.SITE_NO = ${siteNo}
+			</if>
+		) T1,
+		(
+			SELECT 
+				SUM(OOG.MEM_GRD_DC_AMT) MEM_GRADE_DC
+			FROM TBL_OR_ORD_GDS OOG, TBL_OR_ORD OO
+			WHERE OOG.ORD_NO = OO.ORD_NO
+			<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+			AND OOG.REG_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+			</if>
+			<if test="memGrdNo != '' and memGrdNo != null ">
+			AND OOG.MEM_GRD_NO = ${memGrdNo}
+			</if>
+			<if test="siteNo !='' and siteNo != null ">
+			AND OO.SITE_NO = ${siteNo}
+			</if>
+		) T2,
+		(
+			SELECT 
+				SUM(MR.RSV_PNT) TOT_POINT
+			FROM TBL_ME_RESERVE MR, TBL_ME_MEM_INFO MM, TBL_ME_GRD MG
+			WHERE MR.MEM_NO = MM.MEM_NO AND MM.MEM_GRD_NO = MG.MEM_GRD_NO
+			<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+			AND MR.REG_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+			</if>
+			<if test="memGrdNo != '' and memGrdNo != null ">
+			AND MG.MEM_GRD_NO = ${memGrdNo}
+			</if>
+			<if test="siteNo !='' and siteNo != null ">
+			AND MM.SITE_NO = ${siteNo}
+			</if>			
+		) T3,
+		(
+			SELECT 
+				SUM(MR.RSV_PNT) USE_POINT
+			FROM TBL_ME_RESERVE MR, TBL_ME_MEM_INFO MM, TBL_ME_GRD MG
+			WHERE MR.MEM_NO = MM.MEM_NO AND MM.MEM_GRD_NO = MG.MEM_GRD_NO
+			AND RSV_YN='Y'
+			<if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''">
+			AND MR.REG_DTS BETWEEN TO_DATE(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND TO_DATE(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+			</if>
+			<if test="memGrdNo != '' and memGrdNo != null ">
+			AND MG.MEM_GRD_NO = ${memGrdNo}
+			</if>
+			<if test="siteNo !='' and siteNo != null ">
+			AND MM.SITE_NO = ${siteNo}
+			</if>			
+		) T4
+	</select>
+	<!-- 적립금사용통계 토탈 -->
+	<select id="savingStatisticsTotalCnt" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+		SELECT #{totalCnt} FROM DUAL
+	</select>
+</mapper>
+
+
+
+
+
+
