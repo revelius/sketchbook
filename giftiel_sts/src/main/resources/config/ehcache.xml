@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+	<cache name="someCache" maxEntriesLocalHeap="10000" eternal="true"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+		timeToLiveSeconds="1800" memoryStoreEvictionPolicy="LRU">
+	</cache>
+	<cache name="someCache2" maxEntriesLocalHeap="10000" eternal="true"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+		timeToLiveSeconds="1800" memoryStoreEvictionPolicy="LRU">
+	</cache>
+	<cache name="siteConfig" maxEntriesLocalHeap="10000" eternal="true"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+		timeToLiveSeconds="18000" memoryStoreEvictionPolicy="LRU">
+	</cache>
+	<cache name="topNewsList" maxEntriesLocalHeap="10000" eternal="true"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+		timeToLiveSeconds="18000" memoryStoreEvictionPolicy="LRU">
+	</cache>
+	<cache name="snbShop" maxEntriesLocalHeap="10000" eternal="true"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+		timeToLiveSeconds="18000" memoryStoreEvictionPolicy="LRU">
+	</cache>	
+</ehcache>

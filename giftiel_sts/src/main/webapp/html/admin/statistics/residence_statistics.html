@@ -1,0 +1,208 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>통계/분석 > 회원통계 > 거주지별통계</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="first">
+					<div class="tableType2">
+						<table>
+							<caption>배송검색</caption>
+							<colgroup>
+								<col width="100px">
+								<col width="*">
+								<col width="100px">
+								<col width="200px">
+								<col width="120px">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">기간</th>
+									<td>
+										<a href="#" class="btnType1">당일</a>
+										<a href="#" class="btnType1">전일</a>
+										<a href="#" class="btnType1">당월</a>
+										<a href="#" class="btnType1">1주</a>
+										<a href="#" class="btnType1">15일</a>
+										<a href="#" class="btnType1">한달</a>
+										<a href="#" class="btnType1">두달</a>
+										<br /><br />
+										<div class="wrap">
+											<a href="#" class="btnType1">직접검색</a>
+											<input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+											<input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+										</div>
+									</td>
+									<th scope="col">지역</th>
+									<td>
+										<select>
+											<option value="0">시도-전체</option>
+										</select>
+										<select>
+											<option value="0">시군구-전체</option>
+										</select>
+									</td>
+									<td class="bd_left">
+										<a href="#" class="btnType2">검색</a> <br /><br />
+										<a href="#" class="btnType1">초기화</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- section -->
+				<div class="section a2">
+					<div class="tableTitle">
+						<div class="left"><span class="icon2"></span><span>2015년 05월 05일</span>부터 <span>2015년 05월 05일</span>까지의 검색 결과입니다.</div>
+					</div>
+					<div class="tableType1 tblStats">
+						<table>
+							<caption>거주지별통계 그래프</caption>
+							<colgroup>
+								<col width="12%" />
+								<col width="12%" />
+								<col width="10%" />
+								<col width="10%" />
+								<col width="*" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="row" colspan="2">지역</th>
+									<th scope="row" rowspan="2">회원수</th>
+									<th scope="row" rowspan="2">비율</th>
+									<th scope="row" rowspan="2">그래프</th>
+								</tr>
+								<tr>
+									<th scope="row">시도 <a href="#" class="down">▼</a></th>
+									<th scope="row">시군구 <a href="#" class="down">▼</a></th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="txtBold">
+									<th scope="col" colspan="2">합계</th>
+									<td class="tdBg">5,000</td>
+									<td class="tdBg">100%</td>
+									<td class="tdBg"></td>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr>
+									<td>서울시</td>
+									<td rowspan="17">각 구 전체</td>
+									<td>2,000</td>
+									<td>40</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 40%">40%</span></span></td>
+								</tr>
+								<tr>
+									<td>부산시</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>인천광역시</td>
+									<td>600</td>
+									<td>12</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 12%">12%</span></span></td>
+								</tr>
+								<tr>
+									<td>대구광역시</td>
+									<td>400</td>
+									<td>8</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 8%">8%</span></span></td>
+								</tr>
+								<tr>
+									<td>광주광역시</td>
+									<td>500</td>
+									<td>10</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 10%">10%</span></span></td>
+								</tr>
+								<tr>
+									<td>울산광역시</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>경기도</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>전라남도</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>전라북도</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>강원도</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>충청남도</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>경상북도</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>경상남도</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>제주도</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+								<tr>
+									<td>기타</td>
+									<td>1,000</td>
+									<td>20</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 20%">20%</span></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- //section -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

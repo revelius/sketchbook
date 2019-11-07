@@ -1,0 +1,108 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>운영관리 > 게시판관리 > News</h3>
+				<!-- section -->
+				<div class="section a1 tabCon_inner">
+					<div class="tableType2">
+						<table>
+							<caption>News</caption>
+							<colgroup>
+								<col width="130px">
+								<col width="*">
+								<col width="130px">
+								<col width="350px">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">브랜드</th>
+									<td colspan="3">
+										<div class="wrap">
+											<input type="checkbox" id="chk1" /> <label for="chk1">WORKSOUT</label>
+											<input type="checkbox" id="chk2" /> <label for="chk2">CARHARTT</label>
+											<input type="checkbox" id="chk3" /> <label for="chk3">OBEY</label>
+											<input type="checkbox" id="chk4" /> <label for="chk4">BRIXTON</label>
+											<input type="checkbox" id="chk5" /> <label for="chk5">LEXDRAY</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">분류</th>
+									<td>
+										<select>
+											<option value="0">선택</option>
+										</select>
+									</td>
+									<th scope="col">상태</th>
+									<td>
+										<div class="wrap">
+											<input type="radio" id="radio1" name="radio" checked="checked" /> <label for="radio1">공개</label>
+											<input type="radio" id="radio2" name="radio" /> <label for="radio2">비공개</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">제목</th>
+									<td colspan="3"><input type="text" class="ip_tit" /></td>
+								</tr>
+								<tr>
+									<th scope="col">유형</th>
+									<td colspan="3">
+										<div class="wrap">
+											<input type="radio" id="radio2_1" name="radio2" checked="checked" /> <label for="radio2_1">이미지</label>
+											<input type="radio" id="radio2_2" name="radio2" /> <label for="radio2_2">동영상</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">이미지</th>
+									<td colspan="3">
+										<input type="file" class="mb5" /> <span class="addtxt">*이미지 최대 크기는 3MB입니다. 가로 사이즈  700픽셀의 jpg,gif,png 파일로 업로드 바랍니다.</span><br />
+										<span class="file"><a href="#"><img src="../static/images/popup/closeBtn2.gif" alt="" /></a> <span>sample.jpg</span></span>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">동영상</th>
+									<td colspan="3">
+										<input type="text" class="ip_tit" />
+										<p class="addtxt">* 메인으로 등록할 유투브 동영상 주소를 입력해 주세요.</p>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+										에디터 영역 :)
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- //section -->
+				<!-- section -->
+				<div class="section a2 btn">
+					<a href="#" class="btnType2">등록</a>
+					<a href="#" class="btnType1">취소</a>
+				</div>
+				<!-- //section -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

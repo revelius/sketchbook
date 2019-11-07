@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="scheduler">
+	<update id="cancelTempOrder">
+		update tbl_or_ord_gds set per_ord_stat = 'OR00507'
+		where ord_no in (
+		select ord_no from tbl_or_ord where ord_stat = 'OR00202'
+		and reg_dts <![CDATA[<]]> sysdate -1)
+	</update>
+	
+	<update id="cancelTempOrder2">
+		update tbl_or_ord set ord_stat = 'OR00204'
+		where ord_no in (
+		select ord_no from tbl_or_ord where ord_stat = 'OR00202'
+		and reg_dts <![CDATA[<]]> sysdate -1)
+	</update>
+	
+	
+	
+	
+	<!-- 	news 네이버 검색 신디케이션 핑 목록 -->
+	<select id="getNewsList" parameterType="STRING" resultType="java.util.HashMap">
+		SELECT * FROM(
+		SELECT 
+		      ROWNUM
+		      ,NEWS.TXT_NO
+		      ,NEWS_SITE.SITE_NO
+		      ,NEWS.TITLE
+		      ,NEWS.TXT
+		      ,NEWS.TXT_TP
+		      ,NEWS.TXT_CLS 
+		FROM TBL_CM_NEWS NEWS,
+		     TBL_CM_NEWS_SITE NEWS_SITE
+		WHERE NEWS.DISP_YN = 'Y'
+		<if test="value != null and  value !=''"> 
+	    	AND SITE_NO = #{siteNo}
+	    </if>
+		
+		AND   NEWS.TXT_NO =  NEWS_SITE.TXT_NO
+		ORDER BY NEWS.UPD_DTS DESC
+		)
+		WHERE ROWNUM <![CDATA[<]]> 101
+	</select>
+	
+	
+	<resultMap id="listRsvPntOrd" type="com.giftiel.shop.dto.Order">
+	    <result property="ordNo" column="ORD_NO"/>
+	    <result property="ordGdsSeq" column="ORD_GDS_SEQ"/> 
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="expPnt" column="EXP_PNT"/>
+	</resultMap>	
+	<select id="getRsvPntOrdList" resultMap="listRsvPntOrd">
+		SELECT ORD.ORD_NO,ORDGDS.ORD_GDS_SEQ,ORD.MEM_NO,ORDGDS.EXP_PNT FROM TBL_OR_ORD ORD, TBL_OR_ORD_GDS ORDGDS
+		WHERE ORD.ORD_NO = ORDGDS.ORD_NO
+		AND ORD.ORD_DTS <![CDATA[<]]> SYSDATE-15
+		AND ORDGDS.PER_ORD_STAT IN ('OR00505','OR00510')
+		AND ORDGDS.EXP_PNT > 0
+		AND ORDGDS.EXP_PNT_YN = 'N'	
+	</select>
+	
+	<update id="updateOrdRsvPnt" parameterType="com.giftiel.shop.dto.Order">
+	    UPDATE TBL_OR_ORD_GDS /*order.updateOrdStat2*/
+	    	SET EXP_PNT_YN =  'Y'
+		WHERE ORD_NO = #{ordNo}
+		AND ORD_GDS_SEQ = #{ordGdsSeq}
+	</update>
+	
+	<update id="onlineShopMemGrdUp">
+		UPDATE TBL_ME_MEM_INFO SET MEM_GRD_NO = 1 WHERE MEM_NO IN (
+		  SELECT MEM_NO FROM (
+		    SELECT 
+		      MAIN.MEM_NO,
+		      MAIN.SL_PRC - NVL(CANCELORDER.CANCEL_SL_PRC, 0) AS SL_PRC
+		    FROM(
+		      SELECT 
+		        온라인고객코드 AS MEM_NO, 
+		        COUNT(판매일자) AS ORD_CNT, 
+		        SUM(실판매금액) AS SL_PRC,
+		        SUM(적립포인트) AS EXP_PNT,
+		        SUM(사용포인트) AS USE_PNT,
+		        SUM(실판매금액) AS ACTL_PAY_PRC
+		      FROM (
+		        SELECT 온라인고객코드,      판매일자,      매장코드,      판매번호,      판매연번,      작업구분,      품번,
+		          색상,      사이즈,      판매수량,      실판매금액,      적립포인트,      사용포인트,      주문번호
+		        FROM UBI09S_WORKS.V_구매정보 UBIORD
+		        where 작업구분 = '0'
+		        AND 온라인고객코드 is NOT NULL
+		        AND TO_DATE(판매일자,'YYYYMMDD') <![CDATA[<]]> (select trunc(sysdate,'MM') from dual)
+		      )
+		      GROUP BY 온라인고객코드
+		    )MAIN
+		    
+		    LEFT OUTER JOIN
+		    (
+		      SELECT 
+		        온라인고객코드 AS MEM_NO, 
+		        COUNT(판매일자) AS CANCEL_CNT, 
+		        SUM(실판매금액) AS CANCEL_SL_PRC
+		      FROM (
+		        SELECT 온라인고객코드,      판매일자,      매장코드,      판매번호,      판매연번,      작업구분,      품번,
+		          색상,      사이즈,      판매수량,      실판매금액,      적립포인트,      사용포인트,      주문번호
+		        FROM UBI09S_WORKS.V_구매정보 
+		        where 작업구분 = '1'
+		        AND 온라인고객코드 is NOT NULL
+		      )
+		      GROUP BY 온라인고객코드
+		    )CANCELORDER
+		    ON CANCELORDER.MEM_NO = MAIN.MEM_NO
+		  
+		  )
+		  WHERE MEM_NO NOT IN (SELECT 온라인고객코드 FROM UBI09S_WORKS.고객정보 WHERE 고객등급 = '2')
+		  AND SL_PRC <![CDATA[>=]]> 300000
+		)
+	</update>
+	
+	<insert id="ubiMemGrdUp">
+		INSERT INTO UBI09S_WORKS.고객정보
+		SELECT
+		  온라인고객코드,
+		  성명,
+		  핸드폰번호,
+		  성별,
+		  가입매장코드,
+		  고객카드번호,
+		  생일구분,
+		  생년월일,
+		  자택전화번호,
+		  자택우편번호,
+		  자택주소1,
+		  자택주소2,
+		  직업코드,
+		  직장명,
+		  직장전화번호,
+		  직장우편번호,
+		  직장주소1,
+		  직장주소2,
+		  이메일,
+		  DM발송지,
+		  SMS수신,
+		  이메일수신,
+		  탈퇴일자,
+		  SYSDATE,
+		  'U' AS 수정여부,
+		  처리여부,
+		  에러사유,
+		  2 AS 적립율,
+		  2 AS 고객등급
+		FROM UBI09S_WORKS.고객정보 WHERE 온라인고객코드 IN(
+		  SELECT MEM_NO FROM (
+		    SELECT 
+		      MAIN.MEM_NO,
+		      MAIN.SL_PRC - NVL(CANCELORDER.CANCEL_SL_PRC, 0) AS SL_PRC
+		    FROM(
+		      SELECT 
+		        온라인고객코드 AS MEM_NO, 
+		        COUNT(판매일자) AS ORD_CNT, 
+		        SUM(실판매금액) AS SL_PRC,
+		        SUM(적립포인트) AS EXP_PNT,
+		        SUM(사용포인트) AS USE_PNT,
+		        SUM(실판매금액) AS ACTL_PAY_PRC
+		      FROM (
+		        SELECT 온라인고객코드,      판매일자,      매장코드,      판매번호,      판매연번,      작업구분,      품번,
+		          색상,      사이즈,      판매수량,      실판매금액,      적립포인트,      사용포인트,      주문번호
+		        FROM UBI09S_WORKS.V_구매정보 UBIORD
+		        where 작업구분 = '0'
+		        AND 온라인고객코드 is NOT NULL
+		        AND TO_DATE(판매일자,'YYYYMMDD') <![CDATA[<]]> (select trunc(sysdate,'MM') from dual)
+		      )
+		      GROUP BY 온라인고객코드
+		    )MAIN
+		    
+		    LEFT OUTER JOIN
+		    (
+		      SELECT 
+		        온라인고객코드 AS MEM_NO, 
+		        COUNT(판매일자) AS CANCEL_CNT, 
+		        SUM(실판매금액) AS CANCEL_SL_PRC
+		      FROM (
+		        SELECT 온라인고객코드,      판매일자,      매장코드,      판매번호,      판매연번,      작업구분,      품번,
+		          색상,      사이즈,      판매수량,      실판매금액,      적립포인트,      사용포인트,      주문번호
+		        FROM UBI09S_WORKS.V_구매정보 
+		        where 작업구분 = '1'
+		        AND 온라인고객코드 is NOT NULL
+		      )
+		      GROUP BY 온라인고객코드
+		    )CANCELORDER
+		    ON CANCELORDER.MEM_NO = MAIN.MEM_NO
+		  
+		  )
+		  WHERE MEM_NO NOT IN (SELECT 온라인고객코드 FROM UBI09S_WORKS.고객정보 WHERE 고객등급 = '2')
+		  AND SL_PRC <![CDATA[>=]]> 300000
+		)
+	</insert>
+	
+	<update id="googleCdnImgSend">
+	    UPDATE TBL_AD_IMG_SYNC /*scheduler.googleCdnImgSend*/
+	    	SET SYNC_DTS =  SYSDATE
+	</update>		
+</mapper>

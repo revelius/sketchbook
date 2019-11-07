@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="lookbook">
+	<resultMap id="list" type="com.giftiel.shop.dto.LookBook">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="txtNo" column="TXT_NO"/> 
+	    <result property="title" column="TITLE"/> 
+	    <result property="imgUrl" column="IMG_URL"/> 
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="siteNm" column="SITE_NM"/>
+	</resultMap>	
+	
+	<select id="list" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="list">
+		SELECT * FROM
+		(SELECT LOOKBOOK.*,ROWNUM RNUM
+			FROM(
+			    SELECT
+			    	BOARD.TXT_NO
+			    	,BOARD.TITLE
+			    	,CNTS.IMG_URL
+			    	,SITE.SITE_NO
+			    	,SITE.SITE_NM
+			    FROM(
+				    SELECT
+				    	TXT_NO
+				    	,SITE_NO
+				    	,TITLE
+				    	,TO_CHAR(UPD_DTS, 'YYYY/MM/DD HH24MISS') UPD_DTS
+				    FROM TBL_CM_INTG_BOARD
+				    WHERE BOARD_CLCD = 'CM00801'	/* 룩북 */
+				    AND DISP_YN = 'Y'
+				    <if test="siteNo != '' and siteNo != null">
+				    	AND SITE_NO = #{siteNo}
+				    </if>
+				) BOARD
+				LEFT OUTER JOIN TBL_CM_INTG_BOARD_CNTS CNTS ON BOARD.TXT_NO = CNTS.TXT_NO
+				LEFT OUTER JOIN TBL_AD_SITE SITE ON BOARD.SITE_NO = SITE.SITE_NO
+				WHERE CNTS.IMG_CLS = 'CM00601'		/* 메인이미지 */
+				ORDER BY BOARD.UPD_DTS DESC
+			)LOOKBOOK
+		)
+		WHERE RNUM BETWEEN #{startListNum} AND #{endListNum} 		    
+	</select>
+	
+	<resultMap id="detail" type="com.giftiel.shop.dto.LookBook">
+		<id property="txtNo" column="TXT_NO"/> 
+	    <result property="txtNo" column="TXT_NO"/> 
+	    <result property="title" column="TITLE"/> 
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="siteNm" column="SITE_NM"/>
+	    <collection property="images" javaType="ArrayList" ofType="com.giftiel.shop.dto.LookBookImage">
+	    	<id property="imgSeq" column="IMG_SEQ"/>
+	   		<result property="imgUrl" column="IMG_URL"/>
+	   		<result property="dtlImgUrl" column="DTL_IMG_URL"/>
+	   		<result property="frontImgUrl" column="FRONT_IMG_URL"/>
+	   		<result property="frontDtlImgUrl" column="FRONT_DTL_IMG_URL"/>	   		
+	   		<collection property="goodss" javaType="ArrayList" ofType="com.giftiel.shop.dto.LookBookGoods">
+	   			<id property="gdsNo" column="GDS_NO"/>
+			    <result property="gdsNm" column="GDS_NM"/> 
+			    <result property="slPrc" column="SL_PRC"/> 
+			    <result property="linkUrl" column="LINK_URL"/>
+	   		</collection>
+	    </collection>
+	</resultMap>
+	
+	<select id="detail" parameterType="INTEGER" resultMap="detail">
+		SELECT
+  			BOARD.TXT_NO
+  			,BOARD.TITLE
+  			,BOARD.SITE_NO
+  			,SITE.SITE_NM
+  			,CNTS.IMG_SEQ
+			,CNTS.IMG_URL
+<!-- 		    ,CASE  -->
+<!-- 			   WHEN to_date(substr(CNTS.IMG_URL,11,8),'YYYYMMDD') <![CDATA[<]]> (SELECT SYNC_DTS FROM TBL_AD_IMG_SYNC WHERE ROWNUM = 1) THEN 'http://googledrive.com/host/0B6HfeD747YiJZFNiZTNKdGphN2M/'||REPLACE(CNTS.IMG_URL, '/', '_') -->
+<!-- 			   ELSE 'http://worksout60.cafe24.com/upload/image'||CNTS.IMG_URL -->
+<!-- 			 END AS FRONT_IMG_URL				 -->
+		    ,'http://worksout.co.kr/upload/image'||CNTS.IMG_URL AS FRONT_IMG_URL
+			,CNTS.DTL_IMG_URL
+<!-- 		    ,CASE  -->
+<!-- 			   WHEN to_date(substr(CNTS.DTL_IMG_URL,11,8),'YYYYMMDD') <![CDATA[<]]> (SELECT SYNC_DTS FROM TBL_AD_IMG_SYNC WHERE ROWNUM = 1) THEN 'http://googledrive.com/host/0B6HfeD747YiJZFNiZTNKdGphN2M/'||REPLACE(CNTS.DTL_IMG_URL, '/', '_') -->
+<!-- 			   ELSE 'http://worksout60.cafe24.com/upload/image'||CNTS.DTL_IMG_URL -->
+<!-- 			 END AS FRONT_DTL_IMG_URL -->
+			,'http://worksout.co.kr/upload/image'||CNTS.DTL_IMG_URL AS FRONT_DTL_IMG_URL
+			,GDS.UBI_GDS_NO GDS_NO
+			,GDS.GDS_NM
+			,GDS.SL_PRC
+			,GDS.LINK_URL
+		FROM TBL_CM_INTG_BOARD BOARD
+			LEFT OUTER JOIN TBL_AD_SITE SITE ON SITE.SITE_NO = BOARD.SITE_NO
+			LEFT OUTER JOIN TBL_CM_INTG_BOARD_CNTS CNTS ON BOARD.TXT_NO = CNTS.TXT_NO
+			LEFT OUTER JOIN TBL_CM_BOARD_GDS GDS ON CNTS.IMG_SEQ = GDS.IMG_SEQ
+		WHERE BOARD.TXT_NO = #{txtNo}
+		AND CNTS.IMG_CLS != 'CM00601'
+		AND BOARD.BOARD_CLCD = 'CM00801'	/* 룩북 */
+		ORDER BY CNTS.PRIR, GDS.PRIR
+	</select>
+	
+</mapper>

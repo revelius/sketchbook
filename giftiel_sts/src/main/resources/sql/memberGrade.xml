@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="memberGrade">
+	<resultMap id="listGrd" type="com.giftiel.shop.dto.MemberGrade">
+	    <result property="memGrdNo" column="MEM_GRD_NO"/> 
+	    <result property="grdNm" column="GRD_NM"/> 
+	    <result property="dcAmt" column="DC_AMT"/> 
+	    <result property="pntRsvRt" column="PNT_RSV_RT"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+	
+	<select id="listGrd" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listGrd">
+	    SELECT 
+	        MEM_GRD_NO 
+	        ,GRD_NM 
+	        ,DC_AMT 
+	        ,PNT_RSV_RT 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	    FROM
+	        TBL_ME_GRD 
+	    WHERE 1 = 1
+	    ORDER BY GRD_NM DESC
+	</select> 	
+	
+	<insert id="insertGrd" parameterType="com.giftiel.shop.dto.MemberGrade">
+	    INSERT INTO TBL_ME_GRD
+	        ( MEM_GRD_NO , GRD_NM , DC_AMT , PNT_RSV_RT , REGR_NO , REG_DTS , UPDR_NO , UPD_DTS )
+	    VALUES 
+	        ( #{memGrdNo} , #{grdNm} , #{dcAmt} , #{pntRsvRt} , #{regrNo} , SYSDATE , #{updrNo} , SYSDATE )
+	</insert>
+</mapper>

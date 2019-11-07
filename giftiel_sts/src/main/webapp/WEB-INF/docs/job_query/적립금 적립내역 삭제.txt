@@ -1,0 +1,46 @@
+update tbl_or_ord_gds set exp_pnt_yn = 'N' where ord_no in (
+	select main.ord_no from (
+		select ord.ord_no, ord.mem_no, sum(ordgds.exp_pnt) exp_pnt from tbl_or_ord ord, tbl_or_ord_gds ordgds
+		where 
+		ord.ord_no = ordgds.ord_no
+		and ord.ord_dts > sysdate - 100
+		and ordgds.per_ord_stat in ('OR00505','OR00510')
+		and ord.mem_no != 99999999
+		group by ord.ord_no, ord.mem_no
+	)main
+
+	left outer join(
+		select ord_no, mem_no, sum(rsv_pnt) rsv_pnt from tbl_me_reserve rsv where rsv_yn = 'Y' and rsv_rsn_cd = 'MT00201'
+		group by ord_no, mem_no
+	)sub
+	on main.ord_no = sub.ord_no
+
+	where sub.ord_no is not null
+	and main.exp_pnt < sub.rsv_pnt
+);
+
+
+delete from tbl_me_reserve where ord_no in (
+	select main.ord_no from (
+		select ord.ord_no, ord.mem_no, sum(ordgds.exp_pnt) exp_pnt from tbl_or_ord ord, tbl_or_ord_gds ordgds
+		where 
+		ord.ord_no = ordgds.ord_no
+		and ord.ord_dts > sysdate - 100
+		and ordgds.per_ord_stat in ('OR00505','OR00510')
+		and ord.mem_no != 99999999
+		group by ord.ord_no, ord.mem_no
+	)main
+
+	left outer join(
+		select ord_no, mem_no, sum(rsv_pnt) rsv_pnt from tbl_me_reserve rsv where rsv_yn = 'Y' and rsv_rsn_cd = 'MT00201'
+		group by ord_no, mem_no
+	)sub
+	on main.ord_no = sub.ord_no
+
+	where sub.ord_no is not null
+	and main.exp_pnt < sub.rsv_pnt
+)
+and RSV_RSN_CD = 'MT00201' AND RSV_YN = 'Y'
+;
+
+

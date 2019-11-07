@@ -1,0 +1,651 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab productList">
+				<h3><span class="icon1"></span>운영관리 > 게시판관리 > News</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- 브랜드 별 News 목록 입니다.</li>
+						<li>- 브랜드 별 Style / Product / Worksouters / News / Event 등록 가능합니다.</li>
+						<li>- 브랜드 별 상세 목록 조회가 가능합니다.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- tabWrap -->
+				<div class="tabWrap">
+					<ul class="tabList">
+						<li><a href="#" class="current">WORKSOUT</a></li>
+						<li><a href="#">CARHARTT</a></li>
+						<li><a href="#">OBEY</a></li>
+						<li><a href="#">BRIXTON</a></li>
+					</ul>
+					<div class="tabConWrap">
+						<div class="tabCon">
+							<div class="tableType2">
+								<table>
+									<caption>배송검색</caption>
+									<colgroup>
+										<col width="100px">
+										<col width="*">
+										<col width="100px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>기간</th>
+											<td>
+												<div class="wrap">
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+												</div>
+											</td>
+											<td rowspan="3" class="bd_left">
+												<a href="#" class="btnType2">검색</a> <br /><br />
+												<a href="#" class="btnType1">초기화</a>
+											</td>
+										</tr>
+										<tr>
+											<th>분류</th>
+											<td>
+												<select>
+													<option value="0">1차 분류</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>검색</th>
+											<td>
+												<select>
+													<option value="0">제목</option>
+												</select>
+												<input type="text" class="wd_300" />
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="section a2">
+								<div class="tableTitle">
+									<div class="right">
+										<select class="ml_5">
+											<option>15개</option>
+										</select>
+									</div>
+								</div>
+								<div class="tableType1 tblStats">
+									<table>
+										<caption>Archive</caption>
+										<colgroup>
+											<col style="width: 8%" />
+											<col style="width: 10%" />
+											<col style="width: 10%" />
+											<col style="width: *" />
+											<col style="width: 15%" />
+											<col style="width: 15%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="row">No <a href="#" class="down">▼</a></th>
+												<th scope="row">상태 <a href="#" class="down">▼</a></th>
+												<th scope="row">분류 <a href="#" class="down">▼</a></th>
+												<th scope="row">제목 <a href="#" class="down">▼</a></th>
+												<th scope="row">작성자 <a href="#" class="down">▼</a></th>
+												<th scope="row">작성일 <a href="#" class="down">▼</a></th>
+											</tr>
+										</thead>
+										<tbody>	
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!--[s] 페이징 -->
+								<div class="paging">
+									<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+									<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+									<span class="num">
+										<a href="#" class="on">1</a>
+										<a href="#">2</a>
+										<a href="#">3</a>
+										<a href="#">4</a>
+										<a href="#">5</a>
+										<a href="#">6</a>
+										<a href="#">7</a>
+										<a href="#">8</a>
+										<a href="#">9</a>
+										<a href="#">10</a>
+									</span>
+									<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+									<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+									<div class="right">
+										<a href="#" class="btnType2">엑셀다운로드</a>
+										<a href="#" class="btnType2">등록</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tabCon">
+							<div class="tableType2">
+								<table>
+									<caption>배송검색</caption>
+									<colgroup>
+										<col width="100px">
+										<col width="*">
+										<col width="100px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>기간</th>
+											<td>
+												<div class="wrap">
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+												</div>
+											</td>
+											<td rowspan="3" class="bd_left">
+												<a href="#" class="btnType2">검색</a> <br /><br />
+												<a href="#" class="btnType1">초기화</a>
+											</td>
+										</tr>
+										<tr>
+											<th>분류</th>
+											<td>
+												<select>
+													<option value="0">분류</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>검색</th>
+											<td>
+												<select>
+													<option value="0">제목</option>
+												</select>
+												<input type="text" class="wd_300" />
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="section a2">
+								<div class="tableTitle">
+									<div class="right">
+										<select class="ml_5">
+											<option>15개</option>
+										</select>
+									</div>
+								</div>
+								<div class="tableType1 tblStats">
+									<table>
+										<caption>Archive</caption>
+										<colgroup>
+											<col style="width: 8%" />
+											<col style="width: 10%" />
+											<col style="width: 12%" />
+											<col style="width: *" />
+											<col style="width: 15%" />
+											<col style="width: 15%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="row">No <a href="#" class="down">▼</a></th>
+												<th scope="row">상태 <a href="#" class="down">▼</a></th>
+												<th scope="row">분류 <a href="#" class="down">▼</a></th>
+												<th scope="row">제목 <a href="#" class="down">▼</a></th>
+												<th scope="row">작성자 <a href="#" class="down">▼</a></th>
+												<th scope="row">작성일 <a href="#" class="down">▼</a></th>
+											</tr>
+										</thead>
+										<tbody>	
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!--[s] 페이징 -->
+								<div class="paging">
+									<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+									<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+									<span class="num">
+										<a href="#" class="on">1</a>
+										<a href="#">2</a>
+										<a href="#">3</a>
+										<a href="#">4</a>
+										<a href="#">5</a>
+										<a href="#">6</a>
+										<a href="#">7</a>
+										<a href="#">8</a>
+										<a href="#">9</a>
+										<a href="#">10</a>
+									</span>
+									<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+									<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+									<div class="right">
+										<a href="#" class="btnType2">엑셀다운로드</a>
+										<a href="#" class="btnType2">등록</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tabCon">
+							<div class="tableType2">
+								<table>
+									<caption>배송검색</caption>
+									<colgroup>
+										<col width="100px">
+										<col width="*">
+										<col width="100px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>기간</th>
+											<td>
+												<div class="wrap">
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+												</div>
+											</td>
+											<td rowspan="3" class="bd_left">
+												<a href="#" class="btnType2">검색</a> <br /><br />
+												<a href="#" class="btnType1">초기화</a>
+											</td>
+										</tr>
+										<tr>
+											<th>분류</th>
+											<td>
+												<select>
+													<option value="0">분류</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>검색</th>
+											<td>
+												<select>
+													<option value="0">제목</option>
+												</select>
+												<input type="text" class="wd_300" />
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="section a2">
+								<div class="tableTitle">
+									<div class="right">
+										<select class="ml_5">
+											<option>15개</option>
+										</select>
+									</div>
+								</div>
+								<div class="tableType1 tblStats">
+									<table>
+										<caption>Archive</caption>
+										<colgroup>
+											<col style="width: 8%" />
+											<col style="width: 10%" />
+											<col style="width: 12%" />
+											<col style="width: *" />
+											<col style="width: 15%" />
+											<col style="width: 15%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="row">No <a href="#" class="down">▼</a></th>
+												<th scope="row">상태 <a href="#" class="down">▼</a></th>
+												<th scope="row">분류 <a href="#" class="down">▼</a></th>
+												<th scope="row">제목 <a href="#" class="down">▼</a></th>
+												<th scope="row">작성자 <a href="#" class="down">▼</a></th>
+												<th scope="row">작성일 <a href="#" class="down">▼</a></th>
+											</tr>
+										</thead>
+										<tbody>	
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!--[s] 페이징 -->
+								<div class="paging">
+									<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+									<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+									<span class="num">
+										<a href="#" class="on">1</a>
+										<a href="#">2</a>
+										<a href="#">3</a>
+										<a href="#">4</a>
+										<a href="#">5</a>
+										<a href="#">6</a>
+										<a href="#">7</a>
+										<a href="#">8</a>
+										<a href="#">9</a>
+										<a href="#">10</a>
+									</span>
+									<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+									<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+									<div class="right">
+										<a href="#" class="btnType2">엑셀다운로드</a>
+										<a href="#" class="btnType2">등록</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tabCon">
+							<div class="tableType2">
+								<table>
+									<caption>배송검색</caption>
+									<colgroup>
+										<col width="100px">
+										<col width="*">
+										<col width="100px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<th>기간</th>
+											<td>
+												<div class="wrap">
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+													<input type="text" id="" name="">
+													<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+												</div>
+											</td>
+											<td rowspan="3" class="bd_left">
+												<a href="#" class="btnType2">검색</a> <br /><br />
+												<a href="#" class="btnType1">초기화</a>
+											</td>
+										</tr>
+										<tr>
+											<th>분류</th>
+											<td>
+												<select>
+													<option value="0">분류</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>검색</th>
+											<td>
+												<select>
+													<option value="0">제목</option>
+												</select>
+												<input type="text" class="wd_300" />
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="section a2">
+								<div class="tableTitle">
+									<div class="right">
+										<select class="ml_5">
+											<option>15개</option>
+										</select>
+									</div>
+								</div>
+								<div class="tableType1 tblStats">
+									<table>
+										<caption>Archive</caption>
+										<colgroup>
+											<col style="width: 8%" />
+											<col style="width: 10%" />
+											<col style="width: 12%" />
+											<col style="width: *" />
+											<col style="width: 15%" />
+											<col style="width: 15%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="row">No <a href="#" class="down">▼</a></th>
+												<th scope="row">상태 <a href="#" class="down">▼</a></th>
+												<th scope="row">분류 <a href="#" class="down">▼</a></th>
+												<th scope="row">제목 <a href="#" class="down">▼</a></th>
+												<th scope="row">작성자 <a href="#" class="down">▼</a></th>
+												<th scope="row">작성일 <a href="#" class="down">▼</a></th>
+											</tr>
+										</thead>
+										<tbody>	
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+											<tr>
+												<td>1</td>	
+												<td>공개</td>
+												<td>Style</td>
+												<td class="tl">LOOK INSIDE – PRODUCT</td>
+												<td>Manager1</td>
+												<td>2015.05.04</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!--[s] 페이징 -->
+								<div class="paging">
+									<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+									<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+									<span class="num">
+										<a href="#" class="on">1</a>
+										<a href="#">2</a>
+										<a href="#">3</a>
+										<a href="#">4</a>
+										<a href="#">5</a>
+										<a href="#">6</a>
+										<a href="#">7</a>
+										<a href="#">8</a>
+										<a href="#">9</a>
+										<a href="#">10</a>
+									</span>
+									<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+									<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+									<div class="right">
+										<a href="#" class="btnType2">엑셀다운로드</a>
+										<a href="#" class="btnType2">등록</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- //tabWrap -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="coupon">
+	<resultMap id="cpnInfo" type="com.giftiel.shop.dto.Coupon">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="cpnNo" column="CPN_NO"/> 
+	    <result property="cpnNm" column="CPN_NM"/> 
+	    <result property="cpnKnd" column="CPN_KND"/> 
+	    <result property="issWay" column="ISS_WAY"/> 
+	    <result property="cpnDesc" column="CPN_DESC"/> 
+	    <result property="dcWay" column="DC_WAY"/> 
+	    <result property="dcAmt" column="DC_AMT"/> 
+	    <result property="vldTermCls" column="VLD_TERM_CLS"/> 
+	    <result property="vldStrDts" column="VLD_STR_DTS"/> 
+	    <result property="vldEndDts" column="VLD_END_DTS"/> 
+	    <result property="vldDayCnt" column="VLD_DAY_CNT"/> 
+	    <result property="vldWkdy" column="VLD_WKDY"/> 
+	    <result property="vldStrTm" column="VLD_STR_TM"/> 
+	    <result property="vldEndTm" column="VLD__END_TM"/> 
+	    <result property="issStrDts" column="ISS_STR_DTS"/> 
+	    <result property="issEndDts" column="ISS_END_DTS"/> 
+	    <result property="cpnStat" column="CPN_STAT"/> 
+	    <result property="cpnImgUrl" column="CPN_IMG_URL"/> 
+	    <result property="maxDcAmt" column="MAX_DC_AMT"/> 
+	    <result property="minOrdAmt" column="MIN_ORD_AMT"/> 
+	    <result property="allIssLmtCnt" column="ALL_ISS_LMT_CNT"/> 
+	    <result property="dupIssYn" column="DUP_ISS_YN"/> 
+	    <result property="issTms" column="ISS_TMS"/> 
+	    <result property="issWkdy" column="ISS_WKDY"/> 
+	    <result property="issStrTm" column="ISS_STR_TM"/> 
+	    <result property="issEndTm" column="ISS_END_TM"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="resultCode" column="RESULT_CODE"/>
+	    <result property="cpnVldChk" column="CPN_VLD_CHK"/>
+	    <result property="useCnt" column="USE_CNT"/>
+	</resultMap>
+	
+	<select id="offCpnInfo" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="cpnInfo">
+		 select /*coupon.offCpnInfo*/
+		 		ROWNUM RNUM
+		        ,CPN_NO 
+		        ,CPN_NM 
+		        ,CPN_KND 
+		        ,ISS_WAY 
+		        ,CPN_DESC 
+		        ,DC_WAY 
+		        ,DC_AMT 
+		        ,VLD_TERM_CLS 
+		        ,VLD_STR_DTS 
+		        ,VLD_END_DTS 
+		        ,VLD_DAY_CNT 
+		        ,VLD_WKDY 
+		        ,VLD_STR_TM 
+		        ,VLD_END_TM 
+		        ,ISS_STR_DTS 
+		        ,ISS_END_DTS 
+		        ,CPN_STAT 
+		        ,CPN_IMG_URL 
+		        ,MAX_DC_AMT 
+		        ,MIN_ORD_AMT 
+		        ,ALL_ISS_LMT_CNT 
+		        ,DUP_ISS_YN 
+		        ,ISS_TMS 
+		        ,ISS_WKDY 
+		        ,ISS_STR_TM 
+		        ,ISS_END_TM 
+		        ,REGR_NO 
+		        ,REG_DTS 
+		        ,UPDR_NO 
+		        ,UPD_DTS
+		        ,CASE WHEN VLD_TERM_CLS = 'MT00401' THEN 
+		            CASE WHEN SYSDATE BETWEEN VLD_STR_DTS AND VLD_END_DTS THEN 'Y' 
+		            ELSE 'N'
+		            END
+		          ELSE 
+		            'N'
+		          END
+		        AS CPN_VLD_CHK
+	            ,CASE 
+	              WHEN (SELECT USE_CNT FROM TBL_MT_OFF_CPN WHERE OFF_CPN_NO = #{offCpnNo}) > 0 
+	              THEN 
+	              	CASE WHEN (SELECT ALL_ISS_LMT_CNT FROM TBL_MT_CPN WHERE CPN_NO = (SELECT CPN_NO FROM TBL_MT_OFF_CPN WHERE OFF_CPN_NO = #{offCpnNo})) <![CDATA[<=]]> (SELECT USE_CNT FROM TBL_MT_OFF_CPN WHERE OFF_CPN_NO = #{offCpnNo}) THEN '1'
+	              		ELSE '0'
+	              		END
+	              WHEN (
+						SELECT CPN_NO FROM TBL_MT_CPN_GDS
+						WHERE CPN_NO = (SELECT CPN_NO FROM TBL_MT_OFF_CPN WHERE OFF_CPN_NO = #{offCpnNo})
+						AND CTG_CD = (SELECT CATEGORY2코드 AS CATE2 FROM (
+						              SELECT DISTINCT 품번, SEASON코드, CATEGORY1코드, CATEGORY2코드 FROM UBI09S_WORKS.V_상품정보트리거 WHERE 품번 = #{ubiGdsNo})
+						            )
+						UNION ALL 
+						SELECT CPN_NO FROM TBL_MT_CPN_GDS
+						WHERE CPN_NO = (SELECT CPN_NO FROM TBL_MT_OFF_CPN WHERE OFF_CPN_NO = #{offCpnNo})
+						AND M_CTG_CD = (SELECT CATEGORY1코드 AS CATE1 FROM (
+						              SELECT DISTINCT 품번, SEASON코드, CATEGORY1코드, CATEGORY2코드 FROM UBI09S_WORKS.V_상품정보트리거 WHERE 품번 = #{ubiGdsNo})
+						              )
+						AND CTG_CD IS NULL
+						UNION ALL 
+						SELECT CPN_NO FROM TBL_MT_CPN_GDS
+						WHERE CPN_NO = (SELECT CPN_NO FROM TBL_MT_OFF_CPN WHERE OFF_CPN_NO = #{offCpnNo})              
+						AND L_CTG_CD = (SELECT SEASON코드 AS CATE1 FROM (
+						              SELECT DISTINCT 품번, SEASON코드, CATEGORY1코드, CATEGORY2코드 FROM UBI09S_WORKS.V_상품정보트리거 WHERE 품번 = #{ubiGdsNo})
+						              )
+						AND M_CTG_CD IS NULL
+						AND CTG_CD IS NULL
+						) is null THEN '2' /*적용되지 않은 카테고리*/
+					END
+			        AS RESULT_CODE
+			     ,(SELECT USE_CNT FROM TBL_MT_OFF_CPN WHERE OFF_CPN_NO = #{offCpnNo}) AS USE_CNT
+		  from TBL_MT_CPN cpn
+		  where CPN_STAT = 'MT00502'
+		  	AND CPN_NO IN (SELECT CPN_NO FROM TBL_MT_OFF_CPN WHERE OFF_CPN_NO = #{offCpnNo})
+	</select>
+	
+	<update id="updateOffCpn" parameterType="com.giftiel.shop.dto.Coupon">
+		  UPDATE TBL_MT_OFF_CPN /*coupon.updateOffCpn*/
+		    <set>
+			   MEM_NO = #{memNo},
+			   USE_DTS = sysdate,
+			   USE_CNT = USE_CNT + 1,
+			   UPDR_NO = #{updrNo},
+			   UPD_DTS = sysdate
+			</set>
+		WHERE OFF_CPN_NO = #{offCpnNo}
+	</update>
+</mapper>

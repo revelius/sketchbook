@@ -1,0 +1,72 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>	
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>환경설정 > 전체운영설정 > 회원등급관리</h3>
+				<!-- [s] 전체운영설정 컨텐츠 -->
+				<div class="tabCon_inner">
+					<!-- [s] 기본 배송정책 설정 테이블 -->
+					<div class="tableType2">
+						<table>
+							<caption>기본 배송정책</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+								<col width="132px" />
+								<col width="350px" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">작성일</th>
+									<td>2015.01.01</td>
+									<th scope="col">작성자</th>
+									<td>MASTER</td>
+								</tr>
+								<tr>
+									<th scope="col">등급명</th>
+									<td colspan="3"><input type="text" class="wd_270" /> <a href="#" class="btnType1">중복확인</a></td>
+								</tr>
+								<tr>
+									<th scope="col">할인율</th>
+									<td colspan="3">
+										<input type="text" class="txt100" /> <input type="radio" id="radio1" name="radio" checked="checked" /> <label for="radio1">%</label> <input type="radio" id="radio2" name="radio" /> <label for="radio2">%</label>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">적립율</th>
+									<td colspan="3">
+										<input type="text" class="txt100" /> <input type="radio" id="radio1" name="radio" checked="checked" /> <label for="radio1">%</label> <input type="radio" id="radio2" name="radio" /> <label for="radio2">%</label>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 기본 배송정책 설정 테이블 -->
+					<div class="section a2 btn">
+						<a href="#" class="btnType2">저장</a> 
+						<a href="#" class="btnType1">취소</a>
+						<a href="#" class="btnType1">삭제</a>
+					</div>
+				</div>
+				<!-- [e] 상점환경설정 컨텐츠 -->	
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

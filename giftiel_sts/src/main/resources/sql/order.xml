@@ -1,0 +1,2458 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order">
+	<resultMap id="listOrd" type="com.giftiel.shop.dto.Order">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="ordNo" column="ORD_NO"/> 
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="ordDts" column="ORD_DTS"/> 
+	    <result property="ordrNm" column="ORDR_NM"/> 
+	    <result property="ordrTel" column="ORDR_TEL"/> 
+	    <result property="ordrCp" column="ORDR_CP"/> 
+	    <result property="ordrEmail" column="ORDR_EMAIL"/> 
+	    <result property="ordrZipCd" column="ORDR_ZIP_CD"/> 
+	    <result property="ordrBsAddr" column="ORDR_BS_ADDR"/> 
+	    <result property="ordrDtlAddr" column="ORDR_DTL_ADDR"/> 
+	    <result property="ordStat" column="ORD_STAT"/> 
+	    <result property="ordStatNm" column="ORD_STAT_NM"/>
+	    <result property="rcpnNm" column="RCPN_NM"/> 
+	    <result property="rcpnTelNo" column="RCPN_TEL_NO"/> 
+	    <result property="rcpnCpNo" column="RCPN_CP_NO"/> 
+	    <result property="rcpnZipCd" column="RCPN_ZIP_CD"/> 
+	    <result property="rcpnBsAddr" column="RCPN_BS_ADDR"/> 
+	    <result property="rcpnDtlAddr" column="RCPN_DTL_ADDR"/> 
+	    <result property="dlvSvcMemo" column="DLV_SVC_MEMO"/> 
+	    <result property="payCmplDts" column="PAY_CMPL_DTS"/> 
+	    <result property="memId" column="MEM_ID"/> 
+	    <result property="brwsCls" column="BRWS_CLS"/> 
+	    <result property="siteNo" column="SITE_NO"/>
+	    <result property="escrowDlvYn" column="ESCROW_DLV_YN"/>  
+	    <result property="regIp" column="REG_IP"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="clmRegDts" column="CLM_REG_DTS"/> 
+	    <result property="actlPayPrc" column="ACTL_PAY_PRC"/>
+	    
+		<!-- 추가필요변수(리스트조회시 사용) start-->
+		
+		<result property="payAmt" column="PAY_AMT"/>
+		<result property="ordGdsSeq" column="ORD_GDS_SEQ"/>
+		<result property="ubiGdsNm" column="UBI_GDS_NM"/>
+		<result property="ubiGdsNo" column="UBI_GDS_NO"/>
+		<result property="ubiGdsSize" column="UBI_GDS_SIZE"/>
+		<result property="slPrc" column="SL_PRC"/>
+		<result property="perOrdStat" column="PER_ORD_STAT"/>
+		<result property="perOrdStatNm" column="PER_ORD_STAT_NM"/>
+		<result property="siteNm" column="SITE_NM"/>
+		<result property="brand" column="BRAND"/>
+		<result property="ubiGdsColorNm" column="UBI_GDS_COLOR_NM"/>
+		<result property="ordQty" column="ORD_QTY"/>
+		<result property="invNo" column="INV_NO"/>
+		<result property="dlvCmpNo" column="DLV_CMP_NO"/>
+		<result property="sndCmplDts" column="SND_CMPL_DTS"/>
+		
+		<result property="barcode" column="BARCODE"/>
+		
+		<result property="ubiSaleNo" column="UBI_SALE_NO"/>
+		<!-- 추가필요변수(리스트조회시 사용) end-->
+		
+		<result property="mZone" column="M_ZONE"/>
+		<result property="cCode" column="C_CODE"/>
+		<result property="location" column="LOCATION"/>	
+	    
+	    
+	    <collection property="orderGoods" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.OrderGoods" select="listOrdGoods"/>
+	    <collection property="orderPay" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.OrderPay" select="listOrderPay"/>
+	    <collection property="currentGoodsSizes" javaType="ArrayList" column="UBI_GDS_NO" ofType="com.giftiel.shop.dto.CurrentGoodsSize" select="listCurGdsSize"/>
+	    <collection property="orderDelivery" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.OrderDelivery" select="listOrderDelivery"/>
+	</resultMap>
+	
+	<select id="listCurGdsSize" parameterType="String" resultType="com.giftiel.shop.dto.CurrentGoodsSize">
+		SELECT ubiGdsSize
+			,stock  - (select count(*) from tbl_or_ord ord, tbl_or_ord_gds ordgds
+			      where ord.ord_no = ordgds.ord_no
+			      and ord.ord_stat = 'OR00202'
+			      and ordgds.ubi_gds_no = #{ubiGdsNo}
+			      and ordgds.ubi_gds_size = main.ubiGdsSize
+			      and ord.reg_dts > sysdate-2) AS STOCK
+			,SIZE_PRIR
+		FROM (
+	       SELECT UBIGDS.사이즈 AS ubiGdsSize
+	       		 ,NVL(UBIGDS.재고수량, 0) AS stock
+	       		 ,CASE UBIGDS.사이즈 
+	                WHEN 'OS' THEN 0
+	                WHEN 'XS' THEN 1
+	                WHEN 'S' THEN 2
+	                WHEN 'M' THEN 3
+	                WHEN 'L' THEN 4
+	                WHEN 'XL' THEN 5
+	                WHEN 'XXL' THEN 6
+	                WHEN 'XXXL' THEN 7
+	                ELSE 10
+	              END AS SIZE_PRIR
+	         FROM UBI09S_WORKS.V_상품정보 UBIGDS
+	        WHERE UBIGDS.품번 = #{ubiGdsNo}
+	        ORDER BY SIZE_PRIR ASC, UBIGDS.사이즈 ASC
+	        ) MAIN
+	</select>	
+	
+	<!-- 전체주문쿼리 -->
+	<select id="listOrder" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listOrd">
+		SELECT  /*order.listOrder*/
+			ORD_NO
+		    ,SITE_NM
+		    ,ORDR_NM 
+		    ,ORD_DTS   
+		    ,ORDR_EMAIL 
+		    ,ORD_GDS_SEQ
+		    ,PER_ORD_STAT_NM
+		    ,PER_ORD_STAT
+		    ,BRAND
+		    ,UBI_GDS_NM
+		    ,UBI_GDS_COLOR_NM
+		    ,UBI_GDS_SIZE
+		    ,SL_PRC
+		    ,ORD_QTY
+		    ,SND_CMPL_DTS
+		    ,INV_NO
+		    ,DLV_CMP_NO
+		    ,CLM_REG_DTS
+		    
+		    ,ORDR_CP
+    		,ORDR_TEL
+    		,ORDR_ZIP_CD
+    		,ORDR_BS_ADDR
+    		,ORDR_DTL_ADDR
+    		,RCPN_NM
+    		,RCPN_TEL_NO
+    		,RCPN_CP_NO
+    		,RCPN_ZIP_CD
+    		,RCPN_BS_ADDR
+    		,RCPN_DTL_ADDR
+    		,BARCODE
+    		,UBI_GDS_NO
+    		,DLV_SVC_MEMO
+    		,SITE_NO
+    		,MEM_NO
+    		,MEM_NM
+    		,ACTL_PAY_PRC
+    		,(SELECT 판매번호 FROM UBI09S_WORKS.판매정보 WHERE 주문번호 = ORD_NO AND ROWNUM = 1) AS UBI_SALE_NO
+   			,(SELECT 매장존 FROM UBI09S_WORKS.V_온라인출고반품 a WHERE a.주문번호 = ORD_NO AND a.품번 = UBI_GDS_NO AND a.사이즈 = UBI_GDS_SIZE AND ROWNUM = 1) M_ZONE
+   			,(SELECT 창고코드 FROM UBI09S_WORKS.V_온라인출고반품 a WHERE a.주문번호 = ORD_NO AND a.품번 = UBI_GDS_NO AND a.사이즈 = UBI_GDS_SIZE AND ROWNUM = 1) C_CODE
+   			,(SELECT 로케이션 FROM UBI09S_WORKS.V_온라인출고반품 a WHERE a.주문번호 = ORD_NO AND a.품번 = UBI_GDS_NO AND a.사이즈 = UBI_GDS_SIZE AND ROWNUM = 1) LOCATION    		
+		FROM(
+			SELECT 
+				ROW_NUMBER () OVER (ORDER BY ord_dts desc) AS RNUM
+			    ,ORD_NO
+			    ,SITE_NM 
+			    ,ORDR_NM 
+			    ,ORD_DTS   
+			    ,ORDR_EMAIL 
+			    ,ORD_GDS_SEQ
+			    ,PER_ORD_STAT_NM
+			    ,PER_ORD_STAT
+			    ,BRAND
+			    ,UBI_GDS_NM
+			    ,UBI_GDS_COLOR_NM
+			    ,UBI_GDS_SIZE
+			    ,SL_PRC
+			    ,ORD_QTY
+			    ,SND_CMPL_DTS
+			    ,INV_NO
+		        ,DLV_CMP_NO
+		        ,CLM_REG_DTS
+		        ,UBI_GDS_NO
+		        ,ORDR_CP
+       			,ORDR_TEL
+       			,ORDR_ZIP_CD
+       			,ORDR_BS_ADDR
+       			,ORDR_DTL_ADDR
+       			,RCPN_NM
+       			,RCPN_TEL_NO
+       			,RCPN_CP_NO
+       			,RCPN_ZIP_CD
+       			,RCPN_BS_ADDR
+       			,RCPN_DTL_ADDR
+       			,BARCODE
+       			,DLV_SVC_MEMO
+       			,SITE_NO
+       			,MEM_NO
+       			,MEM_NM
+       			,ACTL_PAY_PRC
+			FROM (
+				SELECT DISTINCT ORD_NO
+				     ,SITE_NM
+				     ,ORDR_NM 
+				     ,ORD_DTS   
+				     ,ORDR_EMAIL 
+				     ,ORD_GDS_SEQ
+				     ,PER_ORD_STAT_NM
+				     ,PER_ORD_STAT
+				     ,BRAND
+				     ,UBI_GDS_NM
+				     ,UBI_GDS_COLOR_NM
+				     ,UBI_GDS_SIZE
+				     ,SL_PRC
+				     ,ORD_QTY
+				     ,SND_CMPL_DTS
+				     ,INV_NO
+		       		 ,DLV_CMP_NO
+		       		 ,REG_DTS
+		       		 ,CLM_REG_DTS
+		       		 ,UBI_GDS_NO
+		       		 ,ORDR_CP
+	       			 ,ORDR_TEL
+	       			 ,ORDR_ZIP_CD
+	       			 ,ORDR_BS_ADDR
+	       			 ,ORDR_DTL_ADDR
+	       			 ,RCPN_NM
+	       			 ,RCPN_TEL_NO
+	       			 ,RCPN_CP_NO
+	       			 ,RCPN_ZIP_CD
+	       			 ,RCPN_BS_ADDR
+	       			 ,RCPN_DTL_ADDR
+	       			 ,BARCODE
+	       			 ,DLV_SVC_MEMO
+	       			 ,SITE_NO
+	       			 ,MEM_NO
+	       			 ,MEM_NM
+	       			 ,ACTL_PAY_PRC
+				FROM(
+					SELECT 
+						ORD.ORD_NO 
+					    ,(SELECT SITE_NM FROM TBL_AD_SITE SITE WHERE SITE.SITE_NO=ORD.SITE_NO) SITE_NM  /*매장명*/
+					    ,ORD.ORDR_NM 
+					    ,ORD.ORD_DTS   
+					    ,ORD.ORDR_EMAIL 
+					    ,ORDGDS.ORD_GDS_SEQ /*주문상품일련번호*/
+					    ,(SELECT CD_NM FROM TBL_AD_CD A WHERE A.SUP_CD_NO = 'OR005' AND A.CD_NO = ORDGDS.PER_ORD_STAT) AS PER_ORD_STAT_NM
+					    ,ORDGDS.PER_ORD_STAT /*개별진행상태*/
+					    ,ORDGDS.BRND AS BRAND /*브렌드*/
+					    ,ORDGDS.UBI_GDS_NM /*상품명*/
+					    ,ORDGDS.COLOR AS UBI_GDS_COLOR_NM /*상품컬러*/
+					    ,ORDGDS.UBI_GDS_SIZE /*상품사이즈*/
+					    ,ORDGDS.SL_PRC /*판매가*/
+					    ,ORDGDS.ORD_QTY /*주문수량*/
+					    ,ORDGDS.SND_CMPL_DTS/*발송완료일시*/
+					    ,ORDGDS.INV_NO /*송장번호*/
+		       			,ORDGDS.DLV_CMP_NO /*택배사번호*/
+		       			,ORDGDS.REG_DTS
+		       			,ORD.ESCROW_DLV_YN
+		       			,(SELECT REG_DTS FROM TBL_OR_CLM_GDS WHERE ORD_NO = ORDGDS.ORD_NO AND ORD_GDS_SEQ = ORDGDS.ORD_GDS_SEQ AND CLM_GDS_STAT != 'OR01905' and rownum = 1)  CLM_REG_DTS /*클래임 등록일*/
+		       			,ORD.ORDR_CP
+		       			,ORD.ORDR_TEL
+		       			,ORD.ORDR_ZIP_CD
+		       			,ORD.ORDR_BS_ADDR
+		       			,ORD.ORDR_DTL_ADDR
+		       			,ORD.RCPN_NM
+		       			,ORD.RCPN_TEL_NO
+		       			,ORD.RCPN_CP_NO
+		       			,ORD.RCPN_ZIP_CD
+		       			,ORD.RCPN_BS_ADDR
+		       			,ORD.RCPN_DTL_ADDR
+		       			,(SELECT 바코드 FROM UBI09S_WORKS.V_바코드 where 품번 = ORDGDS.UBI_GDS_NO AND 사이즈 = ORDGDS.UBI_GDS_SIZE) AS BARCODE
+		       			,ORDGDS.UBI_GDS_NO
+		       			,ORD.DLV_SVC_MEMO
+		       			,ORD.ORD_STAT
+		       			,ORD.SITE_NO
+		       			,PAY.PAY_TP
+		       			,PAY.PAY_WAY
+		       			,ORD.MEM_NO
+		       			,F_MEM_NM(ORD.MEM_NO) AS MEM_NM
+		       			,ORDGDS.ACTL_PAY_PRC
+					FROM TBL_OR_ORD ORD
+						,TBL_OR_ORD_GDS ORDGDS
+						,TBL_OR_PAY PAY
+					WHERE ORD.ORD_NO = ORDGDS.ORD_NO
+						AND ORD.ORD_NO = PAY.ORD_NO
+						AND ORD.ORD_STAT != 'OR00201'
+					
+					
+				<if test='offLineEgnoreChk != "Y"'>
+					
+ 					UNION ALL
+				  
+				  	SELECT 
+				        TO_NUMBER(ORD.판매일자||ORD.판매번호) as ORD_NO,
+				        (SELECT 거래처약명 FROM UBI09S_WORKS.V_매장정보 WHERE 거래처코드 = ORD.매장코드) as SITE_NM,
+				        MEM.NM AS ORDR_NM,
+				        TO_DATE(ORD.판매일자, 'YY/MM/DD') as ORD_DTS,
+				        MEM.EMAIL as ORDR_EMAIL,
+				        TO_NUMBER(ORD.판매연번) as ORD_GDS_SEQ,
+				        CASE WHEN ORD.작업구분 = '0' THEN '배송완료'
+				             WHEN ORD.작업구분 = '1' THEN '주문취소'
+				        END AS PER_ORD_STAT_NM,
+				        CASE WHEN ORD.작업구분 = '0' THEN 'OR00505'
+				             WHEN ORD.작업구분 = '1' THEN 'OR00507'
+				        END AS PER_ORD_STAT,
+				        GDS.BARND AS BRAND,
+				        GDS.품명 AS UBI_GDS_NM,
+				        GDS.색상명 AS UBI_GDS_COLOR_NM,
+				        ORD.사이즈 AS UBI_GDS_SIZE,
+				        TO_NUMBER(GDS.현판매가) AS SL_PRC,
+				        TO_NUMBER(ORD.판매수량) AS ORD_QTY,
+				        null AS SND_CMPL_DTS,
+				        null AS INV_NO,
+				        null AS DLV_CMP_NO,
+				        TO_DATE(ORD.판매일자, 'YY/MM/DD') AS REG_DTS,
+				        '' AS ESCROW_DLV_YN,
+				        null AS CLM_REG_DTS,
+				        MEM.CP_NO AS ORDR_CP,
+				        MEM.CP_NO AS ORDR_TEL,
+				        '' AS ORDR_ZIP_CD,
+				        '' AS ORDR_BS_ADDR,
+				        '' AS ORDR_DTL_ADDR,
+				        MEM.NM AS RCPN_NM,
+				        MEM.CP_NO AS RCPN_TEL_NO,
+				        MEM.CP_NO AS RCPN_CP_NO,        
+				        '' AS RCPN_ZIP_CD,
+				        '' AS RCPN_BS_ADDR,
+				        '' AS RCPN_DTL_ADDR,        
+				        (SELECT 바코드 FROM UBI09S_WORKS.V_바코드 where 품번 = ORD.품번 AND 사이즈 = ORD.사이즈) AS BARCODE,
+				        ORD.품번 AS UBI_GDS_NO,
+				        '' AS DLV_SVC_MEMO,
+				        
+				        CASE WHEN ORD.작업구분 = '0' THEN 'OR00203'
+				             WHEN ORD.작업구분 = '1' THEN 'OR00204'
+				        END AS ORD_STAT,
+				        99999 AS SITE_NO,
+				        null AS PAY_TP,
+				        null AS PAY_WAY,
+				        TO_NUMBER(ORD.온라인고객코드) AS MEM_NO,
+				        F_MEM_NM(ORD.온라인고객코드) AS MEM_NM,
+				        ORD.실판매금액 AS ACTL_PAY_PRC
+				      FROM UBI09S_WORKS.V_구매정보 ord, tbl_me_mem_info mem, UBI09S_WORKS.V_상품정보 gds
+				      where ord.온라인고객코드 = mem.mem_no(+)
+				      and ord.품번 = gds.품번
+				      and ord.색상 = gds.색상
+				      and ord.사이즈 = gds.사이즈
+				      and ord.매장코드 != 'WE001'
+				     </if>
+				 )
+				 WHERE 1=1
+				<include refid="orderWhere" />
+		 	 )
+		) MAIN
+		WHERE 1=1
+		<if test="(startListNum != '' and startListNum != null) and (endListNum != '' and endListNum != null)">
+		AND RNUM BETWEEN #{startListNum} AND #{endListNum} 	
+		</if>
+	</select>
+	<!--// 전체주문쿼리 -->
+	
+	<!-- 전체주문 전체건수 -->
+	<select id="totalListOrder" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT /*order.totalListOrder*/
+			   COUNT(*) TOTAL_CNT 
+			FROM (
+				SELECT DISTINCT ORD_NO
+				     ,SITE_NM
+				     ,ORDR_NM 
+				     ,ORD_DTS   
+				     ,ORDR_EMAIL 
+				     ,ORD_GDS_SEQ
+				     ,PER_ORD_STAT_NM
+				     ,PER_ORD_STAT
+				     ,BRAND
+				     ,UBI_GDS_NM
+				     ,UBI_GDS_COLOR_NM
+				     ,UBI_GDS_SIZE
+				     ,SL_PRC
+				     ,ORD_QTY
+				FROM(
+					SELECT 
+						ORD.ORD_NO 
+					    ,(SELECT SITE_NM FROM TBL_AD_SITE SITE WHERE SITE.SITE_NO=ORD.SITE_NO) SITE_NM  /*매장명*/
+					    ,ORD.ORDR_NM 
+					    ,ORD.ORD_DTS   
+					    ,ORD.ORDR_EMAIL 
+					    ,ORDGDS.ORD_GDS_SEQ /*주문상품일련번호*/
+					    ,(SELECT CD_NM FROM TBL_AD_CD A WHERE A.SUP_CD_NO = 'OR005' AND A.CD_NO = ORDGDS.PER_ORD_STAT) AS PER_ORD_STAT_NM
+					    ,ORDGDS.PER_ORD_STAT /*개별진행상태*/
+					    ,ORDGDS.BRND AS BRAND /*브렌드*/
+					    ,ORDGDS.UBI_GDS_NM /*상품명*/
+					    ,ORDGDS.COLOR AS UBI_GDS_COLOR_NM /*상품컬러*/
+					    ,ORDGDS.UBI_GDS_SIZE /*상품사이즈*/
+					    ,ORDGDS.SL_PRC /*판매가*/
+					    ,ORDGDS.ORD_QTY /*주문수량*/
+					    ,ORDGDS.SND_CMPL_DTS/*발송완료일시*/
+					    ,ORDGDS.INV_NO /*송장번호*/
+		       			,ORDGDS.DLV_CMP_NO /*택배사번호*/
+		       			,ORDGDS.REG_DTS
+		       			,ORD.ESCROW_DLV_YN
+		       			,(SELECT REG_DTS FROM TBL_OR_CLM_GDS WHERE ORD_NO = ORDGDS.ORD_NO AND ORD_GDS_SEQ = ORDGDS.ORD_GDS_SEQ AND CLM_GDS_STAT != 'OR01905' and rownum = 1)  CLM_REG_DTS /*클래임 등록일*/
+		       			,ORD.ORDR_CP
+		       			,ORD.ORDR_TEL
+		       			,ORD.ORDR_ZIP_CD
+		       			,ORD.ORDR_BS_ADDR
+		       			,ORD.ORDR_DTL_ADDR
+		       			,ORD.RCPN_NM
+		       			,ORD.RCPN_TEL_NO
+		       			,ORD.RCPN_CP_NO
+		       			,ORD.RCPN_ZIP_CD
+		       			,ORD.RCPN_BS_ADDR
+		       			,ORD.RCPN_DTL_ADDR
+		       			,(SELECT 바코드 FROM UBI09S_WORKS.V_바코드 where 품번 = ORDGDS.UBI_GDS_NO AND 사이즈 = ORDGDS.UBI_GDS_SIZE) AS BARCODE
+		       			,ORDGDS.UBI_GDS_NO
+		       			,ORD.DLV_SVC_MEMO
+		       			
+		       			,ORD.ORD_STAT
+		       			,ORD.SITE_NO
+		       			,PAY.PAY_TP
+		       			,PAY.PAY_WAY
+		       			,ORD.MEM_NO
+		       			,F_MEM_NM(ORD.MEM_NO) AS MEM_NM
+					FROM TBL_OR_ORD ORD
+						,TBL_OR_ORD_GDS ORDGDS
+						,TBL_OR_PAY PAY
+					WHERE ORD.ORD_NO = ORDGDS.ORD_NO
+						AND ORD.ORD_NO = PAY.ORD_NO
+						AND ORD.ORD_STAT != 'OR00201'
+					
+					
+				<if test='offLineEgnoreChk != "Y"'>
+					
+ 					UNION ALL
+				  
+				  	SELECT 
+				        TO_NUMBER(ORD.판매일자||ORD.판매번호) as ORD_NO,
+				        (SELECT 거래처약명 FROM UBI09S_WORKS.V_매장정보 WHERE 거래처코드 = ORD.매장코드) as SITE_NM,
+				        MEM.NM AS ORDR_NM,
+				        TO_DATE(ORD.판매일자, 'YY/MM/DD') as ORD_DTS,
+				        MEM.EMAIL as ORDR_EMAIL,
+				        TO_NUMBER(ORD.판매연번) as ORD_GDS_SEQ,
+				        CASE WHEN ORD.작업구분 = '0' THEN '배송완료'
+				             WHEN ORD.작업구분 = '1' THEN '주문취소'
+				        END AS PER_ORD_STAT_NM,
+				        CASE WHEN ORD.작업구분 = '0' THEN 'OR00505'
+				             WHEN ORD.작업구분 = '1' THEN 'OR00507'
+				        END AS PER_ORD_STAT,
+				        GDS.BARND AS BRAND,
+				        GDS.품명 AS UBI_GDS_NM,
+				        GDS.색상명 AS UBI_GDS_COLOR_NM,
+				        ORD.사이즈 AS UBI_GDS_SIZE,
+				        TO_NUMBER(GDS.현판매가) AS SL_PRC,
+				        TO_NUMBER(ORD.판매수량) AS ORD_QTY,
+				        null AS SND_CMPL_DTS,
+				        null AS INV_NO,
+				        null AS DLV_CMP_NO,
+				        TO_DATE(ORD.판매일자, 'YY/MM/DD') AS REG_DTS,
+				        '' AS ESCROW_DLV_YN,
+				        null AS CLM_REG_DTS,
+				        MEM.CP_NO AS ORDR_CP,
+				        MEM.CP_NO AS ORDR_TEL,
+				        '' AS ORDR_ZIP_CD,
+				        '' AS ORDR_BS_ADDR,
+				        '' AS ORDR_DTL_ADDR,
+				        MEM.NM AS RCPN_NM,
+				        MEM.CP_NO AS RCPN_TEL_NO,
+				        MEM.CP_NO AS RCPN_CP_NO,        
+				        '' AS RCPN_ZIP_CD,
+				        '' AS RCPN_BS_ADDR,
+				        '' AS RCPN_DTL_ADDR,        
+				        (SELECT 바코드 FROM UBI09S_WORKS.V_바코드 where 품번 = ORD.품번 AND 사이즈 = ORD.사이즈) AS BARCODE,
+				        ORD.품번 AS UBI_GDS_NO,
+				        '' AS DLV_SVC_MEMO,
+				        
+				        CASE WHEN ORD.작업구분 = '0' THEN 'OR00203'
+				             WHEN ORD.작업구분 = '1' THEN 'OR00204'
+				        END AS ORD_STAT,
+				        99999 AS SITE_NO,
+				        null AS PAY_TP,
+				        null AS PAY_WAY,
+				        TO_NUMBER(ORD.온라인고객코드) AS MEM_NO,
+				        F_MEM_NM(ORD.온라인고객코드) AS MEM_NM
+				      FROM UBI09S_WORKS.V_구매정보 ord, tbl_me_mem_info mem, UBI09S_WORKS.V_상품정보 gds
+				      where ord.온라인고객코드 = mem.mem_no(+)
+				      and ord.품번 = gds.품번
+				      and ord.색상 = gds.색상
+				      and ord.사이즈 = gds.사이즈
+				      and ord.매장코드 != 'WE001'
+				     </if>
+				 )
+				 WHERE 1=1
+				 <include refid="orderWhere" /> 
+		 	 )
+	</select>
+	<!--// 전체주문 전체건수 -->
+	
+	
+	<sql id = "orderWhere">
+				<if test="ordNo != '' and ordNo != null">
+				AND ORD_NO = #{ordNo}
+				</if>
+				<if test="memNo != '' and memNo != null">
+				AND MEM_NO = #{memNo}
+				</if>
+				<if test="payStat != '' and payStat != null">
+				AND PAY_STAT = #{payStat} /*결제상태*/
+				</if>
+				<if test="ordClmCls != '' and ordClmCls != null">
+				AND ORD_CLM_CLS = #{ordClmCls}  /*주문/클라임구분:주문*/
+				</if>
+				<if test="payTps != null and payTps.length > 0">
+				AND PAY_TP  IN 
+					<foreach item ="item" index="index" collection="payTps" open="(" separator="," close=")">
+			         #{item}
+			  		</foreach>
+			  		  /*결제유형(OR00701:결제, OR00702:부분취소, OR00703:추가결제, OR00704:취소)*/
+				</if>
+				<if test="ordKnd != null and ordKnd == 'ship'">
+				AND PER_ORD_STAT <![CDATA[<=]]> 'OR00506' /*배송관리*/
+				</if>
+				<if test="ordKnd != null and ordKnd == 'cancle'">
+				AND PER_ORD_STAT = 'OR00507' /*주문취소*/
+				</if>
+				<if test="ordKnd != null and ordKnd == 'exchange'">
+				AND PER_ORD_STAT  BETWEEN 'OR00508' AND 'OR00511' /*교환관리*/
+				</if>
+				<if test="ordKnd != null and ordKnd == 'takeBack'">
+				AND PER_ORD_STAT > 'OR00511' /*배송관리*/
+				</if>
+				<if test="ordKnd != null and ordKnd == 'cancleAndTakeBack'"> /*취소/반품내역*/
+				AND (PER_ORD_STAT = 'OR00507' /*주문취소*/ OR PER_ORD_STAT > 'OR00511' /*반품*/) 
+				</if>
+				<if test="siteNos != null and siteNos.length > 0">
+				AND SITE_NO IN
+					<foreach item ="item" index="index" collection="siteNos" open="(" separator="," close=")">
+			  	      #{item}
+				   </foreach>
+				</if>
+				<if test="ordStats != null and ordStats.length > 0">
+				AND ORD_STAT IN
+					<foreach item ="item" index="index" collection="ordStats" open="(" separator="," close=")">
+				         #{item}
+				   </foreach>
+				</if>
+				<if test="perOrdStats != null and perOrdStats.length > 0">
+				AND PER_ORD_STAT IN
+					<foreach item ="item" index="index" collection="perOrdStats" open="(" separator="," close=")">
+				         #{item}
+				   </foreach>
+				</if>
+				<if test="perOrdStat != '' and perOrdStat != null">
+				AND PER_ORD_STAT = #{perOrdStat}
+				</if>
+				<if test="payWay != '' and payWay != null">
+				AND PAY_WAY = #{payWay}
+				</if>
+				<choose>
+				    <when test="inqStrDtm != null and inqEndDtm != null and inqStrDtm != '' and inqEndDtm != ''">
+			    	AND ORD_DTS BETWEEN to_date(#{inqStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{inqEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+				    </when>
+				    <when test="allDay"></when>
+				    <otherwise>
+			    	AND ORD_DTS BETWEEN to_date(TO_CHAR(SYSDATE, 'YYYY-MM-DD') || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(TO_CHAR(SYSDATE, 'YYYY-MM-DD') || '235959', 'YYYY/MM/DD HH24MISS')
+			    	</otherwise>
+	     	   	</choose>
+				<if test="brands != null and brands.length > 0">
+				AND BRAND IN
+					<foreach item ="item" index="index" collection="brands" open="(" separator="," close=")">
+			         #{item}
+			  		</foreach>
+				</if>
+				<if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+				AND SL_PRC >= #{ubiSlStrPrc}
+				</if>
+				<if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+				AND SL_PRC <![CDATA[<=]]> #{ubiSlEndPrc}
+				</if>
+				<if test="searchGb != '' and searchGb != null and searchText != ''  and searchText != null">
+				<choose>
+					<when test="searchGb == 'NM'">
+						AND (SELECT NM FROM TBL_ME_MEM_INFO INFO WHERE INFO.MEM_NO = MEM_NO) LIKE '%'||#{searchText}||'%'
+					</when>
+					<otherwise>
+						AND ${searchGb} like '%'||#{searchText}||'%'
+					</otherwise>
+				</choose>
+		    	</if>
+		    	<if test="oneDepth != '' and oneDepth != null">
+			    	AND SEASONGROUP_CODE = #{oneDepth}
+			    </if>
+			    <if test="twoDepth != '' and twoDepth != null">
+			    	AND CATEGORY1_CODE = #{twoDepth}
+			    </if> 
+			    <if test="threeDepth != '' and threeDepth != null">
+			    	AND CATEGORY2_CODE = #{threeDepth}
+			    </if>
+			    <if test="egnoreStat != '' and egnoreStat != null">
+			    	AND ORD_STAT != #{egnoreStat}
+		    	</if>				 
+	</sql>	
+	
+	<!-- 전체주문쿼리 FROM절-->
+	<sql id = "orderFrom">
+		FROM TBL_OR_ORD ORD
+			,TBL_OR_ORD_GDS ORDGDS
+			,TBL_OR_PAY PAY
+		WHERE ORD.ORD_NO = ORDGDS.ORD_NO
+			AND ORD.ORD_NO = PAY.ORD_NO
+			AND ORD.ORD_STAT != 'OR00201'
+			<if test="ordNo != '' and ordNo != null">
+			AND ORD.ORD_NO = #{ordNo}
+			</if>
+			<if test="memNo != '' and memNo != null">
+			AND ORD.MEM_NO = #{memNo}
+			</if>
+			<if test="payStat != '' and payStat != null">
+			AND PAY.PAY_STAT = #{payStat} /*결제상태*/
+			</if>
+			<if test="ordClmCls != '' and ordClmCls != null">
+			AND PAY.ORD_CLM_CLS = #{ordClmCls}  /*주문/클라임구분:주문*/
+			</if>
+			<if test="payTps != null and payTps.length > 0">
+			AND PAY.PAY_TP  IN 
+				<foreach item ="item" index="index" collection="payTps" open="(" separator="," close=")">
+		         #{item}
+		  		</foreach>
+		  		  /*결제유형(OR00701:결제, OR00702:부분취소, OR00703:추가결제, OR00704:취소)*/
+			</if>
+			<if test="ordKnd != null and ordKnd == 'ship'">
+			AND ORDGDS.PER_ORD_STAT <![CDATA[<=]]> 'OR00506' /*배송관리*/
+			</if>
+			<if test="ordKnd != null and ordKnd == 'cancle'">
+			AND ORDGDS.PER_ORD_STAT = 'OR00507' /*주문취소*/
+			</if>
+			<if test="ordKnd != null and ordKnd == 'exchange'">
+			AND ORDGDS.PER_ORD_STAT  BETWEEN 'OR00508' AND 'OR00511' /*교환관리*/
+			</if>
+			<if test="ordKnd != null and ordKnd == 'takeBack'">
+			AND ORDGDS.PER_ORD_STAT > 'OR00511' /*배송관리*/
+			</if>
+			<if test="ordKnd != null and ordKnd == 'cancleAndTakeBack'"> /*취소/반품내역*/
+			AND (ORDGDS.PER_ORD_STAT = 'OR00507' /*주문취소*/ OR ORDGDS.PER_ORD_STAT > 'OR00511' /*반품*/) 
+			</if>
+			<if test="siteNos != null and siteNos.length > 0">
+			AND ORD.SITE_NO IN
+				<foreach item ="item" index="index" collection="siteNos" open="(" separator="," close=")">
+		  	      #{item}
+			   </foreach>
+			</if>
+			<if test="ordStats != null and ordStats.length > 0">
+			AND ORD.ORD_STAT IN
+				<foreach item ="item" index="index" collection="ordStats" open="(" separator="," close=")">
+			         #{item}
+			   </foreach>
+			</if>
+			<if test="perOrdStats != null and perOrdStats.length > 0">
+			AND ORDGDS.PER_ORD_STAT IN
+				<foreach item ="item" index="index" collection="perOrdStats" open="(" separator="," close=")">
+			         #{item}
+			   </foreach>
+			</if>
+			<if test="perOrdStat != '' and perOrdStat != null">
+			AND ORDGDS.PER_ORD_STAT = #{perOrdStat}
+			</if>
+			<if test="payWay != '' and payWay != null">
+			AND PAY.PAY_WAY = #{payWay}
+			</if>
+			<choose>
+		    <when test="inqStrDtm != null and inqEndDtm != null and inqStrDtm != '' and inqEndDtm != ''">
+	    	AND ORD.REG_DTS BETWEEN to_date(#{inqStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{inqEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		    </when>
+		    <when test="allDay"></when>
+		    <otherwise>
+	    	AND ORD.REG_DTS BETWEEN to_date(TO_CHAR(SYSDATE, 'YYYY-MM-DD') || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(TO_CHAR(SYSDATE, 'YYYY-MM-DD') || '235959', 'YYYY/MM/DD HH24MISS')
+	    	</otherwise>
+     	   </choose>
+			<if test="brands != null and brands.length > 0">
+			AND ORDGDS.BRND IN
+				<foreach item ="item" index="index" collection="brands" open="(" separator="," close=")">
+		         #{item}
+		  		</foreach>
+			</if>
+			<if test="ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != '' and ubiSlStrPrc==null?0:ubiSlStrPrc.toString() != null">
+			AND ORDGDS.SL_PRC >= #{ubiSlStrPrc}
+			</if>
+			<if test="ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != '' and ubiSlEndPrc==null?0:ubiSlEndPrc.toString() != null">
+			AND ORDGDS.SL_PRC <![CDATA[<=]]> #{ubiSlEndPrc}
+			</if>
+			<if test="searchGb != '' and searchGb != null and searchText != ''">
+			<choose>
+				<when test="searchGb == 'NM'">
+					AND (SELECT NM FROM TBL_ME_MEM_INFO WHERE MEM_NO = ORD.MEM_NO) LIKE '%'||#{searchText}||'%'
+				</when>
+				<otherwise>
+					AND ${searchGb} like '%'||#{searchText}||'%'
+				</otherwise>
+			</choose>
+	    	</if>
+	    	<if test="oneDepth != '' and oneDepth != null">
+		    	AND ORDGDS.SEASONGROUP_CODE = #{oneDepth}
+		    </if>
+		    <if test="twoDepth != '' and twoDepth != null">
+		    	AND ORDGDS.CATEGORY1_CODE = #{twoDepth}
+		    </if> 
+		    <if test="threeDepth != '' and threeDepth != null">
+		    	AND ORDGDS.CATEGORY2_CODE = #{threeDepth}
+		    </if>
+		    <if test="egnoreStat != '' and egnoreStat != null">
+		    	AND ORD.ORD_STAT != #{egnoreStat}
+		    </if>
+	</sql>
+	<!--// 전체주문쿼리 FROM절-->
+	
+	<!-- 주문상세 resultMap-->
+	<resultMap id="detailOrd" type="com.giftiel.shop.dto.Order">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="ordNo" column="ORD_NO"/> 
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="ordDts" column="ORD_DTS"/> 
+	    <result property="ordrNm" column="ORDR_NM"/> 
+	    <result property="ordrTel" column="ORDR_TEL"/> 
+	    <result property="ordrCp" column="ORDR_CP"/> 
+	    <result property="ordrEmail" column="ORDR_EMAIL"/> 
+	    <result property="ordrZipCd" column="ORDR_ZIP_CD"/> 
+	    <result property="ordrBsAddr" column="ORDR_BS_ADDR"/> 
+	    <result property="ordrDtlAddr" column="ORDR_DTL_ADDR"/> 
+	    <result property="ordStat" column="ORD_STAT"/> 
+	    <result property="ordStatNm" column="ORD_STAT_NM"/>
+	    <result property="rcpnNm" column="RCPN_NM"/> 
+	    <result property="rcpnTelNo" column="RCPN_TEL_NO"/> 
+	    <result property="rcpnCpNo" column="RCPN_CP_NO"/> 
+	    <result property="rcpnZipCd" column="RCPN_ZIP_CD"/> 
+	    <result property="rcpnBsAddr" column="RCPN_BS_ADDR"/> 
+	    <result property="rcpnDtlAddr" column="RCPN_DTL_ADDR"/> 
+	    <result property="dlvSvcMemo" column="DLV_SVC_MEMO"/> 
+	    <result property="payCmplDts" column="PAY_CMPL_DTS"/> 
+	    <result property="memId" column="MEM_ID"/> 
+	    <result property="brwsCls" column="BRWS_CLS"/> 
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="regIp" column="REG_IP"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    
+		<!-- 추가필요변수(리스트조회시 사용) start-->
+		
+		<result property="payAmt" column="PAY_AMT"/>
+		<result property="ordGdsSeq" column="ORD_GDS_SEQ"/>
+		<result property="ubiGdsNm" column="UBI_GDS_NM"/>
+		<result property="ubiGdsSize" column="UBI_GDS_SIZE"/>
+		<result property="slPrc" column="SL_PRC"/>
+		<result property="perOrdStat" column="PER_ORD_STAT"/>
+		<result property="perOrdStatNm" column="PER_ORD_STAT_NM"/>
+		<result property="siteNm" column="SITE_NM"/>
+		<result property="brand" column="BRAND"/>
+		<result property="ubiGdsColorNm" column="UBI_GDS_COLOR_NM"/>
+		<result property="ordQty" column="ORD_QTY"/>
+		<result property="invNo" column="INV_NO"/>
+		<result property="dlvCmpNo" column="DLV_CMP_NO"/>
+		<result property="sndCmplDts" column="SND_CMPL_DTS"/>
+		<result property="escrowDlvYn" column="ESCROW_DLV_YN"/>
+		
+		<!-- 추가필요변수(리스트조회시 사용) end-->	
+	    <collection property="kcpHist" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.KcpHist" select="listKpcHist"/>
+	    <collection property="orderGoods" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.OrderGoods" select="listOrdGoods"/>
+	    <collection property="orderPay" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.OrderPay" select="listOrderPay"/>
+	    <collection property="orderDelivery" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.OrderDelivery" select="listOrderDelivery"/>
+	    <collection property="orderClm" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.OrderClm" select="listOrderClm"/>
+	    <collection property="orderMemo" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.OrderMemo" select="listOrdMemo"/>
+	    <collection property="orderAddPay" javaType="ArrayList" column="ORD_NO" ofType="com.giftiel.shop.dto.OrderAddPay" select="listOrdAddPay"/>
+	</resultMap>
+	<!--// 주문상세 resultMap-->
+	
+	<!-- 주문 상세쿼리 -->
+	<select id="selectOrder" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="detailOrd">
+		SELECT /*order.selectOrder*/
+			 ORD.ORD_NO         
+			,ORD.MEM_NO         
+			,ORD.ORD_DTS        
+			,ORD.ORDR_NM        
+			,ORD.ORDR_TEL       
+			,ORD.ORDR_CP        
+			,ORD.ORDR_EMAIL     
+			,ORD.ORDR_ZIP_CD    
+			,ORD.ORDR_BS_ADDR   
+			,ORD.ORDR_DTL_ADDR  
+			,ORD.ORD_STAT      
+			,ORD.RCPN_NM        
+			,ORD.RCPN_TEL_NO    
+			,ORD.RCPN_CP_NO     
+			,ORD.RCPN_ZIP_CD    
+			,ORD.RCPN_BS_ADDR   
+			,ORD.RCPN_DTL_ADDR  
+			,ORD.DLV_SVC_MEMO   
+			,ORD.PAY_CMPL_DTS   
+			,ORD.MEM_ID         
+			,ORD.BRWS_CLS       
+			,ORD.SITE_NO        
+			,ORD.REG_IP         
+			,ORD.REGR_NO
+			,ORD.REG_DTS        
+			,ORD.UPDR_NO
+			,ORD.UPD_DTS
+			,(SELECT SITE_NM FROM TBL_AD_SITE SITE WHERE SITE.SITE_NO=ORD.SITE_NO) SITE_NM
+			,ORD.ESCROW_DLV_YN
+	       FROM TBL_OR_ORD ORD
+	      WHERE ORD.ORD_NO = #{ordNo}
+	</select>
+	<!--// 주문 상세쿼리 -->
+	
+	<!-- 주문상품 서브쿼리 -->
+	<resultMap id="listOrdGoods" type="com.giftiel.shop.dto.OrderGoods">
+		<result property="ordNo" column="ORD_NO"/> 
+		<result property="ordGdsSeq" column="ORD_GDS_SEQ"/> 
+		<result property="ordDlvNo" column="ORD_DLV_NO"/> 
+		<result property="ubiGdsNo" column="UBI_GDS_NO"/> 
+		<result property="ubiGdsNm" column="UBI_GDS_NM"/> 
+		<result property="ubiGdsSize" column="UBI_GDS_SIZE"/>
+		<result property="brand" column="BRAND"/>
+		<result property="ubiGdsColorNm" column="UBI_GDS_COLOR_NM"/>
+		<result property="ubiGdsColorCd" column="UBI_GDS_COLOR_CD"/>
+		<result property="expPnt" column="EXP_PNT"/> 
+		<result property="expPntTot" column="EXP_PNT_TOT"/> 
+		<result property="ordQty" column="ORD_QTY"/> 
+		<result property="slPrc" column="SL_PRC"/> 
+		<result property="slPrcTot" column="SL_PRC_TOT"/> 
+		<result property="actlPayPrc" column="ACTL_PAY_PRC"/> 
+		<result property="perOrdStat" column="PER_ORD_STAT"/>
+		<result property="perOrdStatNm" column="PER_ORD_STAT_NM"/>
+		<result property="slFeeRt" column="SL_FEE_RT"/> 
+		<result property="sndExpDts" column="SND_EXP_DTS"/> 
+		<result property="gdsDlvCstPayway" column="GDS_DLV_CST_PAYWAY"/> 
+		<result property="cnclQty" column="CNCL_QTY"/> 
+		<result property="sndPosbTm" column="SND_POSB_TM"/> 
+		<result property="sndCmplDts" column="SND_CMPL_DTS"/> 
+		<result property="sndCplNo" column="SND_CPL_NO"/> 
+		<result property="invNo" column="INV_NO"/> 
+		<result property="dlvCmpNo" column="DLV_CMP_NO"/>
+		<result property="dlvCmpNm" column="DLV_CMP_NM"/>
+		<result property="mngrMemo" column="MNGR_MEMO"/> 
+		<result property="regrNo" column="REGR_NO"/> 
+		<result property="regDts" column="REG_DTS"/> 
+		<result property="updrNo" column="UPDR_NO"/> 
+		<result property="updDts" column="UPD_DTS"/> 
+		<result property="mainImg" column="MAIN_IMG"/>
+		<result property="barcode" column="BARCODE"/>
+		<result property="usePnt" column="USE_PNT"/>
+		<result property="dlvRsPage" column="DLV_RS_PAGE"/>
+		<result property="cpnNo" column="CPN_NO"/>
+		<result property="offCpnNo" column="OFF_CPN_NO"/>
+		<result property="cpnPayAmt" column="CPN_PAY_AMT"/>
+		<result property="mZone" column="M_ZONE"/>
+		<result property="cCode" column="C_CODE"/>
+		<result property="location" column="LOCATION"/>
+		
+		
+		<collection property="goodsSizes" javaType="ArrayList" column="UBI_GDS_NO" ofType="com.giftiel.shop.dto.GoodsSize" select="listSize"/>
+		<!-- <collection property="orderDlvCmp" javaType="ArrayList" column="DLV_CMP_NO" ofType="com.giftiel.shop.dto.OrderDlvCmp" select="listDlvCmp"/> -->
+		
+	</resultMap>	
+	
+	<select id="listOrdGoods"  resultMap="listOrdGoods">
+	   SELECT  /*order.listOrdGoods*/
+	      	ORD_NO 
+	        ,ORD_GDS_SEQ 
+	        ,ORD_DLV_NO 
+	        ,UBI_GDS_NO
+			,UBI_GDS_NM
+			,UBI_GDS_SIZE
+			,BRND AS BRAND
+			,COLOR AS UBI_GDS_COLOR_NM
+			,(SELECT 색상 FROM UBI09S_WORKS.V_상품정보 where 품번 = ORD_GDS.UBI_GDS_NO AND 사이즈 = ORD_GDS.UBI_GDS_SIZE AND ROWNUM = 1) AS UBI_GDS_COLOR_CD
+			,(SELECT 바코드 FROM UBI09S_WORKS.V_바코드 where 품번 = ORD_GDS.UBI_GDS_NO AND 사이즈 = ORD_GDS.UBI_GDS_SIZE AND ROWNUM = 1) AS BARCODE
+	        ,EXP_PNT 
+	        ,(SELECT SUM(EXP_PNT)  FROM TBL_OR_ORD_GDS A WHERE A.ORD_NO = ORD_GDS.ORD_NO) EXP_PNT_TOT
+	        ,ORD_QTY 
+	        ,SL_PRC 
+	        ,(SELECT SUM(SL_PRC)  FROM TBL_OR_ORD_GDS A WHERE A.ORD_NO = ORD_GDS.ORD_NO) SL_PRC_TOT
+	        ,ACTL_PAY_PRC 
+	        ,PER_ORD_STAT 
+	        ,(SELECT CD_NM FROM TBL_AD_CD A WHERE A.SUP_CD_NO = 'OR005' AND A.CD_NO = ORD_GDS.PER_ORD_STAT) AS PER_ORD_STAT_NM
+	        ,SL_FEE_RT 
+	        ,SND_EXP_DTS 
+	        ,GDS_DLV_CST_PAYWAY 
+	        ,CNCL_QTY 
+	        ,SND_POSB_TM 
+	        ,SND_CMPL_DTS 
+	        ,SND_CPL_NO 
+	        ,INV_NO 
+	        ,DLV_CMP_NO 
+	        ,(SELECT DLV_CMP_NM FROM TBL_AD_DLV_CMP A WHERE A.DLV_CMP_NO = ORD_GDS.DLV_CMP_NO) AS DLV_CMP_NM
+	        ,MNGR_MEMO 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	        ,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = ORD_GDS.UBI_GDS_NO) AS MAIN_IMG
+	        ,USE_PNT
+	        ,(SELECT DLV_RS_PAGE FROM TBL_AD_DLV_CMP A WHERE A.DLV_CMP_NO = ORD_GDS.DLV_CMP_NO) AS DLV_RS_PAGE
+	        ,CPN_NO
+	        ,OFF_CPN_NO
+	        ,nvl(CPN_PAY_AMT, 0) AS CPN_PAY_AMT
+   			,(SELECT 매장존 FROM UBI09S_WORKS.V_온라인출고반품 a WHERE a.주문번호 = ORD_GDS.ORD_NO AND a.품번 = ORD_GDS.UBI_GDS_NO AND a.사이즈 = ORD_GDS.UBI_GDS_SIZE AND ROWNUM = 1) M_ZONE
+   			,(SELECT 창고코드 FROM UBI09S_WORKS.V_온라인출고반품 a WHERE a.주문번호 = ORD_GDS.ORD_NO AND a.품번 = ORD_GDS.UBI_GDS_NO AND a.사이즈 = ORD_GDS.UBI_GDS_SIZE AND ROWNUM = 1) C_CODE
+   			,(SELECT 로케이션 FROM UBI09S_WORKS.V_온라인출고반품 a WHERE a.주문번호 = ORD_GDS.ORD_NO AND a.품번 = ORD_GDS.UBI_GDS_NO AND a.사이즈 = ORD_GDS.UBI_GDS_SIZE AND ROWNUM = 1) LOCATION
+	    FROM
+			TBL_OR_ORD_GDS	ORD_GDS
+		WHERE ORD_NO = #{ordNo}
+	</select>
+	
+	<!-- 	상세조회용 상품상세 -->
+	<select id="detailOrdGoods"  resultMap="listOrdGoods">
+	   SELECT  /*order.detailOrdGoods*/
+	      	ORD_NO 
+	        ,ORD_GDS_SEQ 
+	        ,ORD_DLV_NO 
+	        ,UBI_GDS_NO
+			,UBI_GDS_NM
+			,UBI_GDS_SIZE
+			,BRND AS BRAND
+			,COLOR AS UBI_GDS_COLOR_NM
+	        ,EXP_PNT 
+	        ,(SELECT SUM(EXP_PNT)  FROM TBL_OR_ORD_GDS A WHERE A.ORD_NO = ORD_GDS.ORD_NO) EXP_PNT_TOT
+	        ,ORD_QTY 
+	        ,SL_PRC 
+	        ,(SELECT SUM(SL_PRC)  FROM TBL_OR_ORD_GDS A WHERE A.ORD_NO = ORD_GDS.ORD_NO) SL_PRC_TOT
+	        ,ACTL_PAY_PRC 
+	        ,PER_ORD_STAT 
+	        ,(SELECT CD_NM FROM TBL_AD_CD A WHERE A.SUP_CD_NO = 'OR005' AND A.CD_NO = ORD_GDS.PER_ORD_STAT) AS PER_ORD_STAT_NM
+	        ,SL_FEE_RT 
+	        ,SND_EXP_DTS 
+	        ,GDS_DLV_CST_PAYWAY 
+	        ,CNCL_QTY 
+	        ,SND_POSB_TM 
+	        ,SND_CMPL_DTS 
+	        ,SND_CPL_NO 
+	        ,INV_NO 
+	        ,DLV_CMP_NO 
+	        ,(SELECT DLV_CMP_NM FROM TBL_AD_DLV_CMP A WHERE A.DLV_CMP_NO = ORD_GDS.DLV_CMP_NO) AS DLV_CMP_NM
+	        ,MNGR_MEMO 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	        ,(SELECT IMG_URL FROM TBL_GD_GDS_IMG WHERE PRIR=0 AND UBI_GDS_NO = ORD_GDS.UBI_GDS_NO) AS MAIN_IMG
+	    FROM
+			TBL_OR_ORD_GDS	ORD_GDS
+		WHERE ORD_NO = #{ordNo}
+<!-- 		<if test="ordKnd != null and ordKnd == 'exchange'"> -->
+<!-- 			AND ORD_GDS.PER_ORD_STAT  BETWEEN 'OR00508' AND 'OR00511' /*교환관리*/ -->
+<!-- 		</if> -->
+<!-- 		<if test="ordKnd != null and ordKnd == 'cancleAndTakeBack'"> /*취소/반품내역*/ -->
+<!-- 			AND (ORD_GDS.PER_ORD_STAT = 'OR00507' /*주문취소*/ OR ORD_GDS.PER_ORD_STAT > 'OR00511' /*반품*/)  -->
+<!-- 		</if> -->
+	</select>
+	<!--// 주문상품 서브쿼리 -->
+	
+	<!-- 주문결제 서브쿼리 -->
+	<resultMap id="listOrderPay" type="com.giftiel.shop.dto.OrderPay">
+		<result property="payNo" column="PAY_NO"/> 
+		<result property="ordNo" column="ORD_NO"/> 
+		<result property="clmNo" column="CLM_NO"/> 
+		<result property="cncltgPayno" column="CNCLTG_PAYNO"/> 
+		<result property="payAmt" column="PAY_AMT"/> 
+		<result property="payAmtTot" column="PAY_AMT_TOT"/>
+		<result property="cnclAmt" column="CNCL_AMT"/> 
+		<result property="payWay" column="PAY_WAY"/> 
+		<result property="payTp" column="PAY_TP"/> 
+		<result property="payDts" column="PAY_DTS"/> 
+		<result property="payCnclDts" column="PAY_CNCL_DTS"/> 
+		<result property="payStat" column="PAY_STAT"/> 
+		<result property="ordClmCls" column="ORD_CLM_CLS"/> 
+		<result property="etc" column="ETC"/> 
+		<result property="regrNo" column="REGR_NO"/> 
+		<result property="regDts" column="REG_DTS"/> 
+		<result property="updrNo" column="UPDR_NO"/> 
+		<result property="updDts" column="UPD_DTS"/> 
+		<collection property="orderPayCrd" javaType="ArrayList" column="PAY_NO" ofType="com.giftiel.shop.dto.OrderPayCrd" select="listPayCrd"/>
+	    <collection property="orderPayRtm" javaType="ArrayList" column="PAY_NO" ofType="com.giftiel.shop.dto.OrderPayRtm" select="listPayRtm"/>
+	    <collection property="orderPayVrtl" javaType="ArrayList" column="PAY_NO" ofType="com.giftiel.shop.dto.OrderPayVrtl" select="listPayVrtl"/>
+	</resultMap>	
+	
+	<select id="listOrderPay"  resultMap="listOrderPay">
+		SELECT  /*order.listOrderPay*/
+		 		PAY_NO 
+		       ,ORD_NO 
+		       ,CLM_NO 
+		       ,CNCLTG_PAYNO 
+		       ,PAY_AMT 
+		       ,(SELECT SUM(PAY_AMT)  FROM TBL_OR_PAY A WHERE A.ORD_NO = OR_PAY.ORD_NO) PAY_AMT_TOT
+		       ,CNCL_AMT 
+		       ,PAY_WAY 
+		       ,PAY_TP 
+		       ,PAY_DTS 
+		       ,PAY_CNCL_DTS 
+		       ,PAY_STAT 
+		       ,ORD_CLM_CLS 
+		       ,ETC 
+		       ,REGR_NO 
+		       ,REG_DTS 
+		       ,UPDR_NO 
+		       ,UPD_DTS 
+		FROM
+		       TBL_OR_PAY OR_PAY
+		WHERE ORD_NO = #{ordNo}
+		ORDER BY PAY_WAY ASC
+	</select>
+	<!--// 주문결제 서브쿼리 -->
+	
+	<!-- 결재-신용카드 -->
+	<resultMap id="listCrcdCrdPay" type="com.giftiel.shop.dto.OrderPayCrd">
+	    <result property="payNo" column="PAY_NO"/> 
+	    <result property="cardCd" column="CARD_CD"/> 
+	    <result property="cardName" column="CARD_NAME"/> 
+	    <result property="cardNo" column="CARD_NO"/> 
+	    <result property="appNo" column="APP_NO"/> 
+	    <result property="appTime" column="APP_TIME"/> 
+	    <result property="noinf" column="NOINF"/> 
+	    <result property="quota" column="QUOTA"/> 
+	    <result property="amount" column="AMOUNT"/> 
+	    <result property="partcancYn" column="PARTCANC_YN"/> 
+	    <result property="cardBinType01" column="CARD_BIN_TYPE_01"/> 
+	    <result property="cardBinType02" column="CARD_BIN_TYPE_02"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+	<select id="listPayCrd" resultMap="listCrcdCrdPay">
+		 SELECT 
+		        PAY_NO 
+		        ,CARD_CD 
+		        ,CARD_NAME 
+		        ,CARD_NO 
+		        ,APP_NO 
+		        ,APP_TIME 
+		        ,NOINF 
+		        ,QUOTA 
+		        ,AMOUNT 
+		        ,PARTCANC_YN 
+		        ,CARD_BIN_TYPE_01 
+		        ,CARD_BIN_TYPE_02 
+		        ,REGR_NO 
+		        ,REG_DTS 
+		        ,UPDR_NO 
+		        ,UPD_DTS 
+		    FROM
+		        TBL_OR_CRCD_CRD_PAY 
+		    WHERE PAY_NO = #{payNo}
+		    ORDER BY PAY_NO
+	</select> 
+	<!--// 결재-신용카드 -->
+	
+	<!-- 결재-실시간계좌이체 -->
+	<resultMap id="listRtmAcctPay" type="com.giftiel.shop.dto.OrderPayRtm">
+	    <result property="payNo" column="PAY_NO"/> 
+	    <result property="bankCode" column="BANK_CODE"/> 
+	    <result property="bankName" column="BANK_NAME"/> 
+	    <result property="appTime" column="APP_TIME"/> 
+	    <result property="cashAuthno" column="CASH_AUTHNO"/> 
+	    <result property="amount" column="AMOUNT"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+	<select id="listPayRtm" resultMap="listRtmAcctPay">
+		 SELECT /*order.listPayRtm*/
+	       	PAY_NO 
+	        ,BANK_CODE 
+	        ,BANK_NAME 
+	        ,APP_TIME 
+	        ,CASH_AUTHNO 
+	        ,AMOUNT 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	    FROM
+	        TBL_OR_RTM_ACCT_PAY 
+	    WHERE PAY_NO = #{payNo}
+	    ORDER BY PAY_NO
+	</select> 
+	<!--// 결재-실시간계좌이체 -->
+	
+	<!-- 결재-가상계좌 -->
+	<resultMap id="listVrtlAcctPay" type="com.giftiel.shop.dto.OrderPayVrtl">
+		<result property="rnum" column="RNUM"/>
+		<result property="payNo" column="PAY_NO"/> 
+		<result property="amount" column="AMOUNT"/> 
+		<result property="bankcode" column="BANKCODE"/> 
+		<result property="bankname" column="BANKNAME"/> 
+		<result property="account" column="ACCOUNT"/> 
+		<result property="vaDate" column="VA_DATE"/> 
+		<result property="appTime" column="APP_TIME"/> 
+		<result property="regrNo" column="REGR_NO"/> 
+		<result property="regDts" column="REG_DTS"/> 
+		<result property="updrNo" column="UPDR_NO"/> 
+		<result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+	<select id="listPayVrtl" resultMap="listVrtlAcctPay">
+		 SELECT /*order.listPayVrtl*/
+	       PAY_NO 
+	        ,AMOUNT 
+	        ,BANKCODE 
+	        ,BANKNAME 
+	        ,ACCOUNT 
+	        ,VA_DATE 
+	        ,APP_TIME 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	    FROM
+	        TBL_OR_VRTL_ACCT_PAY 
+	    WHERE PAY_NO = #{payNo}
+	    ORDER BY PAY_NO
+	</select> 
+	<!--// 결재-가상계좌 -->
+	
+	
+	<!-- 주문배송 서브쿼리 -->
+	<resultMap id="listOrderDelivery" type="com.giftiel.shop.dto.OrderDelivery">
+		<result property="ordDlvNo" column="ORD_DLV_NO"/> 
+		<result property="ordNo" column="ORD_NO"/> 
+		<result property="plcyDlvCst" column="PLCY_DLV_CST"/> 
+		<result property="dlvCstEtc" column="DLV_CST_ETC"/> 
+		<result property="dlvCstPayway" column="DLV_CST_PAYWAY"/> 
+		<result property="minOrdAmt" column="MIN_ORD_AMT"/> 
+		<result property="regrNo" column="REGR_NO"/> 
+		<result property="regDts" column="REG_DTS"/> 
+		<result property="updrNo" column="UPDR_NO"/> 
+		<result property="updDts" column="UPD_DTS"/>
+		
+		<collection property="orderDlvCsts" javaType="ArrayList" column="ORD_DLV_NO" ofType="com.giftiel.shop.dto.OrderDlvCst" select="listDlvCst"/>
+	</resultMap>
+	
+	<select id="listOrderDelivery"  resultMap="listOrderDelivery">
+		SELECT /*order.listOrderDelivery*/
+		      ORDDVL.ORD_DLV_NO 
+		      ,ORDDVL.ORD_NO 
+		      ,ORDDVL.PLCY_DLV_CST 
+		      ,ORDDVL.DLV_CST_ETC 
+		      ,ORDDVL.DLV_CST_PAYWAY 
+		      ,ORDDVL.MIN_ORD_AMT 
+		      ,ORDDVL.REGR_NO 
+		      ,ORDDVL.REG_DTS 
+		      ,ORDDVL.UPDR_NO 
+		      ,ORDDVL.UPD_DTS 
+		      ,(SELECT ACTL_DLV_CST FROM TBL_OR_DLV_CST CST WHERE CST.ORD_DLV_NO=ORDDVL.ORD_DLV_NO) ACTL_DLV_CST
+		FROM
+		       TBL_OR_ORDDVL ORDDVL 
+		WHERE ORDDVL.ORD_NO = #{ordNo}
+	</select>
+	<!--// 주문배송 서브쿼리 -->
+	
+	<!-- 배송비 -->
+	<resultMap id="listDlvCst" type="com.giftiel.shop.dto.OrderDlvCst">
+	    <result property="dlvCstSeq" column="DLV_CST_SEQ"/> 
+	    <result property="ordDlvNo" column="ORD_DLV_NO"/> 
+	    <result property="clmNo" column="CLM_NO"/> 
+	    <result property="ordClmCls" column="ORD_CLM_CLS"/> 
+	    <result property="dlvCstTp" column="DLV_CST_TP"/> 
+	    <result property="freeDlvrsnCd" column="FREE_DLVRSN_CD"/> 
+	    <result property="actlDlvCst" column="ACTL_DLV_CST"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>
+	<select id="listDlvCst" resultMap="listDlvCst">
+		 SELECT 
+		        DLV_CST_SEQ 
+		        ,ORD_DLV_NO 
+		        ,CLM_NO 
+		        ,ORD_CLM_CLS 
+		        ,DLV_CST_TP 
+		        ,FREE_DLVRSN_CD 
+		        ,ACTL_DLV_CST 
+		        ,REGR_NO 
+		        ,REG_DTS 
+		        ,UPDR_NO 
+		        ,UPD_DTS 
+		    FROM
+		        TBL_OR_DLV_CST 
+		    WHERE ORD_DLV_NO = #{ordDlvNo}
+	</select> 
+	<!--// 배송비 -->
+	
+	<!-- 클라임 -->
+	<resultMap id="listOrderClm" type="com.giftiel.shop.dto.OrderClm">
+		<!-- [s]클라임 --> 
+		<result property="rnum" column="RNUM"/>
+		<result property="clmNo" column="CLM_NO"/>
+	    <result property="clmStat" column="CLM_STAT"/> 
+	    <result property="procCmplDts" column="PROC_CMPL_DTS"/> 
+	    <result property="ordNo" column="ORD_NO"/> 
+	    <result property="clmTp" column="CLM_TP"/>
+	    <result property="clmTpNm" column="CLM_TP_NM"/>  
+	    <result property="rcpnNm" column="RCPN_NM"/> 
+	    <result property="rcpnTelNo" column="RCPN_TEL_NO"/> 
+	    <result property="rcpnCpNo" column="RCPN_CP_NO"/> 
+	    <result property="rcpnZipCd" column="RCPN_ZIP_CD"/> 
+	    <result property="rcpnBsAddr" column="RCPN_BS_ADDR"/> 
+	    <result property="rcpnDtlAddr" column="RCPN_DTL_ADDR"/> 
+	    <result property="dlvSvcMemo" column="DLV_SVC_MEMO"/>
+	    <result property="rfndAcctNo" column="RFND_ACCT_NO"/> 
+	    <result property="rfndBnkCd" column="RFND_BNK_CD"/> 
+	    <result property="rfndAcctOwn" column="RFND_ACCT_OWN"/> 	     
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/>
+	    <result property="rfndBnkNm" column="RFND_BNK_NM"/>
+	    <!-- [e]클라임 -->
+	     
+		<collection property="orderClmGds" javaType="ArrayList" column="CLM_NO" ofType="com.giftiel.shop.dto.OrderClmGds" select="listOrderClmGds"/>	     
+	</resultMap>
+	<select id="listOrderClm" resultMap="listOrderClm">
+		 SELECT /*order.listOrderClm*/
+	        ROWNUM RNUM
+	        ,CLM.CLM_NO 
+	        ,CLM.CLM_STAT 
+	        ,CLM.PROC_CMPL_DTS 
+	        ,CLM.ORD_NO 
+	        ,CLM.CLM_TP
+	        ,F_CD_NM(CLM.CLM_TP) CLM_TP_NM 
+	        ,CLM.RCPN_NM 
+	        ,CLM.RCPN_TEL_NO 
+	        ,CLM.RCPN_CP_NO 
+	        ,CLM.RCPN_ZIP_CD 
+	        ,CLM.RCPN_BS_ADDR 
+	        ,CLM.RCPN_DTL_ADDR 
+	        ,CLM.DLV_SVC_MEMO 
+	        ,CLM.REGR_NO 
+	        ,CLM.REG_DTS 
+	        ,CLM.UPDR_NO 
+	        ,CLM.UPD_DTS 
+	        ,CLM.RFND_ACCT_NO 
+	        ,CLM.RFND_BNK_CD 
+	        ,CLM.RFND_ACCT_OWN 	    
+	        ,F_CD_NM(CLM.RFND_BNK_CD) RFND_BNK_NM
+	    FROM
+	        TBL_OR_CLM CLM
+	  WHERE CLM.ORD_NO = #{ordNo}
+	</select> 
+	<!--// 클라임 -->
+	
+	<!-- 클라임 -->
+	<!-- 
+	<resultMap id="listOrderClmGds" type="com.giftiel.shop.dto.OrderClmGds">
+	    [s]클라임상품
+	    <result property="clmGdsSeq" column="CLM_GDS_SEQ"/> 
+	    <result property="clmNo" column="CLM_NO"/> 
+	    <result property="ubiGdsNo" column="UBI_GDS_NO"/>
+	    <result property="brand" column="BRAND"/>
+	    <result property="ubiGdsNm" column="UBI_GDS_NM"/>
+	    <result property="ubiGdsColorNm" column="UBI_GDS_COLOR_NM"/> 
+	    <result property="ubiGdsSize" column="UBI_GDS_SIZE"/>
+	    <result property="ordDlvNo" column="ORD_DLV_NO"/> 
+	    <result property="clmQty" column="CLM_QTY"/> 
+	    <result property="clmRsnCd" column="CLM_RSN_CD"/>
+	    <result property="clmRsnNm" column="CLM_RSN_NM"/>
+	    <result property="clmTxt" column="CLM_TXT"/> 
+	    <result property="inCmplDt" column="IN_CMPL_DT"/> 
+	    <result property="invNo" column="INV_NO"/> 
+	    <result property="sndCplDt" column="SND_CPL_DT"/> 
+	    <result property="clmGdsStat" column="CLM_GDS_STAT"/> 
+	    <result property="dlvCmpNo" column="DLV_CMP_NO"/> 
+	    <result property="acptDts" column="ACPT_DTS"/> 
+	    <result property="acptUsrNo" column="ACPT_USR_NO"/> 
+	    <result property="mngrMemo" column="MNGR_MEMO"/> 
+	    [e]클라임상품
+	</resultMap>
+	 -->
+	<resultMap id="listOrderClmGds" type="com.giftiel.shop.dto.OrderClmGds">
+	    <!-- [s]클라임상품 -->
+	    <result property="rnum" column="RNUM"/>
+	    <result property="clmGdsSeq" column="CLM_GDS_SEQ"/> 
+	    <result property="clmNo" column="CLM_NO"/> 
+	    <result property="ordNo" column="ORD_NO"/> 
+	    <result property="ordGdsSeq" column="ORD_GDS_SEQ"/> 
+	    <result property="ordDlvNo" column="ORD_DLV_NO"/> 
+	    <result property="clmQty" column="CLM_QTY"/> 
+	    <result property="clmRsnCd" column="CLM_RSN_CD"/> 
+	    <result property="clmTxt" column="CLM_TXT"/> 
+	    <result property="inCmplDt" column="IN_CMPL_DT"/> 
+	    <result property="invNo" column="INV_NO"/> 
+	    <result property="sndCplDt" column="SND_CPL_DT"/> 
+	    <result property="clmGdsStat" column="CLM_GDS_STAT"/> 
+	    <result property="dlvCmpNo" column="DLV_CMP_NO"/> 
+	    <result property="acptDts" column="ACPT_DTS"/> 
+	    <result property="acptUsrNo" column="ACPT_USR_NO"/> 
+	    <result property="mngrMemo" column="MNGR_MEMO"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/>  
+	    <result property="clmRsnNm" column="CLM_RSN_NM"/>  
+	    <result property="dlvCmpNm" column="DLV_CMP_NM"/>
+	    
+	    <result property="clmGdsNm" column="CLM_GDS_NM"/>    
+	    <!-- [e]클라임상품 -->
+	</resultMap>		
+	<select id="listOrderClmGds" resultMap="listOrderClmGds">
+		 SELECT /*order.listOrderClmGds*/
+          CLM_GDS_SEQ ,
+		  CLM.CLM_NO ,
+		  CLM.ORD_NO ,
+		  ORD_GDS_SEQ ,
+		  ORD_DLV_NO ,
+		  CLM_QTY ,
+		  CLM_RSN_CD ,
+		  CLM_TXT ,
+		  IN_CMPL_DT ,
+		  INV_NO ,
+		  SND_CPL_DT ,
+		  CLM_GDS_STAT ,
+		  DLV_CMP_NO ,
+		  ACPT_DTS ,
+		  ACPT_USR_NO ,
+		  MNGR_MEMO ,
+		  CLM.REGR_NO ,
+		  CLM.REG_DTS ,
+		  CLM.UPDR_NO ,
+		  CLM.UPD_DTS ,
+		  F_CD_NM(CLM_RSN_CD) CLM_RSN_NM ,
+		  (SELECT DLV_CMP_NM FROM TBL_AD_DLV_CMP WHERE DLV_CMP_NO = CLM_GDS.DLV_CMP_NO) DLV_CMP_NM ,
+		  (SELECT '['||BRND||']'||UBI_GDS_NM FROM TBL_OR_ORD_GDS WHERE ORD_GDS_SEQ = CLM_GDS.ORD_GDS_SEQ) AS CLM_GDS_NM
+	    FROM
+	        TBL_OR_CLM CLM , TBL_OR_CLM_GDS CLM_GDS
+	  WHERE CLM.CLM_NO = CLM_GDS.CLM_NO
+	      AND  CLM.CLM_NO = #{clmNo}
+	</select> 	
+	<!--  주문상품 개별진행상태  UPDATE -->
+	<update id="updateOrdStat" parameterType="com.giftiel.shop.dto.Order">
+	    UPDATE TBL_OR_ORD_GDS /*order.updateOrdStat*/
+	    	SET PER_ORD_STAT =  #{perOrdStat}
+	    	      ,UPDR_NO = #{updrNo}
+	    	      ,UPD_DTS = SYSDATE
+				<if test="perOrdStat == 'OR00507' or perOrdStat == 'OR00514'">
+				  ,CNCL_DTS = SYSDATE
+				</if>	    	      
+		WHERE ORD_GDS_SEQ IN
+		<foreach item ="item" index="index" collection="ordGdsSeqs" open="(" separator="," close=")">
+	         #{item}
+	   </foreach>
+	</update>
+	<!--//  주문상품 개별진행상태  UPDATE  -->
+	
+	<update id="updateOrdStat2" parameterType="com.giftiel.shop.dto.Order">
+	    UPDATE TBL_OR_ORD_GDS /*order.updateOrdStat2*/
+	    	SET PER_ORD_STAT =  #{perOrdStat}
+	    	      ,UPDR_NO = #{updrNo}
+	    	      ,UPD_DTS = SYSDATE
+				<if test="cnclQty != '' and cnclQty != null">
+				  ,CNCL_QTY = #{cnclQty}
+				</if>
+				<if test="ubiGdsSize != '' and ubiGdsSize != null">
+					,UBI_GDS_SIZE = #{ubiGdsSize}
+				</if>
+				<if test="perOrdStat == 'OR00507' or perOrdStat == 'OR00514'">
+				  ,CNCL_DTS = SYSDATE
+				</if>
+		WHERE ORD_NO = #{ordNo}
+			<if test="ordGdsSeq != '' and ordGdsSeq != null">
+			AND ORD_GDS_SEQ = #{ordGdsSeq}
+			</if>		
+	</update>
+	
+	<!-- 주문자 정보수정 -->
+	<update id="updateOrdr" parameterType="com.giftiel.shop.dto.Order">
+		UPDATE TBL_OR_ORD /*order.updateOrdr*/
+		<set>
+		     <if test="ordrNm != null"> ORDR_NM = #{ordrNm},</if>
+		     <if test="ordrTel != null"> ORDR_TEL = #{ordrTel},</if>
+		     <if test="ordrCp != null"> ORDR_CP = #{ordrCp},</if>
+		     <if test="ordrZipCd != null"> ORDR_ZIP_CD = #{ordrZipCd},</if>
+		     <if test="ordrBsAddr != null"> ORDR_BS_ADDR = #{ordrBsAddr},</if>
+		     <if test="ordrDtlAddr != null"> ORDR_DTL_ADDR = #{ordrDtlAddr},</if>
+		     <if test="dlvSvcMemo != null"> DLV_SVC_MEMO = #{dlvSvcMemo},</if>
+		     <if test="ordStat != null"> ORD_STAT = #{ordStat},</if>
+		     <if test="ordStat == 'OR00203'"> PAY_CMPL_DTS = SYSDATE,</if>
+		     <if test="escrowDlvYn != null"> ESCROW_DLV_YN = #{escrowDlvYn},</if>
+		     UPDR_NO = #{updrNo},
+		     UPD_DTS = SYSDATE
+		</set>
+		WHERE ORD_NO = #{ordNo}
+	</update>
+	<!--// 주문자 정보수정 -->
+	
+	<!-- 주문상품 size조회 -->
+	<select id="listSize" resultType="com.giftiel.shop.dto.GoodsSize">
+		 SELECT /*order.listSize*/
+	        UBI_GDS_NO AS UbiGdsNo
+	        ,SIZE_NM AS sizeNm
+	        ,SIZE_1 AS size1
+	        ,SIZE_2 AS size2
+	        ,SIZE_3 AS size3 
+	        ,SIZE_4 AS size4
+	        ,SIZE_5 AS size5
+	        ,SIZE_6 AS size6
+	        ,SIZE_7 AS size7
+	        ,SIZE_8 AS size8
+	        ,SIZE_9 AS size9
+	        ,SIZE_10 AS size10
+	    FROM
+	        TBL_GD_SIZE 
+	    WHERE UBI_GDS_NO = #{ubiGdsNo}
+	</select>
+	<!--// 주문상품 size조회 -->
+	
+	<!-- 택배사 조회 -->
+	<select id="listDlvCmp" resultType="com.giftiel.shop.dto.OrderDlvCmp">
+		 SELECT /*order.listDlvCmp*/
+			DLV_CMP_NO AS dlvCmpNo 
+			,USE_YN AS useYn 
+			,DTL_ADDR AS dtlAddr 
+			,DLV_SRCH_URL AS dlvSrchUrl 
+			,ZIP_CD AS zipCd 
+			,DLV_RS_PAGE AS dlvRsPage 
+			,CHGR_NM AS chgrNm 
+			,FAX_NO AS faxNo 
+			,TEL AS tel 
+			,ADDR AS addr 
+			,DLV_CMP_NM AS dlvCmpNm 
+			,REGR_NO AS regrNo 
+			,REG_DTS AS regDts 
+			,UPDR_NO AS updrNo 
+			,UPD_DTS AS updDts 
+	    FROM
+	        TBL_AD_DLV_CMP 
+	</select>
+	<!--// 택배사 조회 -->
+	
+	
+	
+	<!-- 택배사 조회 - 택배사 코드로 조회시 -->
+	<select id="dlvCmp" parameterType="INTEGER" resultType="com.giftiel.shop.dto.OrderDlvCmp">
+		 SELECT /*order.listDlvCmp*/
+			DLV_CMP_NO AS dlvCmpNo 
+			,USE_YN AS useYn 
+			,DTL_ADDR AS dtlAddr 
+			,DLV_SRCH_URL AS dlvSrchUrl 
+			,ZIP_CD AS zipCd 
+			,DLV_RS_PAGE AS dlvRsPage 
+			,CHGR_NM AS chgrNm 
+			,FAX_NO AS faxNo 
+			,TEL AS tel 
+			,ADDR AS addr 
+			,DLV_CMP_NM AS dlvCmpNm 
+			,REGR_NO AS regrNo 
+			,REG_DTS AS regDts 
+			,UPDR_NO AS updrNo 
+			,UPD_DTS AS updDts 
+	    FROM
+	        TBL_AD_DLV_CMP 
+	    WHERE DLV_CMP_NO = #{invNo}
+	</select>
+	<!--// 택배사 조회 -->
+	
+	
+	
+	<!-- 주문상품 업데이트-->
+	<update id="updateOrdGoods" parameterType="com.giftiel.shop.dto.Order">
+		UPDATE TBL_OR_ORD_GDS /*order.updateOrdGoods*/
+		<set>
+			<if test="chgInvNo != '' and chgInvNo != null"> INV_NO = #{chgInvNo},</if>
+			<if test="chgDlvCmpNo != '' and chgDlvCmpNo != null"> DLV_CMP_NO = #{chgDlvCmpNo},</if>
+			<if test="chgUbiGdsSize != '' and chgUbiGdsSize != null"> UBI_GDS_SIZE = #{chgUbiGdsSize},</if>
+			 UPDR_NO = #{updrNo},
+		     UPD_DTS = SYSDATE
+		</set>
+		WHERE 1=1
+		
+			<if test="ordGdsSeq !='' and ordGdsSeq != null">
+				AND ORD_GDS_SEQ = #{ordGdsSeq}			
+			</if>
+			<if test="ordNo !='' and ordNo != null">
+				AND ORD_NO = #{ordNo}			
+			</if>
+			
+	</update>	
+	<!-- 주문상품 업데이트-->
+	
+	<!-- 주문코멘트 조회 -->
+	<select id="listOrdMemo" resultType="com.giftiel.shop.dto.OrderMemo">
+		 SELECT /*order.OrderMemo*/
+			ORD_NO AS ordNo
+			,MEMO_NO AS memoNo
+			,MEMO_TXT AS memoTxt
+			,WRTR_CLS AS wrtrCls
+			,REGR_NO AS regrNo
+			,REG_DTS AS regDts
+			,UPDR_NO AS updrNo
+			,UPD_DTS AS updDts
+			,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = ORD_MEMO.REGR_NO) regrNm
+		FROM TBL_OR_ORD_MEMO ORD_MEMO
+		WHERE ORD_NO = #{ordNo}
+		ORDER BY MEMO_NO
+	</select>
+	<!--// 주문코멘트 조회 -->
+	
+	<!-- 주문코멘트 등록 -->
+	<insert id="insertOrdMemo" parameterType="com.giftiel.shop.dto.OrderMemo">
+			INSERT /*order.inserOrdMemo*/
+			INTO TBL_OR_ORD_MEMO
+			  (
+			    ORD_NO,
+			    MEMO_NO,
+			    MEMO_TXT,
+			    WRTR_CLS,
+			    REGR_NO,
+			    REG_DTS,
+			    UPDR_NO,
+			    UPD_DTS
+			  )
+			  VALUES
+			  (
+			    #{ordNo}
+			   ,SEQ_OR_ORD_MEMO.NEXTVAL
+			   ,#{memoTxt}
+			   ,#{wrtrCls}
+			   ,#{regrNo}
+			   ,SYSDATE
+			   ,#{updrNo}
+			   ,SYSDATE
+			  )
+	</insert>
+	<!--// 주문코멘트 등록 -->
+	
+	<!-- 주문코멘트 삭제 -->
+	<delete id="deleteOrdMemo" parameterType="com.giftiel.shop.dto.OrderMemo">
+		DELETE /*order.deleteOrdMemo*/ 
+		  FROM TBL_OR_ORD_MEMO
+		 WHERE MEMO_NO = #{memoNo}
+		   AND ORD_NO = #{ordNo}
+	</delete>
+	<!--// 주문코멘트 삭제 -->
+	
+	
+	<!-- 추가결제 리스트 -->
+	<resultMap id="listAddPay" type="com.giftiel.shop.dto.OrderAddPay">
+	    <!-- 결제 -->
+	    <result property="rnum" column="RNUM"/>
+	    <result property="payNo" column="PAY_NO"/> 
+		<result property="ordNo" column="ORD_NO"/> 
+		<result property="clmNo" column="CLM_NO"/> 
+		<result property="cncltgPayno" column="CNCLTG_PAYNO"/> 
+		<result property="payAmt" column="PAY_AMT"/> 
+		<result property="payAmtTot" column="PAY_AMT_TOT"/>
+		<result property="cnclAmt" column="CNCL_AMT"/> 
+		<result property="payWay" column="PAY_WAY"/> 
+		<result property="payTp" column="PAY_TP"/> 
+		<result property="payDts" column="PAY_DTS"/> 
+		<result property="payCnclDts" column="PAY_CNCL_DTS"/> 
+		<result property="payStat" column="PAY_STAT"/>
+		<result property="payStatNm" column="PAY_STAT_NM"/> 
+		<result property="ordClmCls" column="ORD_CLM_CLS"/> 
+		<result property="etc" column="ETC"/> 
+		<result property="regrNo" column="REGR_NO"/> 
+		<result property="regDts" column="REG_DTS"/> 
+		<result property="updrNo" column="UPDR_NO"/> 
+		<result property="updDts" column="UPD_DTS"/> 
+		<!--// 결제 -->
+		
+		<!-- 추가결제 -->
+		<result property="addPayNo" column="ADD_PAY_NO"/> 
+		<result property="addPayRsn" column="ADD_PAY_RSN"/> 
+		<result property="addPayAmt" column="ADD_PAY_AMT"/> 
+		<result property="memNo" column="MEM_NO"/> 
+		<!--// 추가결제 --> 
+	</resultMap>
+	<select id="listAddPay" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listAddPay">
+		SELECT /*order.listAddPay*/  
+				RNUM
+			  	,PAY_NO 
+				,ORD_NO 
+				,CLM_NO 
+				,CNCLTG_PAYNO 
+				,PAY_AMT 
+				,CNCL_AMT 
+				,PAY_WAY 
+				,PAY_TP 
+				,PAY_DTS 
+				,PAY_CNCL_DTS 
+				,PAY_STAT 
+				,PAY_STAT_NM
+				,ORD_CLM_CLS 
+				,ETC 
+				,REGR_NO 
+				,REG_DTS 
+				,UPDR_NO 
+				,UPD_DTS 
+				,ADD_PAY_NO 
+				,ADD_PAY_RSN 
+				,ADD_PAY_AMT 
+				,MEM_NO 
+				,NM
+				,EMAIL
+		  FROM (
+			SELECT
+			     ROWNUM RNUM
+			  	,PAY_NO 
+				,ORD_NO 
+				,CLM_NO 
+				,CNCLTG_PAYNO 
+				,PAY_AMT 
+				,CNCL_AMT 
+				,PAY_WAY 
+				,PAY_TP 
+				,PAY_DTS 
+				,PAY_CNCL_DTS 
+				,PAY_STAT 
+				,PAY_STAT_NM
+				,ORD_CLM_CLS 
+				,ETC 
+				,REGR_NO 
+				,REG_DTS 
+				,UPDR_NO 
+				,UPD_DTS 
+				,ADD_PAY_NO 
+				,ADD_PAY_RSN 
+				,ADD_PAY_AMT 
+				,MEM_NO 
+				,NM
+				,EMAIL
+			FROM (
+				SELECT 
+					PAY.CLM_NO 
+					,PAY.CNCLTG_PAYNO 
+					,PAY.PAY_AMT 
+					,PAY.CNCL_AMT 
+					,PAY.PAY_WAY 
+					,PAY.PAY_TP 
+					,PAY.PAY_DTS 
+					,PAY.PAY_CNCL_DTS 
+					,PAY.PAY_STAT 
+					,(SELECT CD_NM FROM TBL_AD_CD A WHERE A.SUP_CD_NO = 'OR009' AND A.CD_NO = PAY.PAY_STAT) AS PAY_STAT_NM  
+					,PAY.ORD_CLM_CLS 
+					,PAY.ETC 
+					,ADD_PAY.PAY_NO 
+					,ADD_PAY.ORD_NO 
+					,ADD_PAY.REGR_NO 
+					,ADD_PAY.REG_DTS 
+					,ADD_PAY.UPDR_NO 
+					,ADD_PAY.UPD_DTS 
+					,ADD_PAY.ADD_PAY_NO 
+					,ADD_PAY.ADD_PAY_RSN 
+					,ADD_PAY.ADD_PAY_AMT 
+					,ADD_PAY.MEM_NO 
+					,MEM_INFO.NM
+					,MEM_INFO.EMAIL
+			    <include refid="ordAddPayFrom" />
+			    <choose>
+				<when test="orderBy != '' and orderBy != null">
+					ORDER BY ${orderBy} ${orderFlag}
+				</when>
+				<otherwise>
+					ORDER BY PAY.REG_DTS DESC
+				</otherwise>
+				</choose>
+				) MAIN 
+			) WHERE 1=1
+			AND RNUM BETWEEN #{startListNum} AND #{endListNum}
+		</select> 
+	<!--// 추가결제 리스트 -->
+	
+	<resultMap id="listKpcHist" type="com.giftiel.shop.dto.KcpHist">
+	    <result property="kpcHistNo" column="KPC_HIST_NO"/> 
+	    <result property="ordNo" column="ORD_NO"/> 
+	    <result property="tno" column="TNO"/> 
+	    <result property="clmNo" column="CLM_NO"/> 
+	    <result property="resCd" column="RES_CD"/> 
+	    <result property="resMsg" column="RES_MSG"/> 
+	    <result property="bsucc" column="BSUCC"/> 
+	    <result property="escwYn" column="ESCW_YN"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	</resultMap>	
+	
+	<select id="listKpcHist" resultMap="listKpcHist">
+	    SELECT 
+	        ROWNUM RNUM
+	        ,KPC_HIST_NO 
+	        ,ORD_NO 
+	        ,TNO 
+	        ,CLM_NO 
+	        ,RES_CD 
+	        ,RES_MSG 
+	        ,BSUCC 
+	        ,ESCW_YN 
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	    FROM
+	        TBL_OR_KPC_HIST 
+	    WHERE ORD_NO = #{ordNo}
+	</select>
+	
+	<!-- 추가결제 전체건수 -->
+	<select id="totalListAddPay" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT /*order.totalListAddPay*/
+			COUNT(*) TOTAL_CNT 
+			<include refid="ordAddPayFrom" />
+	</select>
+	<!-- //추가결제 전체건수 -->
+	
+	<!-- 추가결제 FROM -->
+	<sql id = "ordAddPayFrom">
+	    FROM
+	        TBL_OR_PAY PAY 
+	        ,TBL_OR_ADD_PAY ADD_PAY 
+	        ,TBL_ME_MEM_INFO MEM_INFO
+	    WHERE ADD_PAY.PAY_NO = PAY.PAY_NO(+)
+			 AND ADD_PAY.ORD_NO = PAY.ORD_NO (+)
+	        AND ADD_PAY.MEM_NO = MEM_INFO.MEM_NO
+	        <if test="memNo != '' and memNo != null">
+	        AND MEM_INFO.MEM_NO = #{memNo}
+	        </if>
+	        <if test="payTp != '' and payTp != null">
+			AND PAY.PAY_TP  = #{payTp}
+			</if> 
+		  	<if test="payStats != null and payStats.length > 0">
+			AND PAY.PAY_STAT  IN
+				<foreach item ="item" index="index" collection="payStats" open="(" separator="," close=")">
+		         #{item}
+		  		</foreach>
+			</if>
+	       	<if test="payWay != '' and payWay != null">
+			AND PAY.PAY_WAY = #{payWay}
+			</if>
+			<choose>
+		    <when test="inqStrDtm != null and inqEndDtm != null and inqStrDtm != '' and inqEndDtm != ''">
+	    	AND ADD_PAY.REG_DTS BETWEEN to_date(#{inqStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{inqEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+		    </when>
+		    <when test="allDay"></when>
+		    <otherwise>
+	    	AND ADD_PAY.REG_DTS BETWEEN to_date(TO_CHAR(SYSDATE, 'YYYY-MM-DD') || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(TO_CHAR(SYSDATE, 'YYYY-MM-DD') || '235959', 'YYYY/MM/DD HH24MISS')
+	    	</otherwise>
+     	    </choose>
+	        <if test="searchGb != '' and searchGb != null and searchText != ''">
+			AND ${searchGb} like '%'||#{searchText}||'%'
+	    	</if>
+	    	<if test="addPayStrPrc==null?0:addPayStrPrc.toString() != '' and addPayStrPrc==null?0:addPayStrPrc.toString() != null">
+			AND ADD_PAY.ADD_PAY_AMT >= #{addPayStrPrc}
+			</if>
+			<if test="addPayEndPrc==null?0:addPayEndPrc.toString() != '' and addPayEndPrc==null?0:addPayEndPrc.toString() != null">
+			AND ADD_PAY.ADD_PAY_AMT <![CDATA[<=]]> #{addPayEndPrc}
+			</if>
+	</sql>
+	<!--// 추가결제 FROM -->
+	
+	<!-- 추가결제조회 상세팝업페이지 -->
+	<select id="listOrdAddPay" resultMap="listAddPay">
+		SELECT /*order.listOrdAddPay*/
+			ADD_PAY.PAY_NO 
+			,ADD_PAY.ORD_NO 
+			,ADD_PAY.REGR_NO 
+			,ADD_PAY.REG_DTS 
+			,ADD_PAY.UPDR_NO 
+			,ADD_PAY.UPD_DTS 
+			,ADD_PAY.ADD_PAY_NO 
+			,ADD_PAY.ADD_PAY_RSN 
+			,ADD_PAY.ADD_PAY_AMT 
+			,ADD_PAY.MEM_NO 
+		  FROM
+		     TBL_OR_ADD_PAY ADD_PAY 
+	    WHERE ADD_PAY.ORD_NO = #{ordNo}
+	    ORDER BY ADD_PAY.REG_DTS DESC
+	</select> 
+	<!--// 추가결제조회 상세팝업페이지 -->
+	
+	<!-- 주문결제 등록 -->
+	<insert id="insertOrdPay" parameterType="com.giftiel.shop.dto.OrderAddPay">
+		INSERT /*order.insertOrdPay*/ 
+		INTO TBL_OR_PAY (
+		  PAY_NO
+		  ,ORD_NO
+		  <if test="clmNo != null and  clmNo !=''"> 
+		  ,CLM_NO
+		  </if>
+		  <if test="cncltgPayno != null and  cncltgPayno !=''">
+		  ,CNCLTG_PAYNO
+		  </if>
+		  <if test="payAmt != null and  payAmt !=''">
+		  ,PAY_AMT
+		   </if>
+		  <if test="cnclAmt != null and  cnclAmt !=''"> 
+		  ,CNCL_AMT
+		  </if>
+		  <if test="payWay != null and  payWay !=''"> 
+		  ,PAY_WAY
+		  </if>
+		  <if test="payTp != null and  payTp !=''"> 
+		  ,PAY_TP
+		  </if>
+		  <if test="payDts != null and  payDts !=''"> 
+		  ,PAY_DTS
+		  </if>
+		  <if test="payCnclDts != null and  payCnclDts !=''">
+		  ,PAY_CNCL_DTS
+		  </if>
+		  <if test="payStat != null and  payStat !=''"> 
+		  ,PAY_STAT
+		  </if>
+		  <if test="ordClmCls != null and  ordClmCls !=''">
+		  ,ORD_CLM_CLS
+		  </if>
+		  <if test="etc != null and  etc !=''">
+		  ,ETC
+		  </if>
+		  ,REGR_NO
+		  ,REG_DTS
+		) VALUES (
+		  ,#{payNo}
+		  ,#{ordNo}
+		   <if test="clmNo != null and  clmNo !=''"> 
+		  ,#{clmNo}
+		  </if>
+		  <if test="cncltgPayno != null and  cncltgPayno !=''"> 
+		  ,#{cncltgPayno}
+		   </if>
+		   <if test="payAmt != null and  payAmt !=''">
+		  ,#{payAmt}
+		   </if>
+		   <if test="cnclAmt != null and  cnclAmt !=''"> 
+		  ,#{cnclAmt}
+		  </if>
+		  <if test="payWay != null and  payWay !=''"> 
+		  ,#{payWay}
+		  </if>
+		  <if test="payTp != null and  payTp !=''"> 
+		  ,#{payTp}
+		  </if>
+		  <if test="payDts != null and  payDts !=''"> 
+		  ,#{payDts}
+		  </if>
+		  <if test="payCnclDts != null and  payCnclDts !=''"> 
+		   ,#{payCnclDts}
+		  </if>
+		  <if test="payStat != null and  payStat !=''"> 
+		  ,#{payStat}
+		  </if>
+		  <if test="ordClmCls != null and  ordClmCls !=''">
+		  ,#{ordClmCls}
+		  </if>
+		  <if test="etc != null and  etc !=''">
+		  ,#{etc}
+		  </if>
+		  ,#{regrNo}
+		  ,SYSDATE
+		)
+		<selectKey keyProperty="payNo" resultType="Integer" order="AFTER">
+		SELECT SEQ_OR_PAY.CURRVAL FROM dual
+		</selectKey>
+	</insert>
+	<!-- 주문결제 등록 -->
+	
+	<!-- 주문추가결제 등록 -->
+	<insert id="insertOrdAddPay" parameterType="com.giftiel.shop.dto.OrderAddPay">
+		INSERT  /*order.insertOrdAddPay*/  
+		INTO TBL_OR_ADD_PAY  (
+		  ADD_PAY_NO
+		  ,PAY_NO
+		  ,ORD_NO
+		  ,ADD_PAY_RSN
+		  ,ADD_PAY_AMT
+		  ,MEM_NO
+		  ,REGR_NO
+		  ,REG_DTS
+		) VALUES (
+			SEQ_OR_ADD_PAY.NEXTVAL
+		  ,#{payNo, jdbcType=VARCHAR}
+		  ,#{ordNo}
+		  ,#{addPayRsn, jdbcType=VARCHAR}
+		  ,#{addPayAmt}
+		  ,#{memNo}
+		  ,#{regrNo}
+		  ,sysdate
+		)
+	</insert>
+	<!-- //	주문추가결제 등록 -->
+	
+	<!-- 주문추가결제 수정-->
+	<update id="updateOrdAddPay" parameterType="com.giftiel.shop.dto.OrderAddPay">
+	    UPDATE TBL_OR_ADD_PAY /*order.updateOrdAddPay*/
+		    <set>
+			     <if test="addPayRsn != null"> ADD_PAY_RSN = #{addPayRsn},</if>
+			     <if test="addPayAmt != null"> ADD_PAY_AMT = #{addPayAmt},</if>
+			     UPDR_NO = #{updrNo},
+			     UPD_DTS = SYSDATE
+			</set>
+		WHERE ADD_PAY_NO = #{addPayNo}
+	</update>
+	<!--//주문추가결제 수정 -->
+	
+	<!-- 주문결제 수정-->
+	<update id="updateOrdPay" parameterType="com.giftiel.shop.dto.OrderPay">
+		  UPDATE TBL_OR_PAY /*order.updateOrdPay*/
+		    <set>
+			     <if test="payStat != null"> PAY_STAT = #{payStat},</if>
+			     <if test="payStat == 'OR00902'"> PAY_DTS = SYSDATE,</if>
+			     <if test="cnclAmt != null"> CNCL_AMT = CNCL_AMT + #{cnclAmt},</if>
+			     UPDR_NO = #{updrNo},
+			     UPD_DTS = SYSDATE
+			</set>
+		WHERE 1=1
+		<if test="payNo != null">
+			AND PAY_NO = #{payNo}
+		</if>
+		<if test="ordNo != null">
+			AND ORD_NO = #{ordNo}
+		</if>
+		AND PAY_WAY NOT IN ('OR00804', 'OR00805')
+	</update>
+	<!-- 주문추가결제 취소-->
+	
+	<!-- 주문번호 생성 -->
+	<select id="createOrdNo" resultType="String">
+		select to_char(systimestamp, 'yyyymmddhh24ssff1')||ROUND(DBMS_RANDOM.VALUE(100, 999),0) from dual
+	</select>	
+	
+	<!-- 주문 메인데이터 생성 -->
+	<insert id="insertOrd" parameterType="com.giftiel.shop.dto.Order">
+	    INSERT INTO TBL_OR_ORD
+	        ( ORD_NO , MEM_NO , ORD_DTS , ORDR_NM , ORDR_TEL , ORDR_CP , ORDR_EMAIL , ORDR_ZIP_CD , ORDR_BS_ADDR , ORDR_DTL_ADDR , ORD_STAT , RCPN_NM , RCPN_TEL_NO , RCPN_CP_NO , RCPN_ZIP_CD , RCPN_BS_ADDR , RCPN_DTL_ADDR , DLV_SVC_MEMO ,  MEM_ID , BRWS_CLS , SITE_NO , REG_IP , REGR_NO , REG_DTS)
+	    VALUES 
+	        ( #{ordNo} , #{memNo, jdbcType=VARCHAR} , SYSDATE , #{ordrNm, jdbcType=VARCHAR} , #{ordrTel, jdbcType=VARCHAR} , #{ordrCp, jdbcType=VARCHAR} , #{ordrEmail, jdbcType=VARCHAR} , #{ordrZipCd} , #{ordrBsAddr} , #{ordrDtlAddr} , #{ordStat} , #{rcpnNm} , #{rcpnTelNo} , #{rcpnCpNo} , #{rcpnZipCd} , #{rcpnBsAddr} , #{rcpnDtlAddr} , #{dlvSvcMemo, jdbcType=VARCHAR} , #{memId} , #{brwsCls} , #{siteNo} , #{regIp} , #{regrNo} , SYSDATE)
+	</insert>
+	
+	<!-- 주문 상품데이터 생성 -->
+	<insert id="insertOrdGds" parameterType="com.giftiel.shop.dto.OrderGoods">
+	    INSERT INTO TBL_OR_ORD_GDS
+	        ( ORD_NO , ORD_GDS_SEQ , ORD_DLV_NO , UBI_GDS_NO , UBI_GDS_NM , UBI_GDS_SIZE , COLOR , BRND , SEASONGROUP_CODE , CATEGORY1_CODE , CATEGORY2_CODE , EXP_PNT , ORD_QTY , SL_PRC , ACTL_PAY_PRC , PER_ORD_STAT , SL_FEE_RT , SND_EXP_DTS , GDS_DLV_CST_PAYWAY , CNCL_QTY , SND_POSB_TM , SND_CMPL_DTS , SND_CPL_NO , INV_NO , DLV_CMP_NO , MNGR_MEMO , REGR_NO , REG_DTS, USE_PNT,  CPN_NO, OFF_CPN_NO, CPN_PAY_AMT)
+	    VALUES 
+	        ( #{ordNo} , #{ordGdsSeq} , #{ordDlvNo, jdbcType=VARCHAR} , #{ubiGdsNo} , #{ubiGdsNm} , #{ubiGdsSize} , #{color} , #{brnd} , #{seasongroupCode} , #{category1Code} , #{category2Code} , #{expPnt} , #{ordQty} , #{slPrc} , #{actlPayPrc} , #{perOrdStat} , #{slFeeRt, jdbcType=VARCHAR} , #{sndExpDts, jdbcType=VARCHAR} , #{gdsDlvCstPayway, jdbcType=VARCHAR} , #{cnclQty} , #{sndPosbTm, jdbcType=VARCHAR} , #{sndCmplDts, jdbcType=VARCHAR} , #{sndCplNo, jdbcType=VARCHAR} , #{invNo, jdbcType=VARCHAR} , #{dlvCmpNo, jdbcType=VARCHAR} , #{mngrMemo, jdbcType=VARCHAR} , #{regrNo} , SYSDATE, #{usePnt}, #{cpnNo, jdbcType=VARCHAR}, #{offCpnNo, jdbcType=VARCHAR}, #{cpnPayAmt, jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 주문 결제데이터 생성 -->
+	<insert id="insertPay" parameterType="com.giftiel.shop.dto.OrderPay">
+	    INSERT INTO TBL_OR_PAY
+	        ( PAY_NO , ORD_NO , CLM_NO , CNCLTG_PAYNO , PAY_AMT , CNCL_AMT , PAY_WAY , PAY_TP , PAY_DTS , PAY_CNCL_DTS , PAY_STAT , ORD_CLM_CLS , ETC , REGR_NO , REG_DTS)
+	    VALUES 
+	        ( #{payNo} , #{ordNo} , #{clmNo, jdbcType=VARCHAR} , #{cncltgPayno, jdbcType=VARCHAR} , #{payAmt} , #{cnclAmt, jdbcType=VARCHAR} , #{payWay} , #{payTp}
+	         <if test="payStat != 'OR00902'"> , #{payDts, jdbcType=VARCHAR}</if>
+	         <if test="payStat == 'OR00902'"> , sysdate</if>
+	         
+	          , #{payCnclDts, jdbcType=VARCHAR} , #{payStat} , #{ordClmCls, jdbcType=VARCHAR} , #{etc, jdbcType=VARCHAR} , #{regrNo} , SYSDATE)
+	</insert>	
+	
+	<!-- 주문 결제데이터 생성(실시간계좌이체) -->
+	<insert id="insertRtmAcctPay" parameterType="com.giftiel.shop.dto.OrderPayRtm">
+	    INSERT INTO TBL_OR_RTM_ACCT_PAY
+	        ( PAY_NO , BANK_CODE , BANK_NAME , APP_TIME , CASH_AUTHNO , AMOUNT , REGR_NO , REG_DTS)
+	    VALUES 
+	        ( (select pay_no from tbl_or_pay where pay_way = 'OR00802' and ord_no = #{ordNo}) , #{bankCode} , #{bankName} , #{appTime} , #{cashAuthno} , #{amount} , #{regrNo} , SYSDATE)
+	</insert>
+	
+	<!-- 주문 결제데이터 생성(신용카드) -->
+	<insert id="insertCrcdCrdPay" parameterType="com.giftiel.shop.dto.OrderPayCrd">
+	    INSERT INTO TBL_OR_CRCD_CRD_PAY
+	        ( PAY_NO , CARD_CD , CARD_NAME , CARD_NO , APP_NO , APP_TIME , NOINF , QUOTA , AMOUNT , PARTCANC_YN , CARD_BIN_TYPE_01 , CARD_BIN_TYPE_02 , REGR_NO , REG_DTS)
+	    VALUES 
+	        ((select pay_no from tbl_or_pay where pay_way = 'OR00801' and ord_no = #{ordNo}) , #{cardCd} , #{cardName} , #{cardNo} , #{appNo} , #{appTime} , #{noinf} , #{quota} , #{amount} , #{partcancYn} , #{cardBinType01} , #{cardBinType02} , #{regrNo} , SYSDATE)
+	</insert>
+	
+	<!-- 주문 결제데이터 생성(가상계좌) -->
+	<insert id="insertVrtlAcctPay" parameterType="com.giftiel.shop.dto.OrderPayVrtl">
+	    INSERT INTO TBL_OR_VRTL_ACCT_PAY
+	        ( PAY_NO , AMOUNT , BANKCODE , BANKNAME , ACCOUNT , VA_DATE , APP_TIME , REGR_NO , REG_DTS)
+	    VALUES 
+	        ( (select pay_no from tbl_or_pay where pay_way = 'OR00803' and ord_no = #{ordNo}) , #{amount} , #{bankcode} , #{bankname} , #{account} , #{vaDate} , #{appTime} , #{regrNo} , SYSDATE)
+	</insert>
+	
+	<!-- 주문 배송비 정책 그룹생성 -->
+	<insert id="insertOrddvl" parameterType="com.giftiel.shop.dto.OrderDelivery">
+	    INSERT INTO TBL_OR_ORDDVL
+	        ( ORD_DLV_NO , ORD_NO , PLCY_DLV_CST , DLV_CST_ETC , DLV_CST_PAYWAY , MIN_ORD_AMT , REGR_NO , REG_DTS)
+	    VALUES 
+	        ( #{ordDlvNo} , #{ordNo} , #{plcyDlvCst} , #{dlvCstEtc} , #{dlvCstPayway} , #{minOrdAmt} , #{regrNo} , SYSDATE)
+	</insert>
+	
+	<!-- 주문 배송비 생성 -->	
+	<insert id="insertDlvCst" parameterType="com.giftiel.shop.dto.OrderDlvCst">
+	    INSERT INTO TBL_OR_DLV_CST
+	        ( DLV_CST_SEQ , ORD_DLV_NO , CLM_NO , ORD_CLM_CLS , DLV_CST_TP , FREE_DLVRSN_CD , ACTL_DLV_CST , REGR_NO , REG_DTS)
+	    VALUES 
+	        ( #{dlvCstSeq} , #{ordDlvNo} , #{clmNo, jdbcType=VARCHAR} , #{ordClmCls} , #{dlvCstTp} , #{freeDlvrsnCd, jdbcType=VARCHAR} , #{actlDlvCst} , #{regrNo} , SYSDATE)
+	</insert>
+	
+	<insert id="insertKpcHist" parameterType="com.giftiel.shop.dto.KcpHist">
+	    INSERT INTO TBL_OR_KPC_HIST
+	        ( KPC_HIST_NO , ORD_NO , TNO , CLM_NO , RES_CD , RES_MSG , BSUCC , ESCW_YN , REGR_NO , REG_DTS)
+	    VALUES 
+	        ( SEQ_KCP_HIST_NO.nextval , #{ordNo, jdbcType=VARCHAR} , #{tno, jdbcType=VARCHAR} , #{clmNo, jdbcType=VARCHAR} , #{resCd, jdbcType=VARCHAR} , #{resMsg, jdbcType=VARCHAR} , #{bsucc, jdbcType=VARCHAR} , #{escwYn, jdbcType=VARCHAR} , #{regrNo, jdbcType=VARCHAR} , SYSDATE)
+	</insert>
+	
+	<insert id="insertClm" parameterType="com.giftiel.shop.dto.OrderClm">
+	    INSERT INTO TBL_OR_CLM
+	        ( CLM_NO , CLM_STAT , PROC_CMPL_DTS , ORD_NO , CLM_TP , RCPN_NM , RCPN_TEL_NO , RCPN_CP_NO , RCPN_ZIP_CD , RCPN_BS_ADDR , RCPN_DTL_ADDR , DLV_SVC_MEMO , REGR_NO , REG_DTS , RFND_ACCT_NO , RFND_BNK_CD , RFND_ACCT_OWN)
+	    VALUES 
+	        ( SEQ_TBL_OR_CLM.NEXTVAL
+	         , #{clmStat}
+			<if test="clmStat == 'OR01702'">
+				, SYSDATE
+			</if>
+			<if test="clmStat != 'OR01702'">
+				, null
+			</if>			
+	         , #{ordNo}
+	         , #{clmTp}
+	         , #{rcpnNm, jdbcType=VARCHAR}
+	         , #{rcpnTelNo, jdbcType=VARCHAR}
+	         , #{rcpnCpNo, jdbcType=VARCHAR}
+	         , #{rcpnZipCd, jdbcType=VARCHAR}
+	         , #{rcpnBsAddr, jdbcType=VARCHAR}
+	         , #{rcpnDtlAddr, jdbcType=VARCHAR}
+	         , #{dlvSvcMemo, jdbcType=VARCHAR}
+	         , #{regrNo}
+	         , SYSDATE
+	         , #{rfndAcctNo, jdbcType=VARCHAR}
+	         , #{rfndBnkCd, jdbcType=VARCHAR}
+	         , #{rfndAcctOwn, jdbcType=VARCHAR}
+	        )
+	        
+	        <selectKey keyProperty="clmNo" resultType="Integer" order="AFTER">
+				SELECT SEQ_TBL_OR_CLM.currval FROM dual
+			</selectKey>
+	</insert>
+	
+	<insert id="insertClmGds" parameterType="com.giftiel.shop.dto.OrderClmGds">
+	    INSERT INTO TBL_OR_CLM_GDS
+	        ( CLM_GDS_SEQ 
+	        , CLM_NO 
+	        , ORD_NO 
+	        , ORD_GDS_SEQ 
+	        <if test="ordDlvNo != null and  ordDlvNo !=''"> 
+				, ORD_DLV_NO 
+			</if>
+	        , CLM_QTY 
+	        , CLM_RSN_CD 
+	        , CLM_TXT 
+	        <if test="inCmplDt != null and  inCmplDt !=''"> 
+				, IN_CMPL_DT 
+			</if>
+	        <if test="invNo != null and  invNo !=''"> 
+				, INV_NO 
+			</if>
+	        <if test="sndCplDt != null and  sndCplDt !=''"> 
+				, SND_CPL_DT 
+			</if>
+	        , CLM_GDS_STAT 
+	        <if test="dlvCmpNo != null and  dlvCmpNo !=''"> 
+				, DLV_CMP_NO 
+			</if>
+	        <if test="acptDts != null and  acptDts !=''"> 
+				, ACPT_DTS 
+			</if>
+			<if test="acptUsrNo != null and  acptUsrNo !=''"> 
+				 , ACPT_USR_NO 
+			</if>
+			<if test="mngrMemo != null and  mngrMemo !=''"> 
+				 , MNGR_MEMO 
+			</if>
+	        , REGR_NO 
+	        , REG_DTS
+	        )
+	    VALUES 
+	        ( SEQ_TBL_OR_CLM_GDS.NEXTVAL
+	        , #{clmNo}
+	        , #{ordNo}
+	        , #{ordGdsSeq}
+	        <if test="ordDlvNo != null and  ordDlvNo !=''"> 
+				, #{ordDlvNo, jdbcType=VARCHAR}
+			</if>
+	        , 1
+	        , #{clmRsnCd}
+	        , #{clmTxt}
+	        <if test="inCmplDt != null and  inCmplDt !=''"> 
+				, #{inCmplDt, jdbcType=VARCHAR}
+			</if>
+	        <if test="invNo != null and  invNo !=''"> 
+				, #{invNo, jdbcType=VARCHAR}
+			</if>
+	        <if test="sndCplDt != null and  sndCplDt !=''"> 
+				, #{sndCplDt, jdbcType=VARCHAR}
+			</if>
+	        
+	        , #{clmGdsStat}
+	        <if test="dlvCmpNo != null and  dlvCmpNo !=''"> 
+				, #{dlvCmpNo, jdbcType=VARCHAR}
+			</if>
+	        <if test="acptDts != null and  acptDts !=''"> 
+				, #{acptDts, jdbcType=VARCHAR}
+			</if>
+			<if test="acptUsrNo != null and  acptUsrNo !=''"> 
+				 , #{acptUsrNo, jdbcType=VARCHAR}
+			</if>
+			<if test="mngrMemo != null and  mngrMemo !=''"> 
+				 , #{mngrMemo, jdbcType=VARCHAR}
+			</if>
+	        , #{regrNo}
+	        , SYSDATE
+	        )
+	</insert>
+	
+	<update id="updateClm" parameterType="com.giftiel.shop.dto.OrderClm">
+		  UPDATE TBL_OR_CLM /*order.updateClm*/
+		    <set>
+			     <if test="clmStat != null"> CLM_STAT = #{clmStat},</if>
+			     UPDR_NO = #{updrNo},
+			     UPD_DTS = SYSDATE
+			</set>
+		WHERE 1=1
+		AND CLM_NO = #{clmNo}
+	</update>
+	
+	<update id="updateClmGds" parameterType="com.giftiel.shop.dto.OrderClmGds">
+		  UPDATE TBL_OR_CLM_GDS /*order.updateClmGds*/
+		    <set>
+			     <if test="clmGdsStat != null"> CLM_GDS_STAT = #{clmGdsStat},</if>
+			     UPDR_NO = #{updrNo},
+			     UPD_DTS = SYSDATE
+			</set>
+		WHERE CLM_GDS_SEQ = #{clmGdsSeq}
+	</update>
+
+	<resultMap type="java.util.HashMap" id="clmHashMap">
+		<result property="clmNo" column="CLM_NO" javaType="java.lang.Integer"/>
+		<result property="clmGdsSeq" column="CLM_GDS_SEQ" javaType="java.lang.Integer"/>
+	</resultMap>
+
+	<!-- 	주문번호와 주문상품seq로 클라임 번호,클라임 상품번호 받아오기 -->
+	<select id="getClmNo" resultMap="clmHashMap" parameterType="com.giftiel.shop.dto.SearchForm" >
+		SELECT CLM_NO ,CLM_GDS_SEQ 
+		FROM TBL_OR_CLM_GDS
+		WHERE ORD_NO = #{ordNo}
+		AND ORD_GDS_SEQ = #{ordGdsSeq}
+		AND CLM_GDS_STAT != 'OR01905'
+	</select> 
+	
+	
+	
+	<select id="clmGdsStatChk" parameterType="com.giftiel.shop.dto.OrderClmGds" resultType="INTEGER">
+	    SELECT COUNT(*) FROM TBL_OR_CLM_GDS
+		WHERE CLM_NO = #{clmNo}
+		AND CLM_GDS_SEQ != #{clmGdsSeq}
+		AND CLM_GDS_STAT != 'OR01905'
+	</select>
+
+	<insert id="insertUbiOrder" parameterType="com.giftiel.shop.dto.UbiOrder">
+	    INSERT INTO UBI09S_WORKS.판매정보
+	        ( 
+			    판매일자,
+			    매장코드,
+			    판매번호,
+			    판매연번,
+			    작업구분,
+			    품번,
+			    색상,
+			    사이즈,
+			    판매수량,
+			    실판매금액,
+			    온라인고객코드,
+			    적립율,
+			    적립포인트,
+			    사용포인트,
+			    수정여부,
+			    처리여부,
+			    에러사유,
+			    입력일,
+			    주문번호
+	        )
+	    VALUES 
+	        (
+				to_char(sysdate, 'yyyymmdd'),
+				#{매장코드},
+				#{판매번호},
+				#{판매연번},
+				#{작업구분},
+				#{품번},
+				#{색상},
+				#{사이즈},
+				#{판매수량},
+				#{실판매금액},
+				#{온라인고객코드},
+				#{적립율},
+				#{적립포인트},
+				#{사용포인트},
+				#{수정여부},
+				#{처리여부},
+				#{에러사유, jdbcType=VARCHAR},
+				sysdate,
+				#{주문번호}
+	        )
+	</insert>
+	
+	<!-- 반품 -->
+	<insert id="insertUbiOrderCancel" parameterType="com.giftiel.shop.dto.UbiOrder">
+		INSERT INTO UBI09S_WORKS.판매정보
+		SELECT to_char(sysdate, 'yyyymmdd') AS 판매일자,
+		  매장코드,
+		  LPAD((SELECT NVL(MAX(TO_NUMBER(판매번호))+1,1) AS ubiOrdNo		FROM UBI09S_WORKS.판매정보		WHERE 판매일자  = to_char(sysdate, 'YYYYMMDD')), 4, '0') AS 판매번호,
+		  판매연번,
+		  1 AS 작업구분,
+		  품번,
+		  색상,
+		  사이즈,
+		  판매수량,
+		  실판매금액,
+		  온라인고객코드,
+		  적립율,
+		  적립포인트,
+		  사용포인트,
+		  수정여부,
+		  처리여부,
+		  에러사유,
+		  입력일,
+		  주문번호,
+		  비고1
+		FROM UBI09S_WORKS.판매정보 
+		WHERE 주문번호 = #{주문번호}
+		<if test="ubiGdsNo != null">
+			AND 품번 = #{품번}
+			AND 색상 = #{색상}
+			AND 사이즈 = #{사이즈}
+			AND ROWNUM = 1
+		</if>
+	</insert>
+	
+	<!-- 주문취소 -->
+	<insert id="insertUbiOrderCancel2" parameterType="com.giftiel.shop.dto.UbiOrder">
+		INSERT INTO UBI09S_WORKS.판매정보
+		SELECT to_char(sysdate, 'yyyymmdd') AS 판매일자,
+		  매장코드,
+		  LPAD((SELECT NVL(MAX(TO_NUMBER(판매번호))+1,1) AS ubiOrdNo		FROM UBI09S_WORKS.판매정보		WHERE 판매일자  = to_char(sysdate, 'YYYYMMDD')), 4, '0') AS 판매번호,
+		  판매연번,
+		  2 AS 작업구분,
+		  품번,
+		  색상,
+		  사이즈,
+		  판매수량,
+		  실판매금액,
+		  온라인고객코드,
+		  적립율,
+		  적립포인트,
+		  사용포인트,
+		  수정여부,
+		  처리여부,
+		  에러사유,
+		  입력일,
+		  주문번호,
+		  비고1
+		FROM UBI09S_WORKS.판매정보 
+		WHERE 주문번호 = #{주문번호}
+		<if test="ubiGdsNo != null">
+			AND 품번 = #{품번}
+			AND 색상 = #{색상}
+			AND 사이즈 = #{사이즈}
+			AND ROWNUM = 1
+		</if>
+	</insert>	
+	
+	<insert id="insertUbiOrderExchange" parameterType="com.giftiel.shop.dto.UbiOrder">
+		INSERT INTO UBI09S_WORKS.판매정보
+		SELECT to_char(sysdate, 'yyyymmdd') AS 판매일자,
+		  매장코드,
+		  LPAD((SELECT NVL(MAX(TO_NUMBER(판매번호))+1,1) AS ubiOrdNo		FROM UBI09S_WORKS.판매정보		WHERE 판매일자  = to_char(sysdate, 'YYYYMMDD')), 4, '0') AS 판매번호,
+		  '0001',
+		  0 AS 작업구분,
+		  품번,
+		  색상,
+		  #{변경사이즈},
+		  판매수량,
+		  실판매금액,
+		  온라인고객코드,
+		  적립율,
+		  적립포인트,
+		  사용포인트,
+		  수정여부,
+		  처리여부,
+		  에러사유,
+		  입력일,
+		  주문번호,
+		  비고1
+		FROM UBI09S_WORKS.판매정보 
+		WHERE 주문번호 = #{주문번호}
+		<if test="ubiGdsNo != null">
+			AND 품번 = #{품번}
+			AND 색상 = #{색상}
+			AND 사이즈 = #{사이즈}
+			AND ROWNUM = 1
+		</if>
+	</insert>	
+		
+	<update id="updateUbiOrder" parameterType="com.giftiel.shop.dto.UbiOrder">
+		  UPDATE UBI09S_WORKS.판매정보 /*order.updateUbiOrder*/
+		    <set>
+			     수정여부 = 'Y',
+			     작업구분 = #{작업구분}
+			</set>
+		WHERE 주문번호 = #{주문번호}
+			<if test="ubiGdsNo != null">
+				AND 품번 = #{품번}
+				AND 색상 = #{색상}
+				AND 사이즈 = #{사이즈}
+			</if>
+	</update>	
+	<select id="ubiOrderSeq" resultType="INTEGER">
+		SELECT NVL(MAX(TO_NUMBER(판매번호))+1,1) AS ubiOrdNo
+		FROM UBI09S_WORKS.판매정보
+		WHERE 판매일자  = to_char(sysdate, 'YYYYMMDD')
+	</select>
+	
+	<delete id="deleteOrderCart" parameterType="com.giftiel.shop.dto.SearchForm">
+		DELETE
+		FROM TBL_ME_CART
+		WHERE 
+		MEM_NO     = #{memNo}
+		AND UBI_GDS_NO = #{ubiGdsNo}
+		AND GDS_SIZE   = #{ubiGdsSize}
+		<if test="ipAddr != null">
+			AND IP_ADDR = #{ipAddr}
+		</if>
+	</delete>
+	
+	<select id="getOrdNoForTno" parameterType="STRING" resultType="STRING">
+		SELECT ORD_NO FROM TBL_OR_KPC_HIST WHERE TNO = #{tno}
+	</select>
+	
+	<select id="getUbiOrderList" parameterType="com.giftiel.shop.dto.SearchForm" resultType="com.giftiel.shop.dto.UbiOrder">
+		SELECT 판매일자 as ordDts,
+		  매장코드 as sellerCode,
+		  판매번호 as saleNo,
+		  판매연번 as saleSeq,
+		  작업구분 as ordGubun,
+		  품번 as ubiGdsNo,
+		  색상 as ubiGdsColor,
+		  사이즈 as ubiGdsSize,
+		  판매수량 as ordCnt,
+		  실판매금액 as actlPrc,
+		  온라인고객코드 as memNo,
+		  적립율 as expPer,
+		  적립포인트 as expPnt,
+		  사용포인트 as usePnt,
+		  수정여부 as updateYn,
+		  처리여부 as confirmYn,
+		  에러사유 as errorDesc,
+		  입력일 as regDtm,
+		  주문번호 as ordNo
+		FROM UBI09S_WORKS.판매정보
+		WHERE 1=1
+			<if test="memNo != null">
+			AND	온라인고객코드 = #{memNo}
+			</if>		
+	</select>
+	
+	<resultMap id="listOrdBatch" type="com.giftiel.shop.dto.Order">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="ordNo" column="ORD_NO"/> 
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="ordDts" column="ORD_DTS"/> 
+	    <result property="ordrNm" column="ORDR_NM"/> 
+	    <result property="ordrTel" column="ORDR_TEL"/> 
+	    <result property="ordrCp" column="ORDR_CP"/> 
+	    <result property="ordrEmail" column="ORDR_EMAIL"/> 
+	    <result property="ordrZipCd" column="ORDR_ZIP_CD"/> 
+	    <result property="ordrBsAddr" column="ORDR_BS_ADDR"/> 
+	    <result property="ordrDtlAddr" column="ORDR_DTL_ADDR"/> 
+	    <result property="ordStat" column="ORD_STAT"/> 
+	    <result property="ordStatNm" column="ORD_STAT_NM"/>
+	    <result property="rcpnNm" column="RCPN_NM"/> 
+	    <result property="rcpnTelNo" column="RCPN_TEL_NO"/> 
+	    <result property="rcpnCpNo" column="RCPN_CP_NO"/> 
+	    <result property="rcpnZipCd" column="RCPN_ZIP_CD"/> 
+	    <result property="rcpnBsAddr" column="RCPN_BS_ADDR"/> 
+	    <result property="rcpnDtlAddr" column="RCPN_DTL_ADDR"/> 
+	    <result property="dlvSvcMemo" column="DLV_SVC_MEMO"/> 
+	    <result property="payCmplDts" column="PAY_CMPL_DTS"/> 
+	    <result property="memId" column="MEM_ID"/> 
+	    <result property="brwsCls" column="BRWS_CLS"/> 
+	    <result property="siteNo" column="SITE_NO"/>
+	    <result property="escrowDlvYn" column="ESCROW_DLV_YN"/>  
+	    <result property="regIp" column="REG_IP"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="clmRegDts" column="CLM_REG_DTS"/> 
+	    <result property="actlPayPrc" column="ACTL_PAY_PRC"/>
+	    
+		<!-- 추가필요변수(리스트조회시 사용) start-->
+		
+		<result property="payAmt" column="PAY_AMT"/>
+		<result property="ordGdsSeq" column="ORD_GDS_SEQ"/>
+		<result property="ubiGdsNm" column="UBI_GDS_NM"/>
+		<result property="ubiGdsNo" column="UBI_GDS_NO"/>
+		<result property="ubiGdsSize" column="UBI_GDS_SIZE"/>
+		<result property="slPrc" column="SL_PRC"/>
+		<result property="perOrdStat" column="PER_ORD_STAT"/>
+		<result property="perOrdStatNm" column="PER_ORD_STAT_NM"/>
+		<result property="siteNm" column="SITE_NM"/>
+		<result property="brand" column="BRAND"/>
+		<result property="ubiGdsColorNm" column="UBI_GDS_COLOR_NM"/>
+		<result property="ordQty" column="ORD_QTY"/>
+		<result property="invNo" column="INV_NO"/>
+		<result property="dlvCmpNo" column="DLV_CMP_NO"/>
+		<result property="sndCmplDts" column="SND_CMPL_DTS"/>
+		
+		<result property="barcode" column="BARCODE"/>
+		
+		<result property="usePnt" column="USE_PNT"/>
+		
+		<!-- 추가필요변수(리스트조회시 사용) end-->	
+	</resultMap>	
+	
+	<select id="listOrderBatch" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="listOrdBatch">
+		SELECT 
+			ROW_NUMBER () OVER (ORDER BY ORD.ORD_DTS DESC) AS  RNUM					
+			,ORD.ORD_NO 
+		    ,(SELECT SITE_NM FROM TBL_AD_SITE SITE WHERE SITE.SITE_NO=ORD.SITE_NO) SITE_NM  /*매장명*/
+		    ,ORD.ORDR_NM 
+		    ,ORD.ORD_DTS   
+		    ,ORD.ORDR_EMAIL 
+		    ,ORDGDS.ORD_GDS_SEQ /*주문상품일련번호*/
+		    ,(SELECT CD_NM FROM TBL_AD_CD A WHERE A.SUP_CD_NO = 'OR005' AND A.CD_NO = ORDGDS.PER_ORD_STAT) AS PER_ORD_STAT_NM
+		    ,ORDGDS.PER_ORD_STAT /*개별진행상태*/
+		    ,ORDGDS.BRND AS BRAND /*브렌드*/
+		    ,ORDGDS.UBI_GDS_NM /*상품명*/
+		    ,ORDGDS.COLOR AS UBI_GDS_COLOR_NM /*상품컬러*/
+		    ,ORDGDS.UBI_GDS_SIZE /*상품사이즈*/
+		    ,ORDGDS.SL_PRC /*판매가*/
+		    ,ORDGDS.ORD_QTY /*주문수량*/
+		    ,ORDGDS.SND_CMPL_DTS/*발송완료일시*/
+		    ,ORDGDS.INV_NO /*송장번호*/
+   			,ORDGDS.DLV_CMP_NO /*택배사번호*/
+   			,ORDGDS.REG_DTS
+   			,ORD.ESCROW_DLV_YN
+   			,(SELECT REG_DTS FROM TBL_OR_CLM_GDS WHERE ORD_NO = ORDGDS.ORD_NO AND ORD_GDS_SEQ = ORDGDS.ORD_GDS_SEQ AND CLM_GDS_STAT != 'OR01905' and rownum = 1)  CLM_REG_DTS /*클래임 등록일*/
+   			,ORD.ORDR_CP
+   			,ORD.ORDR_TEL
+   			,ORD.ORDR_ZIP_CD
+   			,ORD.ORDR_BS_ADDR
+   			,ORD.ORDR_DTL_ADDR
+   			,ORD.RCPN_NM
+   			,ORD.RCPN_TEL_NO
+   			,ORD.RCPN_CP_NO
+   			,ORD.RCPN_ZIP_CD
+   			,ORD.RCPN_BS_ADDR
+   			,ORD.RCPN_DTL_ADDR
+   			,(SELECT 바코드 FROM UBI09S_WORKS.V_바코드 where 품번 = ORDGDS.UBI_GDS_NO AND 사이즈 = ORDGDS.UBI_GDS_SIZE) AS BARCODE
+   			,ORDGDS.UBI_GDS_NO
+   			,ORD.DLV_SVC_MEMO
+   			,ORD.ORD_STAT
+   			,ORD.SITE_NO
+   			,ORD.MEM_NO
+   			,F_MEM_NM(ORD.MEM_NO) AS MEM_NM
+   			,ORDGDS.ACTL_PAY_PRC
+   			,NVL(ORDGDS.USE_PNT, 0) USE_PNT
+		FROM TBL_OR_ORD ORD
+			,TBL_OR_ORD_GDS ORDGDS
+		WHERE ORD.ORD_NO = ORDGDS.ORD_NO
+			AND ORD.ORD_STAT = #{ordStat}
+			AND ORD_DTS BETWEEN to_date(#{inqStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{inqEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+	</select>		
+</mapper>

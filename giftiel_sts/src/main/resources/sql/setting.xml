@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="setting">
+	
+    <resultMap id="tableList" type="java.util.Map" >
+         <result property="ID"  	column="ID"/>
+         <result property="PWD" 	column="PWD"/>
+         <result property="USER_NM" column="USER_NM"/>
+         <result property="EMAIL" 	column="EMAIL"/>
+         <result property="CMP_NM" 	column="CMP_NM"/>
+         <result property="REPR_NM" column="REPR_NM"/>
+         <result property="PERSON_INFO_MNGR" 	    column="PERSON_INFO_MNGR"/>
+         <result property="PERSON_INFO_MNGR_EMAIL" 	column="PERSON_INFO_MNGR_EMAIL"/>
+         
+         <result property="ZIP_CD" 	 column="ZIP_CD"/>
+         <result property="ADDR" 	 column="ADDR"/>
+         <result property="DTL_ADDR" column="DTL_ADDR"/>
+         <result property="TEL" 	 column="TEL"/>
+         <result property="FAX_NO" 	 column="FAX_NO"/>
+         <result property="BIZ_REG_NO" column="BIZ_REG_NO"/>
+         <result property="TELE_SALES_BIZ_REG_NO" column="TELE_SALES_BIZ_REG_NO"/>
+         <result property="BIZ_ST"   column="BIZ_ST"/>
+         <result property="EVENT"    column="EVENT"/>
+    </resultMap>
+	
+	<select id="selectSuperAdmin" resultMap="tableList">
+		SELECT ID
+		      ,PWD
+		      ,USER_NM
+		      ,EMAIL  
+		      ,CMP_NM 
+		      ,REPR_NM
+		      ,PERSON_INFO_MNGR       
+		      ,PERSON_INFO_MNGR_EMAIL 
+		      ,ZIP_CD  
+		      ,ADDR    
+		      ,DTL_ADDR
+		      ,TEL     
+		      ,FAX_NO  
+		      ,BIZ_REG_NO 
+		      ,TELE_SALES_BIZ_REG_NO 
+		      ,BIZ_ST  
+		      ,EVENT 
+		 FROM TBL_AD_USER
+		WHERE USER_CLS = 'AD02001'
+	</select>
+	
+	<resultMap id="siteList" type="com.giftiel.shop.dto.Site" >
+	    <result property="siteNo" column="SITE_NO"/> 
+	    <result property="siteNm" column="SITE_NM"/> 
+	    <result property="siteDesc" column="SITE_DESC"/> 
+	    <result property="kwd" column="KWD"/> 
+	    <result property="fabiconNm" column="FABICON_NM"/> 
+	    <result property="fabiconImg" column="FABICON_IMG"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+    </resultMap>
+    
+	<!-- 사이트 환경설정  -->
+	<select id="siteSettingList" parameterType="com.giftiel.shop.dto.SiteSetting" resultMap="siteList">
+		SELECT
+			SITE_NO
+			,SITE_NM
+			,SITE_DESC
+			,KWD
+			,FABICON_NM
+			,FABICON_IMG
+			,REGR_NO
+			,REG_DTS
+			,UPDR_NO
+			,UPD_DTS
+		FROM TBL_AD_SITE WHERE 1=1
+		<if test="site_nm != '' and site_nm != null">
+			AND SITE_NM = #{site_nm}
+		</if>		 
+	</select>	
+	
+	<!-- 상점환경 설정 수퍼관리자 정보 수정 -->
+	<update id="storeSettingSave" parameterType="com.giftiel.shop.dto.Setting">
+		UPDATE TBL_AD_USER
+		   SET PWD 	   = #{pwd}
+		      ,USER_NM = #{user_name}
+		      ,EMAIL   = #{email}
+		      ,CMP_NM  = #{com_name}
+		      ,REPR_NM = #{repre_name}
+		      ,PERSON_INFO_MNGR       = #{info_name}
+		      ,PERSON_INFO_MNGR_EMAIL = #{info_email}
+		      ,ZIP_CD  = #{post_no}
+		      ,ADDR    = #{address}
+		      ,DTL_ADDR= #{dtl_address}
+		      ,TEL     = #{tel_no}
+		      ,FAX_NO  = #{fax_no}
+		      ,BIZ_REG_NO = #{com_no}
+		      ,TELE_SALES_BIZ_REG_NO = #{biz_reg_no}
+		      ,BIZ_ST  = #{biz_st}
+		      ,EVENT   = #{event}
+		      ,UPD_DTS = SYSDATE
+		 WHERE ID  = #{admin_id}
+	</update>
+
+	<!-- 	사이트환경설정 삭제 -->
+	<delete id="siteSettingDel" parameterType="com.giftiel.shop.dto.SiteSetting">
+			DELETE FROM TBL_AD_SITE 
+			WHERE SITE_NO = #{site_no}
+	</delete>
+	<!-- 	사이트환경설정 -->
+	<update id="siteSettingReg" parameterType="com.giftiel.shop.dto.SiteSetting">
+		MERGE INTO TBL_AD_SITE /*setting.siteSettingReg*/
+		    USING DUAL
+		    ON (SITE_NO = #{site_no})
+		    
+		WHEN MATCHED THEN
+		
+			UPDATE SET
+				,KWD          = NVL(#{site_keyword} ,KWD)	/* 검색엔진 키워드 */
+				,FABICON_NM   = NVL(#{fabicon_nm} ,FABICON_NM)	/* 브라우저 타이틀설정 */
+				,FABICON_IMG  = NVL(#{favicon_img} ,FABICON_IMG)	/*파비콘설정*/
+				,REGR_NO 	  = #{regr_no}	/* 작성자 */
+				,UPD_DTS      = SYSDATE	/* 작성일 */
+
+		WHEN NOT MATCHED THEN
+
+			INSERT  (
+				SITE_NO	/* 사이트번호 */
+				, SITE_NM	/* 사이트 이름*/
+				, KWD	/* 검색엔진 키워드 */
+				, FABICON_NM	/* 브라우저 타이틀설정 */
+				, FABICON_IMG	/*파비콘설정*/
+				, REGR_NO	/* 작성자 */
+				, REG_DTS	/* 작성일 */
+				)
+		     VALUES (
+		     	#{site_no}
+		     	, #{site_nm}
+		     	, #{site_description}
+		     	, #{site_keyword}
+		     	, #{fabicon_nm}
+		     	, #{favicon_img}
+     	 	  	, #{regr_no}
+		     	, SYSDATE
+		     	)
+	</update>
+	
+	
+	<resultMap id="mallSettingList" type="java.util.Map" >
+         <result property="CND_FREE_DLV_AMT"  column="CND_FREE_DLV_AMT"/>
+         <result property="DLV_CST" 	column="DLV_CST"/>
+         <result property="PNT_GIV_YN"  column="PNT_GIV_YN"/>
+         <result property="PNT_RSV_RT" 	column="PNT_RSV_RT"/>
+         <result property="EXP_PNT" 	column="EXP_PNT"/>
+         <result property="USE_MIN_PNT" column="USE_MIN_PNT"/>
+         <result property="MIN_PAYPNT" 	column="MIN_PAYPNT"/>
+         <result property="MAX_PAYPNT" 	column="MAX_PAYPNT"/>
+         <result property="REGR_NO" 	column="REGR_NO"/>
+         <result property="REG_DTS" 	column="REG_DTS"/>
+         <result property="UPDR_NO" 	column="UPDR_NO"/>
+         <result property="UPD_DTS" 	column="UPD_DTS"/>
+    </resultMap>
+    
+	<!-- 배송설정  -->
+	<select id="deliverySettingList" resultType="com.giftiel.shop.dto.Setting">
+		SELECT * FROM TBL_AD_MALL_SETTING
+	</select>	
+	
+	
+	<!-- 배송설정 정보 등록 -->
+	<insert id="deliverySettingInsert" parameterType="com.giftiel.shop.dto.Setting">
+		INSERT INTO TBL_AD_MALL_SETTING (CND_FREE_DLV_AMT , DLV_CST, REG_DTS)
+		     VALUES (REPLACE(TO_CHAR(#{cnd_free_dlv_amt}), ',' ,''), REPLACE(TO_CHAR(#{dlv_cst}), ',' ,''), SYSDATE) 
+	</insert>
+	
+	<!-- 배송설정 정보 수정 -->
+	<update id="deliverySettingSave" parameterType="com.giftiel.shop.dto.Setting">
+		UPDATE TBL_AD_MALL_SETTING
+		   SET CND_FREE_DLV_AMT	= REPLACE( TO_CHAR(#{cnd_free_dlv_amt}), ',' ,'')
+		      ,DLV_CST          = REPLACE( TO_CHAR(#{dlv_cst}), ',' ,'')
+		      ,UPD_DTS          = SYSDATE
+	</update>
+	
+	<resultMap id="memberSettingList" type="java.util.Map" >
+         <result property="MEM_GRD_NO"  column="MEM_GRD_NO"/>
+         <result property="GRD_NM" 	 	column="GRD_NM"/>
+         <result property="DC_AMT"  	column="DC_AMT"/>
+         <result property="PNT_RSV_RT" 	column="PNT_RSV_RT"/>
+         <result property="REGR_NO" 	column="REGR_NO"/>
+         <result property="REG_DTS" 	column="REG_DTS"/>
+         <result property="UPDR_NO" 	column="UPDR_NO"/>
+         <result property="UPD_DTS" 	column="UPD_DTS"/>
+         <result property="REG_USER_NM" 	column="REG_USER_NM"/>
+    </resultMap>
+    
+	<!-- 배송설정  -->
+	<select id="memberSettingList" resultMap="memberSettingList">
+		SELECT
+			MEM_GRD_NO
+			,GRD_NM
+			,DC_AMT
+			,PNT_RSV_RT
+			,REGR_NO
+			,REG_DTS
+			,UPDR_NO
+			,UPD_DTS
+			,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = TBL_ME_GRD.UPDR_NO) REG_USER_NM 
+		FROM TBL_ME_GRD
+	</select>
+	
+	<resultMap id="memberList" type="java.util.Map" >
+         <result property="grd_no"  column="MEM_GRD_NO"/>
+         <result property="grd_nm" 	 	column="GRD_NM"/>
+         <result property="dc_amt"  	column="DC_AMT"/>
+         <result property="pnt_rsv_rt" 	column="PNT_RSV_RT"/>
+         <result property="regr_no" 	column="REGR_NO"/>
+         <result property="reg_dts" 	column="REG_DTS"/>
+         <result property="updr_no" 	column="UPDR_NO"/>
+         <result property="upd_dts" 	column="UPD_DTS"/>
+    </resultMap>
+    
+	<!-- 회원등급관리  -->
+	<select id="memberLevelList" parameterType="com.giftiel.shop.dto.Setting" resultType="com.giftiel.shop.dto.Setting">
+		SELECT * FROM TBL_ME_GRD 
+		 WHERE MEM_GRD_NO = #{grd_no} 
+	</select>
+	
+	<!-- 회원등급관리  -->
+	<select id="memberGrdList" parameterType="com.giftiel.shop.dto.Setting" resultMap="memberList">
+		SELECT * FROM TBL_ME_GRD 
+		 WHERE 1=1
+		 <if test="grd_no != null and grd_no !=''"> 
+		 AND MEM_GRD_NO != #{grd_no} 
+		 </if>
+		 <if test="grd_nm != null and grd_nm !=''">
+		 AND GRD_NM = #{grd_nm} 
+		 </if>
+	</select>
+	
+	
+	<!-- 회원등급 정보 등록 -->
+	<insert id="memberGrdInsert" parameterType="com.giftiel.shop.dto.Setting">
+		INSERT INTO TBL_ME_GRD (MEM_GRD_NO , GRD_NM, DC_AMT,PNT_RSV_RT,REGR_NO,REG_DTS)
+		     VALUES (SEQ_ME_GRD.NEXTVAL 
+		            ,#{grd_nm} 
+		            ,REPLACE(#{dc_amt}, ',' ,'')
+		            ,REPLACE(#{pnt_rsv_rt}, ',' ,'')
+		            ,#{regr_no}
+		            , SYSDATE) 
+	</insert>
+	
+	<!-- 회원등급 정보 수정 -->
+	<update id="memberGrdUpdate" parameterType="com.giftiel.shop.dto.Setting">
+		UPDATE TBL_ME_GRD
+		   SET GRD_NM	= #{grd_nm} 
+		      ,DC_AMT   = REPLACE(#{dc_amt}, ',' ,'')
+		      ,PNT_RSV_RT =REPLACE(#{pnt_rsv_rt}, ',' ,'')
+		      ,UPDR_NO = #{regr_no}
+		      ,UPD_DTS = SYSDATE
+		 WHERE MEM_GRD_NO = #{grd_no} 
+	</update>
+	
+	<!-- 회원등급 정보 수정 -->
+	<delete id="memberGrdDelete" parameterType="com.giftiel.shop.dto.Setting">
+		DELETE FROM TBL_ME_GRD
+		 WHERE MEM_GRD_NO = #{grd_no} 
+	</delete>	
+	
+	
+	<resultMap id="pointList" type="com.giftiel.shop.dto.Setting" >
+         <result property="cnd_free_dlv_amt"  column="CND_FREE_DLV_AMT"/>
+         <result property="dlv_cst" 	column="DLV_CST"/>
+         <result property="pnt_rsv_rt" 	column="PNT_RSV_RT"/>
+         <result property="exp_pnt" 	column="EXP_PNT"/>
+         <result property="use_min_pnt" column="USE_MIN_PNT"/>
+         <result property="min_paypnt" 	column="MIN_PAYPNT"/>
+         <result property="max_paypnt" 	column="MAX_PAYPNT"/>
+         <result property="pnt_rsv_cls" column="PNT_RSV_CLS"/>
+         <result property="mem_join_rsv_pnt" column="MEM_JOIN_RSV_PNT"/>
+    </resultMap>
+
+	<!-- 회원등급관리  -->
+	<select id="pointSettingList" resultType="com.giftiel.shop.dto.Setting">
+	SELECT * FROM TBL_AD_MALL_SETTING
+	</select>	
+	
+	<!-- 회원등급 정보 등록 -->
+	<insert id="pointSettingInsert" parameterType="com.giftiel.shop.dto.Setting">
+		INSERT INTO TBL_AD_MALL_SETTING (USE_MIN_PNT , MIN_PAYPNT, MAX_PAYPNT,PNT_RSV_RT
+		                                ,PNT_RSV_CLS,MEM_JOIN_RSV_PNT,REGR_NO,REG_DTS)
+		     VALUES (REPLACE(#{use_min_pnt}, ',' ,'')
+		            ,REPLACE(#{min_paypnt}, ',' ,'')
+		            ,REPLACE(#{max_paypnt}, ',' ,'')
+		            ,REPLACE(#{pnt_rsv_rt}, ',' ,'')
+		            ,REPLACE(#{pnt_rsv_cls}, ',' ,'')
+		            ,REPLACE(#{mem_join_rsv_pnt}, ',' ,'')
+		            ,#{regr_no}
+		            , SYSDATE) 		            
+	</insert>
+	
+	<!-- 회원등급 정보 등록 -->
+	<update id="pointSettingSave" parameterType="com.giftiel.shop.dto.Setting">
+		UPDATE TBL_AD_MALL_SETTING 
+		   SET USE_MIN_PNT = REPLACE(#{use_min_pnt}, ',' ,'')
+		     , MIN_PAYPNT  = REPLACE(#{min_paypnt}, ',' ,'')
+		     , MAX_PAYPNT  = REPLACE(#{max_paypnt}, ',' ,'')
+		     , PNT_RSV_RT  = REPLACE(#{pnt_rsv_rt}, ',' ,'')
+		     , PNT_RSV_CLS = REPLACE(#{pnt_rsv_cls}, ',' ,'')
+		     , MEM_JOIN_RSV_PNT = REPLACE(#{mem_join_rsv_pnt}, ',' ,'')
+		     , UPDR_NO     = #{regr_no}
+		     , UPD_DTS     = SYSDATE
+	</update>		
+	
+	<resultMap id="manageList" type="com.giftiel.shop.dto.Setting">
+	    <result property="plcy_no" column="PLCY_NO"/> 
+	    <result property="site_no" column="SITE_NO"/> 
+	    <result property="plcy_nm" column="PLCY_NM"/> 
+	    <result property="plcy_desc" column="PLCY_DESC"/> 
+	    <result property="plcy_txt" column="PLCY_TXT"/> 
+	</resultMap>
+	
+	<select id="storeManageList" parameterType="com.giftiel.shop.dto.Setting" resultMap="manageList">
+		SELECT PLCY_NO
+		      ,SITE_NO
+		      ,PLCY_NM
+		      ,PLCY_DESC
+		      ,PLCY_TXT
+		  FROM TBL_AD_SITE_POLICY 
+		 WHERE SITE_NO = #{site_no}
+		 <if test="plcy_no != null and plcy_no !=''"> 
+		   AND PLCY_NO = #{plcy_no}
+		 </if>
+		 <if test="plcy_desc != null and plcy_desc !=''"> 
+		   AND PLCY_DESC = #{plcy_desc}
+		 </if>
+		 
+		 ORDER BY REG_DTS ASC		 
+	</select>
+	
+	<select id="storeManageSelect" parameterType="com.giftiel.shop.dto.Setting" resultType="com.giftiel.shop.dto.Setting">
+		SELECT PLCY_NO
+		      ,SITE_NO
+		      ,PLCY_NM
+		      ,PLCY_DESC
+		      ,PLCY_TXT
+		  FROM TBL_AD_SITE_POLICY 
+		 WHERE SITE_NO = #{site_no}
+		 <if test="plcy_no != null and plcy_no !=''"> 
+		   AND PLCY_NO = #{plcy_no}
+		 </if>
+		 <if test="plcy_desc != null and plcy_desc !=''"> 
+		   AND PLCY_DESC = #{plcy_desc}
+		 </if>		 		 
+	</select>
+	
+	<!-- 회원등급 정보 등록 -->
+	<insert id="storeMngInsert" parameterType="com.giftiel.shop.dto.Setting">
+		INSERT INTO TBL_AD_SITE_POLICY (PLCY_NO , SITE_NO, PLCY_NM,PLCY_DESC
+		                                ,PLCY_TXT,REGR_NO,REG_DTS)
+		     VALUES (SEQ_AD_SITE_POLICY.NEXTVAL
+		            ,#{site_no}
+		            ,#{plcy_nm}
+		            ,#{plcy_desc}
+		            ,#{plcy_txt}
+		            ,#{regr_no}
+		            , SYSDATE) 		            
+	</insert>
+	
+	<!-- 회원등급 정보 등록 -->
+	<update id="storeMngSave" parameterType="com.giftiel.shop.dto.Setting">
+		UPDATE TBL_AD_SITE_POLICY 
+		   SET PLCY_NM = #{plcy_nm}
+		     , PLCY_DESC  = #{plcy_desc}
+		     , PLCY_TXT   = #{plcy_txt}
+		     , UPDR_NO    = #{regr_no}
+		     , UPD_DTS    = SYSDATE
+		 WHERE PLCY_NO = #{plcy_no}
+	</update>	
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="categoryNew">
+
+	<insert id="insertCategoryNew" parameterType="com.giftiel.shop.dto.CategoryNew">
+		INSERT /*categoryNew.insertCategoryNew*/
+			INTO TBL_GD_CATEGORY_NEW(  
+			    CATE_NO,
+			    SITE_NO,
+			    BRAND,
+			    ONE_DEPTH,
+			    TWO_DEPTH,
+			    THREE_DEPTH,
+			    SEX,
+			    NEW_ARVL
+			)
+			VALUES(
+				 #{cateNo}
+				,#{siteNo}
+				,#{brand, jdbcType=VARCHAR}
+				,#{oneDepth, jdbcType=VARCHAR}
+				,#{twoDepth, jdbcType=VARCHAR}
+				,#{threeDepth, jdbcType=VARCHAR}
+				,#{sex, jdbcType=VARCHAR}
+				,#{newArvl, jdbcType=VARCHAR}
+			)
+	</insert>
+	
+	<insert id="insertCategoryNewGds" parameterType="com.giftiel.shop.dto.CategoryNewGoods">
+		INSERT /*categoryNew.insertCategoryNew*/
+			INTO TBL_GD_CATEGORY_NEW_GDS(  
+			    CATE_NO,
+			    GDS_NO,
+			    GDS_COLOR,
+			    PRIR
+			)
+			VALUES(
+				#{cateNo}
+				,#{gdsNo}
+				,#{gdsColor, jdbcType=VARCHAR}
+				,#{prir}
+			)
+	</insert>
+	
+	<select id="getCategoryNewId" parameterType="com.giftiel.shop.dto.CategoryNew" resultType="String">
+	    SELECT /* categoryNew.getCategoryNewId*/
+			CATE.CATE_NO||''
+	    FROM
+			TBL_GD_CATEGORY_NEW CATE
+		WHERE 1=1
+		<if test="siteNo != '' and siteNo != null">
+			AND CATE.SITE_NO = #{siteNo}
+		</if>
+	    <if test="oneDepth != '' and oneDepth != null">
+	    	AND CATE.ONE_DEPTH = #{oneDepth}
+	    </if> 			
+	    <if test="twoDepth != '' and twoDepth != null">
+	    	AND CATE.TWO_DEPTH = #{twoDepth}
+	    </if> 
+	    <if test="threeDepth != '' and threeDepth != null">
+	    	AND CATE.THREE_DEPTH = #{threeDepth}
+	    </if>
+	    <if test="threeDepth == '' or threeDepth == null">
+	    	AND CATE.THREE_DEPTH is null
+	    </if>
+		<if test="sex != '' and sex != null">
+			AND CATE.SEX = #{sex}
+		</if>
+		<if test="sex == '' or sex == null">
+			AND CATE.SEX is null
+		</if>
+		<if test="newArvl">
+	  		AND CATE.NEW_ARVL = #{newArvl}
+		</if>
+		<if test="!newArvl">
+	  		AND CATE.NEW_ARVL is null
+		</if>
+	</select>
+	
+	<delete id="deleteCategoryNew" parameterType="String">
+	    DELETE FROM TBL_GD_CATEGORY_NEW
+	    WHERE CATE_NO = #{cateNo}
+	</delete>
+	
+	<delete id="deleteCategoryNewGds" parameterType="String">
+	    DELETE FROM TBL_GD_CATEGORY_NEW_GDS
+	    WHERE CATE_NO = #{cateNo}
+	</delete>		
+</mapper>

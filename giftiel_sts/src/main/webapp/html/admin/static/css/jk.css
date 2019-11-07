@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+table { border-collapse: collapse; border-collapse:separate; border-spacing: 0; }
+
+/* 공통 */
+.searchBar { width: 80% !important; }
+.w1200 { width: 1200px !important;}
+.first { margin-top: 20px; }
+.secletW50 { width: 50px !important;} 
+
+/* 서브 */
+.contents .section:after { display: block; clear: both; content:''; }
+
+/* 테이블 */
+.overflowY244 { overflow-y: auto; max-height: 244px; }
+.overflowXY { overflow-y: auto; overflow-x: scroll; max-height: 244px; }
+.layerWrap .tableType1 th, .layerWrap .tableType1 td {position: relative; padding: 8px 10px 7px; line-height: 16px; font-size: 12px;}
+.tableType1 table tfoot td {padding: 10px 0 9px; text-align: center; border-bottom: 1px solid #ddd; border-left: 1px solid #ddd;}
+.tableType1 table tfoot th { padding: 12px 0; font-weight: normal; text-align: center; border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; background: #f7faf9;} 
+.tableType1 table tfoot tr td:first-child, .tableType1 table tfoot tr th:first-child { border-left: 0; }
+.tableType1 .txtBold td, .tableType1 .txtBold th { font-weight: bold; }
+.tableType1 .tdBg { background: #f7faf9; }
+
+/* 통계/분석 */
+.contents {width: 1020px;}
+.cateOpen .panel {margin-top: 40px; }
+.contents.contents_tab { width: 1000px; min-height: auto; padding: 0; margin-left: 0; border-left: 0;}
+.contents.contents_tab .section, .contents.contents_tab .tableType1, .contents.contents_tab .tableType2, .contents.contents_tab .paging, 
+.contents_tab .tableType1 .helpBox, .contents_tab .tableType1 table { width: 1000px; }
+.contents_tab * { text-align: left;}
+.bd_left {border-left: 1px solid #e5e5e5; }
+.advice { position: absolute; top: 0; right: 0; }
+.tableTitle .right { float: right; }
+.tableTitle * { vertical-align: middle; }
+.helpBox { position: relative; margin-top: 30px; }
+.helpBox .close { position: absolute; top: 10px; right: 15px; font-size: 15px; }
+.tblStats > td { position: relative; } 
+.listLayer { display: none; position: absolute; top: 25px; left: -20%; z-index: 20; width: 100%; padding: 10px; border: 1px solid #333; background: #fff; }
+.listLayer li {overflow: hidden;}
+.listLayer .left { float: left; }
+.listLayer .right { float: right; }
+.tblStats .down, .tblStats .up { color: #000; } 
+.tabList { clear:both; margin-top: 30px; padding-bottom: 5px; border-bottom: 1px solid #e5e5e5; }
+.tabList:after { display: block; clear: both; content: ''; }
+.tabList li, .tabList a { float: left; }
+.tabList li { padding-left: 10px; }
+.tabList li:first-child { padding-left: 0; }
+.tabList a { padding: 8px 0 4px; color: #777; text-align: center; }
+.tabList a.current { color: #444; font-weight: bold; }
+.tabCon { clear: both; display: none; padding-top: 20px; }
+.graphArea { display: inline-block; position: relative; width: 100%; height: 25px; }
+.graphArea span { display: inline-block; position: absolute; height: 25px; top: 0; left: 0; text-indent: -999em; }
+.graphArea .barRed { background: red; }
+.graphArea .barGreen { background: Green; }
+.graphArea .barBlue { background: blue; }
+
+/* 디폴트 씨에스에스 변경 사항 */
+

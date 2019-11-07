@@ -1,0 +1,28 @@
+
+INSERT
+INTO TBL_ME_RESERVE
+  (
+    MEM_NO,
+    RSV_PNT,
+    RSV_RSN_CD,
+    RSV_YN,
+    ORD_NO,
+    REGR_NO,
+    REG_DTS,
+    RSV_CLS
+  )
+select regr_no as mem_no, sum(use_pnt) as RSV_PNT, 'MT00201' as RSV_RSN_CD, 'N' as RSV_YN, ord_no, regr_no, reg_dts, 'CM01001' AS RSV_CLS
+from tbl_or_ord_gds where ord_no in (
+
+)
+and use_pnt > 0
+group by regr_no,ord_no,reg_dts
+;
+  
+
+
+
+
+
+
+

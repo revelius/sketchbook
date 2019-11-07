@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="login">
+	
+    <resultMap id="admin" type="com.giftiel.shop.dto.Admin" >
+	    <result property="userNo" column="USER_NO"/> 
+	    <result property="id" column="ID"/> 
+	    <result property="pwd" column="PWD"/> 
+	    <result property="userNm" column="USER_NM"/> 
+	    <result property="email" column="EMAIL"/> 
+	    <result property="cpNo" column="CP_NO"/> 
+	    <result property="useYn" column="USE_YN"/> 
+	    <result property="userCls" column="USER_CLS"/> 
+	    <result property="cmpNm" column="CMP_NM"/> 
+	    <result property="reprNm" column="REPR_NM"/> 
+	    <result property="personInfoMngr" column="PERSON_INFO_MNGR"/> 
+	    <result property="personInfoMngrEmail" column="PERSON_INFO_MNGR_EMAIL"/> 
+	    <result property="zipCd" column="ZIP_CD"/> 
+	    <result property="addr" column="ADDR"/> 
+	    <result property="dtlAddr" column="DTL_ADDR"/> 
+	    <result property="tel" column="TEL"/> 
+	    <result property="faxNo" column="FAX_NO"/> 
+	    <result property="bizRegNo" column="BIZ_REG_NO"/> 
+	    <result property="teleSalesBizRegNo" column="TELE_SALES_BIZ_REG_NO"/> 
+	    <result property="bizSt" column="BIZ_ST"/> 
+	    <result property="event" column="EVENT"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	    <result property="siteAuthNo" column="SITE_AUTH_NO"/> 
+    </resultMap>
+
+	<!-- 관리자 로그인 접속 정보 -->
+	<select id="selectAdmin" resultMap="admin">
+		SELECT 
+		    USER_NO 
+		    ,ID 
+		    ,PWD 
+		    ,USER_NM 
+		    ,EMAIL 
+		    ,CP_NO 
+		    ,USE_YN 
+		    ,USER_CLS 
+		    ,CMP_NM 
+		    ,REPR_NM 
+		    ,PERSON_INFO_MNGR 
+		    ,PERSON_INFO_MNGR_EMAIL 
+		    ,ZIP_CD 
+		    ,ADDR 
+		    ,DTL_ADDR 
+		    ,TEL 
+		    ,FAX_NO 
+		    ,BIZ_REG_NO 
+		    ,TELE_SALES_BIZ_REG_NO 
+		    ,BIZ_ST 
+		    ,EVENT 
+		    ,REGR_NO 
+		    ,REG_DTS 
+		    ,UPDR_NO 
+		    ,UPD_DTS
+		    ,SITE_AUTH_NO 		
+		 FROM TBL_AD_USER
+		WHERE USE_YN = 'Y'
+		<if test="ID != null and ID !=''">
+		 AND ID  = #{ID}
+		</if>
+		<if test="PWD != null and PWD != ''">
+		  AND PWD = #{PWD}
+		</if>
+	</select>
+		
+</mapper>

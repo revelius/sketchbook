@@ -1,0 +1,217 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	
+</head> 
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">			
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">					
+					<h3>회원관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">회원관리</a>
+							<ul>
+								<li class="on">- <a href="#">회원목록</a></li>
+								<li class="last">- <a href="#">포인트관리</a></li>
+							</ul>
+						</li>						
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents memberList">				
+					<h3><span class="icon1"></span>회원정보</h3>	
+					<p class="pt_14">ididididid 님의 정보<span>최종로그인 yyyy-mm-dd HH:MM:SS </span></p>
+
+					<div class="tabType1">
+						<ul>
+							<li><a href="/admin/member/membershipInfo.html">회원정보</a></li>
+							<li><a href="/admin/member/orderList.html">주문내역</a></li>
+							<li class="on"><a href="/admin/member/inquire.html">1:1 문의</a></li>
+							<li><a href="/admin/member/cart.html">Cart</a></li>
+						</ul>
+					</div>
+
+					<!--[s] 1:1문의 리스트 -->
+					<div class="section a2">
+						<div class="tableTitle">								
+							<div class="select2">								
+								<select>
+									<option>선택</option>
+									<option>답변완료</option>
+									<option>미답변</option>
+								</select>								
+							</div>
+						</div>
+
+						<div class="tableType1">
+							<table>
+							<caption>회원목록 검색 결과 리스트</caption>
+							<colgroup>
+								<col width="5%" />
+								<col width="10%" />
+								<col width="*" />
+								<col width="5%" />
+								<col width="10%" />
+								<col width="15%" />
+								<col width="12%" />
+								<col width="12%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>문의</th>
+									<th>제목</th>
+									<th>첨부파일</th>
+									<th>이름</th>
+									<th>브랜드</th>
+									<th>작성일</th>
+									<th>답변여부</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>nn</td>
+									<td>재문의</td>
+									<td class="ta_l"><a href="#">질문 제목 title</a></td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>김보미</td>
+									<td>웍스아웃</td>
+									<td>2015.05.04</td>
+									<td>미답변</td>										
+								</tr>
+								<tr>
+									<td>nn</td>
+									<td>재문의</td>
+									<td class="ta_l"><a href="#">질문 제목 title</a></td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>김보미</td>
+									<td>웍스아웃</td>
+									<td>2015.05.04</td>
+									<td>답변</td>										
+								</tr>
+								<tr>
+									<td>nn</td>
+									<td>재문의</td>
+									<td class="ta_l"><a href="#">질문 제목 title</a></td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>김보미</td>
+									<td>웍스아웃</td>
+									<td>2015.05.04</td>
+									<td>미답변</td>										
+								</tr>
+								<tr>
+									<td>nn</td>
+									<td>재문의</td>
+									<td class="ta_l"><a href="#">질문 제목 title</a></td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>김보미</td>
+									<td>웍스아웃</td>
+									<td>2015.05.04</td>
+									<td>답변</td>										
+								</tr>
+								<tr>
+									<td>nn</td>
+									<td>재문의</td>
+									<td class="ta_l"><a href="#">질문 제목 title</a></td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>김보미</td>
+									<td>웍스아웃</td>
+									<td>2015.05.04</td>
+									<td>미답변</td>										
+								</tr>
+								<tr>
+									<td>nn</td>
+									<td>재문의</td>
+									<td class="ta_l"><a href="#">질문 제목 title</a></td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>김보미</td>
+									<td>웍스아웃</td>
+									<td>2015.05.04</td>
+									<td>미답변</td>										
+								</tr>
+							</tbody>
+							</table>
+						</div>
+					</div>
+					<!--[e] 1:1문의 리스트 -->
+
+					<!--[s] 페이징 -->
+					<div class="paging">
+						<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+						<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+						<span class="num">
+							<a href="#" class="on">1</a>
+							<a href="#">2</a>
+							<a href="#">3</a>
+							<a href="#">4</a>
+							<a href="#">5</a>
+							<a href="#">6</a>
+							<a href="#">7</a>
+							<a href="#">8</a>
+							<a href="#">9</a>
+							<a href="#">10</a>
+						</span>
+						<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+						<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+						<div class="left">
+							<a href="#" class="btnType2">회원목록</a>
+						</div>
+					</div>
+					<!--[e] 페이징 -->				
+
+				</div>
+				<!--[e] contents -->
+
+			</div>
+		<!--[e] subWrap -->
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

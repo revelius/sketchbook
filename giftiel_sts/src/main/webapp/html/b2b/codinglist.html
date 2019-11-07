@@ -1,0 +1,1341 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>코딩리스트</title>
+<link href="/html/b2b/inc/css/reset.css" type="text/css" rel="stylesheet" />
+<link href="/html/b2b/inc/css/common.css" type="text/css" rel="stylesheet" />
+<script src="/html/b2b/inc/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="/html/b2b/inc/js/common.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+a{text-decoration:none;color:blue;}
+a:hover{text-decoration:underline;color:#f5550d;}
+#guide h1{margin:20px 0;font-size:34px;}
+#guide h1 strong{margin-left:20px}
+#guide .logo{display:block;position:absolute;left:20px;top:20px}
+#guide .header{position:relative}
+
+.util{float:left;}
+.util li{float:left;width:185px;height:30px;margin:0 2px;border:1px solid #cdcdcd;line-height:30px;text-align:center;list-style:none;background-color:#555}
+.util li a{font-weight:bold;color:#fff}
+.working{float:right;margin-top:10px;padding-left:20px;}
+.working li{float:left;list-style:none;margin-right:30px;}
+
+.selected a{display:block;color:#f5550d;margin-right:5px;padding:0 0 3px 20px;background:url(/html/b2b/images/common/end.gif) no-repeat 0 0;}
+.edit a{display:block;color:#e9005d;margin-right:5px;padding:0 0 3px 20px;background:url(/html/b2b/images/common/edit.gif) no-repeat 0 0;}
+.confirm a{display:block;color:#168831;margin-right:5px;padding:0 0 3px 20px;background:url(/html/b2b/images/common/ing.gif) no-repeat 0 0;}
+
+.gnb{margin-top:20px;border:1px solid #666666;}
+.gnb a{display:inline-block;float:left;padding:10px 20px;font-weight:bold;background:url(/html/b2b/images/common/line.gif) no-repeat left center;}
+.gnb .first_child{background:none;}
+
+.notice_menu{padding:10px 0;border:1px solid #666666;border-top:0;text-align:center;color:red;}
+
+.coding_list{border-top:1px solid #ddd;border-left:1px solid #ddd;margin:0 0 20px 0;width:100%;font-size:12px;}
+.coding_list th{padding:5px 0 3px;font-weight:bold;background:#f9f9f9;border:1px solid;line-height:18px;}
+.coding_list td{border-right:1px solid #ddd;border-bottom:1px solid #ddd;padding:3px 5px;vertical-align:top;}
+.coding_list td:hover{background:#f7f7f7;}
+.coding_list td.none{background:#000;}
+.coding_list th,.coding_list td {padding:10px 5px!important}
+h2{margin-top:20px;font-size:15px;color:#666;margin-left:5px}
+
+.effect{position:relative;height:100%;display:none;}
+#effect0{display :block}
+
+#footer{height:32px;padding:14px 0 0 0;text-align:right;}
+</style>
+
+<script type="text/javascript">
+// 해당 메뉴 컨텐츠 show, hide
+$(document).ready(function(){
+	for(i = 0;i <= $('.coding_list').length;i++){
+		tableRowSpanning($('table#table' + i), 3);
+		tableRowSpanning($('table#table' + i), 2);
+		tableRowSpanning($('table#table' + i), 1);
+		tableRowSpanning($('table#table' + i), 0);
+};
+
+$(".gnb a").click(function(e){
+		e.preventDefault();
+		var currentId = $(this).index();
+		//alert(currentId );
+		$(".effect").hide();
+        $("#effect"+currentId+"").fadeIn("fast");
+	});
+});
+
+// 테이블 그리기
+function tableRowSpanning(Table, spanning_row_index)
+{
+var RowspanTd = false;
+var RowspanText = false;
+var RowspanCount = 0;
+var Rows = $('tbody tr', Table);
+
+$.each(Rows, function() {
+var This = $('td', this)[spanning_row_index];
+var text = $(This).text();
+
+if(RowspanTd == false)
+{
+RowspanTd = This;
+RowspanText = text;
+RowspanCount = 1;
+}
+else if(RowspanText != text)
+{
+$(RowspanTd)
+.attr('rowSpan', RowspanCount);
+
+RowspanTd = This;
+RowspanText = text;
+RowspanCount = 1;
+}
+else
+{
+$(This)
+.remove();
+RowspanCount++;
+}
+});
+
+// 반복 종료 후 마지막 rowspan 적용
+$(RowspanTd)
+.attr('rowSpan', RowspanCount);
+}
+</script>
+
+
+</head>
+<body>
+<div id="guide">
+	<h1>B2B</h1>
+	<div class="util_wrap clfix">
+		<!-- 외부코딩 리스트 링크 -->
+		<ul class="util clfix">
+			<li><a href="http://222.238.61.189:3000/html/worksout/codinglist.html" target="_blank">WORKSOUT</a></li>
+			<li><a href="http://222.238.61.189:3000/html/brixton/codinglist.html" target="_blank">BRIXTON</a></li>
+			<li><a href="http://222.238.61.189:3000/html/carhartt/codinglist.html" target="_blank">CARHARTT WIP</a></li>
+			<li><a href="http://222.238.61.189:3000/html/obey/codinglist.html" target="_blank">OBEY</a></li>
+			<li><a href="http://222.238.61.189:3000/html/b2b/codinglist.html" target="_blank">B2B</a></li>
+		</ul>
+		<!-- 아이콘 범주 -->
+		<ul class="working clfix">
+			<li><img src="/html/b2b/images/common/ing.gif" alt="확인요청" />확인요청</li>
+			<li><img src="/html/b2b/images/common/edit.gif" alt="수정 중" />수정 중</li>
+			<li><img src="/html/b2b/images/common/end.gif" alt="완료" />완료</li>
+		</ul>
+	</div>
+
+	<!-- 카테고리 메뉴 -->
+	<div class="gnb clfix">
+		<!-- <a href="#" class="first_child">Main</a> -->
+		<a href="#">OnlineShop</a>
+		<!-- <a href="#">LookBook</a>
+		<a href="#">News</a>
+		<a href="#">Util</a>
+		<a href="#">Footer</a>
+		<a href="#">Join</a>
+		<a href="#">Cart_Order</a>
+		<a href="#">My page</a>
+		<a href="#">PROTOTYPE</a> -->
+	</div>
+
+	<div class="notice_menu">
+		<p>확인 하실 메뉴를 클릭해 주세요!</p>
+	</div>
+
+	<!-- 리스트 시작 -->
+	<!-- <div id="effect0" class="effect">
+	<h2>Main</h2>
+	<table class="coding_list" id="table0">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="12%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>메인</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>2015</td>
+				<td></td>
+				<td>/</td>
+				<td class="selected"><a href="/html/b2b/main.html" target="_blank">main.html</a></td>
+				<td>
+					웹 유틸리티 메뉴 (우측상단)<br>
+					임시로 보이게 설정되어 있습니다.<br>
+					눌렀을때 제대로 안 나오면 다시 마우스 <br>
+					오버 해주면 됩니다.
+				</td>
+			</tr>
+			<tr>
+				<td>메인</td>
+				<td>마우스 스크롤 버전</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>2015</td>
+				<td></td>
+				<td>/</td>
+				<td class="selected"><a href="/html/b2b/main2.html" target="_blank">main2.html</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	</div> -->
+
+	<div id="effect0" class="effect">
+	<h2>OnlineShop</h2>
+	<table class="coding_list" id="table0">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>onlineshop</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/onlineshop</td>
+				<td class="confirm"><a href="/html/b2b/onlineshop/product_list.html" target="_blank">product_list.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>onlineshop</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/onlineshop</td>
+				<td class="confirm"><a href="/html/b2b/onlineshop/product_list_new.html" target="_blank">product_list_new.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>onlineshop</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/onlineshop</td>
+				<td class="confirm"><a href="/html/b2b/onlineshop/product_detail.html" target="_blank">product_detail.html</a></td>
+				<td>B2B 추가내용 있음</td>
+			</tr>
+			<tr>
+				<td>onlineshop</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/onlineshop</td>
+				<td class="confirm"><a href="/html/b2b/onlineshop/product_feature.html" target="_blank">product_feature.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>onlineshop</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/onlineshop</td>
+				<td class="confirm"><a href="/html/b2b/onlineshop/collaboration.html" target="_blank">collaboration.html</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div id="effect2" class="effect">
+	<h2>LookBook</h2>
+	<table class="coding_list" id="table2">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Look Book</td>
+				<td>list</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/lookbook</td>
+				<td class="confirm"><a href="/html/b2b/lookbook/lookbook_list.html" target="_blank">lookbook_list.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Look Book</td>
+				<td>detail</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/lookbook</td>
+				<td class="confirm"><a href="/html/b2b/lookbook/lookbook_detail.html" target="_blank">lookbook_detail.html</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+
+
+	</table>
+	</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div id="effect3" class="effect">
+	<h2>NEWS</h2>
+	<table class="coding_list" id="table3">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>NEWS</td>
+				<td>list</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/news</td>
+				<td class="confirm"><a href="/html/b2b/news/news_list.html" target="_blank">news_list.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>NEWS</td>
+				<td>view</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/news</td>
+				<td class="confirm"><a href="/html/b2b/news/news_view.html" target="_blank">news_view.html</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+
+
+	</table>
+	</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div id="effect4" class="effect">
+	<h2>Util</h2>
+	<table class="coding_list" id="table4">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Util</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/util</td>
+				<td class="edit"><a href="/html/b2b/util/" target="_blank">.html</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+
+
+	</table>
+	</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div id="effect5" class="effect">
+	<h2>footer</h2>
+	<table class="coding_list" id="table5">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>footer</td>
+				<td>Dealers</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/footer</td>
+				<td class="confirm"><a href="/html/b2b/footer/dealers.html" target="_blank">dealers.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>footer</td>
+				<td>Contact Us</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/footer</td>
+				<td class="confirm"><a href="/html/b2b/footer/contact_us.html" target="_blank">contact_us.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>footer</td>
+				<td>Work With Us</td>
+				<td>list</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/footer</td>
+				<td class="confirm"><a href="/html/b2b/footer/work_with_us.html" target="_blank">work_with_us.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>footer</td>
+				<td>Work With Us</td>
+				<td>view</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/footer</td>
+				<td class="confirm"><a href="/html/b2b/footer/work_with_us_view.html" target="_blank">work_with_us_view.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>footer</td>
+				<td>Search</td>
+				<td>onlineshop</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/footer</td>
+				<td class="confirm"><a href="/html/b2b/footer/search.html" target="_blank">search.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>footer</td>
+				<td>Search</td>
+				<td>news</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/footer</td>
+				<td class="confirm"><a href="/html/b2b/footer/search02.html" target="_blank">search02.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>footer</td>
+				<td>Search</td>
+				<td>lookbook</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/footer</td>
+				<td class="confirm"><a href="/html/b2b/footer/search03.html" target="_blank">search03.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>footer</td>
+				<td>Search</td>
+				<td>other</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/footer</td>
+				<td class="confirm"><a href="/html/b2b/footer/search04.html" target="_blank">search04.html</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+
+
+	</table>
+	</div> -->
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div id="effect6" class="effect">
+	<h2>Join</h2>
+	<table class="coding_list" id="table6">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Join</td>
+				<td>회원가입 선택 화면</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/join</td>
+				<td class="confirm"><a href="/html/b2b/join/join.html" target="_blank">join.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Join</td>
+				<td>내국인 가입 약관동의</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/join</td>
+				<td class="confirm"><a href="/html/b2b/join/join01.html" target="_blank">join01.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Join</td>
+				<td>내국인 가입 정보입력</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/join</td>
+				<td class="confirm"><a href="/html/b2b/join/join02.html" target="_blank">join02.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Join</td>
+				<td>내국인 가입 완료</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/join</td>
+				<td class="confirm"><a href="/html/b2b/join/join03.html" target="_blank">join03.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Join</td>
+				<td>외국인 본인인증</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/join</td>
+				<td class="confirm"><a href="/html/b2b/join/join04.html" target="_blank">join04.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Join</td>
+				<td>외국인 가입 정보입력</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/join</td>
+				<td class="confirm"><a href="/html/b2b/join/join05.html" target="_blank">join05.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Join</td>
+				<td>외국인 가입 완료</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/join</td>
+				<td class="confirm"><a href="/html/b2b/join/join06.html" target="_blank">join06.html</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+
+
+	</table>
+	</div> -->
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div id="effect7" class="effect">
+	<h2>Cart_Order</h2>
+	<table class="coding_list" id="table7">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Cart Order</td>
+				<td>리스트</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/cart_order</td>
+				<td class="confirm"><a href="/html/b2b/cart_order/cart_list.html" target="_blank">cart_list.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Cart Order</td>
+				<td>결제정보</td>
+				<td></td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/cart_order</td>
+				<td class="confirm"><a href="/html/b2b/cart_order/order_pay_info.html" target="_blank">order_pay_info.html</a></td>
+				<td>
+					신청안함<br>
+					소득공제용<br>
+					지출증빙용<br>
+					소스내에 포함.<br>
+					우편번호찾기 팝업뜸
+				</td>
+			</tr>
+			<tr>
+				<td>Cart Order</td>
+				<td>결제정보</td>
+				<td>비회원일때</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/cart_order</td>
+				<td class="confirm"><a href="/html/b2b/cart_order/order_pay_info02.html" target="_blank">order_pay_info02.html</a></td>
+				<td>
+					우편번호찾기 팝업뜸
+				</td>
+			</tr>
+			<tr>
+				<td>Cart Order</td>
+				<td>주문확인</td>
+				<td></td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/cart_order</td>
+				<td class="confirm"><a href="/html/b2b/cart_order/order_pay_info03.html" target="_blank">order_pay_info03.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Cart Order</td>
+				<td>주문완료</td>
+				<td></td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/cart_order</td>
+				<td class="confirm"><a href="/html/b2b/cart_order/order_pay_info04.html" target="_blank">order_pay_info04.html</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+
+
+	</table>
+	</div> -->
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div id="effect8" class="effect">
+	<h2>Mypage</h2>
+	<table class="coding_list" id="table8">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Mypage</td>
+				<td>메인</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/mypage.html" target="_blank">mypage.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>회원탈퇴</td>
+				<td>정보입력</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/withdraw.html" target="_blank">withdraw.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>회원탈퇴</td>
+				<td>완료</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/withdraw_complete.html" target="_blank">withdraw_complete.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>주문배송내역</td>
+				<td>리스트</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_list.html" target="_blank">order_list.html</a></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>주문배송내역</td>
+				<td>상세</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_detail.html" target="_blank">order_detail.html</a></td>
+				<td>
+					버튼 및 다른항목 추가되어 있음<br>
+					취소버튼 누르면 팝업뜸<br>
+					팝업소스는 /html/b2b/layout/layer_common.html
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>주문배송내역</td>
+				<td>주문서출력</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_print.html" target="_blank">order_print.html</a></td>
+				<td>
+					출력물 퍼블리싱 입니다.<br>
+					프린트 하기 클릭시<br>
+					이 파일을 팝업으로 불러오기 하면됨.<br>
+					웹에서 테스트 인쇄 가능
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>주문배송내역</td>
+				<td>오프라인</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_detail_offline.html" target="_blank">order_detail_offline.html</a></td>
+				<td>
+					오프라인 모드가 먼지 몰라서<br>
+					일단 만들어 놓았습니다.
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>결제취소</td>
+				<td>취소정보및 사유</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_cancel.html" target="_blank">order_cancel.html</a></td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>결제취소</td>
+				<td>결제/환불정보</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_cancel02.html" target="_blank">order_cancel02.html</a></td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>결제취소</td>
+				<td>신청완료</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_cancel03.html" target="_blank">order_cancel03.html</a></td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>취소/반품 내역</td>
+				<td>리스트</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_cancel_list.html" target="_blank">order_cancel_list.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>취소/반품 내역</td>
+				<td>상세</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_cancel_detail.html" target="_blank">order_cancel_detail.html</a></td>
+				<td>
+					버튼 및 다른항목 추가되어 있음<br>
+					취소버튼 누르면 팝업뜸<br>
+					팝업소스는 /html/b2b/layout/layer_common.html
+				</td>
+			</tr>
+
+			<tr>
+				<td>Mypage</td>
+				<td>교환내역</td>
+				<td>리스트</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_change_list.html" target="_blank">order_change_list.html</a></td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>교환내역</td>
+				<td>상세</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_change_detail.html" target="_blank">order_change_detail.html</a></td>
+				<td>
+					버튼 및 다른항목 추가되어 있음<br>
+					취소버튼 누르면 팝업뜸<br>
+					팝업소스는 /html/b2b/layout/layer_common.html
+				</td>
+			</tr>
+
+			<tr>
+				<td>Mypage</td>
+				<td>추가결제</td>
+				<td>리스트</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_add_pay_list.html" target="_blank">order_add_pay_list.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>추가결제</td>
+				<td>상세</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_add_pay_detail.html" target="_blank">order_add_pay_detail.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>Profile</td>
+				<td>회원정보관리</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/profile.html" target="_blank">profile.html</a></td>
+				<td>
+					변경버튼 누르면 팝업뜸
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>Profile</td>
+				<td>비밀번호관리</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/profile02.html" target="_blank">profile02.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>Profile</td>
+				<td>배송지관리</td>
+				<td></td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/profile0301.html" target="_blank">profile0301.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>Profile</td>
+				<td>배송지관리</td>
+				<td>배송지등록</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/profile0302.html" target="_blank">profile0302.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>Profile</td>
+				<td>포인트현황</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/profile04.html" target="_blank">profile04.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>Mypage</td>
+				<td>교환신청</td>
+				<td>교환정보 및 사유</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_change_apply.html" target="_blank">order_change_apply.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>교환신청</td>
+				<td>배송지정보</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_change_apply02.html" target="_blank">order_change_apply02.html</a></td>
+				<td>
+					우편번호팝업뜸
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>교환신청</td>
+				<td>신청완료</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_change_apply03.html" target="_blank">order_change_apply03.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>Mypage</td>
+				<td>반품신청</td>
+				<td>교환정보 및 사유</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_return_apply.html" target="_blank">order_return_apply.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>반품신청</td>
+				<td>배송지정보</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_return_apply02.html" target="_blank">order_return_apply02.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>반품신청</td>
+				<td>신청완료</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/order_return_apply03.html" target="_blank">order_return_apply03.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+			<tr>
+				<td>Mypage</td>
+				<td>문의내역</td>
+				<td>리스트</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/qna_list.html" target="_blank">qna_list.html</a></td>
+				<td>
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>Mypage</td>
+				<td>문의하기</td>
+				<td></td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/mypage</td>
+				<td class="confirm"><a href="/html/b2b/mypage/qna.html" target="_blank">qna.html</a></td>
+				<td>
+					버튼 및 다른항목 추가되어 있음<br>
+					취소버튼 누르면 팝업뜸<br>
+					팝업소스는 /html/b2b/layout/layer_common.html
+				</td>
+				</td>
+			</tr>
+		</tbody>
+
+
+	</table>
+	</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div id="effect9" class="effect">
+	<h2>PROTOTYPE</h2>
+	<table class="coding_list" id="table9">
+		<colgroup>
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="10%" />
+			<col width="5%" />
+			<col width="13%" />
+			<col width="15%" />
+			<col width="*" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>1deth</th>
+				<th>2depth</th>
+				<th>3depth</th>
+				<th>4depth</th>
+				<th>시작일 / 종료일</th>
+				<th>작업자</th>
+				<th>folder</th>
+				<th>filename</th>
+				<th>issue</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>PROTOTYPE</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>/</td>
+				<td>작업자</td>
+				<td>/폴더</td>
+				<td class="edit"><a href="/html/b2b/#" target="_blank">파일이름</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	</div> -->
+
+
+	<!-- 푸터영역 -->
+	<div id="footer">
+		&nbsp;
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<link rel="stylesheet" href="../static/css/jquery-ui.css" type="text/css" />
+	<script src="../static/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+	<script src="../static/js/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="../static/js/common.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>운영관리 > MUSIC 관리 > CARHARTT RADIO</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- CARHARTT RADIO 목록 입니다.</li>
+						<li>- 상세 목록 조회가 가능합니다.</li>
+						<li>- 등록된  RADIO 배너는 상단 라디오버튼 클릭 후 노출되는 레이어 내에서 확인 가능합니다.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- section -->
+				<div class="section a1 tabCon_inner">
+					<div class="tableType2">
+						<table>
+							<caption>music 관리</caption>
+							<colgroup>
+								<col width="130px">
+								<col width="*">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">작성일</th>
+									<td>
+										<span class="dateinput"><input type="text"  class="datepicker1" /></span>
+										~	
+										<span class="dateinput"><input type="text"  class="datepicker2" /></span>
+									</td>
+									<td rowspan="3" class="bd_left">
+										<a href="#" class="btnType2">검색</a> <br /><br />
+										<a href="#" class="btnType1">초기화</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">썸네일</th>
+									<td>
+										<input type="radio" id="thumb1" name="thumd" /><label for="thumb1">등록</label>
+										<input type="radio" id="thumb2" name="thumd" /><label for="thumb2">미등록</label>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">직접검색</th>
+									<td>
+										<select>
+											<option value="0">전체</option>
+										</select>
+										<input type="text" class="searchText" />
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- //section -->
+				<!-- section -->
+				<div class="section a2">
+					<div class="tableTitle">
+						<div class="right">
+							<select>
+								<option>15개</option>
+							</select>
+						</div>
+					</div>
+					<div class="tableType1 tblStats">
+						<table>
+							<caption>CARHARTT RADIO</caption>
+							<colgroup>
+								<col style="width: 6%" />
+								<col style="width: 9%" />
+								<col style="width: 15%" />
+								<col style="width: *" />
+								<col style="width: 15%" />
+								<col style="width: 10%" />
+								<col style="width: 10%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="row">No <a href="#" class="down">▼</a></th>
+									<th scope="row">상태 <a href="#" class="down">▼</a></th>
+									<th scope="row">썸네일 </th>
+									<th scope="row">타이틀 <a href="#" class="down">▼</a></th>
+									<th scope="row">아티스트 <a href="#" class="down">▼</a></th>
+									<th scope="row">작성자 <a href="#" class="down">▼</a></th>
+									<th scope="row">작성일 <a href="#" class="down">▼</a></th>
+								</tr>
+							</thead>
+							<tbody>	
+								<tr>	
+									<td>30</td>
+									<td>공개</td>
+									<td></td>
+									<td><a href="#">Eglo Radio Show II</a></td>
+									<td>ALEXANDER NUT</td>
+									<td>Manager1</td>
+									<td>2015.05.05</td>
+								</tr>
+								<tr>	
+									<td>30</td>
+									<td>공개</td>
+									<td></td>
+									<td><a href="#">Eglo Radio Show II</a></td>
+									<td>ALEXANDER NUT</td>
+									<td>Manager1</td>
+									<td>2015.05.05</td>
+								</tr>
+								<tr>	
+									<td>30</td>
+									<td>공개</td>
+									<td></td>
+									<td><a href="#">Eglo Radio Show II</a></td>
+									<td>ALEXANDER NUT</td>
+									<td>Manager1</td>
+									<td>2015.05.05</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--[s] 페이징 -->
+					<div class="paging">
+						<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+						<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+						<span class="num">
+							<a href="#" class="on">1</a>
+							<a href="#">2</a>
+							<a href="#">3</a>
+							<a href="#">4</a>
+							<a href="#">5</a>
+							<a href="#">6</a>
+							<a href="#">7</a>
+							<a href="#">8</a>
+							<a href="#">9</a>
+							<a href="#">10</a>
+						</span>
+						<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+						<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+						<div class="right">
+							<a href="#" class="btnType2">등록</a>
+						</div>
+					</div>
+					<!--[e] 페이징 -->
+				</div>
+				<!-- //section -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

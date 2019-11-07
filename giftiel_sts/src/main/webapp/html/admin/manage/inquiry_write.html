@@ -1,0 +1,196 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>운영관리 > 고객운영관리 > 1:1문의관리</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- 사용자 문의사항을 확인하실 수 있습니다.</li>
+						<li>- 기간검색은 작성일 기준으로 검색됩니다.</li>
+						<li>- 첫번째 문의사항은 ‘문의’로 표시되며 답변에 대한 문의사항 입력시 ‘재문의’로 표시됩니다.</li>
+						<li>- 첨부파일 선택시 다운로드 됩니다.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- section -->
+				<div class="section a1 tabCon_inner">
+					<!-- [s] 문의 테이블 -->
+					<div class="tableType2">
+						<table>
+							<caption>문의</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+								<col width="132px" />
+								<col width="350px" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="4" class="row_tit">문의</th>
+							    </tr>
+								<tr>
+									<th scope="col">브랜드</th>
+									<td>WORKSOUT</td>
+									<th scope="col">작성일</th>
+									<td>2015.05.04 14:11:12</td>
+								</tr>
+								<tr>
+									<th scope="col">제목</th>
+									<td colspan="3">블라블라</td>
+								</tr>
+								<tr>
+									<th scope="col">이름</th>
+									<td>홍길동</td>
+									<th scope="col">이메일</th>
+									<td>guestID100000@naver.com</td>
+								</tr>
+								<tr>
+									<th scope="col">휴대폰</th>
+									<td>010-000-0000</td>
+									<th scope="col">첨부파일</th>
+									<td><span>sample.jpg</span></td>
+								</tr>
+								<tr>
+									<th scope="col">내용</th>
+									<td colspan="3">언제쯤 오나요?</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 문의 테이블 -->
+					<!-- [s] 답변답변 테이블 -->
+					<div class="tableType2 pt20">
+						<table>
+							<caption>답변</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+								<col width="132px" />
+								<col width="350px" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="4" class="row_tit">답변</th>
+							    </tr>
+								<tr>
+									<th scope="col">답변제목</th>
+									<td><input type="text" class="ip_tit" /></td>
+									<th scope="col">작성일</th>
+									<td>2015.05.04 14:11:12</td>
+								</tr>
+								<tr>
+									<th scope="col">답변자</th>
+									<td colspan="3">관리자</td>
+								</tr>
+								<tr>
+									<th scope="col">답변내용</th>
+									<td colspan="3"><textarea cols="30" rows="10" class="txtareaAll"></textarea></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 문의 테이블 -->
+				</div>
+				<!-- //section -->
+				<!-- section -->
+				<div class="section btn a2">
+					<a href="#" class="btnType2">저장</a>
+					<a href="#" class="btnType1">취소</a>
+				</div>
+				<!-- //section -->
+				<!-- section -->
+				<div class="section a2">
+					<!-- [s] 문의 테이블 -->
+					<div class="tableType2">
+						<table>
+							<caption>문의</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+								<col width="132px" />
+								<col width="350px" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="4" class="row_tit">재문의</th>
+							    </tr>
+								<tr>
+									<th scope="col">제목</th>
+									<td>배송문의</td>
+									<th scope="col">작성일</th>
+									<td>2015.05.04 14:11:12</td>
+								</tr>
+								<tr>
+									<th scope="col">첨부파일</th>
+									<td colspan="3"><span>sample.jpg</span></td>
+								</tr>
+								<tr>
+									<th scope="col">내용</th>
+									<td colspan="3">카드와 현금으로 혼합하여 결제를 할 수는 없나요?</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 문의 테이블 -->
+					<!-- [s] 답변 테이블 -->
+					<div class="tableType2 pt20">
+						<table>
+							<caption>답변</caption>
+							<colgroup>
+								<col width="132px" />
+								<col width="*" />
+								<col width="132px" />
+								<col width="350px" />
+							</colgroup>
+							<tbody>
+							    <tr>
+							    	<th scope="row" colspan="4" class="row_tit">답변</th>
+							    </tr>
+								<tr>
+									<th scope="col">답변제목</th>
+									<td><input type="text" class="ip_tit" /></td>
+									<th scope="col">작성일</th>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th scope="col">답변자</th>
+									<td colspan="3">-</td>
+								</tr>
+								<tr>
+									<th scope="col">답변내용</th>
+									<td colspan="3"><textarea cols="30" rows="10" class="txtareaAll"></textarea></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- [e] 답변 테이블 -->
+				</div>
+				<!-- //section -->
+				<!-- section -->
+				<div class="section btn a2">
+					<a href="#" class="btnType2">저장</a>
+					<a href="#" class="btnType1">취소</a>
+				</div>
+				<!-- //section -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>통계/분석 > 상품통계 > 상품별통계</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="first">
+					<div class="tableType2">
+						<table>
+							<caption>배송검색</caption>
+							<colgroup>
+								<col width="100px">
+								<col width="*">
+								<col width="100px">
+								<col width="150px">
+								<col width="120px">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>기간</th>
+									<td>
+										<a href="#" class="btnType1">당일</a>
+										<a href="#" class="btnType1">전일</a>
+										<a href="#" class="btnType1">당월</a>
+										<a href="#" class="btnType1">1주</a>
+										<a href="#" class="btnType1">15일</a>
+										<a href="#" class="btnType1">한달</a>
+										<a href="#" class="btnType1">두달</a>
+										<br /><br />
+										<div class="wrap">
+											<a href="#" class="btnType1">직접검색</a>
+											<input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+											<input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+										</div>
+									</td>
+									<th>브랜드</th>
+									<td>
+										<select>
+											<option value="0">전체</option>
+										</select>
+									</td>
+									<td rowspan="2" class="bd_left">
+										<a href="#" class="btnType2">검색</a> <br /><br />
+										<a href="#" class="btnType1">초기화</a>
+									</td>
+								</tr>
+								<tr>
+									<th>상품</th>
+									<td colspan="3"><a href="#" class="btnType1">찾기</a> <span>Rival Snap Backnders</span> <a href="#">X</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- section -->
+				<div class="section a2">
+					<div class="tableTitle">
+						<div class="left"><span class="icon2"></span><span>2015년 05월 05일</span>부터 <span>2015년 05월 05일</span>까지의 검색 결과입니다.</div>
+						<div class="right">
+							<a href="#" class="btnType2">전체</a>
+							<a href="#" class="btnType2">접속경로</a>
+							<a href="#" class="btnType2">브라우저</a>
+							<a href="#" class="btnType2">OS</a>
+							<select class="ml_5">
+								<option value="0">15개</option>
+							</select>
+						</div>
+					</div>
+					<!-- 전체 -->
+					<div class="tableType1">
+						<table>
+							<caption>상품별 통계 테이블</caption>
+							<colgroup>
+								<col width="*" />
+								<col width="12%" />
+								<col width="12%" />
+								<col width="12%" />
+								<col width="12%" />
+								<col width="12%" />
+								<col width="12%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="row">일자</th>
+									<th scope="row">브랜드</th>
+									<th scope="row">상세보기 수</th>
+									<th scope="row">장바구니 등록 수</th>
+									<th scope="row">주문건수</th>
+									<th scope="row">판매수</th>
+									<th scope="row">매출</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="txtBold">
+									<th scope="col" colspan="2">합계</th>
+									<td class="tgBg">9</td>
+									<td class="tgBg">5</td>
+									<td class="tgBg">5</td>
+									<td class="tgBg">7</td>
+									<td class="tgBg">220,000</td>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr>
+									<td>2015.05.05</td>
+									<td>worksout</td>
+									<td>3</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2</td>
+									<td>70,000</td>
+								</tr>
+								<tr>
+									<td>2015.05.05</td>
+									<td>worksout</td>
+									<td>3</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2</td>
+									<td>70,000</td>
+								</tr>
+								<tr>
+									<td>2015.05.05</td>
+									<td>worksout</td>
+									<td>3</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2</td>
+									<td>70,000</td>
+								</tr>
+								<tr>
+									<td>2015.05.05</td>
+									<td>worksout</td>
+									<td>3</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2</td>
+									<td>70,000</td>
+								</tr>
+								<tr>
+									<td>2015.05.05</td>
+									<td>worksout</td>
+									<td>3</td>
+									<td>1</td>
+									<td>1</td>
+									<td>2</td>
+									<td>70,000</td>
+								</tr>
+							</tbody>
+						</table>
+						<!--[s] 페이징 -->
+						<div class="paging">
+							<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+							<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+							<span class="num">
+								<a href="#" class="on">1</a>
+								<a href="#">2</a>
+								<a href="#">3</a>
+								<a href="#">4</a>
+								<a href="#">5</a>
+								<a href="#">6</a>
+								<a href="#">7</a>
+								<a href="#">8</a>
+								<a href="#">9</a>
+								<a href="#">10</a>
+							</span>
+							<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+							<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+							<div class="right">
+								<a href="#" class="btnType2">엑셀다운로드</a>
+							</div>
+						</div>
+						<!--[e] 페이징 -->
+					</div>
+					<!-- 전체 -->
+
+					<!-- 접속경로, 브라우저, OS 버튼클릭 시 폼 display: none으로 숨겨두었음-->
+					<div class="tableType1" style="display: none;">
+						<table>
+							<caption>접속방향통계 그래프</caption>
+							<colgroup>
+								<col width="5%" />
+								<col width="25%" />
+								<col width="15%" />
+								<col width="*" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="row">No</th>
+									<th scope="row">접속경로</th>
+									<th scope="row">방문자수</th>
+									<th scope="row">그래프</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="txtBold">
+									<th scope="col" colspan="2">합계</th>
+									<td class="tdBg">286</td>
+									<td class="tdBg"></td>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 38%">38%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>brixton.co.kr</td>
+									<td>70</td>
+									<td><span class="graphArea"><span class="barRed" style="width: 70%">70%</span></span></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="paging">
+							<div class="right">
+								<a href="#" class="btnType2">엑셀다운로드</a>
+							</div>
+						</div>
+					</div>
+					<!-- //접속경로, 브라우저, OS 버튼클릭 시 폼 display: none으로 숨겨두었음-->
+				</div>
+				<!-- //section -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

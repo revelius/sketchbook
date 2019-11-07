@@ -1,0 +1,245 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">
+					<h3>상품관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">카테고리관리</a>
+							<ul>
+								<li>- <a href="#">상품카테고리관리</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상품관리</a>
+							<ul>
+								<li>- <a href="/admin/product/prdAdd.html">상품등록</a></li>
+								<li>- <a href="/admin/product/prdIcon.html">상품 아이콘 관리</a></li>
+								<li>- <a href="/admin/product/prdList.html">상품목록</a></li>
+								<li class="on">- <a href="/admin/product/prdDisplay.html">상품진열설정</a></li>
+								<li>- <a href="/admin/product/prdDel.html">상품휴지통</a></li>
+								<li>- <a href="/admin/product/prdExcel.html">상품 엑셀 일괄 등록</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상품정보고시 관리</a>
+							<ul>
+								<li>- <a href="#">상품정보고시 관리</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents productList">
+					<!--[s] 상품목록 -->
+					<div class="section a1">
+						<h3><span class="icon1"></span>상품진열설정</h3>
+						<div class="tableType2">
+							<ul class="boxLi">
+								<li>- 상품 진열순서를 설정하실 수 있습니다. </li>
+								<li>- 순서를 변경하신 후에는 반드시 "저장"버튼을 누르셔야만 설정하신 순서가 실제 반영됩니다. </li>
+							</ul>
+							<div class="tableType2">
+								<table>
+								<caption>상품등록 폼</caption>
+								<colgroup>
+									<col width="12%" />
+									<col width="*" />
+								</colgroup>
+								<tbody>	
+									<tr>
+										<th>상품분류</th>
+										<td>
+											<div class="cate_m">
+												<ul>
+													<li>대카테고리</li>
+													<li>Brixton</li>
+													<li>Obey</li>
+													<li>Lexdray</li>
+													<li>Brixton-Outlet</li>
+													<li>Obey-Outlet</li>
+													<li>Lexdray-Outlet</li>
+												</ul>
+											</div>
+											<div class="cate_m">
+												<ul>
+													<li>중카테고리</li>
+													<li>중카1</li>
+													<li>중카2</li>
+													<li>중카3</li>
+													<li>중카4</li>
+													<li>중카5</li>
+													<li>중카6</li>
+												</ul>
+											</div>
+											<div class="cate_m">
+												<ul>
+													<li>소카테고리</li>
+													<li>소카1</li>
+													<li>소카2</li>
+													<li>소카3</li>
+													<li>소카4</li>
+													<li>소카5</li>
+													<li>소카6</li>
+												</ul>
+											</div>										
+										</td>
+									</tr>	
+									<tr>
+										<th>제외필터</th>
+										<td><span class="pr26"><input type="checkbox" /> 미진열 상품 제외</span><input type="checkbox" /> 품절 상품 제외</td>
+									</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="paging">
+								<div class="right">
+									<a href="#" class="btnType2">검색</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--[e] 상품목록 -->
+					<!-- [s] 새상품 리스트 -->
+					<div class="result_area">
+						<ul class="table_result">
+							<li class="on"><a href="#">판매인기순</a> |</li>				
+							<li><a href="#">신상품순</a> |</li>
+							<li><a href="#">낮은가격순</a></li>
+						</ul>
+						</div>
+					<div class="section a2">
+						
+
+						<div class="tableType1">
+							<table>
+							<caption>회원목록 검색 결과 리스트</caption>
+							<colgroup>
+								<col width="5%" />
+								<col width="10%" />
+								<col width="15%" />
+								<col width="*%" />
+								<col width="15%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>우선순위</th>
+									<th>상품코드</th>
+									<th>상품명</th>
+									<th>가격</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>99</td>
+									<td>	<input type="text" value="1" /></td>
+									<td>201405151213</td>
+									<td class="p_lineL">
+										<img src="" alt="이미지" class="prd_img" />
+										<p class="img_P">Obey Tokyo Roof</p>
+									</td>
+									<td>	2,500 원</td>
+								</tr>
+								<tr>
+									<td>98</td>
+									<td>	<input type="text" value="2" /></td>
+									<td>201405151213</td>
+									<td class="p_lineL">
+										<img src="" alt="이미지" class="prd_img" />
+										<p class="img_P">Obey Tokyo Roof</p>
+									</td>
+									<td>	2,500 원</td>
+								</tr>
+								<tr>
+									<td>97</td>
+									<td>	<input type="text" value="3" /></td>
+									<td>201405151213</td>
+									<td class="p_lineL">
+										<img src="" alt="이미지" class="prd_img" />
+										<p class="img_P">Obey Tokyo Roof</p>
+									</td>
+									<td>	2,500 원</td>
+								</tr>
+								<tr>
+									<td>96</td>
+									<td>	<input type="text" value="4" /></td>
+									<td>201405151213</td>
+									<td class="p_lineL">
+										<img src="" alt="이미지" class="prd_img" />
+										<p class="img_P">Obey Tokyo Roof</p>
+									</td>
+									<td>	2,500 원</td>
+								</tr>
+							
+							</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- [e] 새상품 리스트 -->
+
+					<!--[s] 페이징 -->
+					<div class="paging">					
+						<div class="right">
+							<a href="#" class="btnType2">저장</a><a href="#" class="btnType1 ml_5">취소</a>
+						</div>
+					</div>
+					<!--[e] 페이징 -->
+					
+					
+				</div>
+				<!--[e] contents -->
+			</div>
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

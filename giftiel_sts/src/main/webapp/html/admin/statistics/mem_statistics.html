@@ -1,0 +1,305 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>통계/분석 > 매출통계 > 회원별매출통계</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- 일반/SNS/매장 회원의 온라인 구매에 따른 매출통계입니다.</li>
+						<li>- 판매수는 배송완료일자 기준의 합계입니다.</li>
+						<li>- 수량은 판매된 상품(옵션포함)의 총 합계입니다.</li>
+						<li>- 총매출은 배송 완료된 주문의 주문금액 [((판매가+옵션가)×수량)-회원할인금-포인트사용+선배송비]으로 배송완료일자 기준의 총합계 금액입니다.</li>
+						<li>- 포인트적립은 배송완료일 기준의 합계입니다.</li>
+						<li>- 포인트사용은 주문일 기준의 합계입니다.</li>
+						<li>- 환불금액은 처리일 기준의 합계 입니다.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<div class="first">
+					<div class="tableType2">
+						<table>
+							<caption>배송검색</caption>
+							<colgroup>
+								<col width="80px">
+								<col width="220px">
+								<col width="80px">
+								<col width="220px">
+								<col width="80px">
+								<col width="220px">
+								<col width="*">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">기간</th>
+									<td colspan="5">
+										<a href="#" class="btnType1">당일</a>
+										<a href="#" class="btnType1">전일</a>
+										<a href="#" class="btnType1">당월</a>
+										<a href="#" class="btnType1">1주</a>
+										<a href="#" class="btnType1">15일</a>
+										<a href="#" class="btnType1">한달</a>
+										<a href="#" class="btnType1">두달</a>
+										<br /><br />
+										<div class="wrap">
+											<a href="#" class="btnType1">직접검색</a>
+											<input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+											<input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+										</div>
+									</td>
+									<td rowspan="5" class="bd_left">
+										<a href="#" class="btnType2">검색</a> <br /><br />
+										<a href="#" class="btnType1">초기화</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">등급</th>
+									<td>
+										<select>
+											<option value="0">전체</option>
+										</select>
+									</td>
+									<th scope="col">유형</th>
+									<td>
+										<select>
+											<option value="0">전체</option>
+										</select>
+									</td>
+									<th scope="col">성별</th>
+									<td>
+										<select>
+											<option value="0">전체</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">나이</th>
+									<td>
+										<select class="secletW50">
+											<option value="0">1</option>
+										</select>
+										~
+										<select class="secletW50">
+											<option value="0">99</option>
+										</select>
+									</td>
+									<th scope="col">지역</th>
+									<td colspan="3">
+										<select>
+											<option value="0">전체</option>
+										</select>
+										<select>
+											<option value="0">전체</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">회원</th>
+									<td colspan="5">
+										<select>
+											<option value="0">회원명</option>
+										</select>
+										<input type="text" class="searchBar" />
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">상품</th>
+									<td colspan="5"><a href="#" class="btnType1">찾기</a> <span>Rival Snap Backnders</span> <a href="#">X</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="section a2">
+					<div class="tableTitle">
+						<div class="left"><span class="icon2"></span><span>2015년 05월 05일</span>부터 <span>2015년 05월 05일</span>까지의 검색 결과입니다.</div>
+						<div class="right">
+							<a href="#" class="btnType2">List</a>
+							<select class="ml_5">
+								<option>15개</option>
+							</select>
+						</div>
+					</div>
+					<!-- list -->
+					<div class="listWrap">
+						<div class="tableType1 tblStats overflowXY">
+							<table class="w1200">
+								<caption>상품 통계</caption>
+								<colgroup>
+									<col style="width: 11%" />
+									<col style="width: 11%" />
+									<col style="width: 11%" />
+									<col style="width: 11%" />
+									<col style="width: 11%" />
+									<col style="width: 11%" />
+									<col style="width: 11%" />
+									<col style="width: 11%" />
+									<col style="width: *" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th scope="row" rowspan="2">구분 <a href="#" class="down">▼</a></th>
+										<th scope="row" rowspan="2">회원명 <a href="#" class="down">▼</a></th>
+										<th scope="row" rowspan="2">회원ID <a href="#" class="down">▼</a></th>
+										<th scope="row" colspan="2">지역</th>
+										<th scope="row" rowspan="2">나이 <a href="#" class="down">▼</a></th>
+										<th scope="row" rowspan="2">성별 <a href="#" class="down">▼</a></th>
+										<th scope="row" rowspan="2">판매수 <a href="#" class="down">▼</a></th>
+										<th scope="row" rowspan="2">수량 <a href="#" class="down">▼</a></th>
+									</tr>
+									<tr>
+										<th scope="row">시도 <a href="#" class="down">▼</a></th>
+										<th scope="row">시군구 <a href="#" class="down">▼</a></th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th scope="col" colspan="7">합계</th>
+										<td>30</td>
+										<td>42</td>
+									<tr>
+								</tfoot>
+								<tbody>	
+									<tr>	
+										<td>일반</td>
+										<td>홍길동</td>
+										<td>E-MAIL ID</td>
+										<td>서울시</td>
+										<td>동작구</td>
+										<td>15</td>
+										<td>남자</td>
+										<td>10</td>
+										<td>14</td>
+									</tr>
+									<tr>	
+										<td>일반</td>
+										<td>홍길동</td>
+										<td>E-MAIL ID</td>
+										<td>서울시</td>
+										<td>동작구</td>
+										<td>15</td>
+										<td>남자</td>
+										<td>10</td>
+										<td>14</td>
+									</tr>
+									<tr>	
+										<td>일반</td>
+										<td>홍길동</td>
+										<td>E-MAIL ID</td>
+										<td>서울시</td>
+										<td>동작구</td>
+										<td>15</td>
+										<td>남자</td>
+										<td>10</td>
+										<td>14</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!--[s] 페이징 -->
+						<div class="paging">
+							<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+							<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+							<span class="num">
+								<a href="#" class="on">1</a>
+								<a href="#">2</a>
+								<a href="#">3</a>
+								<a href="#">4</a>
+								<a href="#">5</a>
+								<a href="#">6</a>
+								<a href="#">7</a>
+								<a href="#">8</a>
+								<a href="#">9</a>
+								<a href="#">10</a>
+							</span>
+							<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+							<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+							<div class="right">
+								<a href="#" class="btnType2">엑셀다운로드</a>
+							</div>
+						</div>
+						<!--[e] 페이징 -->
+						<div class="section a2">
+							<div class="tableType1 tblStats overflowY244">
+								<table>
+									<caption>총매출통계</caption>
+									<thead>
+										<tr>
+											<th scope="row">총매출 <a href="#" class="down">▼</a></th>
+											<th scope="row">환불금액 <a href="#" class="down">▼</a></th>
+											<th scope="row">포인트적립 <a href="#" class="down">▼</a></th>
+											<th scope="row">그래프 <a href="#" class="down">▼</a></th>
+										</tr>
+									</thead>
+									<tbody>	
+										<tr>	
+											<td>43,000</td>
+											<td>7</td>
+											<td>43.000</td>
+											<td><a href="#" class="btnType1">보기</a></td>
+										</tr>
+										<tr>	
+											<td>43,000</td>
+											<td>7</td>
+											<td>43.000</td>
+											<td><a href="#" class="btnType1">보기</a></td>
+										</tr>
+										<tr>	
+											<td>43,000</td>
+											<td>7</td>
+											<td>43.000</td>
+											<td><a href="#" class="btnType1">보기</a></td>
+										</tr>
+										<tr>	
+											<td>43,000</td>
+											<td>7</td>
+											<td>43.000</td>
+											<td><a href="#" class="btnType1">보기</a></td>
+										</tr>
+										<tr>	
+											<td>43,000</td>
+											<td>7</td>
+											<td>43.000</td>
+											<td><a href="#" class="btnType1">보기</a></td>
+										</tr>
+										<tr>	
+											<td>43,000</td>
+											<td>7</td>
+											<td>43.000</td>
+											<td><a href="#" class="btnType1">보기</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- //list -->
+					<!-- graph none 시켜놓았음 style은 영역을 확인하기 위해 임시로 넣어 놓왔음 -->
+					<div class="graphWrap" style="display: none; width: 1000px; padding: 100px 0; border: 1px solid #e5e5e5; text-align: center;">
+						그래프 영역~~~~~ :)
+					</div>
+					<!-- //grap -->
+				</div>
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

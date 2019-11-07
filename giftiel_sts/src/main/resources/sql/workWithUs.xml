@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="workWithUs">
+	<resultMap id="WorksWithusMap" type="com.giftiel.shop.dto.WorkWithUs">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="withusSeq" column="WITHUS_SEQ"/> 
+	    <result property="withusStat" column="WITHUS_STAT"/> 
+	    <result property="withusCls" column="WITHUS_CLS"/> 
+	    <result property="withusArea" column="WITHUS_AREA"/> 
+	    <result property="withusCl" column="WITHUS_CL"/> 
+	    <result property="strDts" column="STR_DTS"/> 
+	    <result property="endDts" column="END_DTS"/> 
+	    <result property="dtlDesc" column="DTL_DESC"/> 
+	    <result property="regrNo" column="REGR_NO"/>
+	    <result property="regUserNm" column="REG_USER_NM"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/> 
+	
+  	    <collection property="workWithUsSite" ofType="com.giftiel.shop.dto.WorkWithUsSite">
+		    <result property="withusSeq" column="WITHUS_SEQ"/>
+		    <result property="siteNo" column="SITE_NO"/> 
+		</collection>
+
+	</resultMap>
+	
+	
+	<!-- Work With Us List -->
+	<select id="listWorkWithus" parameterType="com.giftiel.shop.dto.SearchForm" resultMap="WorksWithusMap">
+	SELECT
+	    RNUM
+	    ,CM_WORKS.WITHUS_SEQ 
+	    ,DECODE(WITHUS_STAT,'Y','공개','N','비공개') WITHUS_STAT
+	    ,WITHUS_CLS 
+	    ,WITHUS_AREA 
+	    ,WITHUS_CL 
+	    ,TO_CHAR(STR_DTS, 'YYYY.MM.DD') STR_DTS
+	    ,TO_CHAR(END_DTS, 'YYYY.MM.DD') END_DTS
+	    ,DTL_DESC 
+	    ,REGR_NO 
+	    ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = CM_WORKS.UPDR_NO) REG_USER_NM
+	    ,TO_CHAR(REG_DTS, 'YYYY.MM.DD') REG_DTS 
+	    ,UPDR_NO 
+	    ,TO_CHAR(UPD_DTS, 'YYYY.MM.DD') UPD_DTS
+	FROM(
+	    SELECT 
+	        ROWNUM RNUM
+	        ,WITHUS_SEQ 
+	        ,WITHUS_STAT 
+	        ,WITHUS_CLS 
+	        ,WITHUS_AREA 
+	        ,WITHUS_CL 
+	        ,STR_DTS 
+	        ,END_DTS 
+	        ,DTL_DESC
+	        ,REGR_NO 
+	        ,REG_DTS 
+	        ,UPDR_NO 
+	        ,UPD_DTS 
+	    FROM
+	        TBL_CM_WORKS_WITHUS CM_WORKS
+	    WHERE WITHUS_STAT = 'Y'
+	    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+	    	AND REG_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+	    </if>
+	    <if test="searchGb != null and  searchGb !=''"> 
+	        AND EXISTS (
+					    SELECT 'X' 
+					    FROM DUAL
+					    WHERE ('stats' = #{searchGb} AND WITHUS_STAT LIKE '%' || #{searchText} || '%') 
+					    OR ('cls' = #{searchGb} AND WITHUS_CLS LIKE '%' || #{searchText} || '%')
+					    OR ('area' = #{searchGb} AND WITHUS_AREA LIKE '%' || #{searchText} || '%')
+					    OR ('cl' = #{searchGb} AND WITHUS_CL LIKE '%' || #{searchText} || '%')
+					    OR ('regr' = #{searchGb} AND UPDR_NO LIKE '%' || #{searchText} || '%')					    
+					)
+	    </if>
+	    <if test="siteNo != null and  siteNo !=''"> 
+		    AND EXISTS (SELECT 'X' FROM TBL_CM_WORKS_WITHUS_SITE WHERE WITHUS_SEQ = CM_WORKS.WITHUS_SEQ AND SITE_NO = #{siteNo})
+		</if>
+	    <choose>
+		    <when test="orderBy != '' and orderBy != null">
+				ORDER BY ${orderBy} ${orderFlag}, CM_WORKS.WITHUS_SEQ DESC
+			</when>
+			<otherwise>
+				ORDER BY CM_WORKS.WITHUS_SEQ DESC
+			</otherwise>
+			</choose>
+	) CM_WORKS WHERE 1=1
+	    AND ROWNUM BETWEEN #{startListNum} AND #{endListNum}
+	</select> 
+	
+	
+	<!-- 	Work With Us 전체List -->
+	<select id="totalListWorkWithus" parameterType="com.giftiel.shop.dto.SearchForm" resultType="INTEGER">
+	    SELECT 
+	        COUNT(*) TOTAL_CNT 
+	    FROM
+	        TBL_CM_WORKS_WITHUS CM_WORKS
+	    WHERE 1 = 1
+	    <if test="searchStrDtm != null and  searchStrDtm !='' and searchEndDtm != null and  searchEndDtm !=''"> 
+	    	AND REG_DTS BETWEEN to_date(#{searchStrDtm} || '000000', 'YYYY/MM/DD HH24MISS') AND to_date(#{searchEndDtm} || '235959', 'YYYY/MM/DD HH24MISS')
+	    </if>
+	    <if test="searchGb != null and  searchGb !=''"> 
+	        AND EXISTS (
+					    SELECT 'X' 
+					    FROM DUAL
+					    WHERE ('stats' = #{searchGb} AND WITHUS_STAT LIKE '%' || #{searchText} || '%') 
+					    OR ('cls' = #{searchGb} AND WITHUS_CLS LIKE '%' || #{searchText} || '%')
+					    OR ('area' = #{searchGb} AND WITHUS_AREA LIKE '%' || #{searchText} || '%')
+					    OR ('cl' = #{searchGb} AND WITHUS_CL LIKE '%' || #{searchText} || '%')
+					    OR ('regr' = #{searchGb} AND REGR_NO LIKE '%' || #{searchText} || '%')					    
+					)
+	    </if>
+	    <if test="siteNo != null and  siteNo !=''"> 
+		    AND EXISTS (SELECT 'X' FROM TBL_CM_WORKS_WITHUS_SITE WHERE WITHUS_SEQ = CM_WORKS.WITHUS_SEQ AND SITE_NO = #{siteNo})
+		</if>
+	    <choose>
+		    <when test="orderBy != '' and orderBy != null">
+				ORDER BY ${orderBy} ${orderFlag}, CM_WORKS.WITHUS_SEQ DESC
+			</when>
+			<otherwise>
+				ORDER BY CM_WORKS.WITHUS_SEQ DESC
+			</otherwise>
+			</choose>
+	</select>
+	
+	<!-- 	Work With Us 상세 -->
+	<select id="workWithUsDetail" parameterType="INTEGER" resultMap="WorksWithusMap">
+		SELECT
+		    CM_WORKS_WITHUS.WITHUS_SEQ 
+		    ,WITHUS_STAT
+		    ,WITHUS_CLS 
+		    ,WITHUS_AREA 
+		    ,WITHUS_CL 
+		    ,TO_CHAR(STR_DTS, 'YYYY.MM.DD') STR_DTS
+		    ,TO_CHAR(END_DTS, 'YYYY.MM.DD') END_DTS
+		    ,DTL_DESC 
+		    ,REGR_NO 
+		    ,(SELECT USER_NM FROM TBL_AD_USER WHERE USER_NO = REGR_NO) REG_USER_NM
+		    ,TO_CHAR(REG_DTS, 'YYYY.MM.DD') REG_DTS 
+		    ,UPDR_NO 
+		    ,TO_CHAR(UPD_DTS, 'YYYY.MM.DD') UPD_DTS
+		    ,CM_WORKS_WITHUS_SITE.SITE_NO
+		FROM
+	        TBL_CM_WORKS_WITHUS CM_WORKS_WITHUS
+	        ,TBL_CM_WORKS_WITHUS_SITE CM_WORKS_WITHUS_SITE
+	        
+		WHERE CM_WORKS_WITHUS.WITHUS_SEQ = #{withusSeq}
+		AND CM_WORKS_WITHUS.WITHUS_SEQ = CM_WORKS_WITHUS_SITE.WITHUS_SEQ(+)
+	
+	</select>
+	
+</mapper>
+
+
+
+

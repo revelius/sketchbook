@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="event">
+	<resultMap id="listEvtJoin" type="com.giftiel.shop.dto.Event">
+	    <result property="rnum" column="RNUM"/>
+	    <result property="evtApplNo" column="EVT_APPL_NO"/> 
+	    <result property="evtNo" column="EVT_NO"/> 
+	    <result property="evtNm" column="EVT_NM"/> 
+	    <result property="memNo" column="MEM_NO"/> 
+	    <result property="email" column="EMAIL"/> 
+	    <result property="emailRcpYn" column="EMAIL_RCP_YN"/> 
+	    <result property="regrNo" column="REGR_NO"/> 
+	    <result property="regDts" column="REG_DTS"/> 
+	    <result property="updrNo" column="UPDR_NO"/> 
+	    <result property="updDts" column="UPD_DTS"/>
+	    <result property="siteNo" column="SITE_NO"/>  
+	</resultMap>
+	
+	<!-- 구독메일주소 조회 -->
+	<select id="evtJoinEmailChk" parameterType="STRING" resultType="INTEGER">
+	    SELECT /* event.evtJoinEmailChk */
+	        COUNT(*)
+	    FROM
+	        TBL_CM_EVT_JOIN 
+	    WHERE EMAIL = #{email}
+	</select>
+
+	<!-- 구독메일주소 등록 -->
+	<insert id="insertEvtJoin" parameterType="com.giftiel.shop.dto.Event">
+	    INSERT INTO TBL_CM_EVT_JOIN /* event.insertEvtJoin */
+	        ( EVT_APPL_NO , EVT_NO , EVT_NM , MEM_NO , EMAIL , EMAIL_RCP_YN , REGR_NO , REG_DTS , SITE_NO )
+	    VALUES 
+	        ( SEQ_CM_EVENT.NEXTVAL , #{evtNo} , #{evtNm} , #{memNo} , #{email} , #{emailRcpYn} , #{regrNo} , SYSDATE , #{siteNo} )
+	</insert>
+	
+	<!-- 구독메일주소 거부 -->
+	<update id="updateEvtJoin" parameterType="com.giftiel.shop.dto.Event">
+	    UPDATE TBL_CM_EVT_JOIN
+	       SET EMAIL_RCP_YN = #{emailRcpYn}
+	     WHERE EMAIL = #{email}  
+	</update>
+
+</mapper>

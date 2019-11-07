@@ -1,0 +1,236 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] container -->
+		<div id="container">		
+			<!--[s] contents -->
+			<div class="contents contents_tab">
+				<h3><span class="icon1"></span>운영관리 > 고객운영관리 > 1:1문의관리</h3>
+				<a href="#" class="btnType2 advice">도움말</a>
+				<div class="helpBox">
+					<ul class="boxLi">
+						<li>- 사용자 문의사항을 확인하실 수 있습니다.</li>
+						<li>- 기간검색은 작성일 기준으로 검색됩니다.</li>
+						<li>- 첫번째 문의사항은 ‘문의’로 표시되며 답변에 대한 문의사항 입력시 ‘재문의’로 표시됩니다.</li>
+						<li>- 첨부파일 선택시 다운로드 됩니다.</li>
+					</ul>
+					<a href="#" class="close">X</a>
+				</div>
+				<!-- section -->
+				<ul class="tabList">
+					<li><a href="#" class="current">WORKSOUT</a></li>
+					<li><a href="#">CARHARTT</a></li>
+					<li><a href="#">OBEY</a></li>
+					<li><a href="#">BRIXTON</a></li>
+				</ul>
+				<div class="section a1 tabCon_inner">
+					<div class="tableType2">
+						<table>
+							<caption>배송검색</caption>
+							<colgroup>
+								<col width="130px">
+								<col width="*">
+								<col width="130px">
+								<col width="250px">
+								<col width="120px">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="col">기간</th>
+									<td colspan="3">
+										<a href="#" class="btnType1">당일</a>
+										<a href="#" class="btnType1">전일</a>
+										<a href="#" class="btnType1">당월</a>
+										<a href="#" class="btnType1">1주</a>
+										<a href="#" class="btnType1">15일</a>
+										<a href="#" class="btnType1">한달</a>
+										<a href="#" class="btnType1">두달</a>
+										<br /><br />
+										<div class="wrap">
+											<a href="#" class="btnType1">직접검색</a>
+											<input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a> ~
+											<input type="text" id="" name="">
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력"></a>				
+										</div>
+									</td>
+									<td rowspan="3" class="bd_left">
+										<a href="#" class="btnType2">검색</a> <br /><br />
+										<a href="#" class="btnType1">초기화</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">회원</th>
+									<td>
+										<select>
+											<option value="0">이름</option>
+										</select>
+										<input type="text" class="wd_200" />
+									</td>
+									<th scope="col">답변</th>
+									<td>
+										<select>
+											<option value="0">전체</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th scope="col">기간</th>
+									<td colspan="3"><input type="text" class="ip_tit" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- //section -->
+				<!-- section -->
+				<div class="section a2">
+					<div class="tableTitle">
+						<div class="right">
+							<select>
+								<option>15개</option>
+							</select>
+						</div>
+					</div>
+					<div class="tableType1 tblStats">
+						<table>
+							<caption>전체매출통계</caption>
+							<colgroup>
+								<col style="width: 6%" />
+								<col style="width: 9%" />
+								<col style="width: *" />
+								<col style="width: 5%" />
+								<col style="width: 8%" />
+								<col style="width: 13%" />
+								<col style="width: 11%" />
+								<col style="width: 10%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="row">No <a href="#" class="down">▼</a></th>
+									<th scope="row">문의 <a href="#" class="down">▼</a></th>
+									<th scope="row">제목 <a href="#" class="down">▼</a></th>
+									<th scope="row">첨부파일</th>
+									<th scope="row">이름 <a href="#" class="down">▼</a></th>
+									<th scope="row">브랜드 <a href="#" class="down">▼</a></th>
+									<th scope="row">작성일 <a href="#" class="down">▼</a></th>
+									<th scope="row">답변여부 <a href="#" class="down">▼</a></th>
+								</tr>
+							</thead>
+							<tbody>	
+								<tr>	
+									<td>3</td>
+									<td>문의</td>
+									<td class="ta_l">배송문의</td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>홍길동</td>
+									<td>WORKSOUT</td>
+									<td>2015.05.05</td>
+									<td>미답변</td>
+								</tr>
+								<tr>	
+									<td>3</td>
+									<td>문의</td>
+									<td class="ta_l">배송문의</td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>홍길동</td>
+									<td>WORKSOUT</td>
+									<td>2015.05.05</td>
+									<td>미답변</td>
+								</tr>
+								<tr>	
+									<td>3</td>
+									<td>문의</td>
+									<td class="ta_l">배송문의</td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>홍길동</td>
+									<td>WORKSOUT</td>
+									<td>2015.05.05</td>
+									<td>미답변</td>
+								</tr>
+								<tr>	
+									<td>3</td>
+									<td>문의</td>
+									<td class="ta_l">배송문의</td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>홍길동</td>
+									<td>WORKSOUT</td>
+									<td>2015.05.05</td>
+									<td>미답변</td>
+								</tr>
+								<tr>	
+									<td>3</td>
+									<td>문의</td>
+									<td class="ta_l">배송문의</td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>홍길동</td>
+									<td>WORKSOUT</td>
+									<td>2015.05.05</td>
+									<td>미답변</td>
+								</tr>
+								<tr>	
+									<td>3</td>
+									<td>문의</td>
+									<td class="ta_l">배송문의</td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>홍길동</td>
+									<td>WORKSOUT</td>
+									<td>2015.05.05</td>
+									<td>미답변</td>
+								</tr>
+								<tr>	
+									<td>3</td>
+									<td>문의</td>
+									<td class="ta_l">배송문의</td>
+									<td><a href="#"><img src="../static/images/common/file.jpg" alt=""></a></td>
+									<td>홍길동</td>
+									<td>WORKSOUT</td>
+									<td>2015.05.05</td>
+									<td>미답변</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--[s] 페이징 -->
+					<div class="paging">
+						<a href="#" class="firstBtn"><img src="../static/images/common/firstBtn.gif" alt="처음으로"></a>
+						<a href="#" class="prevBtn"><img src="../static/images/common/prevBtn.gif" alt="이전으로"></a>
+						<span class="num">
+							<a href="#" class="on">1</a>
+							<a href="#">2</a>
+							<a href="#">3</a>
+							<a href="#">4</a>
+							<a href="#">5</a>
+							<a href="#">6</a>
+							<a href="#">7</a>
+							<a href="#">8</a>
+							<a href="#">9</a>
+							<a href="#">10</a>
+						</span>
+						<a href="#" class="nextBtn"><img src="../static/images/common/nextBtn.gif" alt="다음으로"></a>
+						<a href="#" class="lastBtn"><img src="../static/images/common/lastBtn.gif" alt="마지막으로"></a>
+						<div class="right">
+							<a href="#" class="btnType2">엑셀다운로드</a>
+						</div>
+					</div>
+					<!--[e] 페이징 -->
+				</div>
+				<!-- //section -->
+			</div>
+			<!--[e] contents -->
+		</div>
+		<!--[e] container -->
+	</div>
+</body>
+</html>

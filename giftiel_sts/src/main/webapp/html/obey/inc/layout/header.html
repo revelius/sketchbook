@@ -1,0 +1,919 @@
+<ul class="skipnav">
+	<li>
+		<a href="#content">컨텐츠 바로가기</a>
+	</li>
+</ul>
+<!-- 임시 스크립트 개발시 삭제 바람. -->
+<script>
+$(function()
+{
+	//- $('.login_menu_area').hide();
+	$('.find_id_area').hide();
+	$('.find_pwd_area').hide();
+	$('.non_members_order_info_area').hide();
+	$('.login_menu_area a.btn_ico_arrow').click(function()
+	{
+		$('.login_menu_area').hide();
+		$('.find_id_area').hide();
+		$('.find_pwd_area').hide();
+		$('.non_members_order_info_area').show();
+		utilMenu.refresh();
+	});
+	$('.login_menu_area ul li:nth-child(1)').click(function()
+	{
+		$('.login_menu_area').hide();
+		$('.find_id_area').show();
+		$('.find_pwd_area').hide();
+		$('.non_members_order_info_area').hide();
+		utilMenu.refresh();
+	});
+	$('.login_menu_area ul li:nth-child(2)').click(function()
+	{
+		$('.login_menu_area').hide();
+		$('.find_id_area').hide();
+		$('.find_pwd_area').show();
+		$('.non_members_order_info_area').hide();
+		utilMenu.refresh();
+	});
+});
+</script>
+<!-- 임시 스크립트 개발시 삭제 바람. -->
+<div class="header_content">
+	<a href="/html/obey/main.html" class="txt_logo">
+		<img src="/html/obey/images/common/txt_logo.png" alt="OBEY" />
+	</a>
+	<div class="menu_area clfix">
+		<div class="util_menu_area">
+			<ul class="util_menu clfix">
+				<li class="first_child">
+					<a href="#" class="util_item">SEARCH</a>
+					<div class="util_add">
+						<div class="add_content">
+							<span class="input_txt input_btn_search">
+								<input type="text" name="" id="" placeholder="SEARCH" />
+							</span>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="util_item">HELP</a>
+					<div class="util_add">
+						<div class="add_content">
+							<dl class="util_help_info clfix">
+								<dt>
+									<span class="bu">PHONE</span>
+								</dt>
+								<dd>02-541-0856</dd>
+								<dt>
+									<span class="bu">MON~FRI</span>
+								</dt>
+								<dd>9:30 ~ 18:30</dd>
+								<dt>
+									<span class="bu">BREAK</span>
+								</dt>
+								<dd>12:30 ~ 13:30</dd>
+							</dl>
+							<div class="btn_area">
+								<a href="#" class="btn_ico_arrow color01">MORE INFORMATION</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<!-- 로그인 전 노출 - 아래 내용들은 상황에 맞게 개발 처리 해주세요. -->
+				<li>
+					<a href="#" class="util_item">LOG-IN</a>
+					<div class="util_add">
+						<div class="add_content">
+							<!-- 로그인 메뉴 영역 -->
+							<div class="login_menu_area">
+								<div class="login_menu">
+									<span class="input_txt">
+										<input type="text" name="" id="" placeholder="ID(email)" />
+									</span>
+									<span class="input_txt">
+										<input type="password" name="" id="" placeholder="PASSWORD" />
+									</span>
+									<a href="#" class="btn_black01">LOGIN</a>
+									<ul>
+										<li class="first_child">
+											<a href="#">아이디찾기</a>
+										</li>
+										<li>
+											<a href="#">비밀번호찾기</a>
+										</li>
+										<li>
+											<a href="#">회원가입</a>
+										</li>
+									</ul>
+								</div>
+								<div class="btn_area">
+									<a href="#" class="btn_ico_arrow color01">비회원주문확인</a>
+								</div>
+							</div>
+							<!-- 로그인 메뉴 영역 -->
+							<!-- 아이디 찾기 영역 -->
+							<div class="find_id_area">
+								<div class="find_info_menu">
+									<div class="cont_tit">아이디 찾기</div>
+									<!-- 아이디 찾기 - 입력 -->
+									<div class="find_info_form_input">
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="이름" />
+										</span>
+										<div class="input_layout01 clfix">
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone01" placeholder="010" />
+												</span>
+											</div>
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone02" />
+												</span>
+											</div>
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone03" />
+												</span>
+											</div>
+											<div class="layout layout_ctr02">
+												<a href="#" class="btn_gray01">인증</a>
+											</div>
+										</div>
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="인증번호" />
+										</span>
+										<a href="#" class="btn_black01">다음</a>
+									</div>
+									<!-- 아이디 찾기 - 입력 -->
+									<!-- 아이디 찾기 - 결과 -->
+									<div class="find_info_form_result">
+										<div class="find_result_txt">ID : worksout@worksout.co.kr</div>
+										<a href="#" class="btn_black01">로그인</a>
+									</div>
+									<!-- 아이디 찾기 - 결과 -->
+								</div>
+							</div>
+							<!-- 아이디 찾기 영역 -->
+							<!-- 비밀번호 찾기 영역 -->
+							<div class="find_pwd_area">
+								<div class="find_info_menu">
+									<div class="cont_tit">비밀번호 찾기</div>
+									<!-- 비밀번호 찾기 - 입력 -->
+									<div class="find_info_form_input">
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="아이디 (이메일)" />
+										</span>
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="이름" />
+										</span>
+										<div class="input_layout01 clfix">
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone01" placeholder="010" />
+												</span>
+											</div>
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone02" />
+												</span>
+											</div>
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone03" />
+												</span>
+											</div>
+											<div class="layout layout_ctr02">
+												<a href="#" class="btn_gray01">인증</a>
+											</div>
+										</div>
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="인증번호" />
+										</span>
+										<a href="#" class="btn_black01">다음</a>
+									</div>
+									<!-- 비밀번호 찾기 - 입력 -->
+									<!-- 비밀번호 찾기 - 새비밀번호입력 -->
+									<div class="find_info_form_new">
+										<span class="input_txt">
+											<input type="password" name="" id="" placeholder="새비밀번호" />
+										</span>
+										<span class="input_txt">
+											<input type="password" name="" id="" placeholder="비밀번호확인" />
+										</span>
+										<div class="notice_txt">6~15자 이내의 영,숫자,특수문자 입력 가능</div>
+										<div class="find_result_txt02">사용가능</div>
+										<a href="#" class="btn_black01">변경</a>
+									</div>
+									<!-- 비밀번호 찾기 - 새비밀번호입력 -->
+									<!-- 비밀번호 찾기 - 결과 -->
+									<div class="find_info_form_result">
+										<div class="find_result_txt txt_left">비밀번호가 재설정되었습니다.
+											<br> MYPAGE&gt; PROFILE&gt; 비밀번호 관리에서
+											<br> 변경이 가능합니다.
+											<br>
+										</div>
+										<a href="#" class="btn_black01">로그인</a>
+									</div>
+									<!-- 비밀번호 찾기 - 결과 -->
+								</div>
+							</div>
+							<!-- 비밀번호 찾기 영역 -->
+							<!-- 비회원 주문확인 영역 -->
+							<div class="non_members_order_info_area">
+								<div class="find_info_menu add_info_menu">
+									<div class="cont_tit">비회원 주문확인</div>
+									<div class="find_info_form_input">
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="이름" />
+										</span>
+										<div class="input_layout01 clfix">
+											<div class="layout layout_ctr03">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone01" placeholder="010" />
+												</span>
+											</div>
+											<div class="layout layout_ctr03">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone02" />
+												</span>
+											</div>
+											<div class="layout layout_ctr04">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone03" />
+												</span>
+											</div>
+										</div>
+										<span class="input_txt">
+											<input type="password" name="" id="" placeholder="주문비밀번호" />
+										</span>
+										<a href="#" class="btn_black01">조회</a>
+									</div>
+									<div class="add_info_txt">
+										<div class="txt01">주문비밀번호를 분실 시 아래로 문의주세요.</div>
+										<dl class="util_help_info02 clfix">
+											<dt>PHONE</dt>
+											<dd>02-541-0854</dd>
+											<dt>MON~FRI</dt>
+											<dd>9:30 ~ 18:30</dd>
+											<dt>BREAK</dt>
+											<dd>12:30 ~ 13:30</dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+							<!-- 비회원 주문확인 영역 -->
+						</div>
+					</div>
+				</li>
+				<!-- 로그인 전 노출 - 아래 내용들은 상황에 맞게 개발 처리 해주세요. -->
+				<!-- 로그인 후 노출 - 아래 내용들은 상황에 맞게 개발 처리 해주세요. -->
+				<li>
+					<a href="#" class="util_item">ACCOUNT</a>
+					<div class="util_add">
+						<div class="add_content">
+							<dl class="util_help_info03 clfix">
+								<dt>
+									<span class="bu">ID(email)</span>
+								</dt>
+								<dd>kuj0437@naver.com</dd>
+								<dt>
+									<span class="bu">POINT</span>
+								</dt>
+								<dd>2,000 P</dd>
+							</dl>
+							<div class="btn_area">
+								<a href="#" class="btn_ico_arrow color01 interval01">LOGOUT</a>
+								<a href="#" class="btn_ico_arrow color01">MYPAGE</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<!-- 로그인 후 노출 - 아래 내용들은 상황에 맞게 개발 처리 해주세요. -->
+				<li>
+					<a href="#" class="util_item">CART(0)</a>
+					<div class="util_add">
+						<div class="add_content">
+							<div class="cart_slide_area">
+								<div style="height:329px" class="cart_slide_container">
+									<div class="cart_slide">
+										<div class="silde_item clfix">
+											<a href="#" class="p_img">
+												<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+												/>
+											</a>
+											<div class="p_info">
+												<div class="p_name">SINGLE KNEE PANTNEE PANTNEE PANTNEE PANTNEE PANT LI EI CAJON BL..</div>
+												<div
+												class="p_size">SIZE S</div>
+											<div class="ico_price">123,000</div>
+										</div>
+										<a href="#" class="btn_del">
+											<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+										</a>
+									</div>
+									<div class="silde_item clfix">
+										<a href="#" class="p_img">
+											<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+											/>
+										</a>
+										<div class="p_info">
+											<div class="p_name">SINGLE KNEE LI EI CAJON BL..</div>
+											<div class="p_size">SIZE S</div>
+											<div class="ico_price">123,000</div>
+										</div>
+										<a href="#" class="btn_del">
+											<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+										</a>
+									</div>
+									<div class="silde_item clfix">
+										<a href="#" class="p_img">
+											<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+											/>
+										</a>
+										<div class="p_info">
+											<div class="p_name">SI CAJON BL..</div>
+											<div class="p_size">SIZE S</div>
+											<div class="ico_price">123,000</div>
+										</div>
+										<a href="#" class="btn_del">
+											<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+										</a>
+									</div>
+									<div class="silde_item clfix">
+										<a href="#" class="p_img">
+											<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+											/>
+										</a>
+										<div class="p_info">
+											<div class="p_name">SINGLE KNEE LI EI CAJON BL..</div>
+											<div class="p_size">SIZE S</div>
+											<div class="ico_price">123,000</div>
+										</div>
+										<a href="#" class="btn_del">
+											<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+										</a>
+									</div>
+									<div class="silde_item clfix">
+										<a href="#" class="p_img">
+											<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+											/>
+										</a>
+										<div class="p_info">
+											<div class="p_name">SI CAJON BL..</div>
+											<div class="p_size">SIZE S</div>
+											<div class="ico_price">123,000</div>
+										</div>
+										<a href="#" class="btn_del">
+											<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="cart_ctr">
+								<a href="#" class="btn_cart_up"></a>
+								<a href="#" class="btn_cart_down"></a>
+							</div>
+						</div>
+						<div class="cart_total_price clfix">
+							<div class="txt">TOTAL:</div>
+							<div class="ico_price">406,000</div>
+						</div>
+						<div class="btn_area">
+							<a href="#" class="btn_ico_arrow color01">BUY NOW</a>
+						</div>
+					</div>
+		</div>
+		</li>
+		</ul>
+	</div>
+	<a href="#" class="btn_all_menu">
+		<span class="btn_arrow">
+			<svg x="0px" y="0px" width="20px" viewBox="0 0 100 100" style="position:absolute;left:0;top:0;fill:#000"
+			enable-background="new 0 0 100 100">
+				<rect width="100" height="12" x="0" y="0" class="gh-svg-rect gh-svg-rect-top"></rect>
+			</svg>
+			<svg x="0px" y="0px" width="20px" viewBox="0 0 100 100" style="position:absolute;left:0;top:0;fill:#000"
+			enable-background="new 0 0 100 100">
+				<rect width="100" height="12" x="0" y="0" class="gh-svg-rect gh-svg-rect-top"></rect>
+			</svg>
+			<svg x="0px" y="0px" width="20px" viewBox="0 0 100 100" style="position:absolute;left:0;top:0;fill:#000"
+			enable-background="new 0 0 100 100">
+				<rect width="100" height="12" x="0" y="0" class="gh-svg-rect gh-svg-rect-top"></rect>
+			</svg>
+		</span>
+	</a>
+	<a href="#" class="btn_all_menu02">
+		<span class="btn_arrow">
+			<svg x="0px" y="0px" width="16px" viewBox="0 0 100 100" style="position:absolute;left:0;top:0;fill:#000"
+			enable-background="new 0 0 100 100">
+				<rect width="100" height="12" x="0" y="0" class="gh-svg-rect gh-svg-rect-top"></rect>
+			</svg>
+			<svg x="0px" y="0px" width="16px" viewBox="0 0 100 100" style="position:absolute;left:0;top:0;fill:#000"
+			enable-background="new 0 0 100 100">
+				<rect width="100" height="12" x="0" y="0" class="gh-svg-rect gh-svg-rect-top"></rect>
+			</svg>
+			<svg x="0px" y="0px" width="16px" viewBox="0 0 100 100" style="position:absolute;left:0;top:0;fill:#000"
+			enable-background="new 0 0 100 100">
+				<rect width="100" height="12" x="0" y="0" class="gh-svg-rect gh-svg-rect-top"></rect>
+			</svg>
+		</span>
+		<span class="m_cart_count">27</span>
+	</a>
+</div>
+</div>
+<!-- 웹 버전 전체메뉴 -->
+<div style="display:none" class="all_menu_wrap">
+	<p href="#" class="txt_logo">
+		<img src="/html/obey/images/common/txt_logo.png" alt="WORKSOUT" />
+	</p>
+	<ul class="all_menu_list01">
+		<li>
+			<a href="#">ONLINE SHOP</a>
+		</li>
+		<li>
+			<a href="#">ABOUT</a>
+		</li>
+		<li>
+			<a href="#">OBEY AWARNESS</a>
+		</li>
+		<li>
+			<a href="#">STORE INFO</a>
+		</li>
+		<li>
+			<a href="#">NEWS</a>
+		</li>
+		<li>
+			<a href="#">LOOKBOOK</a>
+		</li>
+		<li>
+			<a href="#">CUSTOMER CARE</a>
+		</li>
+	</ul>
+</div>
+<!-- 웹 버전 전체메뉴 -->
+<!-- 모바일, 태블릿 버전 전체메뉴 -->
+<div style="display:none" class="all_menu_wrap02">
+	<div class="scroll_wrap">
+		<div class="util_menu_area02">
+			<ul class="util_menu02 clfix">
+				<li class="first_child">
+					<a href="#" class="util_item">SEARCH</a>
+					<div class="util_add">
+						<div class="add_content">
+							<span class="input_txt input_btn_search">
+								<input type="text" name="" id="" placeholder="SEARCH" />
+							</span>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="#" class="util_item">HELP</a>
+					<div class="util_add">
+						<div class="add_content">
+							<dl class="util_help_info clfix">
+								<dt>PHONE</dt>
+								<dd>02-541-0856</dd>
+								<dt>MON~FRI</dt>
+								<dd>9:30 ~ 18:30</dd>
+								<dt>BREAK</dt>
+								<dd>12:30 ~ 13:30</dd>
+							</dl>
+							<div class="btn_area">
+								<a href="#" class="btn_ico_arrow color01">MORE INFORMATION</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<!-- 로그인 전 노출 - 아래 내용들은 상황에 맞게 개발 처리 해주세요. -->
+				<li>
+					<a href="#" class="util_item">LOG-IN</a>
+					<div class="util_add">
+						<div class="add_content">
+							<!-- 로그인 메뉴 영역 -->
+							<div class="login_menu_area">
+								<div class="login_menu">
+									<span class="input_txt">
+										<input type="text" name="" id="" placeholder="ID(email)" />
+									</span>
+									<span class="input_txt">
+										<input type="password" name="" id="" placeholder="PASSWORD" />
+									</span>
+									<a href="#" class="btn_black01">LOGIN</a>
+									<ul>
+										<li class="first_child">
+											<a href="#">아이디찾기</a>
+										</li>
+										<li>
+											<a href="#">비밀번호찾기</a>
+										</li>
+										<li>
+											<a href="#">회원가입</a>
+										</li>
+									</ul>
+								</div>
+								<div class="btn_area">
+									<a href="#" class="btn_ico_arrow color01">비회원주문확인</a>
+								</div>
+							</div>
+							<!-- 로그인 메뉴 영역 -->
+							<!-- 아이디 찾기 영역 -->
+							<div class="find_id_area">
+								<div class="find_info_menu">
+									<div class="cont_tit">아이디 찾기</div>
+									<!-- 아이디 찾기 - 입력 -->
+									<div class="find_info_form_input">
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="이름" />
+										</span>
+										<div class="input_layout01 clfix">
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone01" placeholder="010" />
+												</span>
+											</div>
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone02" />
+												</span>
+											</div>
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone03" />
+												</span>
+											</div>
+											<div class="layout layout_ctr02">
+												<a href="#" class="btn_gray01">인증</a>
+											</div>
+										</div>
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="인증번호" />
+										</span>
+										<a href="#" class="btn_black01">다음</a>
+									</div>
+									<!-- 아이디 찾기 - 입력 -->
+									<!-- 아이디 찾기 - 결과 -->
+									<div class="find_info_form_result">
+										<div class="find_result_txt">ID : worksout@worksout.co.kr</div>
+										<a href="#" class="btn_black01">로그인</a>
+									</div>
+									<!-- 아이디 찾기 - 결과 -->
+								</div>
+							</div>
+							<!-- 아이디 찾기 영역 -->
+							<!-- 비밀번호 찾기 영역 -->
+							<div class="find_pwd_area">
+								<div class="find_info_menu">
+									<div class="cont_tit">비밀번호 찾기</div>
+									<!-- 비밀번호 찾기 - 입력 -->
+									<div class="find_info_form_input">
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="아이디 (이메일)" />
+										</span>
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="이름" />
+										</span>
+										<div class="input_layout01 clfix">
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone01" placeholder="010" />
+												</span>
+											</div>
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone02" />
+												</span>
+											</div>
+											<div class="layout layout_ctr01">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone03" />
+												</span>
+											</div>
+											<div class="layout layout_ctr02">
+												<a href="#" class="btn_gray01">인증</a>
+											</div>
+										</div>
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="인증번호" />
+										</span>
+										<a href="#" class="btn_black01">다음</a>
+									</div>
+									<!-- 비밀번호 찾기 - 입력 -->
+									<!-- 비밀번호 찾기 - 새비밀번호입력 -->
+									<div class="find_info_form_new">
+										<span class="input_txt">
+											<input type="password" name="" id="" placeholder="새비밀번호" />
+										</span>
+										<span class="input_txt">
+											<input type="password" name="" id="" placeholder="비밀번호확인" />
+										</span>
+										<div class="notice_txt">6~15자 이내의 영,숫자,특수문자 입력 가능</div>
+										<div class="find_result_txt02">사용가능</div>
+										<a href="#" class="btn_black01">변경</a>
+									</div>
+									<!-- 비밀번호 찾기 - 새비밀번호입력 -->
+									<!-- 비밀번호 찾기 - 결과 -->
+									<div class="find_info_form_result">
+										<div class="find_result_txt txt_left">비밀번호가 재설정되었습니다.
+											<br> MYPAGE&gt; PROFILE&gt; 비밀번호 관리에서
+											<br> 변경이 가능합니다.
+											<br>
+										</div>
+										<a href="#" class="btn_black01">로그인</a>
+									</div>
+									<!-- 비밀번호 찾기 - 결과 -->
+								</div>
+							</div>
+							<!-- 비밀번호 찾기 영역 -->
+							<!-- 비회원 주문확인 영역 -->
+							<div class="non_members_order_info_area">
+								<div class="find_info_menu add_info_menu">
+									<div class="cont_tit">비회원 주문확인</div>
+									<div class="find_info_form_input">
+										<span class="input_txt">
+											<input type="text" name="" id="" placeholder="이름" />
+										</span>
+										<div class="input_layout01 clfix">
+											<div class="layout layout_ctr03">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone01" placeholder="010" />
+												</span>
+											</div>
+											<div class="layout layout_ctr03">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone02" />
+												</span>
+											</div>
+											<div class="layout layout_ctr04">
+												<span class="input_txt">
+													<input type="text" name="phone" id="phone03" />
+												</span>
+											</div>
+										</div>
+										<span class="input_txt">
+											<input type="password" name="" id="" placeholder="주문비밀번호" />
+										</span>
+										<a href="#" class="btn_black01">조회</a>
+									</div>
+									<div class="add_info_txt">
+										<div class="txt01">주문비밀번호를 분실 시 아래로 문의주세요.</div>
+										<dl class="util_help_info02 clfix">
+											<dt>PHONE</dt>
+											<dd>02-541-0854</dd>
+											<dt>MON~FRI</dt>
+											<dd>9:30 ~ 18:30</dd>
+											<dt>BREAK</dt>
+											<dd>12:30 ~ 13:30</dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+							<!-- 비회원 주문확인 영역 -->
+						</div>
+					</div>
+				</li>
+				<!-- 로그인 전 노출 - 아래 내용들은 상황에 맞게 개발 처리 해주세요. -->
+				<!-- 로그인 후 노출 - 아래 내용들은 상황에 맞게 개발 처리 해주세요. -->
+				<li>
+					<a href="#" class="util_item">ACCOUNT</a>
+					<div class="util_add">
+						<div class="add_content">
+							<dl class="util_help_info03 clfix">
+								<dt>ID(email)</dt>
+								<dd>kuj0437@naver.com</dd>
+								<dt>POINT</dt>
+								<dd>2,000 P</dd>
+							</dl>
+							<div class="btn_area">
+								<a href="#" class="btn_ico_arrow color01 interval01">LOGOUT</a>
+								<a href="#" class="btn_ico_arrow color01">MYPAGE</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				<!-- 로그인 후 노출 - 아래 내용들은 상황에 맞게 개발 처리 해주세요. -->
+				<li>
+					<a href="#" class="util_item">CART(0)</a>
+					<div class="util_add">
+						<div class="add_content">
+							<div class="cart_slide_area">
+								<div class="cart_slide_container">
+									<div class="cart_slide">
+										<div class="silde_item clfix">
+											<a href="#" class="p_img">
+												<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+												/>
+											</a>
+											<div class="p_info">
+												<div class="p_name">SINGLE KNEE PANTNEE PANTNEE PANTNEE PANTNEE PANT LI EI CAJON BL..</div>
+												<div
+												class="p_size">SIZE S</div>
+											<div class="ico_price">123,000</div>
+										</div>
+										<a href="#" class="btn_del">
+											<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+										</a>
+									</div>
+									<div class="silde_item clfix">
+										<a href="#" class="p_img">
+											<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+											/>
+										</a>
+										<div class="p_info">
+											<div class="p_name">SINGLE KNEE LI EI CAJON BL..</div>
+											<div class="p_size">SIZE S</div>
+											<div class="ico_price">123,000</div>
+										</div>
+										<a href="#" class="btn_del">
+											<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+										</a>
+									</div>
+									<div class="silde_item clfix">
+										<a href="#" class="p_img">
+											<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+											/>
+										</a>
+										<div class="p_info">
+											<div class="p_name">SI CAJON BL..</div>
+											<div class="p_size">SIZE S</div>
+											<div class="ico_price">123,000</div>
+										</div>
+										<a href="#" class="btn_del">
+											<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+										</a>
+									</div>
+									<div class="silde_item clfix">
+										<a href="#" class="p_img">
+											<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+											/>
+										</a>
+										<div class="p_info">
+											<div class="p_name">SINGLE KNEE PANTNEE PANTNEE PANTNEE PANTNEE PANT LI EI CAJON BL..</div>
+											<div
+											class="p_size">SIZE S</div>
+										<div class="ico_price">123,000</div>
+									</div>
+									<a href="#" class="btn_del">
+										<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+									</a>
+								</div>
+								<div class="silde_item clfix">
+									<a href="#" class="p_img">
+										<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+										/>
+									</a>
+									<div class="p_info">
+										<div class="p_name">SINGLE KNEE LI EI CAJON BL..</div>
+										<div class="p_size">SIZE S</div>
+										<div class="ico_price">123,000</div>
+									</div>
+									<a href="#" class="btn_del">
+										<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+									</a>
+								</div>
+								<div class="silde_item clfix">
+									<a href="#" class="p_img">
+										<img src="/html/obey/images/onlineshop/img_cart01.jpg" alt="관리자에서 등록할 수 있게 개발 필요"
+										/>
+									</a>
+									<div class="p_info">
+										<div class="p_name">SI CAJON BL..</div>
+										<div class="p_size">SIZE S</div>
+										<div class="ico_price">123,000</div>
+									</div>
+									<a href="#" class="btn_del">
+										<img src="/html/obey/images/common/btn_del_reply.png" alt="삭제" />
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="cart_ctr">
+							<a href="#" class="btn_cart_up"></a>
+							<a href="#" class="btn_cart_down"></a>
+						</div>
+					</div>
+					<div class="cart_total_price clfix">
+						<div class="txt">TOTAL:</div>
+						<div class="ico_price">406,000</div>
+					</div>
+					<div class="btn_area">
+						<a href="#" class="btn_ico_arrow color01">BUY NOW</a>
+					</div>
+		</div>
+	</div>
+	</li>
+	</ul>
+</div>
+<ul class="all_menu_list02">
+	<li>
+		<a href="#">ONLINE SHOP</a>
+		<div class="sub_list">
+			<a href="#">S / S 2015</a>
+			<a href="#">OUTLET</a>
+			<a href="#">COLLABORATION</a>
+		</div>
+	</li>
+	<li>
+		<a href="#">ABOUT</a>
+	</li>
+	<li>
+		<a href="#">OBEY AWARENESS</a>
+	</li>
+	<li>
+		<a href="#">STORE INFO</a>
+	</li>
+	<li>
+		<a href="#">NEWS</a>
+	</li>
+	<li>
+		<a href="#">LOOKBOOK</a>
+	</li>
+	<li>
+		<a href="#">CUSTOMER CARE</a>
+	</li>
+</ul>
+</div>
+</div>
+<!-- 모바일, 태블릿 버전 전체메뉴 -->
+<!-- s: 20150908 obey awareness 추가 -->
+<div class="awareness_area" style="display:none;">
+	<div class="awareness_wrap">
+		<div class="awareness_logo">
+			<img src="/html/obey/images/common/txt_obey_radio.png" alt="OBEY AWARENESS" />
+		</div>
+		<div id="mySwipe" class="awareness_container">
+			<div class="awareness_list clfix">
+				<div class="awareness_item">
+					<a href="#">
+						<img src="/html/obey/images/common/img_radio01.jpg" alt="" />
+						<span class="hide_txt">제목 뿌리기1</span>
+						<span class="hide_txt">설명 뿌리기1</span>
+					</a>
+				</div>
+				<div class="awareness_item">
+					<a href="#">
+						<img src="/html/obey/images/common/img_radio01.jpg" alt="" />
+						<span class="hide_txt">제목 뿌리기2</span>
+						<span class="hide_txt">설명 뿌리기2</span>
+					</a>
+				</div>
+				<div class="awareness_item">
+					<a href="#">
+						<img src="/html/obey/images/common/img_radio01.jpg" alt="" />
+						<span class="hide_txt">제목 뿌리기3</span>
+						<span class="hide_txt">설명 뿌리기3</span>
+					</a>
+				</div>
+				<div class="awareness_item">
+					<a href="#">
+						<img src="/html/obey/images/common/img_radio01.jpg" alt="" />
+						<span class="hide_txt">제목 뿌리기4</span>
+						<span class="hide_txt">설명 뿌리기5</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="awareness_util clfix">
+			<span class="util01">
+				<span>3/20</span>
+			</span>
+			<span class="util02">
+				<select>
+					<option>SELECT DEVICE</option>
+				</select>
+				<a href="#" class="btn_download">
+					<span>DOWNLOAD</span>
+				</a>
+			</span>
+		</div>
+		<!-- 위 슬라이드되면 아래 내용 바뀌기 -->
+		<!-- 위 슬라이드에서 hide_txt 에 뿌려지는 내용들을 아래에 넣기 -->
+		<!-- 룩북과 동일함 -->
+		<dl class="awareness_txt_info">
+			<dt>OBEY GO CAMPAIGN</dt>
+			<dd>GO CAMPAIGN은 세계의 고아나 사회적으로 약자인 어린이들에게 기본적인 교육, 직업훈련, 의료시설, 음식을 지원합니다. 고 캠페인은
+				진짜 그곳에 필요한 것이 무엇인지 듣고 필요한 것들을 지원해 줍니다. 기부가 필요한곳에 기부를 할 수 있고 기부로 인해 변화된 모습을
+				확인 하실 수 있습니다. 오베이는 GOCAMPAIGN 을 서포트 합니다.</dd>
+		</dl>
+		<a href="#" onclick="mySwipe.prev(); return false;" class="btn_awareness_prev">
+			<span class="hide_txt">이전으로</span>
+		</a>
+		<a href="#" onclick="mySwipe.next(); return false;" class="btn_awareness_next">
+			<span class="hide_txt">다음으로</span>
+		</a>
+	</div>
+</div>
+<script>
+var elem = document.getElementById('mySwipe');
+window.mySwipe = Swipe(elem,
+{
+	// startSlide: 4,
+	// auto: 3000,
+	// continuous: true,
+	// disableScroll: true,
+	// stopPropagation: true,
+	// callback: function(index, element) {},
+	// transitionEnd: function(index, element) {}
+});
+</script>
+<!-- e: 20150908 obey awareness 추가 -->

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WORKSOUT관리자 센터 화면목록</title>
+<style type="text/css">
+	body, div, p, table, th, td { margin:0; padding:0; font-family:dotum; font-size:12px; line-height:16px; color:#777; }
+	caption{ width:0; height:0;  z-index:-1; font-size:0; line-height:0; visibility:hidden; }
+	a { text-decoration:none; color:#999; cursor:pointer; }
+	a:hover { text-decoration:underline; color:#4ab3cc; }
+	table { border-collapse: collapse; border-collapse:separate; border-spacing: 0; }
+	table { width:100%; min-width:1100px; border: 1px solid #afc6c5; border-spacing:0; color: #232830; }
+	h1 { padding:10px 0 10px 3px; margin-bottom: 10px; border-bottom: 4px double #ccc; font-weight:bold; font-size:24px; color: #232830; letter-spacing:-1px; text-align:left; }
+	h1 strong { color: #f9723b; }
+	h1 span { float: right; }
+	table th { background-color: #232830; color: #b8d2d1; border-left: 1px solid #afc6c5; padding:10px 0 10px 0; font-size:13px; font-weight:normal; }
+	table th:first-child { border-left: 0; }
+	table td { padding:7px 10px 5px 10px; border: solid #afc6c5; border-width: 1px 0 0 1px; vertical-align:top; }
+	table td:first-child { vertical-align:top; }
+	table td.index { background-color:#f5f5f5; border-bottom:solid 2px #aaa; }
+	table td.index span { color:#bababa; }
+	table td.nodata { color:#ccc; vertical-align:top; }
+	table td.txt { padding-left:5px; font-size:11px; color:#999999; }
+	table td.txt a { color: #999; }
+	table td.txt span { margin:0 0 0 5px; display:inline-block; white-space:nowrap; }
+	table tr.sort td { border-top: 1px solid #232830; }
+	table tr .num { text-align: center; border-left: 0; }
+	table tr .num:hover { background: #afc6c5; }
+	table tr.sort .num + td { font-weight: bold;}
+	.wrap { padding:20px; }
+</style>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		function workList() {
+			var $workList = $('table.listbox'),
+				$workListTr = $workList.find('tbody > tr'),
+				$noData = $workListTr.find('td:empty'),
+				$allPage = $('h1 strong'),
+				$listTxt = $('table caption').text(),
+				$listAnchor = $workList.find('a');
+			$workListTr.each(function() {
+				var tgIndex = $(this).index() + 1;
+				$(this).prepend('<td class="num">'+ tgIndex +'</td>');
+			});
+			$workListTr.find("td:first").on("click", function() {
+				if ( $("tr.clicked").size() < 1 ) {
+					$(this).closest("tr").addClass("clicked");
+				} else {
+					var clickedNum = $("tr.clicked").find("td:first").text(),
+						thisNum = $(this).text();
+					$("tr.clicked").removeClass("clicked");
+					if ( clickedNum - thisNum > 0 ) {
+						alert(clickedNum - thisNum + 1);
+					} else {
+						alert(thisNum - clickedNum + 1);
+					}
+				}
+			});
+			console.log($listTxt);
+			$allPage.text($workListTr.size());
+			$noData.addClass('nodata').text('-');
+			$listAnchor.addClass('link').each(function() {
+				var tgTxt = $(this).text();
+				$(this).attr('href', $listTxt + tgTxt);
+			})
+			$listAnchor.on('mouseenter', function() {
+				var currentTr = $(this).parent().siblings().filter('.num');
+				currentTr.css("background", "#afc6c5");
+			}).on('mouseleave', function() {
+				var currentTr = $(this).parent().siblings().filter('.num');
+				currentTr.css("background", "#fff");
+			});
+
+		};
+		workList();
+	});
+</script>
+</head>
+
+<body>
+<div class="wrap">
+<h1>WORKSOUT관리자 센터 화면목록 <span>Total : <strong></strong> p</span></h1>
+<table class="listbox">
+<caption>/html/admin</caption>
+<colgroup>
+	<col width="40px" />
+	<col width="150px" />
+	<col width="200px" />
+	<col width="200px" />
+	<col width="200px" />
+	<col width="200px" />
+	<col width="300px" />
+	<col width="*" />
+</colgroup>
+<thead>
+	<tr>
+		<th>Num</th>
+		<th>1depth/folder</th>
+		<th>2depth</th>
+		<th>3depth</th>
+		<th>4depth</th>
+		<th>5depth</th>
+		<th>url</th>
+		<th>비고</th>
+	</tr>
+</thead>
+<tbody>
+	<tr class="sort">
+		<td>로그인</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/login.html</a></td>
+		<td></td>
+	</tr>
+	<tr class="sort">
+		<td rowspan="8">회원관리</td>
+		<td rowspan="6">회원목록</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/member/memberList.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>회원정보</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/member/membershipInfo.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>주문내역</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/member/orderList.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="2">1:1문의</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/member/inquire.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>1:1문의 팝업</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/member_reply.html</a></td>
+		<td>미답변 문의글에 답변</td>
+	</tr>
+	<tr>
+		<td>Cart</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/member/cart.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="2">포인트 관리</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/member/point.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/member/point2.html</a></td>
+		<td>검색시</td>
+	</tr>
+
+	<tr class="sort">
+		<td rowspan="18">상품관리</td>
+		<td rowspan="8">카테고리관리</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/product/category.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="7">일반카테고리관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/product/categorySetting.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>대카테고리수정</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/cateDepth1_modify.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>대카테고리추가</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/cateDepth1_add.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>중카테고리수정</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/cateDepth2_modify.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>중카테고리추가</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/cateDepth2_add.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>소카테고리수정</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/cateDepth3_modify.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>소카테고리추가</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/cateDepth3_add.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="7">상품관리</td>
+		<td>상품등록</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/product/prdAdd.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품아이콘관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/product/prdIcon.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품목록</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/product/prdList.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품진열설정</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/product/prdDisplay.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품휴지통</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/product/prdDel.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="2">상품엘셀일괄등록</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/product/prdExcel.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품엑셀일괄등록 레이어</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/prd_excel.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="3">상품정보고시 관리</td>
+		<td>상품정보고시 관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/product/prdManage.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품정보고시 관리 추가</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/prd_manage.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품정보고시 관리 추가</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/prd_manage2.html</a></td>
+		<td></td>
+	</tr>
+
+	<tr class="sort">
+		<td rowspan="20">주문/매출관리</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/ordersales_main.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="6">전체주문</td>
+		<td>전체주문</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/allorder.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/cart_add.html</a></td>
+		<td>cart추가</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/prd_number.html</a></td>
+		<td>상품검색</td>
+	</tr>
+	<tr>
+		<td>전체주문 상세</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/allorder_detail.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>전체주문 상세</td>
+		<td>전체주문 상세 팝업(1)</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/orderDetail_all.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>전체주문 상세</td>
+		<td>전체주문 상세 팝업(2)</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/orderDetail_all02.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="5">주문관리</td>
+		<td rowspan="5">배송관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/ship.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>배송번호 입력 팝업</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/delivery_number.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>주문 내역 상세 팝업</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/orderDetail_ship.html</a></td>
+		<td>신규 주문(결제완료)</td>
+	</tr>
+	<tr>
+		<td>주문 내역 상세 팝업</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/orderDetail_ship02.html</a></td>
+		<td>출고지연/배송준비(미배송)</td>
+	</tr>
+	<tr>
+		<td>주문 내역 상세 팝업</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/orderDetail_ship03.html</a></td>
+		<td>배송중/배송완료</td>
+	</tr>
+	<tr>
+		<td rowspan="4">취소/교환/반품신청관리</td>
+		<td>취소관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/cancle.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="2">교환관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/exchange.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품번호 검색 변경</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/product_number.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>반품관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/takeBack.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="4">추가결제관리</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/add_buy.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>추가결제 등록</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/add_buy_register.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>주문검색 팝업(주문검색 클릭시)</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/order_search.html</a></td>
+		<td>상품검색 클릭시 <a href="#" target="_blank">/popup/prd_number.html</a></td>
+	</tr>
+	<tr>
+		<td>추가결제 상세</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/ordersales/add_buy_detail.html</a></td>
+		<td></td>
+	</tr>
+	
+	<tr class="sort">
+		<td rowspan="30">운영관리</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/manage.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/main.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="2">고객운영관리</td>
+		<td rowspan="2">1:1문의관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/inquiry.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/inquiry_write.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="3">권환관리</td>
+		<td rowspan="3">부운영자</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/operator.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/operator2.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/operator3.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="4">SMS관리</td>
+		<td>문구관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/sms1.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>SMS발송</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/sms2.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>회원주소록팝업</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/address_book.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>발송내역</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/send_list.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="4">메일발송관리</td>
+		<td>메일발송</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/mail_send.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>회원메일주소팝업</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/mail_book.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="2">발송내역</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/mail_send_list.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/mail_send_list2.html</a></td>
+		<td>발송내역 상세화면</td>
+	</tr>
+	<tr>
+		<td rowspan="3">메인관리</td>
+		<td rowspan="3">WORKSOUT</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/worksout.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품연결 팝업</td>
+		<td></td>
+			<td><a href="#" target="_blank">/popup/prd_link.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>컨텐츠연결 팝업</td>
+		<td></td>
+			<td><a href="#" target="_blank">/popup/cont_link.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>FEATURE 관리</td>
+		<td>WORKSOUT</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/f_worksout.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="3">COLLABORATION 관리</td>
+		<td rowspan="3">COLLABORATION</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/collaboration.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/collaboration2.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/collaboration3.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="8">게시판관리</td>
+		<td rowspan="3">News</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/news.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/news2.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/news3.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="5">Lookbook</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/lookbook.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/lookbook2.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>브랜드 추가 팝업</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/brand_add.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/manage/lookbook3.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>직접등록 팝업</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/personally_register.html</a></td>
+		<td></td>
+	</tr>
+
+	<tr class="sort">
+		<td rowspan="16">통계</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/main.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="6">매출통계</td>
+		<td rowspan="3">전체매출통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/sales_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/sales_statistics02.html</a></td>
+		<td>그래프 영역 ( 다른곳에서는 숨김 )</td>
+	</tr>
+	<tr>
+		<td>상품검색 팝업</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/product_search.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품별매출통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/product_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>회원별매출통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/mem_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>회원별매출통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/mem_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="4">회원통계</td>
+		<td>남여비율통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/gender_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>연령대별통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/age_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>거주지별통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/residence_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>소셜미디어 통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/sns_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="2">접속통계</td>
+		<td>방문자접속통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/visitant_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>접속방향통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/contact_statistics.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>상품통계</td>
+		<td>상품별통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/product_statistics02.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>마케팅통계</td>
+		<td>적립금사용통계</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/statistics/saving_statistics.html</a></td>
+		<td></td>
+	</tr>
+
+	<tr class="sort">
+		<td rowspan="19">환경설정</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/setting.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/ex.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="5">상점기본정보관리</td>
+		<td rowspan="5">상점환경설정</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/store_setting.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="4">우편번호검색</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/zipcode.html</a></td>
+		<td>동(읍/면)+지번</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/zipcode2.html</a></td>
+		<td>검색 버튼 클릭 시 화면전환으로 주소 조회 목록 나옴</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/zipcode3.html</a></td>
+		<td>도로명주소+건물번호</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/zipcode4.html</a></td>
+		<td>건물명 (아파트명)</td>
+	</tr>
+	<tr>
+		<td rowspan="2">사이트정보관리</td>
+		<td rowspan="2">사이트환경설정</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/site_setting.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>파비콘 업로드</td>
+		<td></td>
+		<td><a href="#" target="_blank">/popup/favicon_up.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="5">전체운영설정</td>
+		<td>배송설정</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/delivery_setting.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="3">회원등급관리</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/member_setting.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/member_regist.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/member_modify.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>포인트설정</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/point_setting.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td rowspan="2">상점운영정책</td>
+		<td rowspan="2">상점운영정책</td>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/store_manage.html</a></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><a href="#" target="_blank">/setting/store_write.html</a></td>
+		<td></td>
+	</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

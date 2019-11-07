@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="util">
+	
+   <resultMap id="tableList" type="com.giftiel.shop.dto.Table" >
+         <result property="tableName" column="TABLE_NAME"/>
+         <result property="comments" column="COMMENTS"/>
+    </resultMap>
+
+	<select id="selectTableList" resultMap="tableList">
+		SELECT TABLE_NAME, COMMENTS
+		FROM USER_TAB_COMMENTS
+	</select>
+	
+	<select id="selectTableList2" resultMap="tableList">
+		SELECT TABLE_NAME, COMMENTS
+		FROM USER_TAB_COMMENTS
+	</select>
+
+   <resultMap id="columnList" type="com.giftiel.shop.dto.Table" >
+         <result property="columnName" column="COLUMN_NAME"/>
+         <result property="comments" column="COMMENTS"/>
+         <result property="dataType" column="DATA_TYPE"/>
+         <result property="dataLength" column="DATA_LENGTH"/>
+         <result property="nullAble" column="NULLABLE"/>
+         <result property="dataDefault" column="DATA_DEFAULT"/>
+    </resultMap>
+	
+	<select id="selectColumnList" parameterType="com.giftiel.shop.dto.Table" resultMap="columnList" >
+		SELECT A.COLUMN_NAME
+			,(SELECT COMMENTS FROM ALL_COL_COMMENTS WHERE TABLE_NAME = A.TABLE_NAME AND COLUMN_NAME = A.COLUMN_NAME) COMMENTS
+			,A.DATA_TYPE
+			,A.DATA_LENGTH
+			,A.NULLABLE
+			,A.DATA_DEFAULT
+		FROM ALL_TAB_COLUMNS A
+		WHERE A.TABLE_NAME = #{tableName}
+		ORDER BY A.COLUMN_ID ASC
+	</select>	
+</mapper>

@@ -1,0 +1,357 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+
+</head>
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">
+					<h3>상품관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">카테고리관리</a>
+							<ul>
+								<li>- <a href="#">상품카테고리관리</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상품관리</a>
+							<ul>
+								<li class="on">- <a href="/admin/product/prdAdd.html">상품등록</a></li>
+								<li>- <a href="/admin/product/prdIcon.html">상품 아이콘 관리</a></li>
+								<li>- <a href="/admin/product/prdList.html">상품목록</a></li>
+								<li>- <a href="/admin/product/prdDisplay.html">상품진열설정</a></li>
+								<li>- <a href="/admin/product/prdDel.html">상품휴지통</a></li>
+								<li>- <a href="/admin/product/prdExcel.html">상품 엑셀 일괄 등록</a></li>
+							</ul>
+						</li>
+						<li><a href="#">상품정보고시 관리</a>
+							<ul>
+								<li>- <a href="#">상품정보고시 관리</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents productList">
+					<!--[s] 카테고리관리 -->
+					<div class="section a1">
+						<h3><span class="icon1"></span>상품등록</h3>
+						<div class="tableType2">
+							<ul class="boxLi">
+								<li>- 가격과 상품이미지 설정하여 상품 등록합니다.</li>
+								<li>- <span class="highlight">*</span>로 설정된 부분은 필수 입력하셔야 합니다.</li>
+							</ul>
+							<div class="tableType2">
+								<table>
+								<caption>상품등록 폼</caption>
+								<colgroup>
+									<col width="132px" />
+									<col width="*" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th>상품코드</th>
+										<td>123456789</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> Item No</th>
+										<td><input type="text" /></td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 카테고리</th>
+										<td>대표 카테고리 &nbsp;
+											<select name="" id="">
+												<option value="">대 카테고리</option>
+											</select>
+											<select name="" id="">
+												<option value="">중 카테고리</option>
+											</select>
+											<select name="" id="">
+												<option value="">소 카테고리</option>
+											</select>
+											<a href="#" class="btnType1 right2">카테고리 추가</a>
+										</td>
+									</tr>
+									<tr>
+										<th>Brand Lael</th>
+										<td>
+											<select name="" id="">
+												<option value="">Obey</option>
+											</select>
+											<a href="#" class="btnType1 right2">브랜드 추가</a>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 상품명</th>
+										<td><input type="text" /><p class="addtxt">* 상품명은 최대 30자까지 등록가능합니다.</p></td>
+									</tr>
+									<tr>
+										<th>앞문구</th>
+										<td><input type="text" /><p class="addtxt">* 앞문구는 최대 35자까지 입력 가능합니다. 상품 상세에 상품명과 함께 노출됩니다.</p></td>
+									</tr>
+									<tr>
+										<th>상품키워드</th>
+										<td>
+											<input type="text" class="mb5" />&nbsp;<input type="text" class="mb5" />&nbsp;<input type="text" class="mb5" /><br />
+											<input type="text" />&nbsp;<input type="text" />&nbsp;<input type="text" />
+											<p class="addtxt">* 최대 6개까지 키워드를 입력하실 수 있습니다.</p>
+										</td>
+									</tr>
+									<tr>
+										<th>상품아이콘</th>
+										<td>
+											<span><input type="checkbox" /> SALE</span>
+											<span><input type="checkbox" /> BEST</span>
+											<span><input type="checkbox" /> 무료배송</span>
+											<span><input type="checkbox" /> NEW</span>
+											<span><input type="checkbox" /> EVENT</span><br />
+											<span class="addtxt">* 아이콘은 최대 2개까지 선택 가능합니다. (상품에 할인가가 적용되는 경우 SALE로 자동노출됩니다.)</span>
+											<a href="#" class="btnType1 right2">아이콘 관리</a>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 메인 이미지</th>
+										<td>
+											<input type="file" />
+											<p class="addtxt">※ 이미지파일은 GIF, JPG로 올려주시기 바랍니다. (<span class="highlight">263*250디자인 확인 후 수정</span>/1MB 이하)<br />메인 이지미를 등록하시면 이미지가 리사이징되어 사이트에서 공통 노출됩니다.</p>
+										</td>
+									</tr>
+									<tr>
+										<th>상품정보고시</th>
+										<td>상품정보고시 선택하기 &nbsp;
+											<select name="" id="">
+												<option value="">선택</option>
+											</select><br /><br />
+											<input type="text" class="mb5 wd_200" />&nbsp;<input type="text" class="mb5 wd_200" /><br />
+											<input type="text" class="mb5 wd_200" />&nbsp;<input type="text" class="mb5 wd_200" /><br />
+											<input type="text" class="mb5 wd_200" />&nbsp;<input type="text" class="mb5 wd_200" /><br />
+											<input type="text" class="mb5 wd_200" />&nbsp;<input type="text" class="mb5 wd_200" /><br />
+											<input type="text" class="mb5 wd_200" />&nbsp;<input type="text" class="mb5 wd_200" />
+											<p class="addtxt">* 최대 6개까지 키워드를 입력하실 수 있습니다.<a href="#" class="btnType1 right2">상품고시정보 관리하기</a></p>										
+										</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 전시여부</th>
+										<td>
+											<span class="pr50"><input type="radio" checked="checked" /> 전시</span>
+											<span><input type="radio" /> 미전시</span>
+										</td>
+									</tr>
+									<tr>
+										<th>판매기간</th>
+										<td>
+											<span class="pr26"><input type="radio" checked="checked" /> 기간없음</span>
+											<span><input type="radio" /> 기간설정</span>
+											<div class="period">
+											<input type="text" id="" name="" />
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a> ~
+											<input type="text" id="" name="" />
+											<a href="#" class="btnCal"><img src="../static/images/common/icon2.gif" alt="달력" /></a>										
+										</div>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 판매상태</th>
+										<td>
+											<span class="pr26"><input type="radio" checked="checked" /> 판매가능</span>
+											<span class="pr26"><input type="radio" /> 판매중지</span>
+											<span><input type="radio"  /> 일시품절</span>
+										</td>
+									</tr>
+									<tr>
+										<th rowspan="2"><span class="highlight">*</span> 판매수량</th>
+										<td>
+											<span class="pr50"><input type="radio" checked="checked" /> 무한</span>
+											<span class="pr26"><input type="radio" /> 한정판매</span>
+											<span>총 수량 &nbsp;&nbsp;<input type="text" /></span>
+										</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /> 1회 구매 수량 제한 &nbsp;&nbsp;<input type="text" /></td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 가격 설정</th>
+										<td class="p_line5">
+											<p>판매가 <input type="text" /> 원</p>
+											<p>회원가 <input type="text" /> 원</p>
+											<p>할인가 <input type="text" /> 원 <span>할인률 <input type="text" /> %</span></p>
+											<p>수수료 <input type="text" /> %</p>
+											<p>공급가 <input type="text" /> 원</p>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 포인트 적립률</th>
+										<td class="p_line5">
+											<p><input type="radio" checked="checked" /> 기본 적립률 적용(회원등급에 따라 자동 적용됩니다.)</p>
+											<p><input type="radio" /> 상품별 적립률 적용</p>
+											<p><span>적립률 <input type="text" /> %</span><span>적립포인트 <input type="text" /> 점</span></p>
+											<p class="addtxt"><span>* 적립률이 소수점인 경우 수정해 주세요.</span></p>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 배송비유형</th>
+										<td class="p_line5">
+											<p><input type="radio" checked="checked" /> 기본 배송비</p>
+											<p><input type="radio" /> 무료배송</p>
+											<p><input type="radio" /> 착불배송<span><input type="text" /> 원(선불 선택 안됨)</span></p>
+											<p><input type="radio" /> 조건부 배송</p>
+											<p><span><input type="radio" checked="checked" /> 금액</span><span><input type="text" /> 원 이상 구매시 무료 배송</span></p>
+											<p><span><span>미만인 경우 배송비 <input type="text" /> 원</span></span></p>
+											<p><span><input type="radio" /> 수량</span><span><input type="text" /> 원 이상 구매시 무료 배송</span></p>
+											<p><span><span>미만인 경우 배송비 <input type="text" /> 원</span></span></p>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 반품배송정보</th>
+										<td class="p_line5">
+											<p><input type="radio" checked="checked" /> 반품 배송 정보<span><input type="radio" /> 직접입력</span></p>
+											<p><textarea>HTML 삽입가능 입력창</textarea></p>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 상품설명</th>
+										<td class="p_line5">										
+											<p><textarea>HTML 삽입가능 입력창</textarea></p>
+											<p><input type="file" /></p>
+											<p class="addtxt">※ 이미지파일은 GIF, JPG로 올려주시기 바랍니다. </p>
+										</td>
+									</tr>
+									<tr>
+										<th><span class="highlight">*</span> 상품설명<br />(size chart)</th>
+										<td>
+											<p class="addtxt">※ 사이즈와 항목은 직접 입력으로 수정할 수 있습니다. </p>
+											<table class="chart">
+												<tr>
+													<th>SIZE</th>
+													<th>size1</th>
+													<th>size2</th>
+													<th>size3</th>
+													<th>size4</th>
+													<th>size5</th>
+													<th>size6</th>
+													<th>size7</th>
+													<th>size8</th>
+												</tr>
+												<tr>
+													<th>항목1</th>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<th>항목2</th>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<th>항목3</th>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<th>항목4</th>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<th>항목5</th>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="paging">
+								<div class="right">
+									<a href="#" class="btnType2">등록</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--[e] 카테고리관리 -->
+				</div>
+				<!--[e] contents -->
+			</div>
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>

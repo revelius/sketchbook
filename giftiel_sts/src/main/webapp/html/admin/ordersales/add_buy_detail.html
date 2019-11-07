@@ -1,0 +1,273 @@
+<!DOCTYPE>
+<html lang="ko" lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>웍스아웃 관리자페이지</title>
+	<link rel="stylesheet" href="../static/css/adminDefault.css" type="text/css" />
+	
+</head> 
+<body>
+	<div id="wrap">
+		<!--[s] header -->
+		<div id="header">
+			<div class="headerWrap">
+				<h1><a href="/admin/index.html">웍스아웃 관리자</a></h1>
+				<div class="topArea">
+					<ul>
+						<li class="fir"><strong>관리자</strong> 님</li>
+						<li>today :<span> 2014.06.01</span></li>
+					</ul>
+				    <a href="#">로그아웃</a>
+					<a href="#">MALL</a>
+				</div>
+				<div class="gnb">
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">회원관리</a></li>
+						<li><a href="#">상품관리</a></li>
+						<li><a href="#">주문매출관리</a></li>
+						<li><a href="#">운영관리</a></li>
+						<li><a href="#">통계분석</a></li>
+						<li><a href="#">환경설정</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--[e] header -->
+
+		<!--[s] container -->
+		<div id="container">			
+			<h2 class="blind">컨텐츠</h2>
+			<div class="subWrap">
+				<!--[s] lnb -->
+				<div class="lnb">					
+					<h3>주문매출관리</h3>
+					<ul class="lnb_ul">
+						<li><a href="#">전체주문</a>
+							<ul>
+								<li>- <a href="#">전체주문</a></li>
+							</ul>
+						</li>		
+						<li><a href="#">주문관리</a>
+							<ul>
+								<li class="last">- <a href="#">배송관리</a></li>
+							</ul>
+						</li>		
+						<li><a href="#">취소/교환/반품신청관리</a>
+							<ul>
+								<li>- <a href="#">취소관리</a></li>
+								<li>- <a href="#">교환관리</a></li>
+								<li class="last">- <a href="#">반품관리</a></li>
+							</ul>
+						</li>
+						<li><a href="#">추가결제관리</a>
+							<ul>
+								<li class="on last">- <a href="#">추가결제관리</a></li>
+							</ul>
+						</li>									
+					</ul>
+				</div>
+				<!--[e] lnb -->
+
+				<!--[s] contents -->
+				<div class="contents">
+					<!-- section -->
+					<div class="section a1 tabCon_inner">
+						<h3><span class="icon1"></span>추가결제관리</h3>						
+						<div class="tableType2">
+							<table>
+								<caption>추가결제관리</caption>
+								<colgroup>
+									<col width="130px" />
+									<col width="*">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="col">진행상태</th>
+										<td>결제요청</td>
+									</tr>
+									<tr>
+										<th scope="col">구분</th>
+										<td>
+											<select>
+												<option value="0">배송비</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th scope="col">E-mail계정</th>
+										<td>E-mail</td>
+									</tr>
+									<tr>
+										<th scope="col">상품선택</th>
+										<td class="tblIn">
+											<a href="#" class="btnType1">주문검색</a> <a href="#" class="btnType1">상품검색</a> <br />
+											<div class="tableType1 tblYscroll" style="max-height: 147px;">
+												<table>
+													<caption></caption>
+													<colgroup>
+														<col width="5%" />
+														<col width="10%" />
+														<col width="10%" />
+														<col width="10%" />
+														<col width="*" />
+													</colgroup>
+													<thead>
+														<tr>
+															<th scope="row"><input type="checkbox" /></th>
+															<th scope="row">구분</th>
+															<th scope="row">주문상태</th>
+															<th scope="row">주문번호</th>
+															<th scope="row">상품</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td><input type="checkbox" /></td>
+															<td>주문상품</td>
+															<td>ORDERSTATE</td>
+															<td>ORDERNUMBER</td>
+															<td class="tl"> [브랜드] 상품명 / 컬러 / 사이즈 / 상품품번</td>
+														</tr>
+														<tr>
+															<td><input type="checkbox" /></td>
+															<td>주문상품</td>
+															<td>ORDERSTATE</td>
+															<td>ORDERNUMBER</td>
+															<td class="tl"> [브랜드] 상품명 / 컬러 / 사이즈 / 상품품번</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="btn">
+												<div class="right"><a href="#" class="btnType2">선택삭제</a></div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="col">금액(원)</th>
+										<td><input type="text" class="ip_tit" value="3,00,00"/></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="btn">
+							<span class="left"><a href="#" class="btnType2">목록</a></span>
+							<span class="right">
+								<a href="#" class="btnType2">수정</a>
+								<a href="#" class="btnType1">결제취소</a>
+								<a href="#" class="btnType1">삭제</a>
+							</span>
+						</div>
+					</div>
+					<!-- //section -->
+					<!-- section -->
+					<div class="section a2 tabCon_inner">				
+						<div class="tableType2">
+							<table>
+								<caption>추가결제관리</caption>
+								<colgroup>
+									<col width="130px" />
+									<col width="*">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="col">진행상태</th>
+										<td>결제대기 / 결제완료 / 결제취소</td>
+									</tr>
+									<tr>
+										<th scope="col">결제정보</th>
+										<td>
+											[입금 전], 가상계좌, [은행명], [계좌번호], [입금자명] #,###,###원 <br />
+											[입금 확인], YYYY.MM.DD / HH:MM:SS,계좌이체, #,###,###원(할인명:#,###,###원) <br />
+											[입금 확인], YYYY.MM.DD / HH:MM:SS,가상계좌, [은행명], [계좌번호], [입금자명] #,###,###원 <br />
+											[입금 확인], YYYY.MM.DD / HH:MM:SS, 신용카드, [카드사], #,###,###원
+										</td>
+									</tr>
+									<tr>
+										<th scope="col">구분</th>
+										<td>배송비 / 수선비</td>
+									</tr>
+									<tr>
+										<th scope="col">E-mail계정</th>
+										<td>E-mail</td>
+									</tr>
+									<tr>
+										<th scope="col">상품선택</th>
+										<td class="tblIn">
+											<a href="#" class="btnType1">주문검색</a> <a href="#" class="btnType1">상품검색</a> <br />
+											<div class="tableType1 tblYscroll" style="max-height: 147px;">
+												<table>
+													<caption></caption>
+													<colgroup>
+														<col width="5%" />
+														<col width="10%" />
+														<col width="10%" />
+														<col width="10%" />
+														<col width="*" />
+													</colgroup>
+													<thead>
+														<tr>
+															<th scope="row"><input type="checkbox" disabled/></th>
+															<th scope="row">구분</th>
+															<th scope="row">주문상태</th>
+															<th scope="row">주문번호</th>
+															<th scope="row">상품</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td><input type="checkbox" disabled/></td>
+															<td>주문상품</td>
+															<td>ORDERSTATE</td>
+															<td>ORDERNUMBER</td>
+															<td class="tl"> [브랜드] 상품명 / 컬러 / 사이즈 / 상품품번</td>
+														</tr>
+														<tr>
+															<td><input type="checkbox" disabled/></td>
+															<td>주문상품</td>
+															<td>ORDERSTATE</td>
+															<td>ORDERNUMBER</td>
+															<td class="tl"> [브랜드] 상품명 / 컬러 / 사이즈 / 상품품번</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="btn">
+												<div class="right"><a href="#" class="btnType2">선택삭제</a></div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="col">금액(원)</th>
+										<td>3,00,000</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="btn">
+							<span class="left"><a href="#" class="btnType2">목록</a></span>
+							<span class="right">
+								<a href="#" class="btnType1">결제취소</a>
+							</span>
+						</div>
+					</div>
+					<!-- //section -->
+				</div>
+				<!--[e] contents -->
+			</div>
+
+		</div>
+		<!--[e] container -->
+
+		<!--[s] footer -->
+		<div id="footer">
+			<p class="copyright">copyright(c) worksout co. republic of korea. all rights reserved.</p>
+		</div>
+		<!--[e] footer -->
+
+	</div>
+</body>
+</html>
