@@ -288,5 +288,18 @@ public class JoinController  extends FrontController{
 		smsSend.sendSMS(27, cpNo, getSiteDesc(request), nm, certNumber,0);
 		result = "0,"+certNumber + ",,";
 		response.getWriter().print(result);
-	}	
+	}
+	
+	@RequestMapping(value = "/sendBusinessCertNo")
+	public void BusinessCertNumChecking(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("cbNo") String cbNo) throws IOException {
+		
+		log.info("===================================== BusinessCertNumChecking {}",cbNo);
+		
+	    SearchForm searchForm = new SearchForm();
+	    searchForm.setCbNo(cbNo);
+		    
+	    String result = cbNo;
+		response.getWriter().print(result);
+	}
 }

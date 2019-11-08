@@ -57,6 +57,9 @@ public class SearchForm {
 	
 	private boolean allMember; //전체회원 조회 여부
 	
+	private String cbNo;				//사업자등록번호
+	
+	
 	//코드
 	private String supCdNo;				//상위코드번호
 	private String depthCode;			//조회 코드
@@ -504,6 +507,15 @@ public class SearchForm {
 		this.supCdNo = supCdNo;
 	}
 
+	public String getCbNo() {
+		return cbNo;
+	}
+
+	public void setCbNo(String cbNo) {
+		this.cbNo = cbNo;
+	}
+
+	
 	public String getInqStrDtm() {
 		return inqStrDtm;
 	}

@@ -36,6 +36,12 @@ public class MemInfo {
 	private String birth02;         //생년월일
 	private String birth03;         //생년월일
 	
+	private String cbNo01;				//사업자번호
+	private String cbNo02;				//사업자번호
+	private String cbNo03;				//사업자번호
+	
+	
+	
 	public Integer getRnum() {
 		return rnum;
 	}
@@ -222,9 +228,23 @@ public class MemInfo {
 	public void setBirth03(String birth03) {
 		this.birth03 = birth03;
 	}
-	
-	
-	
-	
+	public String getCbNo01() {
+		return cbNo01;
+	}
+	public void setCbNo01(String cbNo01) {
+		this.cbNo01 = cbNo01;
+	}
+	public String getCbNo02() {
+		return cbNo02;
+	}
+	public void setCbNo02(String cbNo02) {
+		this.cbNo02 = cbNo02;
+	}
+	public String getCbNo03() {
+		return cbNo03;
+	}
+	public void setCbNo03(String cbNo03) {
+		this.cbNo03 = cbNo03;
+	}
 	
 }

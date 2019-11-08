@@ -9,4 +9,4 @@
 <link rel="stylesheet" href="<c:url value='/resources/admin/css/adminDefault.css'/>" type="text/css" />
 <link rel="stylesheet" href="<c:url value='/resources/common/jquery-ui-1.12.1.custom/jquery-ui.min.css'/>" type="text/css" />
 <link rel="icon" href="http://www.worksout.co.kr/upload/image/favicon/WORKSOUT.ico" type="image/x-icon" />
-<title>기프티엘 관리자페이지</title>
+<!-- <title>기프티엘 관리자페이지</title> -->
