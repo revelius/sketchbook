@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.giftiel.shop.common.Constants;
 import com.giftiel.shop.controller.common.DefaultController;
+import com.giftiel.shop.dao.GiftielViewDao;
 import com.giftiel.shop.dto.Admin;
 import com.giftiel.shop.dto.Category;
 import com.giftiel.shop.dto.CategoryForm;
@@ -30,6 +31,7 @@ import com.giftiel.shop.dto.CategoryNew;
 import com.giftiel.shop.dto.CategoryNewGoods;
 import com.giftiel.shop.dto.Code;
 import com.giftiel.shop.dto.Coupon;
+import com.giftiel.shop.dto.GiftielViewInput;
 import com.giftiel.shop.dto.Goods;
 import com.giftiel.shop.dto.GoodsAddInfo;
 import com.giftiel.shop.dto.GoodsAddInfoGrp;
@@ -61,6 +63,9 @@ public class GoodsController extends DefaultController {
 	private CategoryService categoryService;
 	@Autowired
 	private Seed seed;
+	/*테스트 API 용*/
+	@Autowired
+	private GiftielViewDao gvd;
 
 	private String orderBy = "";
 	private String orderFlag = "";
@@ -1060,6 +1065,33 @@ public class GoodsController extends DefaultController {
 		int result = categoryService.updateNa(categoryForm);
 
 		return result;
+	}
+	
+	/*
+	 * gvd.getReplyData(gvi, String type); type에 따라 다음과 같은 API를 사용합니다.
+		"GetCouponViewData" 				=>	 giftielGetCouponViewDataUrl;break;
+		"GetCouponCondition"				=> 	 giftielGetCouponConditionUrl;break;
+		"GetCouponConditionEx" 				=>	 giftielGetCouponConditionExUrl;break;
+		"GetEachCouponAuthInformation" 		=>	 giftielGetEachCouponAuthInformationUrl;break;
+		"GetSendCouponData" 				=>	 giftielGetSendCouponDataUrl;break;
+	 */
+	@RequestMapping(value="/test")
+	public ModelAndView test(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+			ModelAndView mav = new ModelAndView();
+			
+			GiftielViewInput gvi=new GiftielViewInput();
+			
+			gvi.setCiCode("1111");
+			gvi.setCiPwd("1111");
+			gvi.setCouponNum("1111");
+			gvi.setCouponCode("1111");
+			
+			String str=gvd.getReplyData(gvi, "GetCouponViewData");
+		
+			mav.addObject("result", str);
+			
+			mav.setViewName("/admin" + Constants.MODE_ADMIN + "/goods/GoodsTest");
+			return mav;
 	}
 
 }

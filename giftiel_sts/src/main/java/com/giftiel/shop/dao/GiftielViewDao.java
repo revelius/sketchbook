@@ -52,11 +52,19 @@ public class GiftielViewDao {
 	@Value("${http.maxConnPerRoute}")
 	private int httpMaxConnPerRoute;
 	
-	public String getReplyData(GiftielViewInput giftielViewInput) {
+	public String getReplyData(GiftielViewInput giftielViewInput, String type) {
 		StringBuffer sb = new StringBuffer();
 		sb.append(giftielTestUrl);
-		sb.append(giftielGetCouponViewDataUrl);
-		
+		String append_str="";
+		switch(type) {
+		case "GetCouponViewData":append_str=giftielGetCouponViewDataUrl;break;
+		case "GetCouponCondition":append_str=giftielGetCouponConditionUrl;break;
+		case "GetCouponConditionEx":append_str=giftielGetCouponConditionExUrl;break;
+		case "GetEachCouponAuthInformation":append_str=giftielGetEachCouponAuthInformationUrl;break;
+		case "GetSendCouponData":append_str=giftielGetSendCouponDataUrl;break;
+		default:append_str=giftielGetCouponViewDataUrl;break;
+		}
+		sb.append(append_str);
 		
 		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(); 
 		factory.setReadTimeout(timeout); // 읽기시간초과, 10초
