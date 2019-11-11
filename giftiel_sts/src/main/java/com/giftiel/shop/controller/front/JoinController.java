@@ -31,6 +31,7 @@ import com.giftiel.shop.dto.Member;
 import com.giftiel.shop.dto.SearchForm;
 import com.giftiel.shop.service.ManageService;
 import com.giftiel.shop.service.MemberService;
+import com.giftiel.shop.service.NiceService;
 import com.giftiel.shop.utils.Seed;
 
 
@@ -52,6 +53,9 @@ public class JoinController  extends FrontController{
 	
 	@Autowired
 	private ManageService manageService;
+	
+	@Autowired
+	private NiceService niceService;
 	
 	@Autowired
 	private Seed seed;
@@ -222,9 +226,6 @@ public class JoinController  extends FrontController{
 		return mav;
 	}
 	
-	
-	
-	
 	/**
 	 * 핸드폰 번호 중복 체크
 	 * @param cpNo - 핸드폰 번호
@@ -290,6 +291,15 @@ public class JoinController  extends FrontController{
 		response.getWriter().print(result);
 	}
 	
+	/**
+	 * 사업자번호 인증
+	 * @param cbNo - 사업자등록번호
+	 * @param locale
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/sendBusinessCertNo")
 	public void BusinessCertNumChecking(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("cbNo") String cbNo) throws IOException {
@@ -298,8 +308,9 @@ public class JoinController  extends FrontController{
 		
 	    SearchForm searchForm = new SearchForm();
 	    searchForm.setCbNo(cbNo);
-		    
-	    String result = cbNo;
-		response.getWriter().print(result);
+		
+	    int result = niceService.BusinessCertNumChecking(searchForm);
+
+	    response.getWriter().print(result);
 	}
 }

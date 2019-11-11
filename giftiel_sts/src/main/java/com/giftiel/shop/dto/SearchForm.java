@@ -57,8 +57,16 @@ public class SearchForm {
 	
 	private boolean allMember; //전체회원 조회 여부
 	
+	//2019-11-06 이후 추가
 	private String cbNo;				//사업자등록번호
-	
+	private String id;					//회원아이디
+	private String reprNm;				//대표자
+	private String cmpNm;				//상호명
+	private String cmpType;				//사업자구분
+	private String bizSt;				//업종/업태
+	private String mngr;				//담당자
+	private String dept;				//근무부서
+	private String tel;					//전화번호
 	
 	//코드
 	private String supCdNo;				//상위코드번호
@@ -515,7 +523,70 @@ public class SearchForm {
 		this.cbNo = cbNo;
 	}
 
-	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getReprNm() {
+		return reprNm;
+	}
+
+	public void setReprNm(String reprNm) {
+		this.reprNm = reprNm;
+	}
+
+	public String getCmpNm() {
+		return cmpNm;
+	}
+
+	public void setCmpNm(String cmpNm) {
+		this.cmpNm = cmpNm;
+	}
+
+	public String getCmpType() {
+		return cmpType;
+	}
+
+	public void setCmpType(String cmpType) {
+		this.cmpType = cmpType;
+	}
+
+	public String getBizSt() {
+		return bizSt;
+	}
+
+	public void setBizSt(String bizSt) {
+		this.bizSt = bizSt;
+	}
+
+	public String getMngr() {
+		return mngr;
+	}
+
+	public void setMngr(String mngr) {
+		this.mngr = mngr;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
 	public String getInqStrDtm() {
 		return inqStrDtm;
 	}

@@ -73,12 +73,14 @@ $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(thi
 	        	try{
 		            var data = responseData;
 		            var result = data;
-// 	                if(result != null){  //
-// 	                	alert(result);
-// 	                }else if(result!=cbNo)
-// 	                	alert("등록된 정보가 없습니다.");
+	                if(result != null){  //
+	        			alert("ajax 결과 :" + result);
+	                	alert("인증 완료되었습니다.");
+	                	$("#btn_businessCertNo").text("인증완료").attr("class", "btn_white01");	                	
+	                }
+// 	                else if(result!=cbNo)
+// 	                	alert("잘못된 사업자정보 입니다.<br/>사업자 정보를 다시 확인해주세요");
 // 	                }
-	        	alert("ajax 결과 :" + result);
 	        	}catch(e){
 	        		//alert(e);
 	        	}
@@ -156,7 +158,7 @@ $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(thi
 																</span>
 															</li>
 															<div class="btn_area" style="width: 27%; float: right; padding: 0 0;">
-																<a href="#" class="btn_black01" onclick="sendBusinessCertNo();">인증하기</a>
+																<a href="#" id="btn_businessCertNo" class="btn_black01" onclick="sendBusinessCertNo();">인증하기</a>
 															</div>
 														</ul>
 													</div>
